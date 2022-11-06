@@ -1,0 +1,16 @@
+@import '../../styles/shared';
+
+.teams {
+    @include genericContainer;
+    display:flex;
+    flex-direction: row;
+
+    @include lowWidth() {
+        flex-direction: column;
+        
+        hr {
+            width: 100%;
+            border-bottom: 1px solid #888;
+        }
+    }
+}

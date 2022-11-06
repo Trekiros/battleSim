@@ -1,0 +1,32 @@
+// General style & layout
+html, body, #__next, main {min-height: 100vh; background: #eee; color: #222; margin: 0; padding:0;}
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1, h2 { margin: 0 }
+button {
+    border-radius: 6px;
+    border: none;
+    background: #88f;
+    padding: 4px 8px;
+    min-width: 25px;
+    min-height: 25px;
+    margin: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.5s;
+    
+    &:hover {
+        background: #77e;
+    }
+}

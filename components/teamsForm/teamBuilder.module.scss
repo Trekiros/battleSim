@@ -1,0 +1,10 @@
+.team {
+    width: 50%;
+    margin: 0 8px;
+    display: flex;
+    flex-direction: column;
+    
+    .creature {
+        flex-grow: 1;
+    }
+}

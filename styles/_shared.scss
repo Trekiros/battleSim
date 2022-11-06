@@ -1,0 +1,16 @@
+@mixin genericContainer {
+    // A generic type of container to be extended by actual components
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0px 0px 5px 1px black;
+    max-width: 100%;
+    background: #e0e0f5;
+    margin: 20px;
+    width: 1100px;
+}
+
+@mixin lowWidth() {
+    @media (max-width: 1200px) {
+        @content
+    }
+}

@@ -1,0 +1,35 @@
+@import '../../styles/shared';
+
+.simulation {
+    @include genericContainer;
+
+    @include lowWidth() {
+        width: 461px;
+    }
+
+    .round {
+        margin-bottom: 8px;
+    
+        .lifebars {
+            display:flex;
+            flex-direction: row;
+
+            @include lowWidth() {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        .team {
+            width: 50%;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            margin: 0 2px;
+    
+            @include lowWidth() {
+                width: 100%;
+            }
+        }
+    }
+}
