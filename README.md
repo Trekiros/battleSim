@@ -13,6 +13,3 @@ This is a simple encounter simulator meant to be used **in addition to your good
 
 3: More complex input
 * A DPR calculator form, which asks you things like how many attacks you make, whether your spell is AoE, etc... And calculates your DPR for you using "common sense" rules
-
-3: Other
-* RGPD opt-in cookie thingy

@@ -7,6 +7,10 @@
     background: #e0e0f5;
     margin: 20px;
     width: 1100px;
+
+    @include lowWidth() {
+        width: 545px;
+    }
 }
 
 @mixin lowWidth() {

@@ -3,10 +3,6 @@
 .simulation {
     @include genericContainer;
 
-    @include lowWidth() {
-        width: 461px;
-    }
-
     .round {
         margin-bottom: 8px;
     

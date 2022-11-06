@@ -9,7 +9,7 @@
 
     .text {
         overflow-x: hidden;
-        transition: width 0.5s;
+        transition: width 0.25s;
         width: 100px;
     }
     &:not(:hover) .text {
@@ -19,11 +19,11 @@
     .plus {
         font-size: 50px;
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-        transition: transform 0.5s ease-out;
+        transition: transform 0.25s ease-out;
         transform: rotate(0deg)
     }
     &:hover .plus {
-        transform: rotate(180deg);
+        transform: rotate(270deg);
     }
 
 }

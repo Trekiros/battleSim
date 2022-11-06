@@ -30,9 +30,13 @@ const CreatureBuilder:FC<PropType> = ({ creature, onCreatureChange, onCreatureDe
             <div className={styles.inputGroup}>
                 <label>Count</label>
                 <div className={styles.count}>
-                    <button onClick={() => doUpdate(clone => {clone.count--})}>-</button>
+                    <button onClick={() => doUpdate(clone => {
+                        clone.count = Math.max(1, clone.count - 1)
+                    })}>-</button>
                     {creature.count}
-                    <button onClick={() => doUpdate(clone => {clone.count++})}>+</button>
+                    <button onClick={() => doUpdate(clone => {
+                        clone.count = Math.min(20, clone.count + 1)
+                    })}>+</button>
                 </div>
             </div>
 
@@ -64,7 +68,7 @@ const CreatureBuilder:FC<PropType> = ({ creature, onCreatureChange, onCreatureDe
 
             {/* TO HIT */}
             <div className={styles.inputGroup}>
-                <label>to hit</label>
+                <label>To hit</label>
                 <input type={'number'} value={creature.toHit} placeholder={"To Hit bonus"} onChange={(event) => doUpdate((clone) => {
                     clone.toHit = Number(event.target.value)
                 })} />
