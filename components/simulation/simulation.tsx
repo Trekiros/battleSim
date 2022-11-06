@@ -1,21 +1,14 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC } from 'react'
 import LifeBar from './lifebar'
-import { Round, runSimulation, Team } from '../model'
+import { Round } from '../model'
 import styles from './simulation.module.scss'
+import LifeBars from './lifebar'
 
 type PropType = {
-    players: Team,
-    monsters: Team,
+    rounds: Round[]
 }
 
-const Simulation:FC<PropType> = ({players, monsters}) => {
-    const [rounds, setRounds] = useState<Round[]>([])
-
-    // Whenever the players or monsters get updated, update the simulation
-    useEffect(() => {
-        setRounds(runSimulation(players, monsters))
-    }, [players, monsters])
-
+const Simulation:FC<PropType> = ({rounds}) => {
     return (
         <div className={styles.simulation}>
             {(!rounds.length || !rounds[0].players.length || !rounds[0].monsters.length) ?
@@ -25,17 +18,8 @@ const Simulation:FC<PropType> = ({players, monsters}) => {
                     <div className={styles.round}>
                         <h2>{ (roundIndex === rounds.length - 1) ? ('Result') : (`Round ${roundIndex + 1}`) }</h2>
                         <div className={styles.lifebars}>
-                            <div className={styles.team}>
-                                {round.players.map(player => (
-                                    <LifeBar name={player.name} hp={player.hp} maxHP={player.maxHP} />
-                                ))}
-                            </div>
-
-                            <div className={styles.team}>
-                                {round.monsters.map(monster => (
-                                    <LifeBar name={monster.name} hp={monster.hp} maxHP={monster.maxHP} />
-                                ))}
-                            </div>
+                            <LifeBars combattants={round.players} />
+                            <LifeBars combattants={round.monsters} />
                         </div>
                     </div>
                 ))

@@ -1,32 +1,50 @@
 import React, { FC } from 'react'
-import { Team } from '../model'
+import { Combattant, Team } from '../model'
+import LifeBars from '../simulation/lifebar'
 import TeamBuilder from './teamBuilder'
 import styles from './teamsForm.module.scss'
 
 type PropType = {
-    players: Team,
     monsters: Team,
-    onTeamsChanged?: (players: Team, monsters: Team) => void,
+    onMonstersChanged: (monsters: Team) => void,
+    
+    playersTeam?: Team, 
+    onPlayersChanged?: (players: Team) => void, 
+    
+    playersState?: Combattant[],
+
+    onEncounterRemoved?: () => void,
 }
 
-const TeamsForm:FC<PropType> = ({ players, monsters, onTeamsChanged }) => {
+const TeamsForm:FC<PropType> = ({ playersTeam, playersState, monsters, onPlayersChanged, onMonstersChanged, onEncounterRemoved }) => {
     return (
         <div className={styles.teams}>
-          <TeamBuilder 
-            teamName="Players"
-            team={players}
-            onTeamChange={(newPlayers) => {
-                if (onTeamsChanged) onTeamsChanged(newPlayers, monsters)
-            }} />
+            { onEncounterRemoved && (
+                <div className={styles.removeContainer}>
+                    <div className={styles.remove} onClick={onEncounterRemoved}>
+                    +
+                    </div>
+                </div>
+            )}
 
-          <hr />
+            {playersTeam ? (
+                <TeamBuilder 
+                    teamName="Players"
+                    team={playersTeam}
+                    onTeamChange={onPlayersChanged} />
+            ): playersState && (
+                <div className={styles.lifebars}>
+                    <h2>Players</h2>
+                    <LifeBars combattants={playersState} />
+                </div>
+            )}
 
-          <TeamBuilder
-            teamName="Enemies"
-            team={monsters}
-            onTeamChange={(newMonsters) => {
-                if (onTeamsChanged) onTeamsChanged(players, newMonsters)
-            }} />
+            <hr />
+
+            <TeamBuilder
+                teamName="Enemies"
+                team={monsters}
+                onTeamChange={onMonstersChanged} />
         </div>
     )
 }

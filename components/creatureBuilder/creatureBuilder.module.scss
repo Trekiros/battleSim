@@ -35,7 +35,7 @@
         transition: border 0.5s;
         
         &.name {
-            width: 150px;
+            width: 130px;
         }
     }
     
@@ -53,6 +53,26 @@
 
         &:hover {
             background: #cfcfcf;
+        }
+
+        .count {
+            display:flex;
+            flex-direction: row;
+            align-items: center;
+            width: 60px;
+
+            button {
+                padding: 0;
+                margin: 0 2px;
+                border-radius: 100%;
+                min-width: 16px;
+                min-height: 16px;
+                
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                font-family: Georgia, 'Times New Roman', Times, serif;              
+            }
         }
     }
 }

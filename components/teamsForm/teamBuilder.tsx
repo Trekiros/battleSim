@@ -1,6 +1,6 @@
 import React, {  FC } from 'react'
 import CreatureBuilder from '../creatureBuilder/creatureBuilder'
-import { Creature, Team } from '../model'
+import { clone, Creature, Team } from '../model'
 import TemplateMenu from '../templateMenu/templateMenu'
 import styles from './teamBuilder.module.scss'
 
@@ -8,10 +8,6 @@ type PropType = {
     teamName: string,
     team: Team,
     onTeamChange?: (newValue: Team) => void
-}
-
-function clone<T>(obj: T): T {
-    return JSON.parse(JSON.stringify(obj))
 }
 
 const TeamBuilder:FC<PropType> = ({ teamName, team, onTeamChange }) => {

@@ -4,6 +4,7 @@
     @include genericContainer;
     display:flex;
     flex-direction: row;
+    position: relative;
 
     @include lowWidth() {
         flex-direction: column;
@@ -12,5 +13,23 @@
             width: 100%;
             border-bottom: 1px solid #888;
         }
+    }
+
+    .lifebars {
+        flex: 1 1 0px;
+    }
+
+    .remove {
+        position:absolute;
+        right: 0;
+        top: 0;
+        padding: 8px 16px;
+        font-size: 32px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        transform: rotate(45deg);
+        
+        transition: color 0.5s;
+        color: #888;
+        &:hover { color: #333 }
     }
 }

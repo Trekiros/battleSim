@@ -1,0 +1,28 @@
+.encounter {
+    height: 50px;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: #ddd;
+
+    .text {
+        overflow-x: hidden;
+        transition: width 0.5s;
+        width: 100px;
+    }
+    &:not(:hover) .text {
+        width: 0;
+    }
+
+    .plus {
+        font-size: 50px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        transition: transform 0.5s ease-out;
+        transform: rotate(0deg)
+    }
+    &:hover .plus {
+        transform: rotate(180deg);
+    }
+}

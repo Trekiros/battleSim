@@ -29,9 +29,11 @@ const CreatureBuilder:FC<PropType> = ({ creature, onCreatureChange, onCreatureDe
             {/* COUNT */}
             <div className={styles.inputGroup}>
                 <label>Count</label>
-                <input type={'number'} value={creature.count} placeholder={"Creature Count"} min={0} max={20} onChange={(event) => doUpdate((clone) => {
-                    clone.count = Number(event.target.value)
-                })} />
+                <div className={styles.count}>
+                    <button onClick={() => doUpdate(clone => {clone.count--})}>-</button>
+                    {creature.count}
+                    <button onClick={() => doUpdate(clone => {clone.count++})}>+</button>
+                </div>
             </div>
 
             {/* HP */}
@@ -63,7 +65,7 @@ const CreatureBuilder:FC<PropType> = ({ creature, onCreatureChange, onCreatureDe
             {/* TO HIT */}
             <div className={styles.inputGroup}>
                 <label>to hit</label>
-                <input type={'number'} value={creature.toHit} placeholder={"To Hit bonus"} min={0} onChange={(event) => doUpdate((clone) => {
+                <input type={'number'} value={creature.toHit} placeholder={"To Hit bonus"} onChange={(event) => doUpdate((clone) => {
                     clone.toHit = Number(event.target.value)
                 })} />
             </div>
@@ -76,7 +78,7 @@ const CreatureBuilder:FC<PropType> = ({ creature, onCreatureChange, onCreatureDe
                         <p>Armor Class</p>
                     </div>
                 </label>
-                <input type={'number'} value={creature.AC} placeholder={"AC"} min={0} onChange={(event) => doUpdate((clone) => {
+                <input type={'number'} value={creature.AC} placeholder={"AC"} min={1} onChange={(event) => doUpdate((clone) => {
                     clone.AC = Number(event.target.value)
                 })} />
             </div>

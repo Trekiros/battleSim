@@ -1,45 +1,76 @@
 import Head from 'next/head'
 import React, { useEffect, useState } from 'react'
-import { Team } from '../components/model'
+import { clone, Encounter, runSimulation, Team, teamToCombattants } from '../components/model'
 import Simulation from '../components/simulation/simulation'
 import TeamsForm from '../components/teamsForm/teamsForm'
+import styles from './index.module.scss'
 
 export default function Home() {
   const [players, setPlayersModel] = useState([] as Team)
-  const [monsters, setMonstersModel] = useState([] as Team)
-
-  function setPlayers(newValue: Team) {
-    setPlayersModel(newValue)
-    sessionStorage.setItem('players', JSON.stringify(newValue))
-  }
+  const [encounters, setEncountersModel] = useState([] as Encounter[])
   
-  function setMonsters(newValue: Team) {
-    setMonstersModel(newValue)
-    sessionStorage.setItem('monsters', JSON.stringify(newValue))
+  // Whenever the simulation parameters change, re-run the simulation then save the results
+  function onTeamsChanged(players: Team, encounters: Encounter[]) {
+    if (encounters.length) {
+      encounters[0].players = teamToCombattants(players)
+
+      for (let i = 0 ; i < encounters.length ; i++) {
+        const encounter = encounters[i]
+        const result = runSimulation(encounter.players, encounter.monsters)
+        encounter.simulationResults = result
+        
+        const nextEncounter = (i + 1 < encounters.length) ? encounters[i+1] : null
+        if (nextEncounter) {
+          const playersState = result.length ? result[result.length - 1].players : encounter.players
+          nextEncounter.players = playersState
+        }
+      }
+    }
+    
+    setPlayersModel(players)
+    setEncountersModel(encounters)
+
+    sessionStorage.setItem('players', JSON.stringify(players))
+    sessionStorage.setItem('encounters', JSON.stringify(encounters.map(({monsters}) => ({monsters}))))
   }
 
-  // On page load, recover session details, or provide default
+  // On page load, recover session details, or provide default example
   useEffect(() => {
-    const initialPlayers = sessionStorage.getItem('players')
-    const initialMonsters = sessionStorage.getItem('monsters')
+    const savedPlayers = sessionStorage.getItem('players')
+    const savedEncounters = sessionStorage.getItem('encounters')
 
-    setPlayers(
-      initialPlayers ? JSON.parse(initialPlayers) 
+    const players: Team = savedPlayers ? JSON.parse(savedPlayers)
       : [ { name: 'PC', count: 5, hp: 20, dpr: 10, toHit: 6, AC: 15, target: 'enemy with highest DPR' } ]
-    )
-
-    setMonsters(
-      initialMonsters ? JSON.parse(initialMonsters) 
-      : [
-        { name: 'Boss', count: 1, hp: 80, dpr: 15, toHit: 8, AC: 16, target: 'enemy with most HP' },
-        { name: 'Minion', count: 6, hp: 10, dpr: 5, toHit: 4, AC: 13, target: 'enemy with most HP' },
+      
+    let encounters: Encounter[] = savedEncounters ? JSON.parse(savedEncounters) : []
+    if (!encounters.length) {
+      encounters = [
+        {players: [], simulationResults: [], monsters: [
+          { name: 'Boss', count: 1, hp: 80, dpr: 15, toHit: 8, AC: 16, target: 'enemy with most HP' },
+          { name: 'Minion', count: 6, hp: 10, dpr: 5, toHit: 4, AC: 13, target: 'enemy with most HP' },
+        ]}
       ]
-    )
+    }
+
+    onTeamsChanged(players, encounters)
   }, [])
 
-  function onTeamsChanged(newPlayers: Team, newMonsters: Team) {
-    setPlayers(newPlayers)
-    setMonsters(newMonsters)
+  function onMonstersChanged(encounterIndex: number, newMonsters: Team) {
+    const encountersClone = clone(encounters)
+    encountersClone[encounterIndex].monsters = newMonsters
+    onTeamsChanged(players, encountersClone)
+  }
+
+  function onEncounterAdded() {
+    const encountersClone = clone(encounters)
+    encountersClone.push({monsters: [], players: [], simulationResults: []})
+    onTeamsChanged(players, encountersClone)
+  }
+
+  function onEncounterRemoved(encounterIndex: number) {
+    const encountersClone = clone(encounters)
+    encountersClone.splice(encounterIndex, 1)
+    onTeamsChanged(players, encountersClone)
   }
 
   return (
@@ -53,13 +84,32 @@ export default function Home() {
       <main>
         <div className="content">
           <h1>Encounter Simulator</h1>
-
+          
           <TeamsForm 
-            players={players}
-            monsters={monsters}
-            onTeamsChanged={onTeamsChanged} />
+                  playersTeam={players}
+                  monsters={encounters.length ? encounters[0].monsters : []}
+                  onMonstersChanged={(newMonsters) => onMonstersChanged(0, newMonsters)} 
+                  onPlayersChanged={(newPlayers) => onTeamsChanged(newPlayers, encounters)}/>
 
-          <Simulation players={players} monsters={monsters} />
+          {encounters.map((encounter, index) => (
+            <React.Fragment>
+              { (index !== 0) && (
+                <TeamsForm 
+                  onEncounterRemoved={() => onEncounterRemoved(index)}
+                  playersState={encounter.players}
+                  monsters={encounter.monsters}
+                  onMonstersChanged={(newMonsters) => onMonstersChanged(index, newMonsters)} />
+              )}
+    
+              <Simulation rounds={encounter.simulationResults} />
+            </React.Fragment>
+          ))}
+
+
+          <button className={styles.encounter} onClick={onEncounterAdded}>
+            <div className={styles.text}>Add&nbsp;Encounter</div>
+            <div className={styles.plus}>+</div>
+          </button>
         </div>
       </main>
     </React.Fragment>

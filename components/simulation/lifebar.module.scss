@@ -1,30 +1,45 @@
-.lifebar {
-    flex: 1 1 10%;
-    text-align: center;
-    padding: 0 2px;
-    
-    .name {
-        font-size: small;
+@import '../../styles/shared';
+
+.lifebars {
+    flex: 1 1 0px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0 2px;
+
+    @include lowWidth() {
+        width: 100%;
     }
-    
-    .bg {
-        border-radius: 6px;
-        background: #f88;
-        overflow: hidden;
-        position: relative;
-        height: 30px;
+
+    .lifebar {
+        flex: 1 1 10%;
+        text-align: center;
+        padding: 0 2px;
         
-        .fg {
-            position: absolute;
-            height: 100%;
-            background: #8f8;
+        .name {
+            font-size: small;
         }
         
-        .value {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+        .bg {
+            border-radius: 6px;
+            background: #f88;
+            overflow: hidden;
+            position: relative;
+            height: 30px;
+            
+            .fg {
+                position: absolute;
+                height: 100%;
+                background: #8f8;
+            }
+            
+            .value {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
         }
     }
 }
+

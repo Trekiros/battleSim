@@ -23,26 +23,33 @@ export type Round = {
     monsters: Combattant[],
 }
 
-export function runSimulation(playersTeam: Team, monstersTeam: Team) {
-    function clone<T>(obj: T): T {
-        return JSON.parse(JSON.stringify(obj))
-    }
+export type Encounter = {
+    players: Combattant[],
+    monsters: Team,
+    simulationResults: Round[],
+}
+
+export function clone<T>(obj: T): T {
+    return JSON.parse(JSON.stringify(obj))
+}
+
+export function teamToCombattants(team: Team): Combattant[] {
+    return team.flatMap(creature => {
+        return Array.from({length: creature.count}, (_, index) => ({
+            name: (creature.count === 1) ? creature.name : `${creature.name} ${index + 1}`,
+            maxHP: creature.hp,
+            hp: creature.hp,
+            dpr: creature.dpr,
+            toHit: creature.toHit,
+            AC: creature.AC,
+            target: creature.target,
+        }))
+    })
+}
+
+export function runSimulation(players: Combattant[], monstersTeam: Team) {
 
     // Create a separate object for each creature
-    function teamToCombattants(team: Team): Combattant[] {
-        return team.flatMap(creature => {
-            return Array.from({length: creature.count}, (_, index) => ({
-                name: (creature.count === 1) ? creature.name : `${creature.name} ${index + 1}`,
-                maxHP: creature.hp,
-                hp: creature.hp,
-                dpr: creature.dpr,
-                toHit: creature.toHit,
-                AC: creature.AC,
-                target: creature.target,
-            }))
-        })
-    }
-    let players = teamToCombattants(playersTeam)
     let monsters = teamToCombattants(monstersTeam)
 
     const result: Round[] = []
