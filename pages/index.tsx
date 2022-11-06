@@ -8,6 +8,7 @@ import styles from './index.module.scss'
 export default function Home() {
   const [players, setPlayersModel] = useState([] as Team)
   const [encounters, setEncountersModel] = useState([] as Encounter[])
+  const [useCookies, setUseCookies] = useState(undefined as boolean | undefined)
   
   // Whenever the simulation parameters change, re-run the simulation then save the results
   function onTeamsChanged(players: Team, encounters: Encounter[]) {
@@ -26,12 +27,14 @@ export default function Home() {
         }
       }
     }
-    
+
     setPlayersModel(players)
     setEncountersModel(encounters)
 
-    sessionStorage.setItem('players', JSON.stringify(players))
-    sessionStorage.setItem('encounters', JSON.stringify(encounters.map(({monsters}) => ({monsters}))))
+    if (useCookies) {
+      sessionStorage.setItem('players', JSON.stringify(players))
+      sessionStorage.setItem('encounters', JSON.stringify(encounters.map(({monsters}) => ({monsters}))))
+    }
   }
 
   // On page load, recover session details, or provide default example
@@ -39,8 +42,12 @@ export default function Home() {
     const savedPlayers = sessionStorage.getItem('players')
     const savedEncounters = sessionStorage.getItem('encounters')
 
+    if (savedPlayers || savedEncounters) {
+      setUseCookies(true)
+    }
+
     const players: Team = savedPlayers ? JSON.parse(savedPlayers)
-      : [ { name: 'PC', count: 5, hp: 20, dpr: 10, toHit: 6, AC: 15, target: 'enemy with highest DPR' } ]
+      : [ { name: 'PC', count: 5, hp: 30, dpr: 10, toHit: 6, AC: 15, target: 'enemy with highest DPR' } ]
       
     let encounters: Encounter[] = savedEncounters ? JSON.parse(savedEncounters) : []
     if (!encounters.length) {
@@ -112,6 +119,14 @@ export default function Home() {
           </button>
         </div>
       </main>
+
+      <div className={`${styles.rgpd} ${(useCookies === undefined) ? styles.visible : ''}`}>
+        Do you want to use cookies to save your encounters for the next time you use this website?
+        <div className={styles.buttons}>
+          <button onClick={() => setUseCookies(true)}>Yes</button>
+          <button onClick={() => setUseCookies(false)}>No</button>
+        </div>
+      </div>
     </React.Fragment>
   )
 }
