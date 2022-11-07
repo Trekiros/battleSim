@@ -16,13 +16,13 @@
         width: 0;
     }
 
-    .plus {
-        font-size: 50px;
-        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    svg {
+        height: 40px;
+        width: 40px;
         transition: transform 0.25s ease-out;
         transform: rotate(0deg)
     }
-    &:hover .plus {
+    &:hover svg {
         transform: rotate(270deg);
     }
 

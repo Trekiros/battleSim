@@ -15,18 +15,23 @@
         }
     }
 
+    .team {
+        width: 50%;
+        margin: 0 8px;
+        display: flex;
+        flex-direction: column;
+    }    
+
     .lifebars {
         flex: 1 1 0px;
     }
 
     .remove {
         position:absolute;
-        right: 0;
-        top: 0;
-        padding: 8px 16px;
-        font-size: 32px;
-        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-        transform: rotate(45deg);
+        right: 8px;
+        top: 8px;
+        height: 32px;
+        width: 32px;
         
         transition: color 0.5s;
         color: #888;

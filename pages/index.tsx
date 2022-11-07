@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import Head from 'next/head'
 import React, { useEffect, useState } from 'react'
 import { clone, Encounter, runSimulation, Team, teamToCombattants } from '../components/model'
@@ -115,7 +117,7 @@ export default function Home() {
 
           <button className={styles.encounter} onClick={onEncounterAdded}>
             <div className={styles.text}>Add&nbsp;Encounter</div>
-            <div className={styles.plus}>+</div>
+            <FontAwesomeIcon icon={faPlus} />
           </button>
         </div>
       </main>

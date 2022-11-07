@@ -27,7 +27,12 @@ button {
     cursor: pointer;
     transition: background-color 0.5s;
     
-    &:hover {
+    &:hover &:not(.disabled) {
         background: #77e;
+    }
+
+    &:disabled {
+        background: #aaa;
+        cursor: initial;
     }
 }
