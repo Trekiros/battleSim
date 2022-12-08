@@ -19,7 +19,7 @@ export default function Home() {
 
       for (let i = 0 ; i < encounters.length ; i++) {
         const encounter = encounters[i]
-        const result = runSimulation(encounter.players, encounter.monsters)
+        const result = runSimulation(encounter)
         encounter.simulationResults = result
         
         const nextEncounter = (i + 1 < encounters.length) ? encounters[i+1] : null
@@ -54,10 +54,16 @@ export default function Home() {
     let encounters: Encounter[] = savedEncounters ? JSON.parse(savedEncounters) : []
     if (!encounters.length) {
       encounters = [
-        {players: [], simulationResults: [], monsters: [
-          { name: 'Boss', count: 1, hp: 80, dpr: 15, toHit: 8, AC: 16, target: 'enemy with most HP' },
-          { name: 'Minion', count: 6, hp: 10, dpr: 5, toHit: 4, AC: 13, target: 'enemy with most HP' },
-        ]}
+        {
+          players: [], 
+          simulationResults: [], 
+          monsters: [
+            { name: 'Boss', count: 1, hp: 80, dpr: 15, toHit: 8, AC: 16, target: 'enemy with most HP' },
+            { name: 'Minion', count: 6, hp: 10, dpr: 5, toHit: 4, AC: 13, target: 'enemy with most HP' },
+          ],
+          playersSurprised: false,
+          monstersSurprised: false,
+        }
       ]
     }
 
@@ -72,7 +78,13 @@ export default function Home() {
 
   function onEncounterAdded() {
     const encountersClone = clone(encounters)
-    encountersClone.push({monsters: [], players: [], simulationResults: []})
+    encountersClone.push({
+      monsters: [], 
+      players: [], 
+      simulationResults: [], 
+      playersSurprised: false, 
+      monstersSurprised: false
+    })
     onTeamsChanged(players, encountersClone)
   }
 
@@ -80,6 +92,13 @@ export default function Home() {
     const encountersClone = clone(encounters)
     encountersClone.splice(encounterIndex, 1)
     onTeamsChanged(players, encountersClone)
+  }
+
+  function onSurprisedChanged(encounterIndex: number, args: {playersSurprised?: boolean, monstersSurprised?: boolean}) {
+	const encountersClone = clone(encounters)
+	if (args.playersSurprised !== undefined) encountersClone[encounterIndex].playersSurprised = args.playersSurprised
+	if (args.monstersSurprised !== undefined) encountersClone[encounterIndex].monstersSurprised = args.monstersSurprised
+	onTeamsChanged(players, encountersClone)
   }
 
   return (
@@ -94,11 +113,16 @@ export default function Home() {
         <div className="content">
           <h1>Encounter Simulator</h1>
           
-          <TeamsForm 
-                  playersTeam={players}
-                  monsters={encounters.length ? encounters[0].monsters : []}
-                  onMonstersChanged={(newMonsters) => onMonstersChanged(0, newMonsters)} 
-                  onPlayersChanged={(newPlayers) => onTeamsChanged(newPlayers, encounters)}/>
+          <TeamsForm
+			playersTeam={players}
+			monsters={encounters.length ? encounters[0].monsters : []}
+			onMonstersChanged={(newMonsters) => onMonstersChanged(0, newMonsters)} 
+			onPlayersChanged={(newPlayers) => onTeamsChanged(newPlayers, encounters)}
+			playersSurprised={encounters.length ? encounters[0].playersSurprised : false}
+			togglePlayersSurprised={() => onSurprisedChanged(0, {playersSurprised: !encounters[0].playersSurprised})}
+			monstersSurprised={encounters.length ? encounters[0].monstersSurprised : false}
+			toggleMonstersSurprised={() => onSurprisedChanged(0, {monstersSurprised: !encounters[0].monstersSurprised})}
+		  />
 
           {encounters.map((encounter, index) => (
             <React.Fragment>
@@ -107,7 +131,12 @@ export default function Home() {
                   onEncounterRemoved={() => onEncounterRemoved(index)}
                   playersState={encounter.players}
                   monsters={encounter.monsters}
-                  onMonstersChanged={(newMonsters) => onMonstersChanged(index, newMonsters)} />
+                  onMonstersChanged={(newMonsters) => onMonstersChanged(index, newMonsters)} 
+				  playersSurprised={encounters[index].playersSurprised}
+				  togglePlayersSurprised={() => onSurprisedChanged(index, {playersSurprised: !encounters[index].playersSurprised})}
+				  monstersSurprised={encounters[index].monstersSurprised}
+				  toggleMonstersSurprised={() => onSurprisedChanged(index, {monstersSurprised: !encounters[index].monstersSurprised})}
+				/>
               )}
     
               <Simulation rounds={encounter.simulationResults} />

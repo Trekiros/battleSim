@@ -20,7 +20,11 @@
         margin: 0 8px;
         display: flex;
         flex-direction: column;
-    }    
+    }
+
+    .surprise {
+        float: right;
+    }
 
     .lifebars {
         flex: 1 1 0px;

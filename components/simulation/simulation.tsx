@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import LifeBar from './lifebar'
 import { Round } from '../model'
 import styles from './simulation.module.scss'
 import LifeBars from './lifebar'

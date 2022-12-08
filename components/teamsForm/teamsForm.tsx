@@ -12,14 +12,31 @@ type PropType = {
     onMonstersChanged: (monsters: Team) => void,
     
     playersTeam?: Team, 
-    onPlayersChanged?: (players: Team) => void, 
+    onPlayersChanged?: (players: Team) => void,
+
+    playersSurprised: boolean,
+    togglePlayersSurprised: () => void,
+
+    monstersSurprised: boolean,
+    toggleMonstersSurprised: () => void,
     
     playersState?: Combattant[],
 
     onEncounterRemoved?: () => void,
 }
 
-const TeamsForm:FC<PropType> = ({ playersTeam, playersState, monsters, onPlayersChanged, onMonstersChanged, onEncounterRemoved }) => {
+const TeamsForm:FC<PropType> = ({
+    playersTeam,
+    playersState,
+    monsters,
+    onPlayersChanged,
+    onMonstersChanged,
+    onEncounterRemoved,
+    playersSurprised,
+    togglePlayersSurprised,
+    monstersSurprised,
+    toggleMonstersSurprised,
+}) => {
     const [showPlayerMenu, setShowPlayerMenu] = useState(false)
     const [showMonsterMenu, setShowMonsterMenu] = useState(false)
 
@@ -45,7 +62,17 @@ const TeamsForm:FC<PropType> = ({ playersTeam, playersState, monsters, onPlayers
 
 
             <div className={styles.team}>
-                <h2>Players</h2>
+                <h2>
+                    Players
+                    <span className={styles.surprise}>
+                        Surprised:
+                        <input 
+                            type='checkbox'
+                            checked={playersSurprised}
+                            onClick={togglePlayersSurprised}
+                        />
+                    </span>
+                </h2>
 
                 {playersTeam ? (
                     <React.Fragment>
@@ -75,7 +102,18 @@ const TeamsForm:FC<PropType> = ({ playersTeam, playersState, monsters, onPlayers
 
 
             <div className={styles.team}>
-                <h2>Enemies</h2>
+                <h2>
+                    Enemies
+                    
+                    <span className={styles.surprise}>
+                        Surprised:
+                        <input 
+                            type='checkbox'
+                            checked={monstersSurprised}
+                            onClick={toggleMonstersSurprised}
+                        />
+                    </span>
+                </h2>
 
                 <TeamBuilder
                     team={monsters}

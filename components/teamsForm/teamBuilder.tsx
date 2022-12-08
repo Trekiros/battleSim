@@ -42,6 +42,7 @@ const TeamBuilder:FC<PropType> = ({ team, onTeamChange, defaultMenuTab }) => {
                     onTemplateSelected={(newValue) => {
                         newValue.count = creature.count
                         newValue.name = creature.name
+                        newValue.target = creature.target
                         updateCreature(index, newValue)
                         setMenuShown(-1)
                     }} 

@@ -26,6 +26,8 @@ export type Round = {
 export type Encounter = {
     players: Combattant[],
     monsters: Team,
+    playersSurprised: boolean,
+    monstersSurprised: boolean,
     simulationResults: Round[],
 }
 
@@ -47,11 +49,12 @@ export function teamToCombattants(team: Team): Combattant[] {
     })
 }
 
-export function runSimulation(players: Combattant[], monstersTeam: Team) {
+export function runSimulation(encounter: Encounter) {
+    let players = encounter.players
+    let monsters = teamToCombattants(encounter.monsters)
 
-    // Create a separate object for each creature
-    let monsters = teamToCombattants(monstersTeam)
-
+    let playersSurprised = encounter.playersSurprised
+    let monstersSurprised = encounter.monstersSurprised
     const result: Round[] = []
     do {
         // This function returns an updated clone of the defenderTeam with its hit points decreased by the attackers
@@ -87,8 +90,20 @@ export function runSimulation(players: Combattant[], monstersTeam: Team) {
 
             return result
         }
-        const newMonsters = attack(players, monsters)
-        const newPlayers = attack(monsters, players)
+        
+        let newMonsters = clone(monsters)
+        if (playersSurprised) {
+            playersSurprised = false
+        } else {
+            newMonsters = attack(players, monsters)
+        }
+
+        let newPlayers = clone(players)
+        if (monstersSurprised) {
+            monstersSurprised = false
+        } else {
+            newPlayers = attack(monsters, players)
+        }
 
         result.push({players, monsters})
 
