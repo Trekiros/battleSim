@@ -34,15 +34,15 @@ export default function Home() {
     setEncountersModel(encounters)
 
     if (useCookies) {
-      sessionStorage.setItem('players', JSON.stringify(players))
-      sessionStorage.setItem('encounters', JSON.stringify(encounters.map(({monsters}) => ({monsters}))))
+      localStorage.setItem('players', JSON.stringify(players))
+      localStorage.setItem('encounters', JSON.stringify(encounters.map(({monsters}) => ({monsters}))))
     }
   }
 
   // On page load, recover session details, or provide default example
   useEffect(() => {
-    const savedPlayers = sessionStorage.getItem('players')
-    const savedEncounters = sessionStorage.getItem('encounters')
+    const savedPlayers = localStorage.getItem('players')
+    const savedEncounters = localStorage.getItem('encounters')
 
     if (savedPlayers || savedEncounters) {
       setUseCookies(true)
