@@ -1,5 +1,5 @@
 import { FC, useState } from "react"
-import { Creature } from "../model"
+import { Creature } from "../../model"
 
 
 type PropType = {

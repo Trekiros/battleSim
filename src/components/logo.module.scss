@@ -1,0 +1,224 @@
+/* COLORS */
+.logo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    overflow: hidden;
+
+    --bg: #222;
+    --pink: #c17ba0;
+    --anim-duration: 2s;
+
+    background-color: var(--bg);
+    
+    animation-timing-function: ease-in-out;
+    animation-duration: var(--anim-duration);
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-name: logoAnim;
+
+    @keyframes logoAnim {
+        0% { opacity: 1 }
+        80% { opacity: 1 }
+        99% { visibility: initial }
+        100% { opacity: 0; visibility: hidden }
+    }
+
+    .bookContainer {
+        animation-timing-function: ease-in-out;
+        animation-duration: var(--anim-duration);
+        animation-iteration-count: 1;
+        animation-name: bookAnim;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        
+        @keyframes bookAnim {
+            0% { left: -200vh }
+            30% {left: 50%; transform: rotate(180deg)}
+            60% { transform: rotate(0) }
+        }
+
+        .book {
+            background-color: var(--pink);
+            height: 50vh;
+            width: 40vh;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+        }
+
+        .corner {
+            background-color: var(--pink);
+            height: 7vh;
+            width: 7vh;
+            border: 1vh solid var(--bg);
+            position: absolute;
+            transform: translate(-50%, -50%);
+            
+            &:nth-child(2) {
+                border-radius: 0 0 100% 0;
+                top: calc(50% - 23vh);
+                left: calc(50% - 18vh);
+            }
+            &:nth-child(3) {
+                border-radius: 0 100% 0 0;
+                top: calc(50% + 23vh);
+                left: calc(50% - 18vh);
+            }
+            &:nth-child(4) {
+                border-radius: 0 0 0 100%;
+                top: calc(50% - 23vh);
+                left: calc(50% + 18vh);
+            }
+            &:nth-child(5) {
+                border-radius: 100% 0 0 0;
+                top: calc(50% + 23vh);
+                left: calc(50% + 18vh);
+            }
+        }
+
+        .rim {
+            background:
+                -moz-radial-gradient(0 100%, circle, transparent 5vh, white 5vh),
+                -moz-radial-gradient(100% 100%, circle, transparent 5vh, white 5vh),
+                -moz-radial-gradient(100% 0, circle, transparent 5vh, white 5vh),
+                -moz-radial-gradient(0 0, circle, transparent 5vh, white 5vh);
+            background:
+                -o-radial-gradient(0 100%, circle, transparent 5vh, white 5vh),
+                -o-radial-gradient(100% 100%, circle, transparent 5vh, white 5vh),
+                -o-radial-gradient(100% 0, circle, transparent 5vh, white 5vh),
+                -o-radial-gradient(0 0, circle, transparent 5vh, white 5vh);
+            background:
+                -webkit-radial-gradient(0 100%, circle, transparent 5vh, white 5vh),
+                -webkit-radial-gradient(100% 100%, circle, transparent 5vh, white 5vh),
+                -webkit-radial-gradient(100% 0, circle, transparent 5vh, white 5vh),
+                -webkit-radial-gradient(0 0, circle, transparent 5vh, white 5vh);
+            background-position: bottom left, bottom right, top right, top left;
+                -moz-background-size: 50% 50%;
+                -webkit-background-size: 50% 50%;
+            background-size: 50% 50%;
+            background-repeat: no-repeat;
+        
+            height: 40vh;
+            width: 30vh;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+        
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            div {
+                background:
+                    -moz-radial-gradient(0 100%, circle, transparent 5vh, var(--pink) 5vh),
+                    -moz-radial-gradient(100% 100%, circle, transparent 5vh, var(--pink) 5vh),
+                    -moz-radial-gradient(100% 0, circle, transparent 5vh, var(--pink) 5vh),
+                    -moz-radial-gradient(0 0, circle, transparent 5vh, var(--pink) 5vh);
+                background:
+                    -o-radial-gradient(0 100%, circle, transparent 5vh, var(--pink) 5vh),
+                    -o-radial-gradient(100% 100%, circle, transparent 5vh, var(--pink) 5vh),
+                    -o-radial-gradient(100% 0, circle, transparent 5vh, var(--pink) 5vh),
+                    -o-radial-gradient(0 0, circle, transparent 5vh, var(--pink) 5vh);
+                background:
+                    -webkit-radial-gradient(0 100%, circle, transparent 5vh, var(--pink) 5vh),
+                    -webkit-radial-gradient(100% 100%, circle, transparent 5vh, var(--pink) 5vh),
+                    -webkit-radial-gradient(100% 0, circle, transparent 5vh, var(--pink) 5vh),
+                    -webkit-radial-gradient(0 0, circle, transparent 5vh, var(--pink) 5vh);
+                background-position: bottom left, bottom right, top right, top left;
+                    -moz-background-size: 50% 50%;
+                    -webkit-background-size: 50% 50%;
+                background-size: 50% 50%;
+                background-repeat: no-repeat;
+                
+                height: calc(40vh - 8px);
+                width: calc(30vh - 8px);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                div {
+                    background-color: var(--pink);
+                    width: 50%;
+                    height: 100%;
+                }
+            }
+
+            &:after {
+                background-color: var(--pink);
+            }
+        }
+
+        .ribbonContainer {
+            position: absolute;
+            top: calc(50% + 26vh);
+            left: calc(50% - 13vh);
+            z-index: -1;
+            
+            .ribbon {
+                background-color: var(--pink);
+                height: 7vh;
+                width: 5vh;
+
+                animation-timing-function: ease-in-out;
+                animation-duration: var(--anim-duration);
+                animation-iteration-count: 1;
+
+                animation-name: ribbonAnim;
+                position: absolute;
+                top: 50%;
+
+                @keyframes ribbonAnim {
+                    0% { height: 0; opacity: 0 }
+                    50% { height: 0 }
+                    54% { opacity: 0 }
+                    55% { opacity: 1 }
+                    75% { height: 7vh }
+                    100% { height: 7vh }
+                }
+    
+                &:after {
+                    content: "";
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    border: 2.5vh solid transparent;
+                    border-bottom-color: var(--bg);            
+                }
+            }
+        }
+    }
+
+    .playBtnContainer {
+        animation-timing-function: ease-in-out;
+        animation-duration: var(--anim-duration);
+        animation-iteration-count: 1;
+        animation-name: playAnim;
+        position: absolute;
+        top: 50%;
+        right: 50%;
+
+        @keyframes playAnim {
+            0% { right: -200vh }
+            30% { right: 50%; transform: rotate(-180deg) }
+            60% { transform: rotate(0) }
+        }
+
+        .playBtn {
+            width: 0; 
+            height: 0; 
+            border-top: 6vh solid transparent;
+            border-bottom: 6vh solid transparent;
+            border-left: 6vh solid white;
+            transform: translate(-50%, -50%) scale(3, 1);
+            position: absolute;
+            top: 50%;
+        }
+    }
+}

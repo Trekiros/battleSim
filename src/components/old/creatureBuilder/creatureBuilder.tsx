@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark, faPen, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
 import React, { FC } from 'react'
-import { Creature } from '../model'
+import { Creature } from '../../model'
 import styles from './creatureBuilder.module.scss'
 
 type PropType = {

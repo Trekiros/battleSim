@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import React, { FC, useState } from 'react'
-import { clone, Combattant, Creature, Team } from '../model'
+import { clone, Combattant, Creature, Team } from '../../model'
 import LifeBars from '../simulation/lifebar'
 import TemplateMenu from '../templateMenu/templateMenu'
 import TeamBuilder from './teamBuilder'

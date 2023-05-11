@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Combattant } from '../model'
+import { Combattant } from '../../model'
 import styles from './lifebar.module.scss'
 
 type PropType = {

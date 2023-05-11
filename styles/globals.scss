@@ -1,5 +1,5 @@
 // General style & layout
-html, body, #__next, main {min-height: 100vh; background: #eee; color: #222; margin: 0; padding:0;}
+html, body, #__next, main {min-height: 100vh; background: #433; color: #eee; margin: 0; padding:0;}
 main {
     display: flex;
     flex-direction: column;
@@ -14,25 +14,31 @@ main {
     align-items: center;
 }
 
+div, button {
+    box-sizing: border-box;
+}
+
 h1, h2 { margin: 0 }
 button {
-    border-radius: 6px;
+    border-radius: 8px;
     border: none;
-    background: #88f;
-    padding: 4px 8px;
-    min-width: 25px;
-    min-height: 25px;
+    color: #eee;
+    padding: 1em 2em;
     margin: 8px;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.5s;
+
+    background-color: #fff1;
+    transition: background-color 0.3s, scale 0.3s;
     
-    &:hover &:not(.disabled) {
-        background: #77e;
+    &:hover:not(.disabled) {
+        background-color: #fff3;
+        scale: 1.05;
     }
 
     &:disabled {
-        background: #aaa;
+        background: transparent;
+        color: #aaa;
         cursor: initial;
     }
 }

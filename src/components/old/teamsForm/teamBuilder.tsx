@@ -1,6 +1,6 @@
 import React, {  FC, useState } from 'react'
 import CreatureBuilder from '../creatureBuilder/creatureBuilder'
-import { clone, Creature, Team } from '../model'
+import { clone, Creature, Team } from '../../model'
 import TemplateMenu from '../templateMenu/templateMenu'
 import styles from './teamBuilder.module.scss'
 

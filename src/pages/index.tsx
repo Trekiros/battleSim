@@ -1,13 +1,28 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import Head from 'next/head'
-import React, { useEffect, useState } from 'react'
-import { clone, Encounter, runSimulation, Team, teamToCombattants } from '../components/model'
-import Simulation from '../components/simulation/simulation'
-import TeamsForm from '../components/teamsForm/teamsForm'
-import styles from './index.module.scss'
+import React from 'react'
+import RGPD from '../components/rgpd'
+import Logo from '../components/logo'
+import Simulation from '../components/simulation'
 
 export default function Home() {
+  return (
+    <>
+      <Head>
+        <title>Battle Sim</title>
+        <meta name="description" content="Build balanced encounters!" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <main>
+        <Simulation />
+        <RGPD />
+        <Logo />
+      </main>
+    </>
+  )
+}
+
+/*export default function Home() {
   const [players, setPlayersModel] = useState([] as Team)
   const [encounters, setEncountersModel] = useState([] as Encounter[])
   const [useCookies, setUseCookies] = useState(undefined as boolean | undefined)
@@ -161,3 +176,4 @@ export default function Home() {
     </React.Fragment>
   )
 }
+*/

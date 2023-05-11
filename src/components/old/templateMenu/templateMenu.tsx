@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react'
-import { challengeRating, levels } from '../data'
-import { Creature } from '../model'
+import { challengeRating, levels } from '../../data'
+import { Creature } from '../../model'
 import styles from './templateMenu.module.scss'
 
 type PropType = {
