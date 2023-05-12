@@ -15,7 +15,9 @@ const monsters = obj.monster
         const name = monster.name
         const ac = monster.ac[0].ac
         const hp = monster.hp.average
-        const cr = Number(monster.cr)
+        const cr = monster.cr
+        const mode = 'custom'
+        const type = (typeof monster.type === 'string') ? monster.type : monster.type.type
         const actions = []
 
         function matchEntry(entry, regex) {

@@ -7,11 +7,7 @@
     display: flex;
     flex-direction: column;
 
-    svg { margin: 0 1em }
-    button { 
-        margin: 0;
-        &:hover { scale: 1 }
-    }
+    .addCreatureBtn { margin: 0 }
 
     .deleteEncounter {
         position: absolute;

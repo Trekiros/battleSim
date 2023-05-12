@@ -10,7 +10,7 @@ export default function Home() {
       <Head>
         <title>Battle Sim</title>
         <meta name="description" content="Build balanced encounters!" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/ico.ico" />
       </Head>
 
       <main>

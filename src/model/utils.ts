@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { DependencyList, useEffect, useState } from "react"
 
 export function clone<T>(obj: T): T {
     return structuredClone(obj)
@@ -11,13 +11,16 @@ export function useStoredState<T>(key: string, defaultValue: T, parser: (str: st
         if (!localStorage) return
 
         const storedValue = localStorage.getItem(key)
-
-        if (storedValue !== null) {
+        if (storedValue === null) return
+        
+        try {
             const parsedValue = parser(storedValue)
             if (parsedValue !== null) setState(parsedValue)
             else console.error('Could not parse', key, 'from localStorage')
+        } catch (e) {
+            console.error(e)
         }
-    })
+    }, [])
 
     const stateSaver = (newValue: T) => {
         setState(newValue)
@@ -31,6 +34,25 @@ export function useStoredState<T>(key: string, defaultValue: T, parser: (str: st
     return [state, stateSaver] as const
 }
 
+export function useCalculatedState<T>(generator: () => T, dependencies: DependencyList) {
+    const [state, setState] = useState(generator())
+
+    useEffect(() => {
+        setState(generator())
+    }, dependencies)
+
+    return state
+}
+
 export function range(n: number) {
     return Array.from(Array(n).keys())
+}
+
+export function capitalize(str: string) {
+    const words = str.split(' ')
+    return words.map(word => {
+        const firstLetter = word.charAt(0)
+        const otherLetters = word.substring(1)
+        return firstLetter.toLocaleUpperCase() + otherLetters.toLocaleLowerCase()
+    }).join(' ')
 }

@@ -27,18 +27,34 @@ button {
     margin: 8px;
     font-weight: bold;
     cursor: pointer;
+    user-select: none;
 
     background-color: #fff1;
-    transition: background-color 0.3s, scale 0.3s;
+    transition: background-color 0.3s;
     
-    &:hover:not(.disabled) {
-        background-color: #fff3;
-        scale: 1.05;
-    }
+    &:hover:not(.disabled) { background-color: #fff3 }
 
     &:disabled {
         background: transparent;
         color: #aaa;
         cursor: initial;
+        pointer-events: none;
     }
+
+    svg {
+        margin: 0 1em;
+        width: 1em;
+    }
+}
+
+input {
+    padding: 1em;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    color: white;
+    background: #fff1;
+    transition: background-color 0.3s;
+    &:hover { background: #fff3 }
+    &::placeholder { color: #aaa }
 }

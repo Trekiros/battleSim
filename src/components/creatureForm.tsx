@@ -10,16 +10,12 @@ import CustomForm from "./customForm"
 
 type PropType = {
     onSubmit: (value: Creature) => void,
-    onCancel: () => void
-} & ({
-    initialMode: 'player'|'monster',
-    initialValue: undefined,
-    onDelete: undefined,
-} | {
-    initialMode: undefined,
-    initialValue: Creature,
-    onDelete: () => void,
-})
+    onCancel: () => void,
+
+    initialMode?: 'player'|'monster',
+    initialValue?: undefined,
+    onDelete?: undefined,
+}
 
 function newCreature(mode: 'player'|'monster'): Creature {
     return {
@@ -33,7 +29,7 @@ function newCreature(mode: 'player'|'monster'): Creature {
 }
 
 const CreatureForm:FC<PropType> = ({ initialMode, onSubmit, onCancel, initialValue, onDelete }) => {
-    const [value, setValue] = useState<Creature>(initialValue || newCreature(initialMode))
+    const [value, setValue] = useState<Creature>(initialValue || newCreature(initialMode || 'player'))
     
     function update(callback: (clonedValue: Creature) => void) {
         const clonedValue = clone(value)
@@ -46,9 +42,24 @@ const CreatureForm:FC<PropType> = ({ initialMode, onSubmit, onCancel, initialVal
             <div className={styles.modal} onMouseDown={e => e.stopPropagation()}>
 
                 <div className={styles.modes}>
-                    <button onClick={() => update(c => { c.mode = 'player' })}>Player Character</button>
-                    <button onClick={() => update(c => { c.mode = 'monster' })}>Monster</button>
-                    <button onClick={() => update(c => { c.mode = 'custom' })}>Custom</button>
+                    <button
+                        className={(value.mode === 'player') ? styles.active : undefined}
+                        onClick={() => update(c => { c.mode = 'player' })}
+                    >
+                        Player Character
+                    </button>
+                    <button
+                        className={(value.mode === 'monster') ? styles.active : undefined}
+                        onClick={() => update(c => { c.mode = 'monster' })}
+                    >
+                        Monster
+                    </button>
+                    <button
+                        className={(value.mode === 'custom') ? styles.active : undefined}
+                        onClick={() => update(c => { c.mode = 'custom' })}
+                    >
+                        Custom
+                    </button>
                 </div>
 
                 <div className={styles.form}>

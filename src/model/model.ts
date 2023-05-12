@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { ChallengeRatingSchema, CreatureTypeSchema } from './enums'
 
 const EnemyTargetSchema = z.enum([
     'enemy with least HP',
@@ -58,6 +59,8 @@ const ActionSchema = z.discriminatedUnion('type', [HealActionSchema, AtkActionSc
 
 export const CreatureSchema = z.object({
     mode: z.enum(['player', 'monster', 'custom']),
+    type: CreatureTypeSchema.optional(),
+    cr: ChallengeRatingSchema.optional(),
     name: z.string(),
     count: z.number(),
     hp: z.number(),
