@@ -27,8 +27,8 @@ export function useStoredState<T>(key: string, defaultValue: T, parser: (str: st
         
         if (!localStorage) return
         
-        const useRGPD = localStorage.getItem('useLocalStorage')
-        if (useRGPD !== null) localStorage.setItem(key, JSON.stringify(newValue))
+        const useLocalStorage = localStorage.getItem('useLocalStorage')
+        if (useLocalStorage !== null) localStorage.setItem(key, JSON.stringify(newValue))
     }
 
     return [state, stateSaver] as const
@@ -56,3 +56,16 @@ export function capitalize(str: string) {
         return firstLetter.toLocaleUpperCase() + otherLetters.toLocaleLowerCase()
     }).join(' ')
 }
+
+export function multiSort<T>(arr: T[], ...criteria: (keyof T)[]) {
+    return arr.sort((a, b) => {
+        for (let i = 0 ; i < criteria.length; i++) {
+            const criterion = criteria[i]
+
+            if (a[criterion] > b[criterion]) return 1
+            if (a[criterion] < b[criterion]) return -1
+        }
+        return 0
+    })
+}
+

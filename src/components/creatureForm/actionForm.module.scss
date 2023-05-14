@@ -1,0 +1,28 @@
+.actionForm {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
+    border-radius: 8px;
+    margin: 4px 0;
+    padding: 4px 0;
+
+    > input {
+        padding: 11px // So it lines up with the select elements
+    }
+
+    > input[type=number] { width: 45px }
+    > input[type=text] { width: 50px; min-width: fit-content }
+
+    &:hover {
+        background: #fff1;
+    }
+
+    button {
+        background: none!important;
+        padding: 0;
+
+        svg { transition: color 0.3s }
+        &:hover { color: #bbb }
+    }
+}

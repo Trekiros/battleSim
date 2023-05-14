@@ -16,4 +16,3 @@ export const PlayerTemplates: {[className in Class]: {[level: number]: Creature}
     wizard: {},
 }
 
-export const Monsters: Creature[] = []

@@ -2,6 +2,9 @@
     width: 100%;
     padding: 1em;
     counter-reset: encounters 0;
+    display:flex;
+    flex-direction: column;
+    gap: 2em;
 
     .header {
         user-select: none;
@@ -17,4 +20,6 @@
             content: '';
         }
     }
+
+    .addEncounterBtn { margin: 0 }
 }

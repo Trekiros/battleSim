@@ -2,15 +2,14 @@
     section {
         margin: 1em 0;
         display: grid;
-        grid-template-columns: 1fr 5fr;
+        grid-template-columns: 200px calc(100% - 200px);
         align-items: center;
         gap: 8px;
 
-        @media (width < 1200px) { grid-template-columns: 1fr 4fr }
         @media (width < 800px) { grid-template-columns: 1fr }
     }
 
-    h3 { user-select: none; white-space: nowrap; }
+    h3 { user-select: none; white-space: nowrap; margin: 0.5em 0 }
 
     .creatureTypes {
         overflow: hidden;
@@ -83,7 +82,7 @@
         }
 
         .result {
-            max-height: 800px;
+            max-height: 600px;
             overflow-y: auto;
             overflow-x: hidden;
             
@@ -92,6 +91,27 @@
             &::-webkit-scrollbar-thumb { background: #888 }
 
             .placeholder { width: 100%; padding: 2em; text-align: center; color: #aaa; user-select: none; }
+
+            button {
+                width: 100%;
+                text-align: left;
+                margin: 0;
+                border-radius: 0;
+                background: transparent;
+                &:hover { background: #fff1 }
+
+                .stats {
+                    float: right;
+                    font-weight: lighter;
+                    font-size: smaller;
+                    padding-top: 4px;
+                    padding-left: 1ch;
+
+                    &:not(:last-child) {
+                        @media (width < 600px) { display: none }
+                    }
+                }
+            }
         }
     }
 }

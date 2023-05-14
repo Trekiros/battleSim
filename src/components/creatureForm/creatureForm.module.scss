@@ -49,13 +49,5 @@
                 &.active { background: #fff3 }
             }
         }
-
-        .buttons {
-            display: flex;
-            gap: 1em;
-            margin-top: 1em;
-
-            button { flex: 1 1 0; margin: 0 }
-        }
     }
 }

@@ -1,0 +1,36 @@
+.select { 
+    .control {
+        background: #fff1; 
+        border: none;
+        border-radius: 8px;
+        box-shadow: none;
+
+        &:hover { background: #fff3 }
+    }
+
+    .input { color: white }
+    .singleValue { color: white }
+    .indicator { color: white }
+
+    .menu {
+        margin: 0;
+        background: #544;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0px 10px 10px 0px #000a;
+
+        animation-name: slideIn;
+        animation-duration: 300ms;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+
+        @keyframes slideIn {
+            0% { transform: translateY(-50%) scaleY(0) }
+            100% { transform: translateY(0) scaleY(1) }
+        }
+    }
+    
+    // Options
+    .isSelected { background: #fff3!important }
+    .isFocused { background: #fff1!important }
+}

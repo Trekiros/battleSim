@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import React from 'react'
-import RGPD from '../components/rgpd'
-import Logo from '../components/logo'
-import Simulation from '../components/simulation'
+import RGPD from '../components/utils/rgpd'
+import Logo from '../components/utils/logo'
+import Simulation from '../components/simulation/simulation'
 
 export default function Home() {
   return (

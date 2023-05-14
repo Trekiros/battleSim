@@ -1,5 +1,5 @@
-import { z } from 'zod'
-import { ChallengeRatingSchema, CreatureTypeSchema } from './enums'
+import { string, z } from 'zod'
+import { ChallengeRatingSchema, ConditionSchema, CreatureTypeSchema, FrequencySchema } from './enums'
 
 const EnemyTargetSchema = z.enum([
     'enemy with least HP',
@@ -19,10 +19,11 @@ const AllyTargetSchema = z.enum([
 ])
 
 const ActionSchemaBase = z.object({
+    id: z.string(),
     name: z.string(),
     actionSlot: z.number(), // Can only take 1 action for each action slot per turn, e.g. action slot 0 is all actions, and action slot 1 is all bonus actions
-    freq: z.enum(['at will', '1/fight', '1/day']),
-    condition: z.enum(['default', 'ally at 0 HP', 'is available', 'is under half HP']),
+    freq: FrequencySchema,
+    condition: ConditionSchema,
     targets: z.number(),
 })
 
@@ -58,9 +59,13 @@ const DebuffActionSchema = ActionSchemaBase.merge(z.object({
 const ActionSchema = z.discriminatedUnion('type', [HealActionSchema, AtkActionSchema, BuffActionSchema, DebuffActionSchema])
 
 export const CreatureSchema = z.object({
+    id: z.string(),
+
     mode: z.enum(['player', 'monster', 'custom']),
     type: CreatureTypeSchema.optional(),
     cr: ChallengeRatingSchema.optional(),
+    src: z.string().optional(),
+
     name: z.string(),
     count: z.number(),
     hp: z.number(),

@@ -8,6 +8,8 @@ main {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+main, input, button { font-size: 10pt; }
+
 .content {
     display: flex;
     flex-direction: column;

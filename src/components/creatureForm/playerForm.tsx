@@ -1,16 +1,15 @@
 import { FC, useEffect, useState } from "react"
-import { Creature } from "../model/model"
+import { Creature } from "../../model/model"
 import styles from './playerForm.module.scss'
-import { Class, ClassesList } from "../model/enums"
-import { capitalize, range } from "../model/utils"
-import { PlayerTemplates } from "../data/data"
+import { Class, ClassesList } from "../../model/enums"
+import { capitalize, range } from "../../model/utils"
+import { PlayerTemplates } from "../../data/data"
 
 type PropType = {
-    value: Creature,
     onChange: (newvalue: Creature) => void,
 }
 
-const PlayerForm:FC<PropType> = ({ value, onChange }) => {
+const PlayerForm:FC<PropType> = ({ onChange }) => {
     const [chosenClass, setClass] = useState<Class|null>(null)
     const [level, setLevel] = useState<number | null>(null)
 

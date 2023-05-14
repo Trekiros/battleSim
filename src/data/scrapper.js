@@ -1,21 +1,27 @@
+const crypto = require('crypto')
 const fs = require('fs')
 
-const buffer = fs.readFileSync('./bestiary-mm.json')
-const json = buffer.toString()
-const obj = JSON.parse(json)
+const fileNames = ['./bestiary-mm.json', './bestiary-mpmm.json']
 
 const monstersFilter = [
-    'Death Knight'
+    'Death Knight',
+    'Aboleth',
 ]
 
-const monsters = obj.monster
-    .filter(monster => monstersFilter.includes(monster.name))
+const monsters = fileNames.flatMap(fileName => {
+        const buffer = fs.readFileSync(fileName)
+        const json = buffer.toString()
+        const obj = JSON.parse(json)
+        return obj.monster
+    })
+    //.filter(monster => monstersFilter.includes(monster.name))
     .map(monster => {
+        const id = crypto.randomUUID()
         const src = `${monster.source} p.${monster.page}`
         const name = monster.name
-        const ac = monster.ac[0].ac
+        const AC = (typeof monster.ac[0] === 'number') ? monster.ac[0] : monster.ac[0].ac
         const hp = monster.hp.average
-        const cr = monster.cr
+        const cr = (monster.cr === undefined) ? '—' : (typeof monster.cr === 'string') ? monster.cr : monster.cr.cr
         const mode = 'custom'
         const type = (typeof monster.type === 'string') ? monster.type : monster.type.type
         const actions = []
@@ -88,14 +94,16 @@ const monsters = obj.monster
 
                 const srFreqMatches = matchEntry(action.name, srFreqRegex)
                 let freq = 'at will'
+                let condition = 'default'
                 srFreqMatches.forEach(match => {
                     freq = '1/fight'
+                    condition = 'is available'
                 })
                 const lrFreqMatches = matchEntry(action.name, lrFreqRegex)
                 lrFreqMatches.forEach(match => {
                     const uses = Number(match[2])
-                    if (uses === 1) freq = '1/day'
-                    else if (uses === 2) freq = '1/fight'
+                    if (uses === 1) { freq = '1/day'; condition = 'is available' }
+                    else if (uses === 2) { freq = '1/fight'; condition = 'is available' }
                     // Else remain "at will"
                 })
 
@@ -107,9 +115,12 @@ const monsters = obj.monster
 
                 if (actionDamage > 0) {
                     actions.push({
-                        name: action.name,
+                        id: crypto.randomUUID(),
+                        name: action.name.replace(lrFreqRegex, '').replace(srFreqRegex, '').trim(),
+                        type: 'atk',
                         actionSlot: 0,
                         freq,
+                        condition,
                         dpr: actionDamage,
                         toHit,
                         target: 'enemy with most HP',
@@ -118,8 +129,11 @@ const monsters = obj.monster
                 }
             }
         })
-
-        return { name, src, cr, hp, ac, actions }
+        
+        return { id, mode, name, type, src, cr, hp, AC, actions, count: 1, }
     })
 
-console.log(JSON.stringify(monsters, null, 2))
+const fileStart = `import { Creature } from "../model/model"
+
+export const Monsters: Creature[] = `
+fs.writeFileSync('./monsters.ts', fileStart + JSON.stringify(monsters, null, 2))

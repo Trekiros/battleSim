@@ -1,15 +1,14 @@
 import { FC, useState, } from "react"
-import { Creature } from "../model/model"
+import { Creature } from "../../model/model"
 import styles from './monsterForm.module.scss'
-import { ChallengeRating, ChallengeRatingList, CreatureType, CreatureTypeList, numericCR } from "../model/enums"
+import { ChallengeRating, ChallengeRatingList, CreatureType, CreatureTypeList, numericCR } from "../../model/enums"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCheck, faChevronDown, faChevronUp, faCross, faMultiply } from "@fortawesome/free-solid-svg-icons"
-import { capitalize, clone, useCalculatedState } from "../model/utils"
+import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons"
+import { capitalize, clone, useCalculatedState } from "../../model/utils"
 import { Range } from "react-range"
-import { Monsters } from "../data/data"
+import { Monsters } from "../../data/monsters"
 
 type PropType = {
-    value: Creature,
     onChange: (newvalue: Creature) => void,
 }
 
@@ -22,7 +21,7 @@ const Comparators = {
     crDesc: (a: Creature, b: Creature) => (numericCR(b.cr!) - numericCR(a.cr!)),
 } as const
 
-const MonsterForm:FC<PropType> = ({ value, onChange }) => {
+const MonsterForm:FC<PropType> = ({ onChange }) => {
     const [creatureType, setCreatureType] = useState<{[type in CreatureType]: boolean}>(defaultTypeFilter)
     const [minCR, setMinCR] = useState<ChallengeRating>(ChallengeRatingList[0])
     const [maxCR, setMaxCR] = useState<ChallengeRating>(ChallengeRatingList[ChallengeRatingList.length - 1])
@@ -127,7 +126,8 @@ const MonsterForm:FC<PropType> = ({ value, onChange }) => {
                                 onClick={() => onChange(monster)}
                                 className={styles.monster}>
                                     <span className={styles.name}>{monster.name}</span>
-                                    <span className={styles.stats}>CR {monster.cr} {monster.type}</span>
+                                    <span className={styles.stats}>{monster.type}, {monster.src}</span>
+                                    <span className={styles.stats}>CR {monster.cr}</span>
                             </button>
                         ))
                     )}
