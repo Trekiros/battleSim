@@ -11,6 +11,8 @@ type TeamPropType = {
 
 const TeamResults:FC<TeamPropType> = ({ round, team }) => {
     function getTarget(combattantAction: { action: Action, targets: string[] }) {
+        if (combattantAction.action.target === 'self') return 'itself'
+
         const allCombattants = [...round.team1, ...round.team2].map(combattant => combattant)
         const targetNames = combattantAction.targets.map(targetId => allCombattants.find(combattant => (combattant.id === targetId)))
             .filter(nullable => !!nullable)
