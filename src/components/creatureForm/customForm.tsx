@@ -3,7 +3,7 @@ import { Action, Creature } from "../../model/model"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCheck, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
 import styles from './customForm.module.scss'
-import { clone } from "../../model/utils"
+import { clone, inDevEnvironment } from "../../model/utils"
 import ActionForm from "./actionForm"
 
 type PropType = {
@@ -103,6 +103,12 @@ const CustomForm:FC<PropType> = ({ value, onChange, onSubmit, onDelete }) => {
                         Delete
                     </button>
                 )}
+
+                { inDevEnvironment ? (
+                    <button onClick={() => console.log(value)}>
+                        Debug
+                    </button>
+                ) : null }
             </div>
         </div>
     )

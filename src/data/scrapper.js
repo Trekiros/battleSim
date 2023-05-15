@@ -4,8 +4,7 @@ const fs = require('fs')
 const fileNames = ['./bestiary-mm.json', './bestiary-mpmm.json']
 
 const monstersFilter = [
-    'Death Knight',
-    'Aboleth',
+    'Lich'
 ]
 
 const monsters = fileNames.flatMap(fileName => {
@@ -60,23 +59,40 @@ const monsters = fileNames.flatMap(fileName => {
             })
         })
 
+        const legendaryActions = {}
+        if (monster.legendary) {
+            monster.legendary.forEach(({ name }) => {
+                const correspondingAction = monster.action
+                    .find(action => name.includes(action.name))
+
+                if (!correspondingAction) return
+
+                const actionCostRegex = /\(Costs (\d) Actions\)/g
+                const actionCostMatch = [...name.matchAll(actionCostRegex)]
+                const actionCost = actionCostMatch[0]?.[1] || 1
+                
+                if (actionCost === 1) legendaryActions[correspondingAction.name] = 3
+                else legendaryActions[correspondingAction.name] = 1
+            })
+        }
+
+        let multiattackActions = {}
         monster.action && monster.action.forEach(action => {
             if (action.name === "Multiattack") {
                 // TODO
             } else {
-                const dmgRegex = /{@damage (\d+)d(\d+)(\+(\d+))?}/g
+                const dmgRegex = /{@damage (\d+)d(\d+)( \+ (\d+))?}/g
                 const dcRegex = /{@dc (\d+)}/g
                 const hitRegex = /{@hit (\d+)}/g
                 const srFreqRegex = /({@recharge \d+(-\d+)?})|(\(Recharges after a Short or Long Rest\))/g
                 const lrFreqRegex = /(\((\d+)\/Day\))/g
                 const areaRegex = /(cone)|(line)|(circle)|(sphere)|(cylinder)|(square)|(each creature within \d+ feet of)/g
-
+                
                 const dmgMatches = action.entries.flatMap(entry => matchEntry(entry, dmgRegex))
                 let actionDamage = 0
                 dmgMatches.forEach(match => {
                     actionDamage += Number(match[1]) * (1 + Number(match[2])) / 2 + (match[4] ? Number(match[4]) : 0)
                 })
-                actionDamage *= multiattack[action.name] || 1
 
                 const dcMatches = action.entries.flatMap(entry => matchEntry(entry, dcRegex))
                 let maxDC = 0
@@ -91,6 +107,11 @@ const monsters = fileNames.flatMap(fileName => {
                 })
 
                 const toHit = Math.max(maxToHit, maxDC - 10)
+
+                if (multiattack[action.name]) {
+                    multiattackActions[action.name] = { toHit, actionDamage }
+                    return
+                }
 
                 const srFreqMatches = matchEntry(action.name, srFreqRegex)
                 let freq = 'at will'
@@ -109,12 +130,10 @@ const monsters = fileNames.flatMap(fileName => {
 
                 const areaMatches = action.entries.flatMap(entry => matchEntry(entry, areaRegex))
                 let targets = 1
-                areaMatches.forEach(match => {
-                    targets = 2
-                })
+                areaMatches.forEach(match => { targets = 2 })
 
                 if (actionDamage > 0) {
-                    actions.push({
+                    const newAction = {
                         id: crypto.randomUUID(),
                         name: action.name.replace(lrFreqRegex, '').replace(srFreqRegex, '').trim(),
                         type: 'atk',
@@ -125,15 +144,62 @@ const monsters = fileNames.flatMap(fileName => {
                         toHit,
                         target: 'enemy with most HP',
                         targets,
-                    })
+                    }
+
+                    actions.push(newAction)
+
+                    if (legendaryActions[newAction.name]) {
+                        let actionName = action.name
+                        if (legendaryActions[newAction.name] > 1) actionName += ` x${legendaryActions[newAction.name]}`
+
+                        const LA = {
+                            ...newAction,
+                            id: crypto.randomUUID(),
+                            name: actionName,
+                            dpr: newAction.dpr * legendaryActions[newAction.name],
+                            actionSlot: 2, 
+                        }
+
+                        actions.push(LA)
+                    }
                 }
             }
         })
+
+        if (Object.keys(multiattack).length) {
+            const damage = Object.entries(multiattack)
+                .map(([attackName, attackCount]) => multiattackActions[attackName].actionDamage * attackCount)
+                .reduce((a, b) => (a + b), 0)
+            const toHit = Object.entries(multiattack)
+                .map(([attackName]) => (multiattackActions[attackName].toHit || 0))
+                .reduce((a, b) => Math.max(a, b), 0)
+
+            const multiattackAction = {
+                id: crypto.randomUUID(),
+                name: Object.entries(multiattack)
+                    .map(([attackName, attackCount]) => (attackCount == 1) ? attackName : `${attackName} x ${attackCount}`)
+                    .join(' & '),
+                type: 'atk',
+                actionSlot: 0,
+                freq: 'at will',
+                condition: 'default',
+                dpr: damage,
+                toHit: toHit,
+                target: 'enemy with most HP',
+                targets: 1,
+            }
+
+            actions.push(multiattackAction)
+        }
         
         return { id, mode, name, type, src, cr, hp, AC, actions, count: 1, }
     })
+
+/*
 
 const fileStart = `import { Creature } from "../model/model"
 
 export const Monsters: Creature[] = `
 fs.writeFileSync('./monsters.ts', fileStart + JSON.stringify(monsters, null, 2))
+
+*/

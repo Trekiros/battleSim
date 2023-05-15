@@ -69,3 +69,11 @@ export function multiSort<T>(arr: T[], ...criteria: (keyof T)[]) {
     })
 }
 
+
+let inDevEnvironment = false;
+
+if (process && process.env.NODE_ENV === 'development') {
+  inDevEnvironment = true;
+}
+
+export {inDevEnvironment};

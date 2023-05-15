@@ -18,8 +18,6 @@ const TeamResults:FC<TeamPropType> = ({ round, team }) => {
             .filter(nullable => !!nullable)
             .map(combattant => combattant!.creature.name)
 
-        console.log(combattantAction.targets, allCombattants.map(c => c.id))
-
         return targetNames.join(' and ')
     }
 
