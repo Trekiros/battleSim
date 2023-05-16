@@ -2786,43 +2786,31 @@ export const Monsters: Creature[] = [
     ],
     "count": 1
 },
-  {
-    "id": "fd0e8aaf-795f-4d19-b4c6-f47c677e618b",
-    "mode": "custom",
-    "name": "Bulette",
-    "type": "monstrosity",
-    "src": "MM p.34",
-    "cr": "5",
-    "hp": 94,
-    "AC": 17,
-    "actions": [
+{
+  "id": "fd0e8aaf-795f-4d19-b4c6-f47c677e618b",
+  "mode": "custom",
+  "name": "Bulette",
+  "type": "monstrosity",
+  "src": "MM p.34",
+  "cr": "5",
+  "hp": 94,
+  "AC": 17,
+  "actions": [
       {
-        "id": "89a67aea-4c45-448e-adb9-7391704bfb03",
-        "name": "Bite",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 30,
-        "toHit": 7,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "b0f23a34-3411-4e27-89ce-ba18883e7484",
-        "name": "Deadly Leap",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 29,
-        "toHit": 6,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "89a67aea-4c45-448e-adb9-7391704bfb03",
+          "name": "Deadly Leap",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 29,
+          "toHit": 6,
+          "target": "enemy with most HP",
+          "targets": 2
       }
-    ],
-    "count": 1
-  },
+  ],
+  "count": 1
+},
   {
     "id": "0c47523e-ada4-4a06-92e0-a2270d031a67",
     "mode": "custom",
@@ -2858,33 +2846,21 @@ export const Monsters: Creature[] = [
     "hp": 82,
     "AC": 19,
     "actions": [
-      {
-        "id": "7448280f-208d-48bf-8f57-4451f41d46d1",
-        "name": "Spear",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 19.5,
-        "toHit": 7,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "b276c068-f68b-4541-81ee-abc354bfc7ac",
-        "name": "Fire Ray",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 10.5,
-        "toHit": 7,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "7448280f-208d-48bf-8f57-4451f41d46d1",
+            "name": "Spear x2",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 24,
+            "toHit": 7,
+            "target": "enemy with most HP",
+            "targets": 1
+        }
     ],
     "count": 1
-  },
+},
   {
     "id": "0851c7cf-bcdb-4116-800b-872a60c50dd1",
     "mode": "custom",
@@ -3004,24 +2980,60 @@ export const Monsters: Creature[] = [
     "type": "fiend",
     "src": "MM p.72",
     "cr": "8",
-    "hp": 85,
+    "hp": 850,
     "AC": 16,
     "actions": [
-      {
-        "id": "9c00fb96-5c2c-412c-9237-c571380e291a",
-        "name": "Chain x 2",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 36,
-        "toHit": 8,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "9c00fb96-5c2c-412c-9237-c571380e291a",
+            "name": "Chain x 2",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 36,
+            "toHit": 8,
+            "target": "enemy with most HP",
+            "targets": 1
+        },
+        {
+            "id": "4afdcd2d-8535-4089-a58a-eac0b940c148",
+            "actionSlot": 1,
+            "name": "Animated Chains x2",
+            "freq": "at will",
+            "condition": "default",
+            "targets": 1,
+            "type": "atk",
+            "dpr": 36,
+            "toHit": 8,
+            "target": "enemy with most HP"
+        },
+        {
+            "id": "78fd7364-7547-41fc-8346-1f6f0ef13b4b",
+            "actionSlot": 1,
+            "name": "Awakened Chains x3",
+            "freq": "1/fight",
+            "condition": "is available",
+            "targets": 1,
+            "type": "atk",
+            "dpr": 54,
+            "toHit": 8,
+            "target": "enemy with most HP"
+        },
+        {
+            "id": "4fd23802-6c6f-4387-ac29-c7698c688e4c",
+            "actionSlot": 1,
+            "name": "Awakened Chains x4",
+            "freq": "1/fight",
+            "condition": "is available",
+            "targets": 1,
+            "type": "atk",
+            "dpr": 72,
+            "toHit": 8,
+            "target": "enemy with most HP"
+        }
     ],
     "count": 1
-  },
+},
   {
     "id": "b6a28eb0-56d6-467d-bb10-f5cc59491280",
     "mode": "custom",
@@ -3119,21 +3131,33 @@ export const Monsters: Creature[] = [
     "hp": 133,
     "AC": 14,
     "actions": [
-      {
-        "id": "8db358dc-8a34-44e1-8a9e-7f4857a68bc7",
-        "name": "Slam x 2",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 32,
-        "toHit": 8,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "8db358dc-8a34-44e1-8a9e-7f4857a68bc7",
+            "name": "Slam x 2",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 32,
+            "toHit": 8,
+            "target": "enemy with most HP",
+            "targets": 1
+        },
+        {
+            "id": "12c4adff-ada9-446e-8838-bb81d166190b",
+            "actionSlot": 1,
+            "name": "Hasted Slam",
+            "freq": "at will",
+            "condition": "default",
+            "targets": 1,
+            "type": "atk",
+            "dpr": 16,
+            "toHit": 8,
+            "target": "enemy with most HP"
+        }
     ],
     "count": 1
-  },
+},
   {
     "id": "84e1835e-cb07-4601-a27f-82e034dfd422",
     "mode": "custom",
@@ -3429,21 +3453,33 @@ export const Monsters: Creature[] = [
     "hp": 33,
     "AC": 13,
     "actions": [
-      {
-        "id": "51947e8a-83e6-4365-9ba8-16ad32310a1b",
-        "name": "Dagger",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 4.5,
-        "toHit": 4,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "51947e8a-83e6-4365-9ba8-16ad32310a1b",
+            "name": "Inflict Wounds",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 16,
+            "toHit": 3,
+            "target": "enemy with most HP",
+            "targets": 1
+        },
+        {
+            "id": "ff8a77a0-3750-4649-9cb0-2fe2ebabd99e",
+            "actionSlot": 0,
+            "name": "Spiritual Weapon",
+            "freq": "at will",
+            "condition": "default",
+            "targets": 1,
+            "type": "atk",
+            "dpr": 5,
+            "toHit": 3,
+            "target": "enemy with most HP"
+        }
     ],
     "count": 1
-  },
+},
   {
     "id": "3f8b9016-f96e-4d78-b4d9-9a38e5e6c9cc",
     "mode": "custom",
@@ -3516,21 +3552,21 @@ export const Monsters: Creature[] = [
     "hp": 187,
     "AC": 18,
     "actions": [
-      {
-        "id": "2f4df425-7324-4d7c-8290-48a92f9528ae",
-        "name": "Fist x 2 & Maul x 2",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 70,
-        "toHit": 10,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "2f4df425-7324-4d7c-8290-48a92f9528ae",
+            "name": "Maul x 2",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 40,
+            "toHit": 10,
+            "target": "enemy with most HP",
+            "targets": 1
+        }
     ],
     "count": 1
-  },
+},
   {
     "id": "ec306480-e235-48a9-87c7-d19f6fa9b9ce",
     "mode": "custom",
@@ -3591,119 +3627,117 @@ export const Monsters: Creature[] = [
     "hp": 180,
     "AC": 20,
     "actions": [
-      {
-        "id": "aa308d76-1fb7-4482-a7c3-cca9d1b4d8fc",
-        "name": "Hellfire Orb",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "1/day",
-        "condition": "is available",
-        "dpr": 70,
-        "toHit": 8,
-        "target": "enemy with most HP",
-        "targets": 2
-      },
-      {
-        "id": "46c60fe1-40bb-42e1-b017-9611451f9980",
-        "name": "Longsword x 3",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 114,
-        "toHit": 11,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "aa308d76-1fb7-4482-a7c3-cca9d1b4d8fc",
+            "name": "Hellfire Orb",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "1/day",
+            "condition": "is available",
+            "dpr": 70,
+            "toHit": 8,
+            "target": "enemy with most HP",
+            "targets": 2
+        },
+        {
+            "id": "46c60fe1-40bb-42e1-b017-9611451f9980",
+            "name": "Longsword x 3 + Staggering Smite",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 95,
+            "toHit": 11,
+            "target": "enemy with most HP",
+            "targets": 1
+        },
+        {
+            "id": "e13839fd-0e22-4e8f-9e80-4fbba96997b1",
+            "name": "Parry",
+            "actionSlot": 1,
+            "condition": "default",
+            "freq": "at will",
+            "targets": 1,
+            "type": "buff",
+            "target": "self",
+            "acBonus": 6
+        }
     ],
     "count": 1
-  },
-  {
-    "id": "7880234e-6575-4b7e-866b-8d4390c3f351",
-    "mode": "custom",
-    "name": "Death Slaad",
-    "type": "aberration",
-    "src": "MM p.278",
-    "cr": "10",
-    "hp": 170,
-    "AC": 18,
-    "actions": [
+},
+{
+  "id": "7880234e-6575-4b7e-866b-8d4390c3f351",
+  "mode": "custom",
+  "name": "Death Slaad",
+  "type": "aberration",
+  "src": "MM p.278",
+  "cr": "10",
+  "hp": 170,
+  "AC": 18,
+  "actions": [
       {
-        "id": "cc2e2634-8cbe-4b4e-a084-350737b1a009",
-        "name": "Bite (Slaad Form Only)",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 16.5,
-        "toHit": 9,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "cc2e2634-8cbe-4b4e-a084-350737b1a009",
+          "name": "Bite & Greatsword x2",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 54,
+          "toHit": 9,
+          "target": "enemy with most HP",
+          "targets": 1
       },
       {
-        "id": "5b5bef67-9de4-49a2-a539-e5a2e82e1a1b",
-        "name": "Claws (Slaad Form Only)",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 17.5,
-        "toHit": 9,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "dd7bb8f2-f6de-4eae-a3be-6e55c5575bdf",
-        "name": "Greatsword x 2",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 38,
-        "toHit": 9,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "a7b2e85a-1eba-4812-a652-d725432f28d0",
+          "name": "Regeneration",
+          "actionSlot": 4,
+          "condition": "default",
+          "freq": "at will",
+          "targets": 1,
+          "type": "heal",
+          "amount": 10,
+          "target": "self"
       }
-    ],
-    "count": 1
-  },
-  {
-    "id": "29b4b922-d5ba-436a-a307-d43523bb5485",
-    "mode": "custom",
-    "name": "Death Tyrant",
-    "type": "undead",
-    "src": "MM p.29",
-    "cr": "14",
-    "hp": 187,
-    "AC": 19,
-    "actions": [
+  ],
+  "count": 1
+},
+{
+  "id": "29b4b922-d5ba-436a-a307-d43523bb5485",
+  "mode": "custom",
+  "name": "Death Tyrant",
+  "type": "undead",
+  "src": "MM p.29",
+  "cr": "14",
+  "hp": 187,
+  "AC": 19,
+  "actions": [
       {
-        "id": "71295bbf-6c4a-4658-88d9-9a2e6d9432e5",
-        "name": "Bite",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 14,
-        "toHit": 5,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "065af412-cb31-4198-8f50-0d10a6b83b7a",
+          "name": "Eye Rays x3",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 20,
+          "toHit": 7,
+          "target": "enemy with most HP",
+          "targets": 2
       },
       {
-        "id": "065af412-cb31-4198-8f50-0d10a6b83b7a",
-        "name": "Eye Rays",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 136,
-        "toHit": 7,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "9d4a3e1e-93d9-44e9-8440-9cdbcefd06a6",
+          "actionSlot": 2,
+          "name": "Eye Rays x3",
+          "freq": "at will",
+          "condition": "default",
+          "targets": 2,
+          "type": "atk",
+          "dpr": 20,
+          "toHit": 7,
+          "target": "enemy with most HP"
       }
-    ],
-    "count": 1
-  },
+  ],
+  "count": 1
+},
   {
     "id": "23d96bb6-71db-4f5d-abdf-7f89022793a5",
     "mode": "custom",
@@ -3776,46 +3810,80 @@ export const Monsters: Creature[] = [
     "hp": 80,
     "AC": 20,
     "actions": [
-      {
-        "id": "cd927901-1976-4c11-aaaa-13e1c486cc8c",
-        "name": "Life Drain",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 21,
-        "toHit": 9,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "cd927901-1976-4c11-aaaa-13e1c486cc8c",
+            "name": "Life Drain",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 21,
+            "toHit": 9,
+            "target": "enemy with most HP",
+            "targets": 2
+        },
+        {
+            "id": "2b24d950-f846-4ed5-8ca2-795541a2f471",
+            "name": "Heal from the Life Drain",
+            "actionSlot": 4,
+            "condition": "default",
+            "freq": "at will",
+            "targets": 1,
+            "type": "heal",
+            "amount": 60,
+            "target": "self"
+        },
+        {
+            "id": "8cc5f03d-b300-4292-9e84-1696466ca9f6",
+            "name": "Vile Curse",
+            "actionSlot": 2,
+            "condition": "default",
+            "freq": "at will",
+            "targets": 1,
+            "type": "debuff",
+            "target": "enemy with highest DPR",
+            "acDebuff": -4,
+            "toHitDebuff": -4
+        }
     ],
     "count": 1
-  },
-  {
-    "id": "8ba765e8-1930-4680-8c13-992a40726465",
-    "mode": "custom",
-    "name": "Deva",
-    "type": "celestial",
-    "src": "MM p.16",
-    "cr": "10",
-    "hp": 136,
-    "AC": 17,
-    "actions": [
+},
+{
+  "id": "8ba765e8-1930-4680-8c13-992a40726465",
+  "mode": "custom",
+  "name": "Deva",
+  "type": "celestial",
+  "src": "MM p.16",
+  "cr": "10",
+  "hp": 136,
+  "AC": 17,
+  "actions": [
       {
-        "id": "681c5680-0a5d-4550-a4a5-d62fa15c485e",
-        "name": "Mace",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 25.5,
-        "toHit": 8,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "681c5680-0a5d-4550-a4a5-d62fa15c485e",
+          "name": "Mace x2",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 51,
+          "toHit": 8,
+          "target": "enemy with most HP",
+          "targets": 1
+      },
+      {
+          "id": "8f34d708-899b-49f9-81fe-e07f4b918ff6",
+          "name": "Healing Touch",
+          "actionSlot": 0,
+          "condition": "ally at 0 HP",
+          "freq": "1/day",
+          "targets": 1,
+          "type": "heal",
+          "amount": 20,
+          "target": "ally with the least HP"
       }
-    ],
-    "count": 1
-  },
+  ],
+  "count": 1
+},
   {
     "id": "7c982d18-a2eb-4f2f-880d-43471be6255d",
     "mode": "custom",
@@ -3901,21 +3969,21 @@ export const Monsters: Creature[] = [
     "hp": 52,
     "AC": 14,
     "actions": [
-      {
-        "id": "c4242b98-56b2-4bad-bd0e-aa05b80e0d26",
-        "name": "Slam",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 7.5,
-        "toHit": 6,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "c4242b98-56b2-4bad-bd0e-aa05b80e0d26",
+            "name": "Slam x2",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 15,
+            "toHit": 6,
+            "target": "enemy with most HP",
+            "targets": 1
+        }
     ],
     "count": 1
-  },
+},
   {
     "id": "d63a478e-4fba-4e40-8866-6a19e41f2b25",
     "mode": "custom",
@@ -4013,21 +4081,21 @@ export const Monsters: Creature[] = [
     "hp": 123,
     "AC": 19,
     "actions": [
-      {
-        "id": "754909ee-96bc-4039-9ce6-493e3a9d4d52",
-        "name": "Bite & Longsword x 3 & Longbow x 3",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 95.5,
-        "toHit": 6,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "754909ee-96bc-4039-9ce6-493e3a9d4d52",
+            "name": "Bite & Longbow x 2",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 34,
+            "toHit": 6,
+            "target": "enemy with most HP",
+            "targets": 1
+        }
     ],
     "count": 1
-  },
+},
   {
     "id": "3036d622-9685-4cb2-a224-8cc794e40240",
     "mode": "custom",
@@ -4075,145 +4143,178 @@ export const Monsters: Creature[] = [
     "hp": 71,
     "AC": 18,
     "actions": [
+        {
+            "id": "0411d615-7dbb-4e39-9288-a5a5d9381aba",
+            "name": "Shortsword x 2",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 36,
+            "toHit": 7,
+            "target": "enemy with most HP",
+            "targets": 1
+        },
+        {
+            "id": "9f27dc44-7df6-4110-bc92-95d42463220b",
+            "name": "Parry",
+            "actionSlot": 0,
+            "condition": "default",
+            "freq": "at will",
+            "targets": 1,
+            "type": "buff",
+            "target": "self",
+            "acBonus": 3
+        }
+    ],
+    "count": 1
+},
+{
+  "id": "f5d51178-2c3e-4f9c-bc6b-82d232aaf950",
+  "mode": "custom",
+  "name": "Drow Mage",
+  "type": "humanoid",
+  "src": "MM p.129",
+  "cr": "7",
+  "hp": 45,
+  "AC": 15,
+  "actions": [
       {
-        "id": "0e311e77-f448-43db-9f0e-fe35d20d76c0",
-        "name": "Hand Crossbow",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 7.5,
-        "toHit": 7,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "14270ca3-d687-4c55-9d85-b56407df47f5",
+          "name": "Shield",
+          "actionSlot": 1,
+          "condition": "default",
+          "freq": "at will",
+          "targets": 1,
+          "type": "buff",
+          "target": "self",
+          "acBonus": 5
       },
       {
-        "id": "0411d615-7dbb-4e39-9288-a5a5d9381aba",
-        "name": "Shortsword x 2",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 36,
-        "toHit": 7,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "2252b308-67f8-4132-b0b6-759f7c647da9",
+          "actionSlot": 0,
+          "name": "Lightning Bolt",
+          "freq": "at will",
+          "condition": "default",
+          "targets": 2,
+          "type": "atk",
+          "dpr": 28,
+          "toHit": 4,
+          "target": "enemy with most HP"
       }
-    ],
-    "count": 1
-  },
-  {
-    "id": "f5d51178-2c3e-4f9c-bc6b-82d232aaf950",
-    "mode": "custom",
-    "name": "Drow Mage",
-    "type": "humanoid",
-    "src": "MM p.129",
-    "cr": "7",
-    "hp": 45,
-    "AC": 12,
-    "actions": [
+  ],
+  "count": 1
+},
+{
+  "id": "aee7f112-64d0-40a4-998b-bdb240be3723",
+  "mode": "custom",
+  "name": "Drow Priestess of Lolth",
+  "type": "humanoid",
+  "src": "MM p.129",
+  "cr": "8",
+  "hp": 71,
+  "AC": 16,
+  "actions": [
       {
-        "id": "05e1283f-bf0b-4f60-8652-35a00be84253",
-        "name": "Staff",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 3.5,
-        "toHit": 2,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
-    ],
-    "count": 1
-  },
-  {
-    "id": "aee7f112-64d0-40a4-998b-bdb240be3723",
-    "mode": "custom",
-    "name": "Drow Priestess of Lolth",
-    "type": "humanoid",
-    "src": "MM p.129",
-    "cr": "8",
-    "hp": 71,
-    "AC": 16,
-    "actions": [
-      {
-        "id": "8c65e1a0-f8ac-4daa-896b-f1060c451d72",
-        "name": "Summon Demon",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "1/day",
-        "condition": "is available",
-        "dpr": 5.5,
-        "toHit": 0,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "20602a44-c297-4266-a278-953d91b8ea51",
+          "name": "Scourge x 2",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 46,
+          "toHit": 5,
+          "target": "enemy with most HP",
+          "targets": 1
       },
       {
-        "id": "20602a44-c297-4266-a278-953d91b8ea51",
-        "name": "Scourge x 2",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 46,
-        "toHit": 5,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "36fa04a6-323a-4b6c-852e-43455ae8b15f",
+          "name": "Mass Cure Wounds",
+          "actionSlot": 0,
+          "condition": "ally at 0 HP",
+          "freq": "1/day",
+          "targets": 2,
+          "type": "heal",
+          "amount": 17,
+          "target": "ally with the least HP"
       }
-    ],
-    "count": 1
-  },
-  {
-    "id": "61b96c5d-5d9d-42bf-9b54-02df85b1b755",
-    "mode": "custom",
-    "name": "Druid",
-    "type": "humanoid",
-    "src": "MM p.346",
-    "cr": "2",
-    "hp": 27,
-    "AC": 11,
-    "actions": [
+  ],
+  "count": 1
+},
+{
+  "id": "61b96c5d-5d9d-42bf-9b54-02df85b1b755",
+  "mode": "custom",
+  "name": "Druid",
+  "type": "humanoid",
+  "src": "MM p.346",
+  "cr": "2",
+  "hp": 27,
+  "AC": 16,
+  "actions": [
       {
-        "id": "ba00f89f-c380-4b77-8128-a915f7826fa9",
-        "name": "Quarterstaff",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 14.5,
-        "toHit": 4,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
-    ],
-    "count": 1
-  },
-  {
-    "id": "1eb426f2-0bd1-4ae1-b185-01b9d4cb1799",
-    "mode": "custom",
-    "name": "Dryad",
-    "type": "fey",
-    "src": "MM p.121",
-    "cr": "1",
-    "hp": 22,
-    "AC": 11,
-    "actions": [
+          "id": "ba00f89f-c380-4b77-8128-a915f7826fa9",
+          "name": "Quarterstaff",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "is under half HP",
+          "dpr": 6,
+          "toHit": 4,
+          "target": "enemy with most HP",
+          "targets": 1
+      },
       {
-        "id": "60143b84-e231-4e13-b23f-3a5aaef0e02e",
-        "name": "Club",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 11,
-        "toHit": 6,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "e8c51a12-778d-4b05-90b8-86e83a0634de",
+          "name": "Entangle",
+          "actionSlot": 0,
+          "condition": "default",
+          "freq": "at will",
+          "targets": 2,
+          "type": "debuff",
+          "target": "enemy with highest DPR",
+          "acDebuff": -4,
+          "toHitDebuff": -4
       }
-    ],
-    "count": 1
-  },
+  ],
+  "count": 1
+},
+{
+  "id": "1eb426f2-0bd1-4ae1-b185-01b9d4cb1799",
+  "mode": "custom",
+  "name": "Dryad",
+  "type": "fey",
+  "src": "MM p.121",
+  "cr": "1",
+  "hp": 22,
+  "AC": 11,
+  "actions": [
+      {
+          "id": "60143b84-e231-4e13-b23f-3a5aaef0e02e",
+          "name": "Club",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 8,
+          "toHit": 6,
+          "target": "enemy with most HP",
+          "targets": 1
+      },
+      {
+          "id": "919f752e-28b6-431c-a33a-f056c671ef85",
+          "name": "Entangle",
+          "actionSlot": 0,
+          "condition": "is available",
+          "freq": "1/fight",
+          "targets": 2,
+          "type": "debuff",
+          "target": "enemy with highest DPR",
+          "acDebuff": -4,
+          "toHitDebuff": -4
+      }
+  ],
+  "count": 1
+},
   {
     "id": "c6d418e7-db65-4007-9db7-3159431940c0",
     "mode": "custom",
@@ -4472,58 +4573,58 @@ export const Monsters: Creature[] = [
     "hp": 313,
     "AC": 22,
     "actions": [
-      {
-        "id": "6030e852-423c-4830-baaa-6e3d848a98f1",
-        "name": "Maul",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 31,
-        "toHit": 17,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "6030e852-423c-4830-baaa-6e3d848a98f1",
+            "name": "Maul",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 31,
+            "toHit": 17,
+            "target": "enemy with most HP",
+            "targets": 1
+        },
+        {
+            "id": "4b4a56df-3c41-4ddc-982e-f08a3ba64048",
+            "actionSlot": 2,
+            "name": "Maul x3",
+            "freq": "at will",
+            "condition": "default",
+            "targets": 1,
+            "type": "atk",
+            "dpr": 93,
+            "toHit": 17,
+            "target": "enemy with most HP"
+        }
     ],
     "count": 1
-  },
-  {
-    "id": "70863ae7-ffa3-4bd5-9fa6-50130111aa0a",
-    "mode": "custom",
-    "name": "Erinyes",
-    "type": "fiend",
-    "src": "MM p.73",
-    "cr": "12",
-    "hp": 153,
-    "AC": 18,
-    "actions": [
+},
+{
+  "id": "70863ae7-ffa3-4bd5-9fa6-50130111aa0a",
+  "mode": "custom",
+  "name": "Erinyes",
+  "type": "fiend",
+  "src": "MM p.73",
+  "cr": "12",
+  "hp": 153,
+  "AC": 18,
+  "actions": [
       {
-        "id": "4760202d-5bb9-40d9-8681-06920966af9b",
-        "name": "Longsword",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 31.5,
-        "toHit": 8,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "911ecd23-4f51-43c8-9f24-ae48c2c7feaa",
-        "name": "Longbow",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 21,
-        "toHit": 7,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "4760202d-5bb9-40d9-8681-06920966af9b",
+          "name": "Longsword x3",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 66,
+          "toHit": 8,
+          "target": "enemy with most HP",
+          "targets": 1
       }
-    ],
-    "count": 1
-  },
+  ],
+  "count": 1
+},
   {
     "id": "740e0792-348b-4e6f-9b5c-8294634a942c",
     "mode": "custom",
@@ -4755,21 +4856,44 @@ export const Monsters: Creature[] = [
     "hp": 40,
     "AC": 13,
     "actions": [
-      {
-        "id": "7de14aa3-0382-43ce-8d4e-2b3f29e500c2",
-        "name": "Fire Ray",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 10.5,
-        "toHit": 5,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "7de14aa3-0382-43ce-8d4e-2b3f29e500c2",
+            "name": "Fire Ray x2",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 21,
+            "toHit": 5,
+            "target": "enemy with most HP",
+            "targets": 1
+        },
+        {
+            "id": "79e62dc7-fae0-402a-953a-ffb1c32b8bc8",
+            "actionSlot": 0,
+            "name": "Fireball",
+            "freq": "1/day",
+            "condition": "default",
+            "targets": 2,
+            "type": "atk",
+            "dpr": 28,
+            "toHit": 3,
+            "target": "enemy with least HP"
+        },
+        {
+            "id": "8cb3eeb3-9c51-4794-87b5-d7539f1775ac",
+            "name": "Shield",
+            "actionSlot": 4,
+            "condition": "default",
+            "freq": "at will",
+            "targets": 1,
+            "type": "buff",
+            "target": "self",
+            "acBonus": 5
+        }
     ],
     "count": 1
-  },
+},
   {
     "id": "bc9b45d8-6c4e-4b16-8f91-f58971aa489c",
     "mode": "custom",
@@ -6052,42 +6176,53 @@ export const Monsters: Creature[] = [
     "count": 1
   },
   {
-    "id": "49b17ccd-be63-4451-8c80-dc2a8f0c0354",
+    "id": "9d98ca5a-6f72-4d2b-a85f-c892e9f6127e",
     "mode": "custom",
-    "name": "Gladiator",
+    "name": "Githzerai Enlightened",
     "type": "humanoid",
-    "src": "MM p.346",
-    "cr": "5",
+    "src": "MPMM p.143",
+    "cr": "10",
     "hp": 112,
-    "AC": 16,
+    "AC": 18,
     "actions": [
-      {
-        "id": "2b67872d-0ae1-43b7-bf35-c08b686d2c33",
-        "name": "Spear",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 24,
-        "toHit": 7,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "3fe6f6c1-5679-4587-95a5-bd2d89bfa7a7",
-        "name": "Shield Bash",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 9,
-        "toHit": 7,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "1aece606-132c-4dc6-80e4-ad4ee1bd4ca8",
+            "name": "Unarmed Strike x3",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 93,
+            "toHit": 8,
+            "target": "enemy with most HP",
+            "targets": 1
+        },
+        {
+            "id": "6d83ae63-a363-44f5-97bd-db87b34d45a9",
+            "name": "Temporal Strike",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "1/fight",
+            "condition": "is available",
+            "dpr": 65,
+            "toHit": 8,
+            "target": "enemy with most HP",
+            "targets": 1
+        },
+        {
+            "id": "5a564dda-333b-4a3e-a5c7-b1306411e017",
+            "name": "Temporal Strike Debuff",
+            "actionSlot": 4,
+            "condition": "is available",
+            "freq": "1/fight",
+            "targets": 1,
+            "type": "debuff",
+            "target": "enemy with least HP",
+            "toHitDebuff": -20
+        }
     ],
     "count": 1
-  },
+},
   {
     "id": "b209ee47-6ca4-4b7f-96c3-e5528edd8be0",
     "mode": "custom",
@@ -6172,33 +6307,32 @@ export const Monsters: Creature[] = [
     "hp": 49,
     "AC": 15,
     "actions": [
-      {
-        "id": "4b5173a5-ee54-4eff-a539-9946400838d2",
-        "name": "Bite",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 5.5,
-        "toHit": 5,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "943cc4b2-f395-45da-bf8e-36623d095488",
-        "name": "Glaive x 2 & Longbow x 2",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 30,
-        "toHit": 5,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "943cc4b2-f395-45da-bf8e-36623d095488",
+            "name": "Glaive x 2 & Longbow x 2",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 30,
+            "toHit": 5,
+            "target": "enemy with most HP",
+            "targets": 1
+        },
+        {
+            "id": "7a040e38-6e7f-419b-8c91-bf435d25c0ad",
+            "name": "Incite Rampage",
+            "actionSlot": 1,
+            "condition": "default",
+            "freq": "at will",
+            "targets": 1,
+            "type": "buff",
+            "target": "ally with the least HP",
+            "damageBonus": 10
+        }
     ],
     "count": 1
-  },
+},
   {
     "id": "5cbc365e-443e-443a-b68f-1eeb914921f1",
     "mode": "custom",
@@ -6382,33 +6516,33 @@ export const Monsters: Creature[] = [
     "hp": 310,
     "AC": 19,
     "actions": [
-      {
-        "id": "3cd10104-7c3f-4459-a30e-856d1cf6142a",
-        "name": "Gore",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 45.5,
-        "toHit": 13,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "05117276-9f81-4489-a65c-110fa46bfd86",
-        "name": "Fist x 2 & Hoof",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 64.5,
-        "toHit": 13,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "3cd10104-7c3f-4459-a30e-856d1cf6142a",
+            "name": "Gore + Charge",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "1/fight",
+            "condition": "is available",
+            "dpr": 83,
+            "toHit": 13,
+            "target": "enemy with most HP",
+            "targets": 1
+        },
+        {
+            "id": "05117276-9f81-4489-a65c-110fa46bfd86",
+            "name": "Fist x 2 & Hoof",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 64.5,
+            "toHit": 13,
+            "target": "enemy with most HP",
+            "targets": 1
+        }
     ],
     "count": 1
-  },
+},
   {
     "id": "5fc0ad62-0de1-46da-abe6-bc424e33eafc",
     "mode": "custom",
@@ -6444,45 +6578,21 @@ export const Monsters: Creature[] = [
     "hp": 127,
     "AC": 18,
     "actions": [
-      {
-        "id": "ee552ae0-18a2-4324-b76f-13c225a8d910",
-        "name": "Bite (Slaad Form Only)",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 6.5,
-        "toHit": 7,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "08c97524-9bd3-44f9-9c7e-38ec26883d49",
-        "name": "Claws (Slaad Form Only)",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 8.5,
-        "toHit": 7,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "437ccef9-5682-4f37-90a8-39eb165069b9",
-        "name": "Greatsword x 2",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 20,
-        "toHit": 7,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "ee552ae0-18a2-4324-b76f-13c225a8d910",
+            "name": "Bite + Greatsword x2",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 26.5,
+            "toHit": 7,
+            "target": "enemy with most HP",
+            "targets": 1
+        }
     ],
     "count": 1
-  },
+},
   {
     "id": "ebe72089-9124-4d8b-84df-1561f2e956e9",
     "mode": "custom",
@@ -6555,57 +6665,21 @@ export const Monsters: Creature[] = [
     "hp": 127,
     "AC": 16,
     "actions": [
-      {
-        "id": "3268a3ee-6a0d-4f54-aa74-c3160118bd5e",
-        "name": "Bite (Slaad Form Only)",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 11,
-        "toHit": 7,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "15baf97d-4e3c-458a-81ee-1b1ebdd3a1cd",
-        "name": "Claw (Slaad Form Only)",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 7.5,
-        "toHit": 7,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "37a16ed3-f169-4e00-a1ba-1471e3f4c657",
-        "name": "Hurl Flame",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 10.5,
-        "toHit": 4,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "7da420aa-b021-43e9-8154-48875aec6282",
-        "name": "Staff x 2",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 22,
-        "toHit": 7,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "3268a3ee-6a0d-4f54-aa74-c3160118bd5e",
+            "name": "Bite + Staff x2",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 33,
+            "toHit": 7,
+            "target": "enemy with most HP",
+            "targets": 1
+        }
     ],
     "count": 1
-  },
+},
   {
     "id": "66d2962c-6b87-4f5f-b551-50c6cc61c1dd",
     "mode": "custom",
@@ -6803,21 +6877,44 @@ export const Monsters: Creature[] = [
     "hp": 136,
     "AC": 17,
     "actions": [
-      {
-        "id": "f2ecf2f9-cc1e-4f4a-99e5-a67388c1b989",
-        "name": "Claw x 2",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 26,
-        "toHit": 8,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "3ab6238c-c2c4-4e4e-b6a2-25cb678df655",
+            "name": "Shield",
+            "actionSlot": 4,
+            "condition": "default",
+            "freq": "at will",
+            "targets": 1,
+            "type": "buff",
+            "target": "self",
+            "acBonus": 5
+        },
+        {
+            "id": "5429bfa1-8a03-4263-b337-d02d5720a505",
+            "actionSlot": 0,
+            "name": "Claw x2",
+            "freq": "at will",
+            "condition": "default",
+            "targets": 1,
+            "type": "atk",
+            "dpr": 26,
+            "toHit": 8,
+            "target": "enemy with least HP"
+        },
+        {
+            "id": "5f6630f0-81ad-426c-9be4-8619fd842460",
+            "actionSlot": 2,
+            "name": "Claw x3",
+            "freq": "at will",
+            "condition": "default",
+            "targets": 1,
+            "type": "atk",
+            "dpr": 39,
+            "toHit": 8,
+            "target": "enemy with least HP"
+        }
     ],
     "count": 1
-  },
+},
   {
     "id": "f6fc46b6-68bc-4cc0-a20e-44b9b517ca2f",
     "mode": "custom",
@@ -6865,45 +6962,33 @@ export const Monsters: Creature[] = [
     "hp": 65,
     "AC": 18,
     "actions": [
-      {
-        "id": "1fc3746e-a740-48a7-b946-3af0f8b18560",
-        "name": "Heavy Crossbow",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 6.5,
-        "toHit": 3,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "900008d1-22cf-495b-9ac3-c2c11c29c2c2",
-        "name": "Fire Breath",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "1/fight",
-        "condition": "is available",
-        "dpr": 24.5,
-        "toHit": 5,
-        "target": "enemy with most HP",
-        "targets": 2
-      },
-      {
-        "id": "939df6ab-01a5-40be-9961-d99afe4c2c77",
-        "name": "Longsword x 2 & Shortsword x 2",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 45,
-        "toHit": 5,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "900008d1-22cf-495b-9ac3-c2c11c29c2c2",
+            "name": "Fire Breath",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "1/fight",
+            "condition": "is available",
+            "dpr": 24.5,
+            "toHit": 5,
+            "target": "enemy with most HP",
+            "targets": 2
+        },
+        {
+            "id": "939df6ab-01a5-40be-9961-d99afe4c2c77",
+            "name": "Longsword x 2 & Shortsword",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 39,
+            "toHit": 5,
+            "target": "enemy with most HP",
+            "targets": 1
+        }
     ],
     "count": 1
-  },
+},
   {
     "id": "5dd1d14d-a6d8-4dc0-b2d9-ab72d23b3092",
     "mode": "custom",
@@ -7137,82 +7222,69 @@ export const Monsters: Creature[] = [
     "hp": 39,
     "AC": 17,
     "actions": [
-      {
-        "id": "b2efdfb8-567e-40c6-beeb-476fc2f57a2c",
-        "name": "Javelin",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 5.5,
-        "toHit": 4,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "8fe49378-bde0-458a-8c53-e70fa9cb9825",
-        "name": "Greatsword x 2",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 18,
-        "toHit": 4,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "8fe49378-bde0-458a-8c53-e70fa9cb9825",
+            "name": "Greatsword x 2 + Martial Advantage",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 25,
+            "toHit": 4,
+            "target": "enemy with most HP",
+            "targets": 1
+        }
     ],
     "count": 1
-  },
-  {
-    "id": "ac8958e4-f9b9-4572-9a61-5317a15cbd29",
-    "mode": "custom",
-    "name": "Hobgoblin Warlord",
-    "type": "humanoid",
-    "src": "MM p.187",
-    "cr": "6",
-    "hp": 97,
-    "AC": 20,
-    "actions": [
+},
+{
+  "id": "ac8958e4-f9b9-4572-9a61-5317a15cbd29",
+  "mode": "custom",
+  "name": "Hobgoblin Warlord",
+  "type": "humanoid",
+  "src": "MM p.187",
+  "cr": "6",
+  "hp": 97,
+  "AC": 20,
+  "actions": [
       {
-        "id": "d46c011f-a85b-4710-93ed-5bfd745143f1",
-        "name": "Longsword",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 16,
-        "toHit": 9,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "d46c011f-a85b-4710-93ed-5bfd745143f1",
+          "name": "Longsword x3 + Martial Advantage",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 38,
+          "toHit": 9,
+          "target": "enemy with most HP",
+          "targets": 1
       },
       {
-        "id": "954190de-f5b9-492b-b3a5-ed22f5bd935d",
-        "name": "Shield Bash",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 5.5,
-        "toHit": 9,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "ef637906-7b0c-4563-adc3-f2f057a6cf2e",
+          "name": "Leadership",
+          "actionSlot": 0,
+          "condition": "default",
+          "freq": "at will",
+          "targets": 2,
+          "type": "buff",
+          "target": "ally with the highest DPR",
+          "acBonus": 2,
+          "toHitBonus": 2
       },
       {
-        "id": "a67be15e-e278-4600-9151-443b154b1696",
-        "name": "Javelin x 2",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 13,
-        "toHit": 9,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "0b86b24c-09fb-4d67-bcae-ffe585e9a0bc",
+          "name": "Parry",
+          "actionSlot": 0,
+          "condition": "default",
+          "freq": "at will",
+          "targets": 1,
+          "type": "buff",
+          "target": "self",
+          "acBonus": 3
       }
-    ],
-    "count": 1
-  },
+  ],
+  "count": 1
+},
   {
     "id": "ca088a3c-708b-4cd5-9119-ad73f6241c40",
     "mode": "custom",
@@ -7322,21 +7394,69 @@ export const Monsters: Creature[] = [
     "hp": 172,
     "AC": 15,
     "actions": [
-      {
-        "id": "e24476bb-931a-4730-b575-c01cbc27c169",
-        "name": "Bite",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 10.5,
-        "toHit": 8,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "e24476bb-931a-4730-b575-c01cbc27c169",
+            "name": "Bite",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 10.5,
+            "toHit": 8,
+            "target": "enemy with most HP",
+            "targets": 1
+        },
+        {
+            "id": "a4a62593-06cd-4833-b879-555d90dbaa18",
+            "actionSlot": 0,
+            "name": "Bite x2",
+            "freq": "1/fight",
+            "condition": "is available",
+            "targets": 1,
+            "type": "atk",
+            "dpr": 21,
+            "toHit": 8,
+            "target": "enemy with most HP"
+        },
+        {
+            "id": "5b86c226-7123-4265-90a2-1dad20d0d698",
+            "actionSlot": 0,
+            "name": "Bite x3",
+            "freq": "1/fight",
+            "condition": "is available",
+            "targets": 1,
+            "type": "atk",
+            "dpr": 31,
+            "toHit": 8,
+            "target": "enemy with most HP"
+        },
+        {
+            "id": "2fcaee50-dcc0-428c-90a0-196f6fa7569e",
+            "actionSlot": 0,
+            "name": "Bite x4",
+            "freq": "1/fight",
+            "condition": "is available",
+            "targets": 1,
+            "type": "atk",
+            "dpr": 42,
+            "toHit": 8,
+            "target": "enemy with most HP"
+        },
+        {
+            "id": "0d21dca3-2808-4f1e-80cc-30a7f03c49d8",
+            "actionSlot": 0,
+            "name": "Bite x5",
+            "freq": "1/fight",
+            "condition": "is available",
+            "targets": 1,
+            "type": "atk",
+            "dpr": 52,
+            "toHit": 8,
+            "target": "enemy with most HP"
+        }
     ],
     "count": 1
-  },
+},
   {
     "id": "5dd0d50d-9a90-4437-a171-5166787fd90e",
     "mode": "custom",
@@ -7508,33 +7628,33 @@ export const Monsters: Creature[] = [
     "hp": 21,
     "AC": 12,
     "actions": [
-      {
-        "id": "0f69b990-fed0-4fa8-a88c-65ec63198af8",
-        "name": "Devour Intellect",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 11,
-        "toHit": 2,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "d07c7bea-e008-4297-8c19-6db8c92488bf",
-        "name": "Claws",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 7,
-        "toHit": 4,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "0f69b990-fed0-4fa8-a88c-65ec63198af8",
+            "name": "Claws + Devour Intellect",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 18,
+            "toHit": 2,
+            "target": "enemy with most HP",
+            "targets": 1
+        },
+        {
+            "id": "7a7b6aeb-897f-43df-9749-dd0c29fcb57f",
+            "name": "Intelligence Drain",
+            "actionSlot": 4,
+            "condition": "default",
+            "freq": "at will",
+            "targets": 1,
+            "type": "debuff",
+            "target": "enemy with highest AC",
+            "toHitDebuff": -20,
+            "damageDebuff": -1000
+        }
     ],
     "count": 1
-  },
+},
   {
     "id": "9449102f-296e-4512-af17-37c95ad69e13",
     "mode": "custom",
@@ -7570,45 +7690,33 @@ export const Monsters: Creature[] = [
     "hp": 210,
     "AC": 20,
     "actions": [
-      {
-        "id": "8f67bbc1-dd15-47c6-9b11-800d9e3a6857",
-        "name": "Slam",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 20.5,
-        "toHit": 13,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "4443587a-e648-47ba-9bee-2da4968d09a4",
-        "name": "Sword",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 23.5,
-        "toHit": 13,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "f612643a-9fdc-4c24-93c7-983d10b71c3f",
-        "name": "Poison Breath",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "1/fight",
-        "condition": "is available",
-        "dpr": 45,
-        "toHit": 9,
-        "target": "enemy with most HP",
-        "targets": 2
-      }
+        {
+            "id": "4443587a-e648-47ba-9bee-2da4968d09a4",
+            "name": "Sword x2",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 47,
+            "toHit": 13,
+            "target": "enemy with most HP",
+            "targets": 1
+        },
+        {
+            "id": "f612643a-9fdc-4c24-93c7-983d10b71c3f",
+            "name": "Poison Breath",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "1/fight",
+            "condition": "is available",
+            "dpr": 45,
+            "toHit": 9,
+            "target": "enemy with most HP",
+            "targets": 2
+        }
     ],
     "count": 1
-  },
+},
   {
     "id": "6a6b7446-0e23-4bd5-bd4c-9a1e0f93b5a2",
     "mode": "custom",
@@ -7730,33 +7838,44 @@ export const Monsters: Creature[] = [
     "hp": 52,
     "AC": 18,
     "actions": [
-      {
-        "id": "b8f8f038-a8db-44e0-be54-8acc31ae46cc",
-        "name": "Greatsword",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 10,
-        "toHit": 5,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "edef9247-5a49-44d2-b812-0f86374d29db",
-        "name": "Heavy Crossbow",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 5.5,
-        "toHit": 2,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "b8f8f038-a8db-44e0-be54-8acc31ae46cc",
+            "name": "Greatsword x2",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 20,
+            "toHit": 5,
+            "target": "enemy with most HP",
+            "targets": 1
+        },
+        {
+            "id": "b78a14d5-c901-4be6-92f6-b1a999111e73",
+            "name": "Leadership",
+            "actionSlot": 1,
+            "condition": "default",
+            "freq": "at will",
+            "targets": 2,
+            "type": "buff",
+            "target": "ally with the least HP",
+            "acBonus": 2,
+            "toHitBonus": 2
+        },
+        {
+            "id": "43d47420-058a-4a30-8270-c6c157c6380b",
+            "name": "Parry",
+            "actionSlot": 0,
+            "condition": "default",
+            "freq": "at will",
+            "targets": 1,
+            "type": "buff",
+            "target": "self",
+            "acBonus": 2
+        }
     ],
     "count": 1
-  },
+},
   {
     "id": "5ba734ba-ecd2-4387-a69b-a816a3c8b0a0",
     "mode": "custom",
@@ -7804,69 +7923,33 @@ export const Monsters: Creature[] = [
     "hp": 472,
     "AC": 18,
     "actions": [
-      {
-        "id": "409ff9f6-9100-4e5c-9015-330c64e949e4",
-        "name": "Bite",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 65.5,
-        "toHit": 17,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "36303bac-7a7b-4ee9-9c0d-f2a84739e96f",
-        "name": "Fling",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 3.5,
-        "toHit": 8,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "939d5995-6fa3-46bd-8fa8-eceac573ea9c",
-        "name": "Lightning Storm",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 22,
-        "toHit": 13,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "edef7fe0-23ad-48fb-b4a2-cd55de7b8f9d",
-        "name": "Lightning Storm",
-        "type": "atk",
-        "actionSlot": 2,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 22,
-        "toHit": 13,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "44c69e98-4923-42b5-9628-744231ce137e",
-        "name": "Tentacle x 3",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 61.5,
-        "toHit": 17,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "edef7fe0-23ad-48fb-b4a2-cd55de7b8f9d",
+            "name": "Tentacle x3",
+            "type": "atk",
+            "actionSlot": 2,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 61.5,
+            "toHit": 13,
+            "target": "enemy with most HP",
+            "targets": 1
+        },
+        {
+            "id": "44c69e98-4923-42b5-9628-744231ce137e",
+            "name": "Tentacle x 3",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 61.5,
+            "toHit": 17,
+            "target": "enemy with most HP",
+            "targets": 1
+        }
     ],
     "count": 1
-  },
+},
   {
     "id": "1f21d8c0-76d4-4cdf-8139-35fd263cb6fe",
     "mode": "custom",
@@ -7914,33 +7997,55 @@ export const Monsters: Creature[] = [
     "hp": 97,
     "AC": 13,
     "actions": [
-      {
-        "id": "27cb6571-0024-4899-b226-b51eaefcfd6c",
-        "name": "Scepter",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 20.5,
-        "toHit": 6,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "56f0b393-aef7-438a-a14a-907588090925",
-        "name": "Unarmed Strike",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 5.5,
-        "toHit": 6,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "27cb6571-0024-4899-b226-b51eaefcfd6c",
+            "name": "Scepter x2",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 41,
+            "toHit": 6,
+            "target": "enemy with most HP",
+            "targets": 1
+        },
+        {
+            "id": "7fe74bc0-a9c8-4925-a982-bf8919b2202c",
+            "actionSlot": 4,
+            "name": "Spirit Guardians",
+            "freq": "at will",
+            "condition": "default",
+            "targets": 2,
+            "type": "atk",
+            "dpr": 13,
+            "toHit": 4,
+            "target": "enemy with most HP"
+        },
+        {
+            "id": "ddaebc59-2c49-4db3-8724-8c529cc7d5da",
+            "name": "Mass Cure Wounds",
+            "actionSlot": 0,
+            "condition": "ally at 0 HP",
+            "freq": "at will",
+            "targets": 2,
+            "type": "heal",
+            "amount": 16,
+            "target": "ally with the least HP"
+        },
+        {
+            "id": "fa919198-838d-41d8-bd4d-93c8df6c5922",
+            "name": "Mass Cure Wounds",
+            "actionSlot": 0,
+            "condition": "is under half HP",
+            "freq": "at will",
+            "targets": 2,
+            "type": "heal",
+            "amount": 16,
+            "target": "ally with the least HP"
+        }
     ],
     "count": 1
-  },
+},
   {
     "id": "af91e3fa-8d08-4d69-b48f-c198a609e3d3",
     "mode": "custom",
@@ -8051,33 +8156,56 @@ export const Monsters: Creature[] = [
     "hp": 135,
     "AC": 17,
     "actions": [
-      {
-        "id": "5e1cb455-2765-4356-b069-c53641a1d11e",
-        "name": "Paralyzing Touch",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 10.5,
-        "toHit": 12,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "a8c84273-173d-41bc-8ab9-9802d968d2cc",
-        "name": "Paralyzing Touch",
-        "type": "atk",
-        "actionSlot": 2,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 10.5,
-        "toHit": 12,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "ed9e4d93-f1b8-43e2-8cd8-6c7463ace5c3",
+            "name": "Shield",
+            "actionSlot": 4,
+            "condition": "default",
+            "freq": "at will",
+            "targets": 1,
+            "type": "buff",
+            "target": "self",
+            "acBonus": 5
+        },
+        {
+            "id": "b7e3494f-fabb-450d-9d10-7a4ff366f489",
+            "actionSlot": 0,
+            "name": "Finger of Death",
+            "freq": "at will",
+            "condition": "default",
+            "targets": 1,
+            "type": "atk",
+            "dpr": 61,
+            "toHit": 10,
+            "target": "enemy with least HP"
+        },
+        {
+            "id": "3999049e-2275-4243-9ae6-7d84d94f6595",
+            "actionSlot": 2,
+            "name": "Ray of Frost x3",
+            "freq": "at will",
+            "condition": "default",
+            "targets": 1,
+            "type": "atk",
+            "dpr": 42,
+            "toHit": 12,
+            "target": "enemy with least HP"
+        },
+        {
+            "id": "481822df-6241-407c-a35e-f86c99d015bf",
+            "actionSlot": 0,
+            "name": "Power Word Kill",
+            "freq": "1/day",
+            "condition": "is under half HP",
+            "targets": 1,
+            "type": "atk",
+            "dpr": 1000,
+            "toHit": 20,
+            "target": "enemy with least HP"
+        }
     ],
     "count": 1
-  },
+},
   {
     "id": "78baaf96-8224-4c72-84d5-cea2c311e438",
     "mode": "custom",
@@ -8283,23 +8411,46 @@ export const Monsters: Creature[] = [
     "src": "MM p.347",
     "cr": "6",
     "hp": 40,
-    "AC": 12,
+    "AC": 15,
     "actions": [
-      {
-        "id": "784b29e8-c3d0-494a-b442-dc12d69c8095",
-        "name": "Dagger",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 4.5,
-        "toHit": 5,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "9eb3d86f-b192-48cd-ae53-8b0ae5bbb932",
+            "name": "Shield",
+            "actionSlot": 4,
+            "condition": "default",
+            "freq": "at will",
+            "targets": 1,
+            "type": "buff",
+            "target": "self",
+            "acBonus": 5
+        },
+        {
+            "id": "c0349e26-649b-4aeb-b128-5d970ca7a9c0",
+            "actionSlot": 0,
+            "name": "Cone of Cold",
+            "freq": "at will",
+            "condition": "default",
+            "targets": 2,
+            "type": "atk",
+            "dpr": 36,
+            "toHit": 5,
+            "target": "enemy with most HP"
+        },
+        {
+            "id": "555c6ec5-8787-4339-a718-958927e4d31d",
+            "actionSlot": 0,
+            "name": "Fireball",
+            "freq": "at will",
+            "condition": "default",
+            "targets": 2,
+            "type": "atk",
+            "dpr": 27,
+            "toHit": 5,
+            "target": "enemy with least HP"
+        }
     ],
     "count": 1
-  },
+},
   {
     "id": "393b7b9a-3b34-4443-ace4-d76e3440fa74",
     "mode": "custom",
@@ -8434,58 +8585,58 @@ export const Monsters: Creature[] = [
     "hp": 68,
     "AC": 14,
     "actions": [
-      {
-        "id": "987b26ff-71b1-4521-b1fd-2b25f29f9a1d",
-        "name": "Bite & Claw x 2 & Tail Spike x 3",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 43,
-        "toHit": 5,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "987b26ff-71b1-4521-b1fd-2b25f29f9a1d",
+            "name": "Tail Spike x 3",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 21,
+            "toHit": 5,
+            "target": "enemy with most HP",
+            "targets": 1
+        },
+        {
+            "id": "b45ced7a-2104-40d0-9b6f-bcfd7b3f5d83",
+            "actionSlot": 0,
+            "name": "Bite & Claw x2",
+            "freq": "at will",
+            "condition": "default",
+            "targets": 1,
+            "type": "atk",
+            "dpr": 19,
+            "toHit": 5,
+            "target": "enemy with most HP"
+        }
     ],
     "count": 1
-  },
-  {
-    "id": "14ee352f-0198-459c-b664-771b4b5a4fb2",
-    "mode": "custom",
-    "name": "Marid",
-    "type": "elemental",
-    "src": "MM p.146",
-    "cr": "11",
-    "hp": 229,
-    "AC": 17,
-    "actions": [
+},
+{
+  "id": "14ee352f-0198-459c-b664-771b4b5a4fb2",
+  "mode": "custom",
+  "name": "Marid",
+  "type": "elemental",
+  "src": "MM p.146",
+  "cr": "11",
+  "hp": 229,
+  "AC": 17,
+  "actions": [
       {
-        "id": "41bf0751-572f-4aea-a513-cb2d70e60fd2",
-        "name": "Water Jet",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 21,
-        "toHit": 6,
-        "target": "enemy with most HP",
-        "targets": 2
-      },
-      {
-        "id": "8a241372-0e57-4bc5-9e08-2b2aff903029",
-        "name": "Trident x 2",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 56,
-        "toHit": 10,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "41bf0751-572f-4aea-a513-cb2d70e60fd2",
+          "name": "Water Jet",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 21,
+          "toHit": 6,
+          "target": "enemy with most HP",
+          "targets": 2
       }
-    ],
-    "count": 1
-  },
+  ],
+  "count": 1
+},
   {
     "id": "92a63810-82ff-43cd-9ec0-6c092d890eda",
     "mode": "custom",
@@ -8546,21 +8697,21 @@ export const Monsters: Creature[] = [
     "hp": 127,
     "AC": 15,
     "actions": [
-      {
-        "id": "abaaeb32-df0f-4e80-aae1-a06d02cf4c8f",
-        "name": "Snake Hair & Shortsword x 2 & Longbow x 2",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 56.5,
-        "toHit": 5,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "abaaeb32-df0f-4e80-aae1-a06d02cf4c8f",
+            "name": "Snake Hair & Shortsword x 2",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 29,
+            "toHit": 5,
+            "target": "enemy with most HP",
+            "targets": 1
+        }
     ],
     "count": 1
-  },
+},
   {
     "id": "ebc894cf-c3e4-4169-b935-659aa4abe059",
     "mode": "custom",
@@ -8683,94 +8834,81 @@ export const Monsters: Creature[] = [
     "hp": 71,
     "AC": 15,
     "actions": [
-      {
-        "id": "ddf3219d-eedd-4bbd-9bd4-ce2c9ba55dd9",
-        "name": "Tentacles",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 15,
-        "toHit": 7,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "3debe8d7-ea0a-45c2-8ea5-4a84c4f763a0",
-        "name": "Extract Brain",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 55,
-        "toHit": 7,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "201dffdf-795b-416b-ae72-f0e3b24abec7",
-        "name": "Mind Blast",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "1/fight",
-        "condition": "is available",
-        "dpr": 22,
-        "toHit": 5,
-        "target": "enemy with most HP",
-        "targets": 2
-      }
+        {
+            "id": "ddf3219d-eedd-4bbd-9bd4-ce2c9ba55dd9",
+            "name": "Tentacles",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 15,
+            "toHit": 7,
+            "target": "enemy with most HP",
+            "targets": 1
+        },
+        {
+            "id": "3debe8d7-ea0a-45c2-8ea5-4a84c4f763a0",
+            "name": "Extract Brain",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "is under half HP",
+            "dpr": 55,
+            "toHit": 7,
+            "target": "enemy with most HP",
+            "targets": 1
+        },
+        {
+            "id": "201dffdf-795b-416b-ae72-f0e3b24abec7",
+            "name": "Mind Blast",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "1/fight",
+            "condition": "is available",
+            "dpr": 22,
+            "toHit": 5,
+            "target": "enemy with most HP",
+            "targets": 2
+        }
     ],
     "count": 1
-  },
-  {
-    "id": "2d0d3fb2-2fab-442d-9892-b43fe8afb888",
-    "mode": "custom",
-    "name": "Mind Flayer Arcanist",
-    "type": "aberration",
-    "src": "MM p.222",
-    "cr": "8",
-    "hp": 71,
-    "AC": 15,
-    "actions": [
+},
+{
+  "id": "2d0d3fb2-2fab-442d-9892-b43fe8afb888",
+  "mode": "custom",
+  "name": "Mind Flayer Arcanist",
+  "type": "aberration",
+  "src": "MM p.222",
+  "cr": "8",
+  "hp": 71,
+  "AC": 15,
+  "actions": [
       {
-        "id": "b4e89d3b-5891-4407-9cda-f3cca6924e2e",
-        "name": "Tentacles",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 15,
-        "toHit": 7,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "87bf09d6-70e6-4309-98cb-b27d613002a0",
+          "actionSlot": 0,
+          "name": "Lightning Bolt",
+          "freq": "at will",
+          "condition": "default",
+          "targets": 1,
+          "type": "atk",
+          "dpr": 27,
+          "toHit": 5,
+          "target": "enemy with most HP"
       },
       {
-        "id": "53a11b20-b893-4fb1-88f3-5d907a262d73",
-        "name": "Extract Brain",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 55,
-        "toHit": 7,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "ba210900-666b-409e-bf99-399d7726179e",
-        "name": "Mind Blast",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "1/fight",
-        "condition": "is available",
-        "dpr": 22,
-        "toHit": 5,
-        "target": "enemy with most HP",
-        "targets": 2
+          "id": "0b1731a8-3a28-42eb-857f-3f018e9570a4",
+          "name": "Shield",
+          "actionSlot": 1,
+          "condition": "default",
+          "freq": "at will",
+          "targets": 1,
+          "type": "buff",
+          "target": "self",
+          "acBonus": 5
       }
-    ],
-    "count": 1
-  },
+  ],
+  "count": 1
+},
   {
     "id": "9be5b832-4386-4dcb-8d32-ea37a0cd9e60",
     "mode": "custom",
@@ -8967,21 +9105,45 @@ export const Monsters: Creature[] = [
     "hp": 97,
     "AC": 17,
     "actions": [
-      {
-        "id": "1b7301fd-00c0-4b95-a48a-57f3c9c7a45b",
-        "name": "Rotting Fist",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 35.5,
-        "toHit": 9,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "7af20370-2e3c-44e7-9661-f1a07a40f9e2",
+            "actionSlot": 0,
+            "name": "Harm",
+            "freq": "1/day",
+            "condition": "is available",
+            "targets": 1,
+            "type": "atk",
+            "dpr": 49,
+            "toHit": 7,
+            "target": "enemy with most HP"
+        },
+        {
+            "id": "20af4526-8985-4416-bd9d-9d3cd7c80b36",
+            "actionSlot": 0,
+            "name": "Guardian of Faith",
+            "freq": "at will",
+            "condition": "default",
+            "targets": 2,
+            "type": "atk",
+            "dpr": 20,
+            "toHit": 100,
+            "target": "enemy with most HP"
+        },
+        {
+            "id": "8e99f75d-7ffb-4679-9ce0-81ae77c92e2b",
+            "actionSlot": 2,
+            "name": "Rotting fist x3",
+            "freq": "at will",
+            "condition": "default",
+            "targets": 1,
+            "type": "atk",
+            "dpr": 105,
+            "toHit": 9,
+            "target": "enemy with least HP"
+        }
     ],
     "count": 1
-  },
+},
   {
     "id": "b47dd5f9-b55c-480d-8744-2bd9780615f5",
     "mode": "custom",
@@ -15128,132 +15290,120 @@ export const Monsters: Creature[] = [
     "hp": 52,
     "AC": 14,
     "actions": [
-      {
-        "id": "90e5502b-40e6-4019-8310-289fb2f0431d",
-        "name": "Barbed Tail",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 13,
-        "toHit": 4,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "90e5502b-40e6-4019-8310-289fb2f0431d",
+            "name": "Barbed Tail",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 16,
+            "toHit": 4,
+            "target": "enemy with most HP",
+            "targets": 1
+        },
+        {
+            "id": "42a192dd-8889-4427-9c4c-4fd2dca447cf",
+            "actionSlot": 0,
+            "name": "rotting Presence",
+            "freq": "at will",
+            "condition": "default",
+            "targets": 2,
+            "type": "atk",
+            "dpr": 3,
+            "toHit": 3,
+            "target": "enemy with most HP"
+        }
     ],
     "count": 1
-  },
-  {
-    "id": "e91d1db6-8817-4aec-9a21-c4d3990726c6",
-    "mode": "custom",
-    "name": "Cadaver Collector",
-    "type": "construct",
-    "src": "MPMM p.68",
-    "cr": "14",
-    "hp": 189,
-    "AC": 17,
-    "actions": [
+},
+{
+  "id": "e91d1db6-8817-4aec-9a21-c4d3990726c6",
+  "mode": "custom",
+  "name": "Cadaver Collector",
+  "type": "construct",
+  "src": "MPMM p.68",
+  "cr": "14",
+  "hp": 189,
+  "AC": 17,
+  "actions": [
       {
-        "id": "5cc6b2cd-a690-4388-b963-a1b9f608588f",
-        "name": "Slam",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 35,
-        "toHit": 10,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "5cc6b2cd-a690-4388-b963-a1b9f608588f",
+          "name": "Slam x2",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 70,
+          "toHit": 10,
+          "target": "enemy with most HP",
+          "targets": 1
       }
-    ],
-    "count": 1
-  },
-  {
-    "id": "f41d4beb-5dd2-4f3c-a1d0-2b4961d7049e",
-    "mode": "custom",
-    "name": "Canoloth",
-    "type": "fiend",
-    "src": "MPMM p.69",
-    "cr": "8",
-    "hp": 120,
-    "AC": 16,
-    "actions": [
+  ],
+  "count": 1
+},
+{
+  "id": "f41d4beb-5dd2-4f3c-a1d0-2b4961d7049e",
+  "mode": "custom",
+  "name": "Canoloth",
+  "type": "fiend",
+  "src": "MPMM p.69",
+  "cr": "8",
+  "hp": 120,
+  "AC": 16,
+  "actions": [
       {
-        "id": "c703c377-b24a-4da5-8e12-c476453d79b2",
-        "name": "Bite",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 25.5,
-        "toHit": 7,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "c703c377-b24a-4da5-8e12-c476453d79b2",
+          "name": "Bite + Claw",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 42,
+          "toHit": 7,
+          "target": "enemy with most HP",
+          "targets": 1
+      }
+  ],
+  "count": 1
+},
+{
+  "id": "20dbaf7a-3df6-4751-b31a-d7c651e1fec6",
+  "mode": "custom",
+  "name": "Catoblepas",
+  "type": "monstrosity",
+  "src": "MPMM p.70",
+  "cr": "5",
+  "hp": 84,
+  "AC": 14,
+  "actions": [
+      {
+          "id": "9e33cd36-f886-4e4a-a97b-54f2808ed41d",
+          "name": "Tail",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 21.5,
+          "toHit": 7,
+          "target": "enemy with most HP",
+          "targets": 1
       },
       {
-        "id": "8305e696-0daa-4e7d-ba14-b7ff4f2e84d0",
-        "name": "Claw",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 16.5,
-        "toHit": 7,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "b4c1e4d9-3a94-4812-864a-e5100b53cd94",
-        "name": "Tongue",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 17.5,
-        "toHit": 7,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "99ff8c8d-1eb6-4beb-9463-391204678114",
+          "name": "Death Ray",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "1/fight",
+          "condition": "is available",
+          "dpr": 64,
+          "toHit": 1,
+          "target": "enemy with most HP",
+          "targets": 1
       }
-    ],
-    "count": 1
-  },
-  {
-    "id": "20dbaf7a-3df6-4751-b31a-d7c651e1fec6",
-    "mode": "custom",
-    "name": "Catoblepas",
-    "type": "monstrosity",
-    "src": "MPMM p.70",
-    "cr": "5",
-    "hp": 84,
-    "AC": 14,
-    "actions": [
-      {
-        "id": "9e33cd36-f886-4e4a-a97b-54f2808ed41d",
-        "name": "Tail",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 21.5,
-        "toHit": 7,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "99ff8c8d-1eb6-4beb-9463-391204678114",
-        "name": "Death Ray",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "1/fight",
-        "condition": "is available",
-        "dpr": 36,
-        "toHit": 6,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
-    ],
-    "count": 1
-  },
+  ],
+  "count": 1
+},
   {
     "id": "c36c962f-1474-4c55-b1f2-e25125feebd9",
     "mode": "custom",
@@ -15289,33 +15439,44 @@ export const Monsters: Creature[] = [
     "hp": 143,
     "AC": 18,
     "actions": [
-      {
-        "id": "e8b52880-1f13-4a55-ac66-348249c6bebe",
-        "name": "Greatsword",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 19,
-        "toHit": 9,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "a1fb80e5-7238-4d09-96f5-cb834cdf5855",
-        "name": "Shortbow",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 12.5,
-        "toHit": 6,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "e8b52880-1f13-4a55-ac66-348249c6bebe",
+            "name": "Greatsword x3",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 57,
+            "toHit": 9,
+            "target": "enemy with most HP",
+            "targets": 1
+        },
+        {
+            "id": "295b62f3-8eef-45e3-8d7b-286e025a967c",
+            "actionSlot": 0,
+            "name": "Weakened Greatsword x3",
+            "freq": "at will",
+            "condition": "is under half HP",
+            "targets": 1,
+            "type": "atk",
+            "dpr": 36,
+            "toHit": 9,
+            "target": "enemy with least HP"
+        },
+        {
+            "id": "7124cc56-2896-4461-b08b-ca20682a3541",
+            "name": "Second Wind",
+            "actionSlot": 1,
+            "condition": "is under half HP",
+            "freq": "1/fight",
+            "targets": 1,
+            "type": "heal",
+            "amount": 20,
+            "target": "self"
+        }
     ],
     "count": 1
-  },
+},
   {
     "id": "c6eb543f-29a4-462b-a36e-fdd327624a98",
     "mode": "custom",
@@ -15423,7 +15584,7 @@ export const Monsters: Creature[] = [
         "dpr": 14,
         "toHit": 3,
         "target": "enemy with most HP",
-        "targets": 1
+        "targets": 2
       }
     ],
     "count": 1
@@ -15463,157 +15624,155 @@ export const Monsters: Creature[] = [
     "hp": 117,
     "AC": 16,
     "actions": [
+        {
+            "id": "985fe330-5ea5-41cc-940d-ef390b0fe25b",
+            "name": "Lancing Bolt x2",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 30,
+            "toHit": 7,
+            "target": "enemy with most HP",
+            "targets": 1
+        },
+        {
+            "id": "dd1d4f36-8e31-41ed-bb4a-d8e73428a4f3",
+            "name": "Explosive Bolt",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "1/fight",
+            "condition": "is available",
+            "dpr": 17.5,
+            "toHit": 5,
+            "target": "enemy with most HP",
+            "targets": 2
+        }
+    ],
+    "count": 1
+},
+{
+  "id": "080ce702-ea99-40cd-95c1-3b3a7fca5741",
+  "mode": "custom",
+  "name": "Clockwork Stone Defender",
+  "type": "construct",
+  "src": "MPMM p.80",
+  "cr": "4",
+  "hp": 105,
+  "AC": 16,
+  "actions": [
       {
-        "id": "985fe330-5ea5-41cc-940d-ef390b0fe25b",
-        "name": "Lancing Bolt",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 15,
-        "toHit": 7,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "563d2ce6-2e43-40b4-bba8-aeb90beb6b06",
+          "name": "Slam",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 11,
+          "toHit": 6,
+          "target": "enemy with most HP",
+          "targets": 1
       },
       {
-        "id": "14f22695-0b98-47c1-b028-4a194a44e8aa",
-        "name": "Harpoon",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 15,
-        "toHit": 7,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "878bb988-fe22-4205-b4f0-f28414a4c7db",
+          "name": "Intercept Attack",
+          "actionSlot": 1,
+          "condition": "default",
+          "freq": "at will",
+          "targets": 1,
+          "type": "buff",
+          "target": "ally with the lowest AC",
+          "acBonus": 5
+      }
+  ],
+  "count": 1
+},
+{
+  "id": "8338afea-93e8-4bdc-a0c9-5c8edd14c27a",
+  "mode": "custom",
+  "name": "Cloud Giant Smiling One",
+  "type": "giant",
+  "src": "MPMM p.81",
+  "cr": "11",
+  "hp": 250,
+  "AC": 15,
+  "actions": [
+      {
+          "id": "49d090b4-5b44-48f2-b5ff-c3c0d425ae00",
+          "name": "Slam x2",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 54,
+          "toHit": 12,
+          "target": "enemy with most HP",
+          "targets": 1
+      }
+  ],
+  "count": 1
+},
+{
+  "id": "8338afea-93e8-4bdc-a0c9-5c8edd14c27a",
+  "mode": "custom",
+  "name": "Cloud Giant Smiling One",
+  "type": "giant",
+  "src": "MPMM p.81",
+  "cr": "11",
+  "hp": 250,
+  "AC": 15,
+  "actions": [
+      {
+          "id": "49d090b4-5b44-48f2-b5ff-c3c0d425ae00",
+          "name": "Slam x2",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 54,
+          "toHit": 12,
+          "target": "enemy with most HP",
+          "targets": 1
+      }
+  ],
+  "count": 1
+},
+{
+  "id": "499e661f-b592-49e6-8673-99cc30a1e585",
+  "mode": "custom",
+  "name": "Corpse Flower",
+  "type": "plant",
+  "src": "MPMM p.82",
+  "cr": "8",
+  "hp": 127,
+  "AC": 12,
+  "actions": [
+      {
+          "id": "3d876e3e-a1b4-4ed0-a93e-7b7f4e3343dd",
+          "name": "Tentacle x3",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 58,
+          "toHit": 5,
+          "target": "enemy with most HP",
+          "targets": 1
       },
       {
-        "id": "dd1d4f36-8e31-41ed-bb4a-d8e73428a4f3",
-        "name": "Explosive Bolt",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "1/fight",
-        "condition": "is available",
-        "dpr": 17.5,
-        "toHit": 5,
-        "target": "enemy with most HP",
-        "targets": 2
+          "id": "6149cc53-dff5-4c1b-9042-6f7fe4fd4892",
+          "name": "Digest",
+          "actionSlot": 1,
+          "condition": "is under half HP",
+          "freq": "at will",
+          "targets": 1,
+          "type": "heal",
+          "amount": 11,
+          "target": "self"
       }
-    ],
-    "count": 1
-  },
-  {
-    "id": "080ce702-ea99-40cd-95c1-3b3a7fca5741",
-    "mode": "custom",
-    "name": "Clockwork Stone Defender",
-    "type": "construct",
-    "src": "MPMM p.80",
-    "cr": "4",
-    "hp": 105,
-    "AC": 16,
-    "actions": [
-      {
-        "id": "563d2ce6-2e43-40b4-bba8-aeb90beb6b06",
-        "name": "Slam",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 11,
-        "toHit": 6,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
-    ],
-    "count": 1
-  },
-  {
-    "id": "8338afea-93e8-4bdc-a0c9-5c8edd14c27a",
-    "mode": "custom",
-    "name": "Cloud Giant Smiling One",
-    "type": "giant",
-    "src": "MPMM p.81",
-    "cr": "11",
-    "hp": 250,
-    "AC": 15,
-    "actions": [
-      {
-        "id": "49d090b4-5b44-48f2-b5ff-c3c0d425ae00",
-        "name": "Slam",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 27,
-        "toHit": 12,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "7911490a-5c63-4c69-ba4d-9515c39a7cc1",
-        "name": "Telekinetic Strike",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 25,
-        "toHit": 7,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
-    ],
-    "count": 1
-  },
-  {
-    "id": "d448fb58-e766-422c-ba89-0242d79e33e0",
-    "mode": "custom",
-    "name": "Conjurer Wizard",
-    "type": "humanoid",
-    "src": "MPMM p.260",
-    "cr": "6",
-    "hp": 58,
-    "AC": 12,
-    "actions": [
-      {
-        "id": "2f019ced-5055-4311-b0ca-3e4721061219",
-        "name": "Arcane Burst",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 19.5,
-        "toHit": 8,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
-    ],
-    "count": 1
-  },
-  {
-    "id": "499e661f-b592-49e6-8673-99cc30a1e585",
-    "mode": "custom",
-    "name": "Corpse Flower",
-    "type": "plant",
-    "src": "MPMM p.82",
-    "cr": "8",
-    "hp": 127,
-    "AC": 12,
-    "actions": [
-      {
-        "id": "3d876e3e-a1b4-4ed0-a93e-7b7f4e3343dd",
-        "name": "Tentacle",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 19.5,
-        "toHit": 5,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
-    ],
-    "count": 1
-  },
+  ],
+  "count": 1
+},
   {
     "id": "5ab796f4-66a1-4180-9b6f-aa167656d2ac",
     "mode": "custom",
@@ -15686,70 +15845,58 @@ export const Monsters: Creature[] = [
     "hp": 142,
     "AC": 15,
     "actions": [
-      {
-        "id": "9c4dfd12-65cc-4c9b-817e-12974896232c",
-        "name": "Blood Drain",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 22,
-        "toHit": 6,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "a2554ff7-38a3-4803-8828-f3f7dcd7a3af",
-        "name": "Tentacle",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 11,
-        "toHit": 8,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "a2554ff7-38a3-4803-8828-f3f7dcd7a3af",
+            "name": "Tentacle x2",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 11,
+            "toHit": 8,
+            "target": "enemy with most HP",
+            "targets": 1
+        },
+        {
+            "id": "15cad536-8e1f-40e3-ba17-4b86eef088fa",
+            "actionSlot": 4,
+            "name": "Blood Drain",
+            "freq": "at will",
+            "condition": "default",
+            "targets": 1,
+            "type": "atk",
+            "dpr": 22,
+            "toHit": 6,
+            "target": "enemy with least HP"
+        }
     ],
     "count": 1
-  },
-  {
-    "id": "e70a9579-27c5-424f-b1a5-091a48c21016",
-    "mode": "custom",
-    "name": "Deathlock",
-    "type": "undead",
-    "src": "MPMM p.86",
-    "cr": "4",
-    "hp": 36,
-    "AC": 12,
-    "actions": [
+},
+{
+  "id": "e70a9579-27c5-424f-b1a5-091a48c21016",
+  "mode": "custom",
+  "name": "Deathlock",
+  "type": "undead",
+  "src": "MPMM p.86",
+  "cr": "4",
+  "hp": 36,
+  "AC": 12,
+  "actions": [
       {
-        "id": "f02df217-0dbd-4079-bc45-6983592312c6",
-        "name": "Deathly Claw",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 9,
-        "toHit": 4,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "e75c173f-0615-46a3-8c21-643977d1f278",
-        "name": "Grave Bolt",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 14,
-        "toHit": 5,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "e75c173f-0615-46a3-8c21-643977d1f278",
+          "name": "Grave Bolt x2",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 28,
+          "toHit": 5,
+          "target": "enemy with most HP",
+          "targets": 1
       }
-    ],
-    "count": 1
-  },
+  ],
+  "count": 1
+},
   {
     "id": "933096e6-5404-4043-9268-a6348e09eaec",
     "mode": "custom",
@@ -15761,28 +15908,16 @@ export const Monsters: Creature[] = [
     "AC": 13,
     "actions": [
       {
-        "id": "0593102b-b2d4-40b3-8e66-75e9cbc59845",
-        "name": "Deathly Claw",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 13.5,
-        "toHit": 6,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "5a7ebc61-b34b-4dff-9d16-527106fd463e",
-        "name": "Grave Bolt",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 13.5,
-        "toHit": 6,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "e75c173f-0615-46a3-8c21-643977d1f278",
+          "name": "Grave Bolt x2",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 28,
+          "toHit": 5,
+          "target": "enemy with most HP",
+          "targets": 1
       }
     ],
     "count": 1
@@ -15797,33 +15932,21 @@ export const Monsters: Creature[] = [
     "hp": 37,
     "AC": 12,
     "actions": [
-      {
-        "id": "7bc35225-09f0-4271-9ec6-394e6f284281",
-        "name": "Life Drain",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 6.5,
-        "toHit": 4,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "fa4cb6d2-8249-47d6-adc3-3de8013a8404",
-        "name": "Grave Bolt",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 12,
-        "toHit": 5,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "fa4cb6d2-8249-47d6-adc3-3de8013a8404",
+            "name": "Grave Bolt x2",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 24,
+            "toHit": 5,
+            "target": "enemy with most HP",
+            "targets": 1
+        }
     ],
     "count": 1
-  },
+},
   {
     "id": "d141d8b8-2557-42a8-a596-290a5629a567",
     "mode": "custom",
@@ -15859,107 +15982,83 @@ export const Monsters: Creature[] = [
     "hp": 67,
     "AC": 11,
     "actions": [
-      {
-        "id": "b9d69534-4f17-486e-8a5f-630d1369ab4f",
-        "name": "Battleaxe",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 9.5,
-        "toHit": 6,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "1ee776a2-d814-45fd-82dd-e94c6211d3a5",
-        "name": "Bite (Hybrid Form Only)",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 6.5,
-        "toHit": 6,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "5ee4a8c2-486b-45d1-9193-06634ac83d10",
-        "name": "Claw (Hybrid Form Only)",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 7.5,
-        "toHit": 6,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "1ee776a2-d814-45fd-82dd-e94c6211d3a5",
+            "name": "Bite & Claw x2",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 21,
+            "toHit": 6,
+            "target": "enemy with most HP",
+            "targets": 1
+        }
     ],
     "count": 1
-  },
-  {
-    "id": "d9a31fad-5ddf-49cf-b747-b1676ec34a84",
-    "mode": "custom",
-    "name": "Deinonychus",
-    "type": "beast",
-    "src": "MPMM p.95",
-    "cr": "1",
-    "hp": 26,
-    "AC": 13,
-    "actions": [
+},
+{
+  "id": "d9a31fad-5ddf-49cf-b747-b1676ec34a84",
+  "mode": "custom",
+  "name": "Deinonychus",
+  "type": "beast",
+  "src": "MPMM p.95",
+  "cr": "1",
+  "hp": 26,
+  "AC": 13,
+  "actions": [
       {
-        "id": "a3445b34-0f27-4f5f-9d5a-3b298cafaaca",
-        "name": "Bite",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 6.5,
-        "toHit": 4,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "a3445b34-0f27-4f5f-9d5a-3b298cafaaca",
+          "name": "Bite x2 & Claw x2",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 26,
+          "toHit": 4,
+          "target": "enemy with most HP",
+          "targets": 1
+      }
+  ],
+  "count": 1
+},
+{
+  "id": "bcb6ab50-a138-475f-a92b-8821eea05b64",
+  "mode": "custom",
+  "name": "Demogorgon",
+  "type": "fiend",
+  "src": "MPMM p.90",
+  "cr": "26",
+  "hp": 464,
+  "AC": 22,
+  "actions": [
+      {
+          "id": "7751b150-2c9b-4d56-bc6a-00f3cd1c5985",
+          "name": "Tentacle x2",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 57,
+          "toHit": 17,
+          "target": "enemy with most HP",
+          "targets": 1
       },
       {
-        "id": "0dee9066-0013-403a-8408-d23475706ed0",
-        "name": "Claw",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 6.5,
-        "toHit": 4,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "fb9bf03c-9b57-4332-935a-5923c8a26618",
+          "actionSlot": 2,
+          "name": "Tail x3",
+          "freq": "at will",
+          "condition": "default",
+          "targets": 1,
+          "type": "atk",
+          "dpr": 93,
+          "toHit": 17,
+          "target": "enemy with least HP"
       }
-    ],
-    "count": 1
-  },
-  {
-    "id": "bcb6ab50-a138-475f-a92b-8821eea05b64",
-    "mode": "custom",
-    "name": "Demogorgon",
-    "type": "fiend",
-    "src": "MPMM p.90",
-    "cr": "26",
-    "hp": 464,
-    "AC": 22,
-    "actions": [
-      {
-        "id": "7751b150-2c9b-4d56-bc6a-00f3cd1c5985",
-        "name": "Tentacle",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 28.5,
-        "toHit": 17,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
-    ],
-    "count": 1
-  },
+  ],
+  "count": 1
+},
   {
     "id": "f129a5ce-18a4-42cb-9c24-0763534e0cf7",
     "mode": "custom",
@@ -16032,70 +16131,70 @@ export const Monsters: Creature[] = [
     "hp": 189,
     "AC": 16,
     "actions": [
-      {
-        "id": "ab581f30-381d-44ab-9f0a-967766762858",
-        "name": "Claw",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 33,
-        "toHit": 10,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "4ee8c498-7e52-4c3a-8ced-4a138497639b",
-        "name": "Soul Rend {@recharge}",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 44,
-        "toHit": 8,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "ab581f30-381d-44ab-9f0a-967766762858",
+            "name": "Claw x2",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 66,
+            "toHit": 10,
+            "target": "enemy with most HP",
+            "targets": 1
+        },
+        {
+            "id": "4ee8c498-7e52-4c3a-8ced-4a138497639b",
+            "name": "Soul Rend",
+            "type": "atk",
+            "actionSlot": 1,
+            "freq": "1/fight",
+            "condition": "default",
+            "dpr": 44,
+            "toHit": 8,
+            "target": "enemy with most HP",
+            "targets": 2
+        }
     ],
     "count": 1
-  },
-  {
-    "id": "80a4908a-f3ac-4181-9eff-119a4e068256",
-    "mode": "custom",
-    "name": "Dhergoloth",
-    "type": "fiend",
-    "src": "MPMM p.94",
-    "cr": "7",
-    "hp": 119,
-    "AC": 15,
-    "actions": [
+},
+{
+  "id": "80a4908a-f3ac-4181-9eff-119a4e068256",
+  "mode": "custom",
+  "name": "Dhergoloth",
+  "type": "fiend",
+  "src": "MPMM p.94",
+  "cr": "7",
+  "hp": 119,
+  "AC": 15,
+  "actions": [
       {
-        "id": "b40d102f-4d2e-4020-962c-da8b40ce04e1",
-        "name": "Claw",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 12,
-        "toHit": 6,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "b40d102f-4d2e-4020-962c-da8b40ce04e1",
+          "name": "Claw x2",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 24,
+          "toHit": 6,
+          "target": "enemy with most HP",
+          "targets": 1
       },
       {
-        "id": "0a1fe3a7-6aa1-4605-8212-c51ad12a898f",
-        "name": "Flailing Claws",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "1/fight",
-        "condition": "is available",
-        "dpr": 22.5,
-        "toHit": 4,
-        "target": "enemy with most HP",
-        "targets": 2
+          "id": "0a1fe3a7-6aa1-4605-8212-c51ad12a898f",
+          "name": "Flailing Claws",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "1/fight",
+          "condition": "is available",
+          "dpr": 22.5,
+          "toHit": 4,
+          "target": "enemy with most HP",
+          "targets": 2
       }
-    ],
-    "count": 1
-  },
+  ],
+  "count": 1
+},
   {
     "id": "bea6f173-1373-4f2c-b2db-81849fce1325",
     "mode": "custom",
@@ -16131,82 +16230,81 @@ export const Monsters: Creature[] = [
     "hp": 172,
     "AC": 15,
     "actions": [
-      {
-        "id": "ffdbecb9-e0bb-44c1-b633-00bf0fbcd178",
-        "name": "Bite",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 16,
-        "toHit": 11,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "7a26806e-c639-4ccc-8edf-d245148af104",
-        "name": "Claws",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 16.5,
-        "toHit": 11,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "be3d46f9-f14f-434b-9495-f72b508acfa9",
-        "name": "Whirlwind of Claws",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "1/fight",
-        "condition": "is available",
-        "dpr": 44,
-        "toHit": 9,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "ffdbecb9-e0bb-44c1-b633-00bf0fbcd178",
+            "name": "Bite & Claw x4",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 82,
+            "toHit": 11,
+            "target": "enemy with most HP",
+            "targets": 1
+        },
+        {
+            "id": "be3d46f9-f14f-434b-9495-f72b508acfa9",
+            "name": "Whirlwind of Claws",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "1/fight",
+            "condition": "is available",
+            "dpr": 44,
+            "toHit": 9,
+            "target": "enemy with most HP",
+            "targets": 2
+        },
+        {
+            "id": "5ac77f74-0e34-42cf-95ca-db22888fa34c",
+            "name": "Regeneration",
+            "actionSlot": 4,
+            "condition": "default",
+            "freq": "at will",
+            "targets": 1,
+            "type": "heal",
+            "amount": 10,
+            "target": "self"
+        }
     ],
     "count": 1
-  },
-  {
-    "id": "a374bdda-802f-4f45-a139-b985e657e77d",
-    "mode": "custom",
-    "name": "Diviner Wizard",
-    "type": "humanoid",
-    "src": "MPMM p.261",
-    "cr": "8",
-    "hp": 90,
-    "AC": 12,
-    "actions": [
+},
+{
+  "id": "a374bdda-802f-4f45-a139-b985e657e77d",
+  "mode": "custom",
+  "name": "Diviner Wizard",
+  "type": "humanoid",
+  "src": "MPMM p.261",
+  "cr": "8",
+  "hp": 90,
+  "AC": 12,
+  "actions": [
       {
-        "id": "c6b5082c-97c5-4440-87b2-d2061ca4d02a",
-        "name": "Arcane Burst",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 20.5,
-        "toHit": 7,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "c6b5082c-97c5-4440-87b2-d2061ca4d02a",
+          "name": "Arcane Burst x3",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 60,
+          "toHit": 7,
+          "target": "enemy with most HP",
+          "targets": 1
       },
       {
-        "id": "2ac2bc58-ae5d-43d8-983e-dd7175f1552e",
-        "name": "Overwhelming Revelation",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "1/fight",
-        "condition": "is available",
-        "dpr": 45,
-        "toHit": 5,
-        "target": "enemy with most HP",
-        "targets": 2
+          "id": "2ac2bc58-ae5d-43d8-983e-dd7175f1552e",
+          "name": "Overwhelming Revelation",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "1/fight",
+          "condition": "is available",
+          "dpr": 45,
+          "toHit": 5,
+          "target": "enemy with most HP",
+          "targets": 2
       }
-    ],
-    "count": 1
-  },
+  ],
+  "count": 1
+},
   {
     "id": "010b26ec-0a78-491e-bf6a-39f8ac8ed34d",
     "mode": "custom",
@@ -16267,464 +16365,399 @@ export const Monsters: Creature[] = [
     "hp": 123,
     "AC": 15,
     "actions": [
-      {
-        "id": "6b7ae369-fda3-47bf-9cfb-d2046d36c9ef",
-        "name": "Bite",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 16,
-        "toHit": 8,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "f098f032-2d61-42b5-9120-b649e2d3a29e",
-        "name": "Claw",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 16,
-        "toHit": 8,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "6b7ae369-fda3-47bf-9cfb-d2046d36c9ef",
+            "name": "Bite + Claw x2",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 48,
+            "toHit": 8,
+            "target": "enemy with most HP",
+            "targets": 1
+        }
     ],
     "count": 1
-  },
-  {
-    "id": "0e6663cd-4666-46c3-9f68-b84300189921",
-    "mode": "custom",
-    "name": "Drow Arachnomancer",
-    "type": "humanoid",
-    "src": "MPMM p.99",
-    "cr": "13",
-    "hp": 162,
-    "AC": 15,
-    "actions": [
+},
+{
+  "id": "0e6663cd-4666-46c3-9f68-b84300189921",
+  "mode": "custom",
+  "name": "Drow Arachnomancer",
+  "type": "humanoid",
+  "src": "MPMM p.99",
+  "cr": "13",
+  "hp": 162,
+  "AC": 15,
+  "actions": [
       {
-        "id": "f570d79a-40ed-435e-bdae-76b10be3dcf7",
-        "name": "Bite (Spider Form Only)",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 43.5,
-        "toHit": 8,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "f8719e10-ed93-4165-a8b6-4902ea9251f9",
-        "name": "Poisonous Touch (Humanoid Form Only)",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 35,
-        "toHit": 8,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "f570d79a-40ed-435e-bdae-76b10be3dcf7",
+          "name": "Bite x3",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 130,
+          "toHit": 8,
+          "target": "enemy with most HP",
+          "targets": 1
       }
-    ],
-    "count": 1
-  },
-  {
-    "id": "d4d70922-e881-4a58-9ac5-c09f1180e4e6",
-    "mode": "custom",
-    "name": "Drow Favored Consort",
-    "type": "humanoid",
-    "src": "MPMM p.100",
-    "cr": "18",
-    "hp": 240,
-    "AC": 15,
-    "actions": [
+  ],
+  "count": 1
+},
+{
+  "id": "d4d70922-e881-4a58-9ac5-c09f1180e4e6",
+  "mode": "custom",
+  "name": "Drow Favored Consort",
+  "type": "humanoid",
+  "src": "MPMM p.100",
+  "cr": "18",
+  "hp": 240,
+  "AC": 15,
+  "actions": [
       {
-        "id": "ac8b6b8a-47cf-4b50-84cf-82d21fd763a6",
-        "name": "Scimitar",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 35.5,
-        "toHit": 11,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "07d5bcee-707b-4317-8448-811a1f11eee1",
+          "name": "Arcane Eruption x3",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 108,
+          "toHit": 10,
+          "target": "enemy with most HP",
+          "targets": 1
       },
       {
-        "id": "07d5bcee-707b-4317-8448-811a1f11eee1",
-        "name": "Arcane Eruption",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 36,
-        "toHit": 10,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "0c0a78e3-6698-4f5b-bf13-de93af452b21",
+          "name": "Protective Shield",
+          "actionSlot": 0,
+          "condition": "default",
+          "freq": "at will",
+          "targets": 1,
+          "type": "buff",
+          "target": "ally with the least HP",
+          "acBonus": 5
       }
-    ],
-    "count": 1
-  },
-  {
-    "id": "86fe8cbf-04c6-4df0-bc92-7032bbf1eb2d",
-    "mode": "custom",
-    "name": "Drow House Captain",
-    "type": "humanoid",
-    "src": "MPMM p.101",
-    "cr": "9",
-    "hp": 162,
-    "AC": 16,
-    "actions": [
+  ],
+  "count": 1
+},
+{
+  "id": "86fe8cbf-04c6-4df0-bc92-7032bbf1eb2d",
+  "mode": "custom",
+  "name": "Drow House Captain",
+  "type": "humanoid",
+  "src": "MPMM p.101",
+  "cr": "9",
+  "hp": 162,
+  "AC": 16,
+  "actions": [
       {
-        "id": "d35fd49d-99a2-4195-b5e9-6669f8f25139",
-        "name": "Scimitar",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 21.5,
-        "toHit": 8,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "d35fd49d-99a2-4195-b5e9-6669f8f25139",
+          "name": "Scimitar x2",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 43,
+          "toHit": 8,
+          "target": "enemy with most HP",
+          "targets": 1
       },
       {
-        "id": "a9aa826b-b502-4820-975b-1dc7a9564463",
-        "name": "Whip",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 6.5,
-        "toHit": 8,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "be58a32f-83e4-422c-9f51-6820e7312b1d",
+          "name": "Battle Command (dodge)",
+          "actionSlot": 1,
+          "condition": "is under half HP",
+          "freq": "at will",
+          "targets": 1,
+          "type": "buff",
+          "target": "ally with the least HP",
+          "acBonus": 4
       },
       {
-        "id": "1bb27929-cf50-419e-b867-df5b4a169e8d",
-        "name": "Hand Crossbow",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 7.5,
-        "toHit": 8,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "936ae09e-022c-477b-a9e8-1528d9804add",
+          "name": "Battle Command (attack)",
+          "actionSlot": 1,
+          "condition": "default",
+          "freq": "at will",
+          "targets": 1,
+          "type": "buff",
+          "target": "ally with the highest DPR",
+          "damageBonus": 21
+      },
+      {
+          "id": "e8eac7e3-9fa4-4d6c-98a0-51263d083137",
+          "name": "Parry",
+          "actionSlot": 4,
+          "condition": "default",
+          "freq": "at will",
+          "targets": 1,
+          "type": "buff",
+          "target": "self",
+          "acBonus": 3
       }
-    ],
-    "count": 1
-  },
-  {
-    "id": "25cb4935-5242-461d-a04e-698f48dc7c2e",
-    "mode": "custom",
-    "name": "Drow Inquisitor",
-    "type": "humanoid",
-    "src": "MPMM p.102",
-    "cr": "14",
-    "hp": 149,
-    "AC": 16,
-    "actions": [
+  ],
+  "count": 1
+},
+{
+  "id": "25cb4935-5242-461d-a04e-698f48dc7c2e",
+  "mode": "custom",
+  "name": "Drow Inquisitor",
+  "type": "humanoid",
+  "src": "MPMM p.102",
+  "cr": "14",
+  "hp": 149,
+  "AC": 16,
+  "actions": [
       {
-        "id": "23b98e46-c2cd-4a59-a312-98d1ab0bcdf1",
-        "name": "Death Lance",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 26.5,
-        "toHit": 10,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "23b98e46-c2cd-4a59-a312-98d1ab0bcdf1",
+          "name": "Death Lance x3",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 79,
+          "toHit": 10,
+          "target": "enemy with most HP",
+          "targets": 1
+      },
+      {
+          "id": "c3424ea9-6339-4088-8f34-bf6f5f8b4029",
+          "actionSlot": 1,
+          "name": "Spectral Dagger",
+          "freq": "at will",
+          "condition": "default",
+          "targets": 1,
+          "type": "atk",
+          "dpr": 9,
+          "toHit": 10,
+          "target": "enemy with least HP"
       }
-    ],
-    "count": 1
-  },
-  {
-    "id": "965e2df5-41e7-4e5a-bcd0-acb1955372c8",
-    "mode": "custom",
-    "name": "Drow Matron Mother",
-    "type": "humanoid",
-    "src": "MPMM p.104",
-    "cr": "20",
-    "hp": 247,
-    "AC": 17,
-    "actions": [
+  ],
+  "count": 1
+},
+{
+  "id": "965e2df5-41e7-4e5a-bcd0-acb1955372c8",
+  "mode": "custom",
+  "name": "Drow Matron Mother",
+  "type": "humanoid",
+  "src": "MPMM p.104",
+  "cr": "20",
+  "hp": 247,
+  "AC": 17,
+  "actions": [
       {
-        "id": "57f3e8e3-2299-4d4e-8c4e-d1cbe7c5c6c5",
-        "name": "Demon Staff",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 30,
-        "toHit": 10,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "57f3e8e3-2299-4d4e-8c4e-d1cbe7c5c6c5",
+          "name": "Demon Staff x2",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 60,
+          "toHit": 10,
+          "target": "enemy with most HP",
+          "targets": 1
       },
       {
-        "id": "f6ed6b0d-61e8-4f37-abcb-9924830d170d",
-        "name": "Demon Staff x3",
-        "type": "atk",
-        "actionSlot": 2,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 90,
-        "toHit": 10,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "f6ed6b0d-61e8-4f37-abcb-9924830d170d",
+          "name": "Demon Staff x3",
+          "type": "atk",
+          "actionSlot": 2,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 90,
+          "toHit": 10,
+          "target": "enemy with most HP",
+          "targets": 1
       },
       {
-        "id": "3f94b141-99d3-4a00-91fc-2113604bd45c",
-        "name": "Tentacle Rod",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 3.5,
-        "toHit": 9,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "3b458403-5eed-4097-bd0b-afc6b799fdf3",
-        "name": "Divine Flame",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "1/fight",
-        "condition": "is available",
-        "dpr": 28,
-        "toHit": 10,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "f9bad053-1d17-4016-8dec-7de4a5d2338c",
+          "name": "Fickle Favor",
+          "actionSlot": 0,
+          "condition": "default",
+          "freq": "at will",
+          "targets": 1,
+          "type": "buff",
+          "target": "ally with the least HP",
+          "toHitBonus": 4
       }
-    ],
-    "count": 1
-  },
-  {
-    "id": "8057809b-163d-4585-ad7a-c07967ccb6f8",
-    "mode": "custom",
-    "name": "Drow Shadowblade",
-    "type": "humanoid",
-    "src": "MPMM p.105",
-    "cr": "11",
-    "hp": 150,
-    "AC": 17,
-    "actions": [
+  ],
+  "count": 1
+},
+{
+  "id": "8057809b-163d-4585-ad7a-c07967ccb6f8",
+  "mode": "custom",
+  "name": "Drow Shadowblade",
+  "type": "humanoid",
+  "src": "MPMM p.105",
+  "cr": "11",
+  "hp": 150,
+  "AC": 17,
+  "actions": [
       {
-        "id": "fbd3332a-f790-408a-bf9b-0d885c97eea5",
-        "name": "Shadow Sword",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 29.5,
-        "toHit": 9,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "fbd3332a-f790-408a-bf9b-0d885c97eea5",
+          "name": "Shadow Sword x3",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 88,
+          "toHit": 9,
+          "target": "enemy with most HP",
+          "targets": 1
+      }
+  ],
+  "count": 1
+},
+{
+  "id": "ca3e1dc0-365e-415d-8b6e-24177944ff45",
+  "mode": "custom",
+  "name": "Duergar Despot",
+  "type": "humanoid",
+  "src": "MPMM p.107",
+  "cr": "12",
+  "hp": 119,
+  "AC": 21,
+  "actions": [
+      {
+          "id": "ad9fb7e0-2948-4af4-922d-77ef615360b5",
+          "name": "Iron Fist x2 + Stomping Foot",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 66,
+          "toHit": 9,
+          "target": "enemy with most HP",
+          "targets": 2
       },
       {
-        "id": "e84c4934-6ba2-4d51-b3cc-f4716c49350f",
-        "name": "Hand Crossbow",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 8.5,
-        "toHit": 9,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "dc9ec9fd-4ef4-485c-b883-81a29a8a476f",
+          "name": "Flame Jet",
+          "type": "atk",
+          "actionSlot": 1,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 18,
+          "toHit": 6,
+          "target": "enemy with most HP",
+          "targets": 2
       }
-    ],
-    "count": 1
-  },
-  {
-    "id": "ca3e1dc0-365e-415d-8b6e-24177944ff45",
-    "mode": "custom",
-    "name": "Duergar Despot",
-    "type": "humanoid",
-    "src": "MPMM p.107",
-    "cr": "12",
-    "hp": 119,
-    "AC": 21,
-    "actions": [
+  ],
+  "count": 1
+},
+{
+  "id": "45c3eee5-2e90-42b8-a730-97eae600ee15",
+  "mode": "custom",
+  "name": "Duergar Hammerer",
+  "type": "construct",
+  "src": "MPMM p.112",
+  "cr": "2",
+  "hp": 33,
+  "AC": 17,
+  "actions": [
       {
-        "id": "ad9fb7e0-2948-4af4-922d-77ef615360b5",
-        "name": "Iron Fist",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 23,
-        "toHit": 9,
-        "target": "enemy with most HP",
-        "targets": 2
+          "id": "227973af-6aed-453d-9252-734a0ec7e9e5",
+          "name": "Claw & Hammer",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 16.5,
+          "toHit": 5,
+          "target": "enemy with most HP",
+          "targets": 1
+      }
+  ],
+  "count": 1
+},
+{
+  "id": "79188723-7167-4775-9362-3c6fd0624611",
+  "mode": "custom",
+  "name": "Duergar Kavalrachni",
+  "type": "humanoid",
+  "src": "MPMM p.107",
+  "cr": "2",
+  "hp": 26,
+  "AC": 16,
+  "actions": [
+      {
+          "id": "8370bcc2-3ee4-432f-996f-aea5bda4f411",
+          "name": "War Pick x2 + Mount Steeder's Bite",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 40,
+          "toHit": 4,
+          "target": "enemy with most HP",
+          "targets": 1
+      }
+  ],
+  "count": 1
+},
+{
+  "id": "4fe0fce5-427a-4823-a15f-f107872e7322",
+  "mode": "custom",
+  "name": "Duergar Mind Master",
+  "type": "humanoid",
+  "src": "MPMM p.108",
+  "cr": "2",
+  "hp": 39,
+  "AC": 14,
+  "actions": [
+      {
+          "id": "912fa281-01c7-4e5a-824b-13aaa02bf7f4",
+          "name": "Mind-Poison Dagger x2",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 30,
+          "toHit": 5,
+          "target": "enemy with most HP",
+          "targets": 1
+      }
+  ],
+  "count": 1
+},
+{
+  "id": "63db243c-4b0f-4a2d-ba33-62542cf93951",
+  "mode": "custom",
+  "name": "Duergar Screamer",
+  "type": "construct",
+  "src": "MPMM p.111",
+  "cr": "3",
+  "hp": 38,
+  "AC": 15,
+  "actions": [
+      {
+          "id": "23604eca-f917-4d36-b629-318006fb79cb",
+          "name": "Drill",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 10.5,
+          "toHit": 6,
+          "target": "enemy with most HP",
+          "targets": 1
       },
       {
-        "id": "35e89eec-a2e6-4d53-9cff-1cfeaa220957",
-        "name": "Stomping Foot",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 10.5,
-        "toHit": 9,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "dc9ec9fd-4ef4-485c-b883-81a29a8a476f",
-        "name": "Flame Jet",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 18,
-        "toHit": 6,
-        "target": "enemy with most HP",
-        "targets": 2
+          "id": "3a5b1fbe-7dc9-46aa-b091-010eadb6fdb0",
+          "name": "Sonic Scream",
+          "type": "atk",
+          "actionSlot": 1,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 7,
+          "toHit": 1,
+          "target": "enemy with most HP",
+          "targets": 2
       }
-    ],
-    "count": 1
-  },
-  {
-    "id": "45c3eee5-2e90-42b8-a730-97eae600ee15",
-    "mode": "custom",
-    "name": "Duergar Hammerer",
-    "type": "construct",
-    "src": "MPMM p.112",
-    "cr": "2",
-    "hp": 33,
-    "AC": 17,
-    "actions": [
-      {
-        "id": "227973af-6aed-453d-9252-734a0ec7e9e5",
-        "name": "Claw",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 6.5,
-        "toHit": 5,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "bb4e80fd-8629-4fe7-aa66-d23de96b9607",
-        "name": "Hammer",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 10,
-        "toHit": 5,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
-    ],
-    "count": 1
-  },
-  {
-    "id": "79188723-7167-4775-9362-3c6fd0624611",
-    "mode": "custom",
-    "name": "Duergar Kavalrachni",
-    "type": "humanoid",
-    "src": "MPMM p.107",
-    "cr": "2",
-    "hp": 26,
-    "AC": 16,
-    "actions": [
-      {
-        "id": "8370bcc2-3ee4-432f-996f-aea5bda4f411",
-        "name": "War Pick",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 11.5,
-        "toHit": 4,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "ad896f33-03c8-4946-856f-a4c890c798c3",
-        "name": "Heavy Crossbow",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 5.5,
-        "toHit": 2,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
-    ],
-    "count": 1
-  },
-  {
-    "id": "4fe0fce5-427a-4823-a15f-f107872e7322",
-    "mode": "custom",
-    "name": "Duergar Mind Master",
-    "type": "humanoid",
-    "src": "MPMM p.108",
-    "cr": "2",
-    "hp": 39,
-    "AC": 14,
-    "actions": [
-      {
-        "id": "912fa281-01c7-4e5a-824b-13aaa02bf7f4",
-        "name": "Mind-Poison Dagger",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 26.5,
-        "toHit": 5,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
-    ],
-    "count": 1
-  },
-  {
-    "id": "63db243c-4b0f-4a2d-ba33-62542cf93951",
-    "mode": "custom",
-    "name": "Duergar Screamer",
-    "type": "construct",
-    "src": "MPMM p.111",
-    "cr": "3",
-    "hp": 38,
-    "AC": 15,
-    "actions": [
-      {
-        "id": "23604eca-f917-4d36-b629-318006fb79cb",
-        "name": "Drill",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 10.5,
-        "toHit": 6,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "3a5b1fbe-7dc9-46aa-b091-010eadb6fdb0",
-        "name": "Sonic Scream",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 7,
-        "toHit": 1,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
-    ],
-    "count": 1
-  },
+  ],
+  "count": 1
+},
   {
     "id": "5671953b-faab-4b59-9eab-f76b1bc05d9e",
     "mode": "custom",
@@ -16760,70 +16793,80 @@ export const Monsters: Creature[] = [
     "hp": 39,
     "AC": 18,
     "actions": [
-      {
-        "id": "7f2826e2-3071-468b-b503-e7e99c856f78",
-        "name": "Shortsword",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 18.5,
-        "toHit": 6,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "8c8b872e-b73f-423e-848d-25e442c5f7e0",
-        "name": "Javelin",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 18.5,
-        "toHit": 6,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "7f2826e2-3071-468b-b503-e7e99c856f78",
+            "name": "Shortsword x2",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 22,
+            "toHit": 6,
+            "target": "enemy with most HP",
+            "targets": 1
+        },
+        {
+            "id": "96103363-d786-4cb3-baf2-0441e1de7036",
+            "actionSlot": 0,
+            "name": "Shortsword x2 (with Phalanx Tactics)",
+            "freq": "at will",
+            "condition": "default",
+            "targets": 1,
+            "type": "atk",
+            "dpr": 22,
+            "toHit": 11,
+            "target": "enemy with most HP"
+        }
     ],
     "count": 1
-  },
-  {
-    "id": "e80741ad-7578-48c5-b22d-fe5dce3abb09",
-    "mode": "custom",
-    "name": "Duergar Warlord",
-    "type": "humanoid",
-    "src": "MPMM p.111",
-    "cr": "6",
-    "hp": 75,
-    "AC": 20,
-    "actions": [
+},
+{
+  "id": "e80741ad-7578-48c5-b22d-fe5dce3abb09",
+  "mode": "custom",
+  "name": "Duergar Warlord",
+  "type": "humanoid",
+  "src": "MPMM p.111",
+  "cr": "6",
+  "hp": 75,
+  "AC": 20,
+  "actions": [
       {
-        "id": "8a247bc0-13f8-4c1b-9e17-bc2fd4ce7089",
-        "name": "Psychic-Attuned Hammer",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 30,
-        "toHit": 7,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "8a247bc0-13f8-4c1b-9e17-bc2fd4ce7089",
+          "name": "Psychic-Attuned Hammer x2",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 40,
+          "toHit": 7,
+          "target": "enemy with most HP",
+          "targets": 1
       },
       {
-        "id": "a4df5d3a-c959-4b95-a6e5-746d855f8ac6",
-        "name": "Javelin",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 18.5,
-        "toHit": 7,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "85226820-0def-4803-9910-4b3150572a35",
+          "name": "Call to Attack",
+          "actionSlot": 1,
+          "condition": "default",
+          "freq": "at will",
+          "targets": 2,
+          "type": "buff",
+          "target": "ally with the least HP",
+          "damageBonus": 8
+      },
+      {
+          "id": "e0d75f2a-de4d-4e9d-8fe2-329f1fa68e2f",
+          "name": "Scouring Instruction",
+          "actionSlot": 4,
+          "condition": "default",
+          "freq": "at will",
+          "targets": 1,
+          "type": "buff",
+          "target": "ally with the least HP",
+          "toHitBonus": 3
       }
-    ],
-    "count": 1
-  },
+  ],
+  "count": 1
+},
   {
     "id": "063d6ed3-2625-4fb6-a42e-4b5ef3f36cc5",
     "mode": "custom",
@@ -16841,7 +16884,7 @@ export const Monsters: Creature[] = [
         "actionSlot": 0,
         "freq": "at will",
         "condition": "default",
-        "dpr": 29,
+        "dpr": 19,
         "toHit": 5,
         "target": "enemy with most HP",
         "targets": 1
@@ -16868,24 +16911,35 @@ export const Monsters: Creature[] = [
     "type": "fiend",
     "src": "MPMM p.113",
     "cr": "4",
-    "hp": 37,
+    "hp": 57,
     "AC": 14,
     "actions": [
-      {
-        "id": "25692fd2-e05e-4a01-b57e-9c16f17ae9ff",
-        "name": "Tentacle",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 13,
-        "toHit": 6,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "25692fd2-e05e-4a01-b57e-9c16f17ae9ff",
+            "name": "Tentacle",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 13,
+            "toHit": 6,
+            "target": "enemy with most HP",
+            "targets": 1
+        },
+        {
+            "id": "80771db9-fba9-4ecc-90ec-99ab371d2d46",
+            "name": "Possess Corpse",
+            "actionSlot": 0,
+            "condition": "is under half HP",
+            "freq": "1/fight",
+            "targets": 1,
+            "type": "heal",
+            "amount": 20,
+            "target": "self"
+        }
     ],
     "count": 1
-  },
+},
   {
     "id": "3316cd33-cf2a-4668-afca-c63e489cfd1f",
     "mode": "custom",
@@ -16945,119 +16999,131 @@ export const Monsters: Creature[] = [
     "hp": 210,
     "AC": 10,
     "actions": [
-      {
-        "id": "9696ac55-0906-4514-a9f6-73b4a632db31",
-        "name": "Tentacle",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 29.5,
-        "toHit": 7,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "ec569e4c-a664-4e34-b2bf-19e67afdfc6a",
-        "name": "Tentacle",
-        "type": "atk",
-        "actionSlot": 2,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 29.5,
-        "toHit": 7,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "0afc1389-27e1-4137-8c39-88d33b5d6d1f",
-        "name": "Mind Blast",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "1/fight",
-        "condition": "is available",
-        "dpr": 32.5,
-        "toHit": 8,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "9696ac55-0906-4514-a9f6-73b4a632db31",
+            "name": "Tentacle + Psychic Link",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 39.5,
+            "toHit": 7,
+            "target": "enemy with most HP",
+            "targets": 1
+        },
+        {
+            "id": "ec569e4c-a664-4e34-b2bf-19e67afdfc6a",
+            "name": "Psychic Pulse x3",
+            "type": "atk",
+            "actionSlot": 2,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 30,
+            "toHit": 8,
+            "target": "enemy with most HP",
+            "targets": 2
+        },
+        {
+            "id": "0afc1389-27e1-4137-8c39-88d33b5d6d1f",
+            "name": "Mind Blast",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "1/fight",
+            "condition": "is available",
+            "dpr": 32.5,
+            "toHit": 8,
+            "target": "enemy with most HP",
+            "targets": 1
+        }
     ],
     "count": 1
-  },
-  {
-    "id": "cfb1927c-f1d2-4fa5-bb1b-f64ff8db9714",
-    "mode": "custom",
-    "name": "Elder Oblex",
-    "type": "ooze",
-    "src": "MPMM p.199",
-    "cr": "10",
-    "hp": 115,
-    "AC": 16,
-    "actions": [
+},
+{
+  "id": "cfb1927c-f1d2-4fa5-bb1b-f64ff8db9714",
+  "mode": "custom",
+  "name": "Elder Oblex",
+  "type": "ooze",
+  "src": "MPMM p.199",
+  "cr": "10",
+  "hp": 115,
+  "AC": 16,
+  "actions": [
       {
-        "id": "905bcf0e-f151-4911-a444-1d5ba8b5323b",
-        "name": "Pseudopod",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 31,
-        "toHit": 7,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "905bcf0e-f151-4911-a444-1d5ba8b5323b",
+          "name": "Pseudopod x2",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 62,
+          "toHit": 7,
+          "target": "enemy with most HP",
+          "targets": 1
       },
       {
-        "id": "b6da8e66-a061-4e15-a5ec-8ba729d3b6b4",
-        "name": "Eat Memories",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 44,
-        "toHit": 8,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "b6da8e66-a061-4e15-a5ec-8ba729d3b6b4",
+          "name": "Eat Memories",
+          "type": "atk",
+          "actionSlot": 1,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 44,
+          "toHit": 8,
+          "target": "enemy with most HP",
+          "targets": 1
       }
-    ],
-    "count": 1
-  },
-  {
-    "id": "6abf09d1-a835-4a71-9461-d9cd0b44b5e4",
-    "mode": "custom",
-    "name": "Elder Tempest",
-    "type": "elemental",
-    "src": "MPMM p.121",
-    "cr": "23",
-    "hp": 264,
-    "AC": 19,
-    "actions": [
+  ],
+  "count": 1
+},
+{
+  "id": "6abf09d1-a835-4a71-9461-d9cd0b44b5e4",
+  "mode": "custom",
+  "name": "Elder Tempest",
+  "type": "elemental",
+  "src": "MPMM p.121",
+  "cr": "23",
+  "hp": 264,
+  "AC": 19,
+  "actions": [
       {
-        "id": "3206a9a6-460f-4066-8df5-3b7f9def3412",
-        "name": "Thunderous Slam",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 23,
-        "toHit": 16,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "3206a9a6-460f-4066-8df5-3b7f9def3412",
+          "name": "Thunderous Slam x2",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 46,
+          "toHit": 16,
+          "target": "enemy with most HP",
+          "targets": 1
       },
       {
-        "id": "7fdeead7-cd9e-4d8b-9377-012f696f45f7",
-        "name": "Lightning Storm {@recharge}",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 27,
-        "toHit": 11,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "7fdeead7-cd9e-4d8b-9377-012f696f45f7",
+          "name": "Lightning Storm",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "1/fight",
+          "condition": "is available",
+          "dpr": 27,
+          "toHit": 11,
+          "target": "enemy with most HP",
+          "targets": 2
+      },
+      {
+          "id": "df386e16-9ea8-4d5b-9414-3782cf8ac39a",
+          "actionSlot": 0,
+          "name": "Screaming Gale",
+          "freq": "at will",
+          "condition": "default",
+          "targets": 2,
+          "type": "atk",
+          "dpr": 43,
+          "toHit": 11,
+          "target": "enemy with most HP"
       }
-    ],
-    "count": 1
-  },
+  ],
+  "count": 1
+},
   {
     "id": "cee501b6-de3f-4b9f-af5b-775240774d4e",
     "mode": "custom",
@@ -17192,45 +17258,33 @@ export const Monsters: Creature[] = [
     "hp": 187,
     "AC": 21,
     "actions": [
-      {
-        "id": "8cc28a8e-34b0-4b3c-8b5d-6f217b918dd5",
-        "name": "Fireshield",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 36,
-        "toHit": 13,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "be35aba8-b0bf-43df-bb8b-f93e7a9fb495",
-        "name": "Rock",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 30,
-        "toHit": 13,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "3a3462b7-2189-42e3-b39a-6dff99e758c2",
-        "name": "Shield Charge",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "1/fight",
-        "condition": "is available",
-        "dpr": 50,
-        "toHit": 11,
-        "target": "enemy with most HP",
-        "targets": 2
-      }
+        {
+            "id": "be35aba8-b0bf-43df-bb8b-f93e7a9fb495",
+            "name": "Fireshield x2",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 72,
+            "toHit": 13,
+            "target": "enemy with most HP",
+            "targets": 1
+        },
+        {
+            "id": "3a3462b7-2189-42e3-b39a-6dff99e758c2",
+            "name": "Shield Charge",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "1/fight",
+            "condition": "is available",
+            "dpr": 50,
+            "toHit": 11,
+            "target": "enemy with most HP",
+            "targets": 2
+        }
     ],
     "count": 1
-  },
+},
   {
     "id": "ca71f48b-70f3-4059-a6fd-eb31a433f57e",
     "mode": "custom",
@@ -17340,180 +17394,120 @@ export const Monsters: Creature[] = [
     "hp": 127,
     "AC": 16,
     "actions": [
-      {
-        "id": "6d5196a7-dfb7-4508-821a-3d98328677b9",
-        "name": "Flail of Chaos",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 10.5,
-        "toHit": 9,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "7fcf0856-0cbf-4072-aa17-db80955e0630",
-        "name": "Flail of Pain",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 27,
-        "toHit": 9,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "5e08c8dd-90b6-4711-b387-8a30c577808f",
-        "name": "Flail of Paralysis",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 10.5,
-        "toHit": 9,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "1d11224d-d4c4-403b-b727-fc4d6f00d4fb",
-        "name": "Longbow",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 6.5,
-        "toHit": 6,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "6d5196a7-dfb7-4508-821a-3d98328677b9",
+            "name": "Flail x3",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 48,
+            "toHit": 9,
+            "target": "enemy with most HP",
+            "targets": 1
+        }
     ],
     "count": 1
-  },
-  {
-    "id": "85c18495-4ce6-42a5-bdd5-7cfe0ff2d18f",
-    "mode": "custom",
-    "name": "Fraz-Urb'luu",
-    "type": "fiend",
-    "src": "MPMM p.129",
-    "cr": "23",
-    "hp": 337,
-    "AC": 18,
-    "actions": [
+},
+{
+  "id": "85c18495-4ce6-42a5-bdd5-7cfe0ff2d18f",
+  "mode": "custom",
+  "name": "Fraz-Urb'luu",
+  "type": "fiend",
+  "src": "MPMM p.129",
+  "cr": "23",
+  "hp": 337,
+  "AC": 18,
+  "actions": [
       {
-        "id": "3f34fae3-59a1-43e4-9471-ac4e8acb1843",
-        "name": "Bite",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 19.5,
-        "toHit": 16,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "3f34fae3-59a1-43e4-9471-ac4e8acb1843",
+          "name": "Bite & Fist x2",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 64.5,
+          "toHit": 16,
+          "target": "enemy with most HP",
+          "targets": 1
       },
       {
-        "id": "1a08ed7e-60ef-4a8e-ba9d-7a9119c67ded",
-        "name": "Fist",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 22.5,
-        "toHit": 16,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "d5499bd9-052e-46e8-9aeb-b7933b5b640d",
+          "name": "Phantasmal Terror",
+          "type": "atk",
+          "actionSlot": 1,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 16.5,
+          "toHit": 13,
+          "target": "enemy with most HP",
+          "targets": 1
       },
       {
-        "id": "d5499bd9-052e-46e8-9aeb-b7933b5b640d",
-        "name": "Phantasmal Terror",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 16.5,
-        "toHit": 13,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "2870c3d3-242d-4008-8fec-f2f5e7f7403b",
+          "actionSlot": 2,
+          "name": "Tail x3",
+          "freq": "at will",
+          "condition": "default",
+          "targets": 1,
+          "type": "atk",
+          "dpr": 60,
+          "toHit": 16,
+          "target": "enemy with least HP"
       }
-    ],
-    "count": 1
-  },
-  {
-    "id": "d61a7e7f-5522-4e41-a629-8035fc6de699",
-    "mode": "custom",
-    "name": "Froghemoth",
-    "type": "monstrosity",
-    "src": "MPMM p.130",
-    "cr": "10",
-    "hp": 161,
-    "AC": 14,
-    "actions": [
+  ],
+  "count": 1
+},
+{
+  "id": "d61a7e7f-5522-4e41-a629-8035fc6de699",
+  "mode": "custom",
+  "name": "Froghemoth",
+  "type": "monstrosity",
+  "src": "MPMM p.130",
+  "cr": "10",
+  "hp": 161,
+  "AC": 14,
+  "actions": [
       {
-        "id": "a2f0b7ba-7389-4381-9110-0666a1c875dd",
-        "name": "Bite",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 33,
-        "toHit": 10,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "c8ae04fa-a761-4306-95c0-3e35e0b82b5a",
-        "name": "Tentacle",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 19.5,
-        "toHit": 10,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "a2f0b7ba-7389-4381-9110-0666a1c875dd",
+          "name": "Bite + Tentacle x2",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 72,
+          "toHit": 10,
+          "target": "enemy with most HP",
+          "targets": 1
       }
-    ],
-    "count": 1
-  },
-  {
-    "id": "ce73d46f-e9bd-4939-9f59-4b3faebc4087",
-    "mode": "custom",
-    "name": "Frost Giant Everlasting One",
-    "type": "giant",
-    "src": "MPMM p.131",
-    "cr": "12",
-    "hp": 189,
-    "AC": 15,
-    "actions": [
+  ],
+  "count": 1
+},
+{
+  "id": "ce73d46f-e9bd-4939-9f59-4b3faebc4087",
+  "mode": "custom",
+  "name": "Frost Giant Everlasting One",
+  "type": "giant",
+  "src": "MPMM p.131",
+  "cr": "12",
+  "hp": 378,
+  "AC": 15,
+  "actions": [
       {
-        "id": "79c2825c-1265-4832-98c8-c7a6a000fc14",
-        "name": "Greataxe",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 57,
-        "toHit": 11,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "dfa22be8-2d51-4036-9dc8-d7b4969dcfa9",
-        "name": "Rock",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 29,
-        "toHit": 11,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "79c2825c-1265-4832-98c8-c7a6a000fc14",
+          "name": "Raging Greataxe x2",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 60,
+          "toHit": 11,
+          "target": "enemy with most HP",
+          "targets": 1
       }
-    ],
-    "count": 1
-  },
+  ],
+  "count": 1
+},
   {
     "id": "87ac0785-226c-4c8e-bd20-4ee0c0427b7d",
     "mode": "custom",
@@ -17635,33 +17629,33 @@ export const Monsters: Creature[] = [
     "hp": 300,
     "AC": 19,
     "actions": [
-      {
-        "id": "b4b97c24-14fe-4b1d-8075-6a772264e848",
-        "name": "Claw",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 50,
-        "toHit": 16,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "98081d7e-0331-4c5b-88d1-993b4c5d7d4b",
-        "name": "Stinger",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 27,
-        "toHit": 16,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "b4b97c24-14fe-4b1d-8075-6a772264e848",
+            "name": "Claw + Stinger",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 77,
+            "toHit": 16,
+            "target": "enemy with most HP",
+            "targets": 1
+        },
+        {
+            "id": "faa5fdd1-fb2a-4ceb-96c5-258c7df04fd1",
+            "actionSlot": 2,
+            "name": "Stinger",
+            "freq": "at will",
+            "condition": "default",
+            "targets": 1,
+            "type": "atk",
+            "dpr": 27,
+            "toHit": 16,
+            "target": "enemy with least HP"
+        }
     ],
     "count": 1
-  },
+},
   {
     "id": "91a998a4-3665-46e2-95aa-9b282537a366",
     "mode": "custom",
@@ -17770,268 +17764,264 @@ export const Monsters: Creature[] = [
     "hp": 59,
     "AC": 13,
     "actions": [
+        {
+            "id": "d1db1181-8dfb-4772-90e8-664bdc09cab1",
+            "name": "Bite + Claw x4",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 37.5,
+            "toHit": 6,
+            "target": "enemy with most HP",
+            "targets": 1
+        }
+    ],
+    "count": 1
+},
+{
+  "id": "9616bc1e-21dc-4f57-8bd4-8e885677a602",
+  "mode": "custom",
+  "name": "Githyanki Gish",
+  "type": "humanoid",
+  "src": "MPMM p.140",
+  "cr": "10",
+  "hp": 130,
+  "AC": 17,
+  "actions": [
       {
-        "id": "d1db1181-8dfb-4772-90e8-664bdc09cab1",
-        "name": "Bite",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 7.5,
-        "toHit": 6,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "114f3959-0fd4-4e8c-ad23-f2e3703086a0",
+          "name": "Longsword x3",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 90,
+          "toHit": 7,
+          "target": "enemy with most HP",
+          "targets": 1
+      }
+  ],
+  "count": 1
+},
+{
+  "id": "6a895552-4a5b-4423-86cb-0e081264c126",
+  "mode": "custom",
+  "name": "Githyanki Kith'rak",
+  "type": "humanoid",
+  "src": "MPMM p.140",
+  "cr": "12",
+  "hp": 180,
+  "AC": 18,
+  "actions": [
+      {
+          "id": "517495d2-8bb0-4551-890d-71486a17039b",
+          "name": "Greatsword x3",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 85,
+          "toHit": 8,
+          "target": "enemy with most HP",
+          "targets": 1
       },
       {
-        "id": "f2f06bf0-40dc-4feb-84c1-e2d19ca430e8",
-        "name": "Claw",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 7.5,
-        "toHit": 6,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "608abe02-9602-46ec-982c-ba0355f922ce",
+          "name": "Parry",
+          "actionSlot": 4,
+          "condition": "default",
+          "freq": "at will",
+          "targets": 1,
+          "type": "buff",
+          "target": "self",
+          "acBonus": 4
       }
-    ],
-    "count": 1
-  },
-  {
-    "id": "9616bc1e-21dc-4f57-8bd4-8e885677a602",
-    "mode": "custom",
-    "name": "Githyanki Gish",
-    "type": "humanoid",
-    "src": "MPMM p.140",
-    "cr": "10",
-    "hp": 130,
-    "AC": 17,
-    "actions": [
+  ],
+  "count": 1
+},
+{
+  "id": "67f81589-0f07-4506-aa5d-9ca4496e8030",
+  "mode": "custom",
+  "name": "Githyanki Supreme Commander",
+  "type": "humanoid",
+  "src": "MPMM p.141",
+  "cr": "14",
+  "hp": 187,
+  "AC": 18,
+  "actions": [
       {
-        "id": "114f3959-0fd4-4e8c-ad23-f2e3703086a0",
-        "name": "Longsword",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 38.5,
-        "toHit": 7,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "f216aec7-961c-4046-9b28-5acf9a29322f",
+          "name": "Silver Greatsword x2",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 63,
+          "toHit": 12,
+          "target": "enemy with most HP",
+          "targets": 1
       },
       {
-        "id": "603e0c2d-73f5-4b03-92e0-97542169a50d",
-        "name": "Telekinetic Bolt",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 28,
-        "toHit": 7,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
-    ],
-    "count": 1
-  },
-  {
-    "id": "6a895552-4a5b-4423-86cb-0e081264c126",
-    "mode": "custom",
-    "name": "Githyanki Kith'rak",
-    "type": "humanoid",
-    "src": "MPMM p.140",
-    "cr": "12",
-    "hp": 180,
-    "AC": 18,
-    "actions": [
-      {
-        "id": "517495d2-8bb0-4551-890d-71486a17039b",
-        "name": "Greatsword",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 28.5,
-        "toHit": 8,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
-    ],
-    "count": 1
-  },
-  {
-    "id": "67f81589-0f07-4506-aa5d-9ca4496e8030",
-    "mode": "custom",
-    "name": "Githyanki Supreme Commander",
-    "type": "humanoid",
-    "src": "MPMM p.141",
-    "cr": "14",
-    "hp": 187,
-    "AC": 18,
-    "actions": [
-      {
-        "id": "f216aec7-961c-4046-9b28-5acf9a29322f",
-        "name": "Silver Greatsword",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 31.5,
-        "toHit": 12,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
-    ],
-    "count": 1
-  },
-  {
-    "id": "bb68294e-f9af-4819-b99c-c836573853e2",
-    "mode": "custom",
-    "name": "Githzerai Anarch",
-    "type": "humanoid",
-    "src": "MPMM p.142",
-    "cr": "16",
-    "hp": 144,
-    "AC": 20,
-    "actions": [
-      {
-        "id": "cfe845c5-bc5b-41a7-bdec-aae66d9bdf2c",
-        "name": "Unarmed Strike",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 27.5,
-        "toHit": 10,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
-    ],
-    "count": 1
-  },
-  {
-    "id": "9d98ca5a-6f72-4d2b-a85f-c892e9f6127e",
-    "mode": "custom",
-    "name": "Githzerai Enlightened",
-    "type": "humanoid",
-    "src": "MPMM p.143",
-    "cr": "10",
-    "hp": 112,
-    "AC": 18,
-    "actions": [
-      {
-        "id": "1aece606-132c-4dc6-80e4-ad4ee1bd4ca8",
-        "name": "Unarmed Strike",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 31,
-        "toHit": 8,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "b10469a0-7680-4855-9800-c4dc765e04db",
+          "name": "Command Ally x3",
+          "actionSlot": 2,
+          "condition": "default",
+          "freq": "at will",
+          "targets": 2,
+          "type": "buff",
+          "target": "ally with the least HP",
+          "damageBonus": 20
       },
       {
-        "id": "6d83ae63-a363-44f5-97bd-db87b34d45a9",
-        "name": "Temporal Strike {@recharge}",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 65,
-        "toHit": 8,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "50759def-0318-4c53-bd34-4d0d4cced43f",
+          "name": "Parry",
+          "actionSlot": 4,
+          "condition": "default",
+          "freq": "at will",
+          "targets": 1,
+          "type": "buff",
+          "target": "self",
+          "acBonus": 5
       }
-    ],
-    "count": 1
-  },
-  {
-    "id": "cc43548d-d174-42c0-b94f-17fa8e3a4a77",
-    "mode": "custom",
-    "name": "Gnoll Flesh Gnawer",
-    "type": "monstrosity",
-    "src": "MPMM p.144",
-    "cr": "1",
-    "hp": 22,
-    "AC": 14,
-    "actions": [
+  ],
+  "count": 1
+},
+{
+  "id": "bb68294e-f9af-4819-b99c-c836573853e2",
+  "mode": "custom",
+  "name": "Githzerai Anarch",
+  "type": "humanoid",
+  "src": "MPMM p.142",
+  "cr": "16",
+  "hp": 144,
+  "AC": 20,
+  "actions": [
       {
-        "id": "18ebca23-9d79-470d-9277-f683acf3c2b4",
-        "name": "Bite",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 4.5,
-        "toHit": 4,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "cfe845c5-bc5b-41a7-bdec-aae66d9bdf2c",
+          "name": "Unarmed Strike x3",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 82.5,
+          "toHit": 10,
+          "target": "enemy with most HP",
+          "targets": 1
       },
       {
-        "id": "7193f2b1-d4e2-4d31-bc25-65e185b4f860",
-        "name": "Shortsword",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 5.5,
-        "toHit": 4,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "9af68eaa-ca42-41fd-8752-3271ca832941",
+          "actionSlot": 2,
+          "name": "Unarmed Strike x3",
+          "freq": "at will",
+          "condition": "default",
+          "targets": 1,
+          "type": "atk",
+          "dpr": 82.5,
+          "toHit": 10,
+          "target": "enemy with most HP"
       }
-    ],
-    "count": 1
-  },
-  {
-    "id": "323a6193-e3fd-4691-8d9a-5e3ac8f76ffc",
-    "mode": "custom",
-    "name": "Gnoll Hunter",
-    "type": "monstrosity",
-    "src": "MPMM p.144",
-    "cr": "1/2",
-    "hp": 22,
-    "AC": 13,
-    "actions": [
+  ],
+  "count": 1
+},
+{
+  "id": "9d98ca5a-6f72-4d2b-a85f-c892e9f6127e",
+  "mode": "custom",
+  "name": "Githzerai Enlightened",
+  "type": "humanoid",
+  "src": "MPMM p.143",
+  "cr": "10",
+  "hp": 112,
+  "AC": 18,
+  "actions": [
       {
-        "id": "188e1f98-d7cf-468f-a631-48325f9e2701",
-        "name": "Bite",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 4.5,
-        "toHit": 4,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "1aece606-132c-4dc6-80e4-ad4ee1bd4ca8",
+          "name": "Unarmed Strike x3",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 93,
+          "toHit": 8,
+          "target": "enemy with most HP",
+          "targets": 1
       },
       {
-        "id": "30522d8f-d922-4352-a6a1-19e0d315c436",
-        "name": "Spear",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 12,
-        "toHit": 4,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "6d83ae63-a363-44f5-97bd-db87b34d45a9",
+          "name": "Temporal Strike",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "1/fight",
+          "condition": "is available",
+          "dpr": 65,
+          "toHit": 8,
+          "target": "enemy with most HP",
+          "targets": 1
       },
       {
-        "id": "fcf49106-8ae9-48fb-92ca-ddf3892667bb",
-        "name": "Longbow",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 6.5,
-        "toHit": 4,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "5a564dda-333b-4a3e-a5c7-b1306411e017",
+          "name": "Temporal Strike Debuff",
+          "actionSlot": 4,
+          "condition": "is available",
+          "freq": "1/fight",
+          "targets": 1,
+          "type": "debuff",
+          "target": "enemy with least HP",
+          "toHitDebuff": -20
       }
-    ],
-    "count": 1
-  },
+  ],
+  "count": 1
+},
+{
+  "id": "cc43548d-d174-42c0-b94f-17fa8e3a4a77",
+  "mode": "custom",
+  "name": "Gnoll Flesh Gnawer",
+  "type": "monstrosity",
+  "src": "MPMM p.144",
+  "cr": "1",
+  "hp": 22,
+  "AC": 14,
+  "actions": [
+      {
+          "id": "18ebca23-9d79-470d-9277-f683acf3c2b4",
+          "name": "Bite & Shortsword x2",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 15.5,
+          "toHit": 4,
+          "target": "enemy with most HP",
+          "targets": 1
+      }
+  ],
+  "count": 1
+},
+{
+  "id": "323a6193-e3fd-4691-8d9a-5e3ac8f76ffc",
+  "mode": "custom",
+  "name": "Gnoll Hunter",
+  "type": "monstrosity",
+  "src": "MPMM p.144",
+  "cr": "1/2",
+  "hp": 22,
+  "AC": 13,
+  "actions": [
+      {
+          "id": "30522d8f-d922-4352-a6a1-19e0d315c436",
+          "name": "Spear x2",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 12,
+          "toHit": 4,
+          "target": "enemy with most HP",
+          "targets": 1
+      }
+  ],
+  "count": 1
+},
   {
     "id": "6a79d38d-b87a-4767-b942-09baea47a0e8",
     "mode": "custom",
@@ -18079,83 +18069,83 @@ export const Monsters: Creature[] = [
     "hp": 189,
     "AC": 19,
     "actions": [
+        {
+            "id": "1344fdce-68f9-41d8-83dc-0f69d3ae972b",
+            "name": "Bite & Claw x2",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 63,
+            "toHit": 8,
+            "target": "enemy with most HP",
+            "targets": 1
+        }
+    ],
+    "count": 1
+},
+{
+  "id": "2e2cfd20-52e7-4299-9d3b-4ca9c9d4dbf3",
+  "mode": "custom",
+  "name": "Graz'zt",
+  "type": "fiend",
+  "src": "MPMM p.148",
+  "cr": "24",
+  "hp": 346,
+  "AC": 20,
+  "actions": [
       {
-        "id": "1344fdce-68f9-41d8-83dc-0f69d3ae972b",
-        "name": "Bite",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 17,
-        "toHit": 8,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "4e372f53-6a8f-4512-96a6-d756f520b1b4",
+          "name": "Wave of Sorrow x2",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 64,
+          "toHit": 13,
+          "target": "enemy with most HP",
+          "targets": 1
       },
       {
-        "id": "516d824f-4e8a-4c22-b722-92b4cf58ba8d",
-        "name": "Claw",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 23.5,
-        "toHit": 8,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "327c3016-4c2f-4da6-9045-3fc2f7b2f3f8",
+          "actionSlot": 2,
+          "name": "Wave of Sorrow x3",
+          "freq": "at will",
+          "condition": "default",
+          "targets": 1,
+          "type": "atk",
+          "dpr": 96,
+          "toHit": 13,
+          "target": "enemy with most HP"
       }
-    ],
-    "count": 1
-  },
-  {
-    "id": "2e2cfd20-52e7-4299-9d3b-4ca9c9d4dbf3",
-    "mode": "custom",
-    "name": "Graz'zt",
-    "type": "fiend",
-    "src": "MPMM p.148",
-    "cr": "24",
-    "hp": 346,
-    "AC": 20,
-    "actions": [
+  ],
+  "count": 1
+},
+{
+  "id": "4a5da7ac-188b-44f1-921e-632e71446102",
+  "mode": "custom",
+  "name": "Green Abishai",
+  "type": "fiend",
+  "src": "MPMM p.40",
+  "cr": "15",
+  "hp": 195,
+  "AC": 18,
+  "actions": [
       {
-        "id": "4e372f53-6a8f-4512-96a6-d756f520b1b4",
-        "name": "Wave of Sorrow (Greatsword)",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 34,
-        "toHit": 13,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "fbfa40da-3dba-49f2-81b4-a535ccbfd37f",
+          "name": "Fiendish Claw x2",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 56,
+          "toHit": 8,
+          "target": "enemy with most HP",
+          "targets": 1
       }
-    ],
-    "count": 1
-  },
-  {
-    "id": "4a5da7ac-188b-44f1-921e-632e71446102",
-    "mode": "custom",
-    "name": "Green Abishai",
-    "type": "fiend",
-    "src": "MPMM p.40",
-    "cr": "15",
-    "hp": 195,
-    "AC": 18,
-    "actions": [
-      {
-        "id": "fbfa40da-3dba-49f2-81b4-a535ccbfd37f",
-        "name": "Fiendish Claw",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 28.5,
-        "toHit": 8,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
-    ],
-    "count": 1
-  },
+  ],
+  "count": 1
+},
   {
     "id": "63ea5640-2210-4ee8-9ace-6341273a2473",
     "mode": "custom",
@@ -18327,107 +18317,71 @@ export const Monsters: Creature[] = [
     "hp": 216,
     "AC": 18,
     "actions": [
-      {
-        "id": "8ec24b7f-48ee-49d0-bdc8-9dc3fcf096ed",
-        "name": "Flesh-Crushing Stride",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 28,
-        "toHit": 8,
-        "target": "enemy with most HP",
-        "targets": 2
-      },
-      {
-        "id": "81077150-abd9-47de-bee0-9a26bd7d1c21",
-        "name": "Hellfire Weapons",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 154,
-        "toHit": 10,
-        "target": "enemy with most HP",
-        "targets": 2
-      }
+        {
+            "id": "8ec24b7f-48ee-49d0-bdc8-9dc3fcf096ed",
+            "name": "Thunder Cannon x3",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 138,
+            "toHit": 10,
+            "target": "enemy with most HP",
+            "targets": 2
+        }
     ],
     "count": 1
-  },
-  {
-    "id": "32bfa272-9ed2-4ac2-b796-8efafd1cd804",
-    "mode": "custom",
-    "name": "Hobgoblin Devastator",
-    "type": "fey",
-    "src": "MPMM p.153",
-    "cr": "4",
-    "hp": 45,
-    "AC": 13,
-    "actions": [
+},
+{
+  "id": "32bfa272-9ed2-4ac2-b796-8efafd1cd804",
+  "mode": "custom",
+  "name": "Hobgoblin Devastator",
+  "type": "fey",
+  "src": "MPMM p.153",
+  "cr": "4",
+  "hp": 45,
+  "AC": 13,
+  "actions": [
       {
-        "id": "9eb376ba-f09f-4ce4-98de-3ff1fb8e16d4",
-        "name": "Quarterstaff",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 23.5,
-        "toHit": 3,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "718c2fbb-ffe4-483b-8fe8-20f054fb0258",
-        "name": "Devastating Bolt",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 21,
-        "toHit": 5,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "9eb376ba-f09f-4ce4-98de-3ff1fb8e16d4",
+          "name": "Lightning Bolt or Fireball",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 28,
+          "toHit": 3,
+          "target": "enemy with most HP",
+          "targets": 2
       }
-    ],
-    "count": 1
-  },
-  {
-    "id": "59ed178b-a932-4c5f-9b5a-825f14da9955",
-    "mode": "custom",
-    "name": "Hobgoblin Iron Shadow",
-    "type": "fey",
-    "src": "MPMM p.154",
-    "cr": "2",
-    "hp": 32,
-    "AC": 15,
-    "actions": [
+  ],
+  "count": 1
+},
+{
+  "id": "59ed178b-a932-4c5f-9b5a-825f14da9955",
+  "mode": "custom",
+  "name": "Hobgoblin Iron Shadow",
+  "type": "fey",
+  "src": "MPMM p.154",
+  "cr": "2",
+  "hp": 32,
+  "AC": 15,
+  "actions": [
       {
-        "id": "53e1d71c-65f6-429d-9b0e-9134980e2755",
-        "name": "Unarmed Strike",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 5.5,
-        "toHit": 5,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "9ea1a6ae-080a-4eb8-bc0b-659186bd2710",
-        "name": "Dart",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 5.5,
-        "toHit": 5,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "53e1d71c-65f6-429d-9b0e-9134980e2755",
+          "name": "Unarmed Strike x4",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 22,
+          "toHit": 5,
+          "target": "enemy with most HP",
+          "targets": 1
       }
-    ],
-    "count": 1
-  },
+  ],
+  "count": 1
+},
   {
     "id": "91db2c29-4ff9-465c-ad73-039d003e7cbb",
     "mode": "custom",
@@ -18475,254 +18429,205 @@ export const Monsters: Creature[] = [
     "hp": 225,
     "AC": 17,
     "actions": [
-      {
-        "id": "c1fcfeda-d1a3-4b4c-affa-36ce03bcd8e5",
-        "name": "Bite",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 22,
-        "toHit": 8,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "788ada9b-ffe4-46be-9eef-a652be12ff47",
-        "name": "Claw",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 18,
-        "toHit": 8,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "c1fcfeda-d1a3-4b4c-affa-36ce03bcd8e5",
+            "name": "Bite + Claw",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 40,
+            "toHit": 8,
+            "target": "enemy with most HP",
+            "targets": 1
+        },
+        {
+            "id": "8095eb13-f9b7-496b-9aa6-36f0f4c64949",
+            "actionSlot": 1,
+            "name": "Life Hunger",
+            "freq": "1/fight",
+            "condition": "is under half HP",
+            "targets": 1,
+            "type": "atk",
+            "dpr": 22,
+            "toHit": 20,
+            "target": "enemy with least HP"
+        },
+        {
+            "id": "ae5e891a-a754-4b7d-860d-e6cf7432c661",
+            "name": "Life Hunger advantage",
+            "actionSlot": 4,
+            "condition": "default",
+            "freq": "at will",
+            "targets": 1,
+            "type": "buff",
+            "target": "self",
+            "toHitBonus": 4
+        }
     ],
     "count": 1
-  },
-  {
-    "id": "60c45ba7-8631-4568-b30c-9920dfa4cef6",
-    "mode": "custom",
-    "name": "Hutijin",
-    "type": "fiend",
-    "src": "MPMM p.157",
-    "cr": "21",
-    "hp": 200,
-    "AC": 19,
-    "actions": [
+},
+{
+  "id": "60c45ba7-8631-4568-b30c-9920dfa4cef6",
+  "mode": "custom",
+  "name": "Hutijin",
+  "type": "fiend",
+  "src": "MPMM p.157",
+  "cr": "21",
+  "hp": 200,
+  "AC": 19,
+  "actions": [
       {
-        "id": "094dfa6d-c329-49ef-8c36-23cf62c219e3",
-        "name": "Bite",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 25.5,
-        "toHit": 15,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "094dfa6d-c329-49ef-8c36-23cf62c219e3",
+          "name": "Bite + Claw + Mace + Tail",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 76,
+          "toHit": 15,
+          "target": "enemy with most HP",
+          "targets": 1
       },
       {
-        "id": "1241ee91-96fb-47db-b708-296bfa59355b",
-        "name": "Claw",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 17,
-        "toHit": 15,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "16bbbb05-5866-4b7d-a1e2-c44c4531b861",
-        "name": "Mace",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 15,
-        "toHit": 15,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "094d055e-c14b-4468-b594-5e9d1ff195a5",
-        "name": "Tail",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 19,
-        "toHit": 15,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "c2b9af0e-d5d4-4963-b3de-c94068d4877c",
+          "actionSlot": 2,
+          "name": "Tail x3",
+          "freq": "at will",
+          "condition": "default",
+          "targets": 1,
+          "type": "atk",
+          "dpr": 57,
+          "toHit": 15,
+          "target": "enemy with most HP"
       }
-    ],
-    "count": 1
-  },
-  {
-    "id": "ba2199e6-7119-473b-92b8-442de0e67084",
-    "mode": "custom",
-    "name": "Hydroloth",
-    "type": "fiend",
-    "src": "MPMM p.158",
-    "cr": "9",
-    "hp": 135,
-    "AC": 15,
-    "actions": [
+  ],
+  "count": 1
+},
+{
+  "id": "ba2199e6-7119-473b-92b8-442de0e67084",
+  "mode": "custom",
+  "name": "Hydroloth",
+  "type": "fiend",
+  "src": "MPMM p.158",
+  "cr": "9",
+  "hp": 135,
+  "AC": 15,
+  "actions": [
       {
-        "id": "a772cefb-5f87-4f0b-9ec7-2b4c0479206d",
-        "name": "Bite",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 27,
-        "toHit": 9,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "90f134fd-6891-48a5-a041-8dff3eed59e1",
-        "name": "Claw",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 25,
-        "toHit": 9,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "980dc961-764d-4f35-b93e-bdb39ccf40d5",
-        "name": "Steal Memory",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "1/day",
-        "condition": "is available",
-        "dpr": 14,
-        "toHit": 6,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "a772cefb-5f87-4f0b-9ec7-2b4c0479206d",
+          "name": "Bite x2",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 50,
+          "toHit": 9,
+          "target": "enemy with most HP",
+          "targets": 1
       }
-    ],
-    "count": 1
-  },
-  {
-    "id": "9e289ee4-6867-4013-a7ad-cb9503fa06ae",
-    "mode": "custom",
-    "name": "Illusionist Wizard",
-    "type": "humanoid",
-    "src": "MPMM p.263",
-    "cr": "3",
-    "hp": 44,
-    "AC": 12,
-    "actions": [
+  ],
+  "count": 1
+},
+{
+  "id": "9e289ee4-6867-4013-a7ad-cb9503fa06ae",
+  "mode": "custom",
+  "name": "Illusionist Wizard",
+  "type": "humanoid",
+  "src": "MPMM p.263",
+  "cr": "3",
+  "hp": 44,
+  "AC": 12,
+  "actions": [
       {
-        "id": "a50b378f-8135-4de8-8671-70710034c85e",
-        "name": "Arcane Burst",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 14,
-        "toHit": 5,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "a50b378f-8135-4de8-8671-70710034c85e",
+          "name": "Arcane Burst x2",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 28,
+          "toHit": 5,
+          "target": "enemy with most HP",
+          "targets": 1
       }
-    ],
-    "count": 1
-  },
-  {
-    "id": "f07a68a1-8154-4a5c-90fb-251c7d1096a9",
-    "mode": "custom",
-    "name": "Juiblex",
-    "type": "fiend",
-    "src": "MPMM p.160",
-    "cr": "23",
-    "hp": 350,
-    "AC": 18,
-    "actions": [
+  ],
+  "count": 1
+},
+{
+  "id": "f07a68a1-8154-4a5c-90fb-251c7d1096a9",
+  "mode": "custom",
+  "name": "Juiblex",
+  "type": "fiend",
+  "src": "MPMM p.160",
+  "cr": "23",
+  "hp": 350,
+  "AC": 18,
+  "actions": [
       {
-        "id": "6164523e-967a-4cfd-a819-cc24decc5d33",
-        "name": "Acid Lash",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 21,
-        "toHit": 14,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "6164523e-967a-4cfd-a819-cc24decc5d33",
+          "name": "Acid Lash x3",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 63,
+          "toHit": 14,
+          "target": "enemy with most HP",
+          "targets": 1
       },
       {
-        "id": "3ff83548-55ab-4407-8c1c-47fa65bc32e5",
-        "name": "Eject Slime",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "1/fight",
-        "condition": "is available",
-        "dpr": 55,
-        "toHit": 11,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "019fed6e-b308-42da-9596-c1ad9e2ae714",
+          "actionSlot": 2,
+          "name": "Acid Lash x3",
+          "freq": "at will",
+          "condition": "default",
+          "targets": 1,
+          "type": "atk",
+          "dpr": 63,
+          "toHit": 14,
+          "target": "enemy with most HP"
       }
-    ],
-    "count": 1
-  },
-  {
-    "id": "92e0b543-9a7d-4f24-a9ff-ee66435c9bf7",
-    "mode": "custom",
-    "name": "Ki-rin",
-    "type": "celestial",
-    "src": "MPMM p.162",
-    "cr": "12",
-    "hp": 153,
-    "AC": 20,
-    "actions": [
+  ],
+  "count": 1
+},
+{
+  "id": "92e0b543-9a7d-4f24-a9ff-ee66435c9bf7",
+  "mode": "custom",
+  "name": "Ki-rin",
+  "type": "celestial",
+  "src": "MPMM p.162",
+  "cr": "12",
+  "hp": 153,
+  "AC": 20,
+  "actions": [
       {
-        "id": "d2d01b39-ffff-45a9-968a-51d6942490f4",
-        "name": "Hoof",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 10,
-        "toHit": 9,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "5ebd416e-b5ff-45ba-9545-4517c1cc1ef2",
+          "name": "Sacred Fire x2",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 37,
+          "toHit": 9,
+          "target": "enemy with most HP",
+          "targets": 1
       },
       {
-        "id": "c121da52-5850-4ea7-aa45-b596ea088665",
-        "name": "Horn",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 14,
-        "toHit": 9,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "5ebd416e-b5ff-45ba-9545-4517c1cc1ef2",
-        "name": "Sacred Fire",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 18.5,
-        "toHit": 9,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "3e012f14-ed2f-4651-b466-892ba9a715eb",
+          "actionSlot": 2,
+          "name": "Sacred Fire x3",
+          "freq": "at will",
+          "condition": "default",
+          "targets": 1,
+          "type": "atk",
+          "dpr": 55,
+          "toHit": 9,
+          "target": "enemy with least HP"
       }
-    ],
-    "count": 1
-  },
+  ],
+  "count": 1
+},
   {
     "id": "c0da8ddb-c005-464d-a27d-e0a355996c27",
     "mode": "custom",
@@ -18881,33 +18786,21 @@ export const Monsters: Creature[] = [
     "hp": 75,
     "AC": 15,
     "actions": [
-      {
-        "id": "9b9a29b7-ef1e-4c2b-85fc-94514aaf9073",
-        "name": "Thunderous Touch",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 27.5,
-        "toHit": 5,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "aa8417eb-64d4-4dc8-a2c6-94d86aed9a4f",
-        "name": "Thunderbolt",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 11,
-        "toHit": 5,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "9b9a29b7-ef1e-4c2b-85fc-94514aaf9073",
+            "name": "Thunderous Touch x2",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 55,
+            "toHit": 5,
+            "target": "enemy with most HP",
+            "targets": 1
+        }
     ],
     "count": 1
-  },
+},
   {
     "id": "35123082-9cad-4ac9-b125-5ee737f0c860",
     "mode": "custom",
@@ -19004,131 +18897,131 @@ export const Monsters: Creature[] = [
     "hp": 328,
     "AC": 17,
     "actions": [
-      {
-        "id": "a108a8d9-7c2b-47a9-a7ef-2dc35b1f7951",
-        "name": "Slam",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 34,
-        "toHit": 14,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "6e575f1a-f1ca-420e-b038-169728c81b96",
-        "name": "Slam",
-        "type": "atk",
-        "actionSlot": 2,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 34,
-        "toHit": 14,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "5cedae9e-c016-4ffc-acd8-6caf14810924",
-        "name": "Tail",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 29.5,
-        "toHit": 14,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "6437a35e-ba5c-4919-8ca8-45197f8c6098",
-        "name": "Tidal Wave {@recharge}",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 45.5,
-        "toHit": 14,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "a108a8d9-7c2b-47a9-a7ef-2dc35b1f7951",
+            "name": "Slam + Tail",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 63,
+            "toHit": 14,
+            "target": "enemy with most HP",
+            "targets": 1
+        },
+        {
+            "id": "6e575f1a-f1ca-420e-b038-169728c81b96",
+            "name": "Slam",
+            "type": "atk",
+            "actionSlot": 2,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 34,
+            "toHit": 14,
+            "target": "enemy with most HP",
+            "targets": 1
+        },
+        {
+            "id": "6437a35e-ba5c-4919-8ca8-45197f8c6098",
+            "name": "Tidal Wave",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "1/fight",
+            "condition": "is available",
+            "dpr": 45.5,
+            "toHit": 14,
+            "target": "enemy with most HP",
+            "targets": 2
+        }
     ],
     "count": 1
-  },
-  {
-    "id": "dc013a3c-8f33-4478-8dd0-54971255057f",
-    "mode": "custom",
-    "name": "Lonely Sorrowsworn",
-    "type": "monstrosity",
-    "src": "MPMM p.223",
-    "cr": "9",
-    "hp": 112,
-    "AC": 16,
-    "actions": [
+},
+{
+  "id": "dc013a3c-8f33-4478-8dd0-54971255057f",
+  "mode": "custom",
+  "name": "Lonely Sorrowsworn",
+  "type": "monstrosity",
+  "src": "MPMM p.223",
+  "cr": "9",
+  "hp": 112,
+  "AC": 16,
+  "actions": [
       {
-        "id": "a89f62e4-3b0a-47ad-9eb1-63fc4364fef8",
-        "name": "Harpoon Arm",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 21,
-        "toHit": 7,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "a89f62e4-3b0a-47ad-9eb1-63fc4364fef8",
+          "name": "Harpoon Arm",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 21,
+          "toHit": 7,
+          "target": "enemy with most HP",
+          "targets": 1
       },
       {
-        "id": "9fd34664-e2d8-422f-9d07-efa19f0d0d96",
-        "name": "Sorrowful Embrace",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 18,
-        "toHit": 5,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
-    ],
-    "count": 1
-  },
-  {
-    "id": "d6289978-7204-44b6-8569-bde38eb2ffb6",
-    "mode": "custom",
-    "name": "Lost Sorrowsworn",
-    "type": "monstrosity",
-    "src": "MPMM p.224",
-    "cr": "7",
-    "hp": 78,
-    "AC": 15,
-    "actions": [
-      {
-        "id": "8dc9c49a-b949-45b7-9e5a-16c57164890a",
-        "name": "Arm Spike",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 14,
-        "toHit": 6,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "9fd34664-e2d8-422f-9d07-efa19f0d0d96",
+          "name": "Sorrowful Embrace",
+          "type": "atk",
+          "actionSlot": 1,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 18,
+          "toHit": 5,
+          "target": "enemy with most HP",
+          "targets": 2
       },
       {
-        "id": "69fb41ba-8af3-4c53-8b4b-50530ba05754",
-        "name": "Embrace",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "1/fight",
-        "condition": "is available",
-        "dpr": 52,
-        "toHit": 6,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "a8b70424-4718-4007-976e-f1e559952e1a",
+          "actionSlot": 4,
+          "name": "Psychic Leech",
+          "freq": "at will",
+          "condition": "default",
+          "targets": 2,
+          "type": "atk",
+          "dpr": 10,
+          "toHit": 20,
+          "target": "enemy with least HP"
       }
-    ],
-    "count": 1
-  },
+  ],
+  "count": 1
+},
+{
+  "id": "d6289978-7204-44b6-8569-bde38eb2ffb6",
+  "mode": "custom",
+  "name": "Lost Sorrowsworn",
+  "type": "monstrosity",
+  "src": "MPMM p.224",
+  "cr": "7",
+  "hp": 78,
+  "AC": 15,
+  "actions": [
+      {
+          "id": "8dc9c49a-b949-45b7-9e5a-16c57164890a",
+          "name": "Arm Spike x2",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 28,
+          "toHit": 6,
+          "target": "enemy with most HP",
+          "targets": 1
+      },
+      {
+          "id": "69fb41ba-8af3-4c53-8b4b-50530ba05754",
+          "name": "Embrace",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "1/fight",
+          "condition": "is available",
+          "dpr": 52,
+          "toHit": 6,
+          "target": "enemy with most HP",
+          "targets": 1
+      }
+  ],
+  "count": 1
+},
   {
     "id": "91aceb57-e010-4a9e-b079-b4504aae5b3c",
     "mode": "custom",
@@ -19164,119 +19057,131 @@ export const Monsters: Creature[] = [
     "hp": 60,
     "AC": 16,
     "actions": [
-      {
-        "id": "9202dce2-ebdc-43f4-a120-40707e4cdfa8",
-        "name": "Unarmed Strike",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 7.5,
-        "toHit": 5,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "16531612-5e9c-4f71-849f-c3f9468223c9",
-        "name": "Dart",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 5.5,
-        "toHit": 5,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "9202dce2-ebdc-43f4-a120-40707e4cdfa8",
+            "name": "Unarmed Strike x3",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 22,
+            "toHit": 5,
+            "target": "enemy with most HP",
+            "targets": 1
+        },
+        {
+            "id": "16531612-5e9c-4f71-849f-c3f9468223c9",
+            "name": "Dart x5",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 27,
+            "toHit": 5,
+            "target": "enemy with most HP",
+            "targets": 1
+        }
     ],
     "count": 1
-  },
-  {
-    "id": "37c3154b-1979-402c-afa8-6bf261fc25f7",
-    "mode": "custom",
-    "name": "Marut",
-    "type": "construct",
-    "src": "MPMM p.173",
-    "cr": "25",
-    "hp": 432,
-    "AC": 22,
-    "actions": [],
-    "count": 1
-  },
-  {
-    "id": "a2c624b0-c464-405e-ad7d-7cb6698e856d",
-    "mode": "custom",
-    "name": "Master Thief",
-    "type": "humanoid",
-    "src": "MPMM p.174",
-    "cr": "5",
-    "hp": 84,
-    "AC": 16,
-    "actions": [
+},
+{
+  "id": "37c3154b-1979-402c-afa8-6bf261fc25f7",
+  "mode": "custom",
+  "name": "Marut",
+  "type": "construct",
+  "src": "MPMM p.173",
+  "cr": "25",
+  "hp": 432,
+  "AC": 22,
+  "actions": [
       {
-        "id": "53bbaf36-3c09-4c4b-a3a5-3ca8dc0d571b",
-        "name": "Shortsword",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 11,
-        "toHit": 7,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "7579364a-7f2b-41c4-925b-c757374e41dd",
+          "actionSlot": 0,
+          "name": "Unerring Slam",
+          "freq": "at will",
+          "condition": "default",
+          "targets": 1,
+          "type": "atk",
+          "dpr": 60,
+          "toHit": 100,
+          "target": "enemy with least HP"
       },
       {
-        "id": "e66b7cd3-bd31-4479-9dcc-77008a7466d7",
-        "name": "Shortbow",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 11,
-        "toHit": 7,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "3e43e3b5-6786-4bb9-aaf1-62367fcf3092",
+          "actionSlot": 1,
+          "name": "Unerring Slam",
+          "freq": "at will",
+          "condition": "default",
+          "targets": 1,
+          "type": "atk",
+          "dpr": 60,
+          "toHit": 100,
+          "target": "enemy with least HP"
       }
-    ],
-    "count": 1
-  },
-  {
-    "id": "a074c98a-510d-4224-b5fd-82332461a3be",
-    "mode": "custom",
-    "name": "Maurezhi",
-    "type": "fiend",
-    "src": "MPMM p.175",
-    "cr": "7",
-    "hp": 88,
-    "AC": 15,
-    "actions": [
+  ],
+  "count": 1
+},
+{
+  "id": "a2c624b0-c464-405e-ad7d-7cb6698e856d",
+  "mode": "custom",
+  "name": "Master Thief",
+  "type": "humanoid",
+  "src": "MPMM p.174",
+  "cr": "5",
+  "hp": 84,
+  "AC": 16,
+  "actions": [
       {
-        "id": "265d429a-1f1d-4784-8186-15d4adec2f62",
-        "name": "Bite",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 14,
-        "toHit": 6,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "53bbaf36-3c09-4c4b-a3a5-3ca8dc0d571b",
+          "name": "Shortsword x3",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 33,
+          "toHit": 7,
+          "target": "enemy with most HP",
+          "targets": 1
       },
       {
-        "id": "2058bc32-737f-4f9a-af89-7beac301c88c",
-        "name": "Claw",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 12,
-        "toHit": 6,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "65c5db69-bdfe-4f7b-bc5f-1d2e011cad96",
+          "name": "Uncanny Dodge",
+          "actionSlot": 1,
+          "condition": "default",
+          "freq": "at will",
+          "targets": 1,
+          "type": "buff",
+          "target": "self",
+          "acBonus": 5
       }
-    ],
-    "count": 1
-  },
+  ],
+  "count": 1
+},
+{
+  "id": "a074c98a-510d-4224-b5fd-82332461a3be",
+  "mode": "custom",
+  "name": "Maurezhi",
+  "type": "fiend",
+  "src": "MPMM p.175",
+  "cr": "7",
+  "hp": 88,
+  "AC": 15,
+  "actions": [
+      {
+          "id": "265d429a-1f1d-4784-8186-15d4adec2f62",
+          "name": "Bite + Claw",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 26,
+          "toHit": 6,
+          "target": "enemy with most HP",
+          "targets": 1
+      }
+  ],
+  "count": 1
+},
   {
     "id": "52d0d8d1-1d40-412f-9c52-46dc9c0e687c",
     "mode": "custom",
@@ -19386,33 +19291,21 @@ export const Monsters: Creature[] = [
     "hp": 45,
     "AC": 16,
     "actions": [
-      {
-        "id": "d6b9ea11-c30e-4850-8666-89babf817887",
-        "name": "Halberd",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 9.5,
-        "toHit": 6,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "bd57e246-d000-4d2c-ba56-7dfc0c015465",
-        "name": "Heavy Crossbow",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 7.5,
-        "toHit": 4,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "d6b9ea11-c30e-4850-8666-89babf817887",
+            "name": "Halberd x3",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 28,
+            "toHit": 6,
+            "target": "enemy with most HP",
+            "targets": 1
+        }
     ],
     "count": 1
-  },
+},
   {
     "id": "9346a7cc-3bbe-4ca5-ad18-e43a82d1f13a",
     "mode": "custom",
@@ -19448,192 +19341,132 @@ export const Monsters: Creature[] = [
     "hp": 75,
     "AC": 15,
     "actions": [
-      {
-        "id": "7d053f8d-4da6-4009-9bc1-fbf1d50d4a8f",
-        "name": "Bite",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 16,
-        "toHit": 5,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "e0b2b2d8-e694-472d-a98e-5ee0386f2c5d",
-        "name": "Tentacles",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 20,
-        "toHit": 5,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "991f8515-2870-4ac4-83b6-94a55498aa0f",
-        "name": "Eye Ray",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 27,
-        "toHit": 3,
-        "target": "enemy with most HP",
-        "targets": 1
-      }
+        {
+            "id": "7d053f8d-4da6-4009-9bc1-fbf1d50d4a8f",
+            "name": "Bite + Tentacles",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 36,
+            "toHit": 5,
+            "target": "enemy with most HP",
+            "targets": 1
+        }
     ],
     "count": 1
-  },
-  {
-    "id": "1704931e-f395-429d-b72e-3abac411d816",
-    "mode": "custom",
-    "name": "Moloch",
-    "type": "fiend",
-    "src": "MPMM p.183",
-    "cr": "21",
-    "hp": 253,
-    "AC": 19,
-    "actions": [
+},
+{
+  "id": "1704931e-f395-429d-b72e-3abac411d816",
+  "mode": "custom",
+  "name": "Moloch",
+  "type": "fiend",
+  "src": "MPMM p.183",
+  "cr": "21",
+  "hp": 253,
+  "AC": 19,
+  "actions": [
       {
-        "id": "ed319049-37e6-4cae-89bd-3ce77b2e6a1f",
-        "name": "Bite",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 26,
-        "toHit": 15,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "ed319049-37e6-4cae-89bd-3ce77b2e6a1f",
+          "name": "Bite + Claw + Many-Tailed Whip",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 67,
+          "toHit": 15,
+          "target": "enemy with most HP",
+          "targets": 1
       },
       {
-        "id": "77b96cb3-01c0-49c5-96cd-fccf639c24da",
-        "name": "Claw",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 17,
-        "toHit": 15,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "3405ef43-b09e-4a80-81e8-a4ce5213e686",
-        "name": "Many-Tailed Whip",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 24,
-        "toHit": 15,
-        "target": "enemy with most HP",
-        "targets": 2
-      },
-      {
-        "id": "59fdb312-c85c-4dd3-a084-4632be292c22",
-        "name": "Breath of Despair",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "1/fight",
-        "condition": "is available",
-        "dpr": 27.5,
-        "toHit": 11,
-        "target": "enemy with most HP",
-        "targets": 2
+          "id": "e5ea6572-250b-464d-a7c7-3b3fcfb30c08",
+          "actionSlot": 2,
+          "name": "Bite x3",
+          "freq": "at will",
+          "condition": "default",
+          "targets": 1,
+          "type": "atk",
+          "dpr": 78,
+          "toHit": 15,
+          "target": "enemy with most HP"
       }
-    ],
-    "count": 1
-  },
-  {
-    "id": "ec6174e7-40e2-4985-a7ca-e3dd0106e412",
-    "mode": "custom",
-    "name": "Molydeus",
-    "type": "fiend",
-    "src": "MPMM p.184",
-    "cr": "21",
-    "hp": 216,
-    "AC": 19,
-    "actions": [
+  ],
+  "count": 1
+},
+{
+  "id": "ec6174e7-40e2-4985-a7ca-e3dd0106e412",
+  "mode": "custom",
+  "name": "Molydeus",
+  "type": "fiend",
+  "src": "MPMM p.184",
+  "cr": "21",
+  "hp": 216,
+  "AC": 19,
+  "actions": [
       {
-        "id": "b9402381-e7bc-45ec-bf49-d78719ef6a54",
-        "name": "Demonic Weapon",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 62,
-        "toHit": 16,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "b9402381-e7bc-45ec-bf49-d78719ef6a54",
+          "name": "Demonic Weapon + Snakebite + Wolf Bite",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 76,
+          "toHit": 16,
+          "target": "enemy with most HP",
+          "targets": 1
       },
       {
-        "id": "96820151-9a71-4c60-a888-9156b0cac71b",
-        "name": "Snakebite",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 16,
-        "toHit": 16,
-        "target": "enemy with most HP",
-        "targets": 1
-      },
-      {
-        "id": "f4229b93-b7ae-49f1-9d6a-3ce129cb59bd",
-        "name": "Wolf Bite",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 25.5,
-        "toHit": 16,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "9fc3f4fb-9669-4098-bc1a-dbc349e55409",
+          "actionSlot": 2,
+          "name": "Demonic Weapon x3",
+          "freq": "at will",
+          "condition": "default",
+          "targets": 1,
+          "type": "atk",
+          "dpr": 105,
+          "toHit": 16,
+          "target": "enemy with most HP"
       }
-    ],
-    "count": 1
-  },
-  {
-    "id": "c0a74f32-9fe4-455b-ae89-cd562e833930",
-    "mode": "custom",
-    "name": "Morkoth",
-    "type": "aberration",
-    "src": "MPMM p.186",
-    "cr": "11",
-    "hp": 165,
-    "AC": 17,
-    "actions": [
+  ],
+  "count": 1
+},
+{
+  "id": "c0a74f32-9fe4-455b-ae89-cd562e833930",
+  "mode": "custom",
+  "name": "Morkoth",
+  "type": "aberration",
+  "src": "MPMM p.186",
+  "cr": "11",
+  "hp": 165,
+  "AC": 17,
+  "actions": [
       {
-        "id": "dd8a70c5-d8a5-4787-969d-db3a42a4bbfc",
-        "name": "Bite",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 19.5,
-        "toHit": 6,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "dd8a70c5-d8a5-4787-969d-db3a42a4bbfc",
+          "name": "Bite x2",
+          "type": "atk",
+          "actionSlot": 0,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 39,
+          "toHit": 6,
+          "target": "enemy with most HP",
+          "targets": 1
       },
       {
-        "id": "d0a0437e-5b0b-485b-a667-36bb0353449b",
-        "name": "Tentacles",
-        "type": "atk",
-        "actionSlot": 0,
-        "freq": "at will",
-        "condition": "default",
-        "dpr": 15.5,
-        "toHit": 6,
-        "target": "enemy with most HP",
-        "targets": 1
+          "id": "d0a0437e-5b0b-485b-a667-36bb0353449b",
+          "name": "Tentacles",
+          "type": "atk",
+          "actionSlot": 1,
+          "freq": "at will",
+          "condition": "default",
+          "dpr": 31,
+          "toHit": 6,
+          "target": "enemy with most HP",
+          "targets": 1
       }
-    ],
-    "count": 1
-  },
+  ],
+  "count": 1
+},
   {
     "id": "2ac224f9-2154-40f5-b818-8125ebcb5b74",
     "mode": "custom",

@@ -194,7 +194,7 @@ function useAtkAction(attacker: Combattant, action: AtkAction, target: Combattan
     const damage = action.dpr + attacker.finalState.buffs.map(buff => (buff.damage || 0))  .reduce((a, b) => (a+b), 0)
 
     const hitChance = Math.min(1, Math.max(0, (11 + toHit - (ac - 10)) / 20))
-    target.finalState.currentHP = Math.max(0, target.finalState.currentHP - damage * hitChance)
+    target.finalState.currentHP = Math.min(target.finalState.currentHP, Math.max(0, target.finalState.currentHP - damage * hitChance))
 }
 
 function useHealAction(action: HealAction, target: Combattant) {
