@@ -24,7 +24,7 @@ const TeamResults:FC<TeamPropType> = ({ round, team }) => {
     return (
         <div className={styles.team}>
             { team.map(combattant => (
-                <div key={combattant.id} className={styles.lifebar}>
+                <div key={combattant.id} className={`${styles.lifebar} tooltipContainer`}>
                     <div className={styles.lifebarBackground}>
                         <div 
                             className={styles.lifebarForeground} 
@@ -39,7 +39,7 @@ const TeamResults:FC<TeamPropType> = ({ round, team }) => {
                     </div>
 
                     { (combattant.actions.length === 0) ? null : (
-                        <div className={styles.tooltip}>
+                        <div className="tooltip">
                             Used { combattant.actions.flatMap(actionSlot => actionSlot).map(action => `${action.action.name} on ${getTarget(action)}`).join(', and ') }
                         </div>
                     )}

@@ -1,5 +1,5 @@
 import { FC, useState, } from "react"
-import { Creature } from "../../model/model"
+import { Creature, CreatureSchema } from "../../model/model"
 import styles from './monsterForm.module.scss'
 import { ChallengeRating, ChallengeRatingList, CreatureType, CreatureTypeList, numericCR } from "../../model/enums"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -7,6 +7,7 @@ import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons"
 import { capitalize, clone, useCalculatedState } from "../../model/utils"
 import { Range } from "react-range"
 import { Monsters } from "../../data/monsters"
+
 
 type PropType = {
     onChange: (newvalue: Creature) => void,
@@ -43,6 +44,14 @@ const MonsterForm:FC<PropType> = ({ onChange }) => {
         const newValue = clone(creatureType)
         newValue[type] = !newValue[type]
         setCreatureType(newValue)
+    }
+
+    function selectMonster(monster: Creature) {
+        const templates = JSON.parse(localStorage.getItem('monsterTemplates') || "{}")
+        const monsterTemplate = CreatureSchema.safeParse(templates[monster.id])
+
+        if (monsterTemplate.success) onChange(monsterTemplate.data)
+        else onChange(monster)
     }
 
     return (
@@ -123,7 +132,7 @@ const MonsterForm:FC<PropType> = ({ onChange }) => {
                     ) : (
                         searchResults.map(monster => (
                             <button
-                                onClick={() => onChange(monster)}
+                                onClick={() => selectMonster(monster)}
                                 className={styles.monster}>
                                     <span className={styles.name}>{monster.name}</span>
                                     <span className={styles.stats}>{monster.type}, {monster.src}</span>

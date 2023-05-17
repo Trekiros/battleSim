@@ -22,6 +22,7 @@ div, button {
 
 h1, h2 { margin: 0 }
 button {
+    position: relative;
     border-radius: 8px;
     border: none;
     color: #eee;
@@ -59,4 +60,39 @@ input {
     transition: background-color 0.3s;
     &:hover { background: #fff3 }
     &::placeholder { color: #aaa }
+}
+
+.tooltipContainer {
+    &:hover .tooltip {
+        display: initial;
+        opacity: 1;
+    }
+
+    .tooltip {
+        position: absolute;
+        bottom: calc(100% + 8px);
+        left: 50%;
+        transform: translateX(-50%);
+        min-width: 200px;
+        padding: 1em;
+        border-radius: 8px;
+        background: #433;
+        z-index: 1;
+        display: none;
+        opacity: 0;
+        transition: opacity 0.3s;
+        box-shadow: 0 10px 20px 2px #fff1;
+
+        &::before {
+            content: "";
+            width: 0;
+            border-top: 8px solid #433;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
 }

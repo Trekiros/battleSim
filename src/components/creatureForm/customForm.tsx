@@ -1,7 +1,7 @@
 import { FC } from "react"
 import { Action, Creature } from "../../model/model"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCheck, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faCheck, faPlus, faSave, faTrash } from "@fortawesome/free-solid-svg-icons"
 import styles from './customForm.module.scss'
 import { clone, inDevEnvironment } from "../../model/utils"
 import ActionForm from "./actionForm"
@@ -56,11 +56,33 @@ const CustomForm:FC<PropType> = ({ value, onChange, onSubmit, onDelete }) => {
         onSubmit()
     }
 
+    const canSaveTemplate = !!localStorage && !!localStorage.getItem('useLocalStorage') && !!value.type
+
+    function saveTemplate() {
+        if (!canSaveTemplate) return
+
+        const templates = JSON.parse(localStorage.getItem('monsterTemplates') || "{}")
+        templates[value.id] = value
+        localStorage.setItem('monsterTemplates', JSON.stringify(templates))
+    }
+
     return (
         <div className={styles.customForm}>
             <section>
                 <h3>Name</h3>
-                <input type='text' value={value.name} onChange={e => update(v => { v.name = e.target.value })} />
+                <div className={styles.nameContainer}>
+                    <input type='text' value={value.name} onChange={e => update(v => { v.name = e.target.value })} />
+                    { canSaveTemplate ? (
+                        <button onClick={saveTemplate} className="tooltipContainer">
+                            <FontAwesomeIcon icon={faSave} />
+                            <span className={styles.btnText}>Save</span>
+
+                            <div className="tooltip">
+                                This will save the {value.name} to your bestiary, so when you select it, it will use the current stats instead of the default ones.
+                            </div>
+                        </button>
+                    ) : null }
+                </div>
             </section>
             <section>
                 <h3>Hit Points</h3>
@@ -93,22 +115,24 @@ const CustomForm:FC<PropType> = ({ value, onChange, onSubmit, onDelete }) => {
 
 
             <div className={styles.buttons}>
-                <button onClick={submit} disabled={!validate()}>
+                <button onClick={submit} disabled={!validate()} className="tooltipContainer">
                     <FontAwesomeIcon icon={faCheck} />
                     OK
+                    
+                    <div className="tooltip">
+                        Save this creature for the current encounter
+                    </div>
                 </button>
                 { !onDelete ? null : (
-                    <button onClick={onDelete}>
+                    <button onClick={onDelete} className="tooltipContainer">
                         <FontAwesomeIcon icon={faTrash} />
                         Delete
+                        
+                        <div className="tooltip">
+                            Remove this creature from the current encounter
+                        </div>
                     </button>
                 )}
-
-                { inDevEnvironment ? (
-                    <button onClick={() => console.log(value)}>
-                        Debug
-                    </button>
-                ) : null }
             </div>
         </div>
     )

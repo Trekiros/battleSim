@@ -10,6 +10,21 @@
         @media (width < 800px) { grid-template-columns: 1fr }
     }
 
+    .nameContainer {
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+
+        input { flex-grow: 1; width: 75px }
+        button { margin: 0 }
+        svg { margin-left: 0 }
+
+        @media (width < 450px) {
+            button .btnText { display: none }
+            svg { margin-right: 0 }
+        }
+    }
+
     h3 { user-select: none; white-space: nowrap; margin: 0.5em 0 }
 
     .actionsHeader {
