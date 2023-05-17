@@ -49,7 +49,7 @@ const MonsterForm:FC<PropType> = ({ onChange }) => {
         <div className={styles.monsterForm}>
             <section>
                 <h3>Name</h3>
-                <input type='text' value={name} onChange={e => setName(e.target.value)} placeholder='Bandit...' />
+                <input type='text' value={name} onChange={e => setName(e.target.value)} placeholder='Bandit...'  autoFocus={true} />
             </section>
 
             <section>

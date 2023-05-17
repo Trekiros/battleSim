@@ -198,7 +198,7 @@ function useAtkAction(attacker: Combattant, action: AtkAction, target: Combattan
 }
 
 function useHealAction(action: HealAction, target: Combattant) {
-    target.finalState.currentHP = Math.min(target.creature.hp, target.finalState.currentHP + action.amount)
+    target.finalState.currentHP = Math.max(target.finalState.currentHP, Math.min(target.creature.hp, target.finalState.currentHP + action.amount))
 }
 
 // The attackers & defenders must be clones here, they will both be mutated
