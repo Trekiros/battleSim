@@ -1,3 +1,6 @@
 import { createContext } from "react";
 
-const rgpdContext = createContext(false)
+export const validateContext = createContext({
+    isValid: false, 
+    validate: (newValue: boolean) => {}
+})

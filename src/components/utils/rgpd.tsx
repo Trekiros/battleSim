@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import styles from './rgpd.module.scss'
-import { useStoredState } from "../model/utils";
+import { useStoredState } from "../../model/utils";
 
 type PropType = {}
 

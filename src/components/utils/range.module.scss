@@ -1,0 +1,11 @@
+.range {
+    padding: 8px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    label { width: 40px; font-weight: normal; &:last-child { text-align: end } }
+    .thumb { height: 16px; width: 8px; background: #c88 }
+    .track { height: 4px; background: white; flex-grow: 1 }
+    .mark { height: 12px; width: 3px; background: white; border-radius: 4px; @media (width < 450px) { display: none } }
+}

@@ -1,5 +1,6 @@
-import { string, z } from 'zod'
-import { ChallengeRatingSchema, ConditionSchema, CreatureTypeSchema, FrequencySchema } from './enums'
+import { z } from 'zod'
+import { ChallengeRatingSchema, ClassesSchema, ConditionSchema, CreatureTypeSchema, FrequencySchema } from './enums'
+import { ClassOptionsSchema } from './classOptions'
 
 const EnemyTargetSchema = z.enum([
     'enemy with least HP',
@@ -65,6 +66,11 @@ export const CreatureSchema = z.object({
     type: CreatureTypeSchema.optional(),
     cr: ChallengeRatingSchema.optional(),
     src: z.string().optional(),
+    class: z.object({
+        type: ClassesSchema,
+        level: z.number(),
+        options: ClassOptionsSchema,
+    }).optional(),
 
     name: z.string(),
     count: z.number(),

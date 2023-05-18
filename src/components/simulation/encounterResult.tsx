@@ -3,6 +3,7 @@ import { Combattant, EncounterResult } from "../../model/model"
 import styles from './encounterResult.module.scss'
 import { Action } from "../../model/model"
 import { Round } from "../../model/model"
+import { clone } from "../../model/utils"
 
 type TeamPropType = {
     round: Round,
@@ -28,10 +29,10 @@ const TeamResults:FC<TeamPropType> = ({ round, team }) => {
                     <div className={styles.lifebarBackground}>
                         <div 
                             className={styles.lifebarForeground} 
-                            style={{ width: `${100*combattant.finalState.currentHP/combattant.creature.hp}%` }}
+                            style={{ width: `${100*combattant.initialState.currentHP/combattant.creature.hp}%` }}
                         />
                         <div className={styles.lifebarLabel}>
-                            {Math.round(combattant.finalState.currentHP)}/{combattant.creature.hp}
+                            {Math.round(combattant.initialState.currentHP)}/{combattant.creature.hp}
                         </div>
                     </div>
                     <div className={styles.creatureName}>
@@ -40,7 +41,20 @@ const TeamResults:FC<TeamPropType> = ({ round, team }) => {
 
                     { (combattant.actions.length === 0) ? null : (
                         <div className="tooltip">
-                            Used { combattant.actions.flatMap(actionSlot => actionSlot).map(action => `${action.action.name} on ${getTarget(action)}`).join(', and ') }
+                            <ul>
+                                { (() => {
+                                    const li = combattant.actions.flatMap(actionSlot => actionSlot)
+                                    .filter(({ targets }) => !!targets.length)
+                                    .map((action, index) => (
+                                        <li key={index}>
+                                            <b>{action.action.name}</b> on {getTarget(action)}
+                                        </li>
+                                    ))
+
+                                    if (!li.length) return <>No action</>
+                                    return li
+                                })()}
+                            </ul>
                         </div>
                     )}
                 </div>
@@ -54,20 +68,38 @@ type PropType = {
 }
 
 const EncounterResult:FC<PropType> = ({ value }) => {
+    const lastRound = clone(value[value.length - 1]);
+    
+    ([...lastRound.team1, ...lastRound.team2]).forEach(combattant => {
+        combattant.initialState = combattant.finalState
+        combattant.actions = []
+    })
+
     return (
         <div className={styles.encounterResult}>
             { (!value[0].team1.length || !value[0].team2.length) ? null : 
-                value.map((round, roundIndex) => (
-                    <div key={roundIndex} className={styles.round}>
-                        <h3>Round {roundIndex + 1}</h3>
-    
+                <>
+                    {value.map((round, roundIndex) => (
+                        <div key={roundIndex} className={styles.round}>
+                            <h3>Round {roundIndex + 1}</h3>
+        
+                            <div className={styles.lifebars}>
+                                <TeamResults round={round} team={round.team1} />
+                                <hr />
+                                <TeamResults round={round} team={round.team2} />
+                            </div>
+                        </div>
+                    ))}
+                    <div className={styles.round}>
+                        <h3>Result</h3>
+
                         <div className={styles.lifebars}>
-                            <TeamResults round={round} team={round.team1} />
+                            <TeamResults round={lastRound} team={lastRound.team1} />
                             <hr />
-                            <TeamResults round={round} team={round.team2} />
+                            <TeamResults round={lastRound} team={lastRound.team2} />
                         </div>
                     </div>
-                ))
+                </>
             }
         </div>
     )

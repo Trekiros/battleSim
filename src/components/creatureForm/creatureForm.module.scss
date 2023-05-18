@@ -49,5 +49,15 @@
                 &.active { background: #fff3 }
             }
         }
+
+        .buttons {
+            margin-top: 2em;
+            display: flex;
+            gap: 1em;
+            margin-top: 1em;
+    
+            button { flex: 1 1 0; margin: 0 }
+            @media (width < 600px) { flex-direction: column; }
+        }
     }
 }

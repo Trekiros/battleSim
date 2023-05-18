@@ -13,7 +13,7 @@ export const ActionTypeSchema = z.enum(ActionTypeList)
 export type ActionType = z.infer<typeof ActionTypeSchema>
 
 export const ClassesList = [ 'barbarian', 'bard', 'cleric', 'druid', 'fighter', 'monk', 'paladin', 'ranger', 'rogue', 'sorcerer', 'warlock', 'wizard' ] as const
-const ClassesSchema = z.enum(ClassesList)
+export const ClassesSchema = z.enum(ClassesList)
 export type Class = z.infer<typeof ClassesSchema>
 
 export const CreatureTypeList = [ 'aberration', 'beast', 'celestial', 'construct', 'dragon', 'elemental', 'fey', 'fiend', 'giant', 'humanoid', 'monstrosity', 'ooze', 'plant', 'undead' ] as const

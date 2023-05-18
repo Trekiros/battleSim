@@ -95,10 +95,15 @@ function getActions(combattant: Combattant, allies: Combattant[]): Action[] {
 function getNextTarget(combattant: Combattant, action: Action, allies: Combattant[], enemies: Combattant[]): Combattant|undefined {
     const getHighestDPR = (group: Combattant[]) => {
         const getDPR = (combattant: Combattant) => {
+            const dmgBonus = combattant.finalState.buffs
+                .filter(buff => !!buff.damage)
+                .map(buff => buff.damage!)
+                .reduce((a, b) => (a+b), 0)
+            
             return getActions(combattant, allies)
             .map(action => {
                 if (action.type !== "atk") return 0
-                return action.dpr * action.targets
+                return (action.dpr + dmgBonus) * action.targets
             })
             .reduce((dpr1, dpr2) => (dpr1 + dpr2), 0)
         }

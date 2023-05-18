@@ -1,15 +1,17 @@
-import { FC, useState, } from "react"
+import { FC, useContext, useEffect, useState, } from "react"
 import { Creature, CreatureSchema } from "../../model/model"
 import styles from './monsterForm.module.scss'
 import { ChallengeRating, ChallengeRatingList, CreatureType, CreatureTypeList, numericCR } from "../../model/enums"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons"
 import { capitalize, clone, useCalculatedState } from "../../model/utils"
-import { Range } from "react-range"
 import { Monsters } from "../../data/monsters"
+import Range from "../utils/range"
+import { validateContext } from "../../context/simulationContext"
 
 
 type PropType = {
+    value: Creature,
     onChange: (newvalue: Creature) => void,
 }
 
@@ -22,12 +24,17 @@ const Comparators = {
     crDesc: (a: Creature, b: Creature) => (numericCR(b.cr!) - numericCR(a.cr!)),
 } as const
 
-const MonsterForm:FC<PropType> = ({ onChange }) => {
+const MonsterForm:FC<PropType> = ({ onChange, value }) => {
     const [creatureType, setCreatureType] = useState<{[type in CreatureType]: boolean}>(defaultTypeFilter)
     const [minCR, setMinCR] = useState<ChallengeRating>(ChallengeRatingList[0])
     const [maxCR, setMaxCR] = useState<ChallengeRating>(ChallengeRatingList[ChallengeRatingList.length - 1])
     const [name, setName] = useState<string>('')
     const [sortBy, setSortBy] = useState<keyof typeof Comparators>('nameAsc')
+
+    const {validate} = useContext(validateContext)
+    useEffect(() => {
+        validate(!!value.cr)
+    }, [value])
 
     const searchResults = useCalculatedState(() => Monsters.filter(monster => {
         if (!monster.name.toLocaleLowerCase().includes(name.toLocaleLowerCase())) return false
@@ -50,8 +57,9 @@ const MonsterForm:FC<PropType> = ({ onChange }) => {
         const templates = JSON.parse(localStorage.getItem('monsterTemplates') || "{}")
         const monsterTemplate = CreatureSchema.safeParse(templates[monster.id])
 
-        if (monsterTemplate.success) onChange(monsterTemplate.data)
-        else onChange(monster)
+        const creature = monsterTemplate.success ? monsterTemplate.data : monster
+        creature.count = value?.count || 1
+        onChange(creature)
     }
 
     return (
@@ -87,28 +95,14 @@ const MonsterForm:FC<PropType> = ({ onChange }) => {
             
             <section className={styles.challengeRating}>
                 <h3>Challenge Rating</h3>
-
-                <div className={styles.range}>
-                    <div className={styles.value}>{minCR}</div>
-                    <Range
-                        values={[ChallengeRatingList.indexOf(minCR), ChallengeRatingList.indexOf(maxCR)]}
-                        max={ChallengeRatingList.length - 1}
-                        step={1}
-                        onChange={(values) => { setMinCR(ChallengeRatingList[values[0]]); setMaxCR(ChallengeRatingList[values[1]]) }}
-                        renderThumb={({ props }) => (
-                            <div {...props} className={styles.thumb} />
-                        )}
-                        renderTrack={({ props, children }) => (
-                            <div {...props} className={styles.track}>
-                                {children}
-                            </div>
-                        )}
-                        renderMark={({ props }) => (
-                            <div {...props} className={styles.mark} />
-                        )}
-                    />
-                    <div className={styles.value}>{maxCR}</div>
-                </div>
+                <Range
+                    values={[ChallengeRatingList.indexOf(minCR), ChallengeRatingList.indexOf(maxCR)]}
+                    min={0}
+                    max={ChallengeRatingList.length - 1}
+                    onChange={(values: number[]) => { setMinCR(ChallengeRatingList[values[0]]); setMaxCR(ChallengeRatingList[values[1]]) }}
+                    label={minCR}
+                    upperLabel={maxCR}
+                />
             </section>
 
             <div className={styles.searchResults}>
@@ -133,7 +127,7 @@ const MonsterForm:FC<PropType> = ({ onChange }) => {
                         searchResults.map(monster => (
                             <button
                                 onClick={() => selectMonster(monster)}
-                                className={styles.monster}>
+                                className={`${styles.monster} ${value?.id === monster.id ? styles.active : ''}`}>
                                     <span className={styles.name}>{monster.name}</span>
                                     <span className={styles.stats}>{monster.type}, {monster.src}</span>
                                     <span className={styles.stats}>CR {monster.cr}</span>

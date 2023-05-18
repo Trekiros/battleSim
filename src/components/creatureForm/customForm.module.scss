@@ -35,12 +35,4 @@
         .label { flex-grow: 1 }
         .createActionBtn { flex-shrink: 1; margin: 0 }
     }
-    
-    .buttons {
-        display: flex;
-        gap: 1em;
-        margin-top: 1em;
-
-        button { flex: 1 1 0; margin: 0 }
-    }
 }

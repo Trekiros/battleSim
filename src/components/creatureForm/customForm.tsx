@@ -1,19 +1,29 @@
-import { FC } from "react"
+import { FC, useContext, useEffect } from "react"
 import { Action, Creature } from "../../model/model"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCheck, faPlus, faSave, faTrash } from "@fortawesome/free-solid-svg-icons"
 import styles from './customForm.module.scss'
 import { clone, inDevEnvironment } from "../../model/utils"
 import ActionForm from "./actionForm"
+import { validateContext } from "../../context/simulationContext"
 
 type PropType = {
     value: Creature,
     onChange: (newvalue: Creature) => void,
-    onSubmit: () => void,
-    onDelete?: () => void
 }
 
-const CustomForm:FC<PropType> = ({ value, onChange, onSubmit, onDelete }) => {
+const CustomForm:FC<PropType> = ({ value, onChange }) => {
+    const {validate} = useContext(validateContext)
+
+    useEffect(() => {
+        validate(!!value.name
+            && !!value.AC
+            && !!value.hp
+            && !!value.actions.length
+            && !value.actions.find(action => (!action.name))
+        )
+    }, [value])
+
     function update(callback: (valueClone: Creature) => void) {
         const valueClone = clone(value)
         callback(valueClone)
@@ -41,19 +51,6 @@ const CustomForm:FC<PropType> = ({ value, onChange, onSubmit, onDelete }) => {
 
     function deleteAction(index: number) {
         update(v => { v.actions.splice(index, 1) })
-    }
-
-    function validate() {
-        return !!value.name
-            && !!value.AC
-            && !!value.hp
-            && !!value.actions.length
-            && !value.actions.find(action => (!action.name))
-    }
-
-    function submit() {
-        if (!validate()) return
-        onSubmit()
     }
 
     const canSaveTemplate = !!localStorage && !!localStorage.getItem('useLocalStorage') && !!value.type
@@ -110,29 +107,6 @@ const CustomForm:FC<PropType> = ({ value, onChange, onSubmit, onDelete }) => {
                         onDelete={() => deleteAction(index)}
                     />
                 ))}
-            </div>
-
-
-
-            <div className={styles.buttons}>
-                <button onClick={submit} disabled={!validate()} className="tooltipContainer">
-                    <FontAwesomeIcon icon={faCheck} />
-                    OK
-                    
-                    <div className="tooltip">
-                        Save this creature for the current encounter
-                    </div>
-                </button>
-                { !onDelete ? null : (
-                    <button onClick={onDelete} className="tooltipContainer">
-                        <FontAwesomeIcon icon={faTrash} />
-                        Delete
-                        
-                        <div className="tooltip">
-                            Remove this creature from the current encounter
-                        </div>
-                    </button>
-                )}
             </div>
         </div>
     )

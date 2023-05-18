@@ -3,7 +3,7 @@ import { Creature } from "../model/model"
 export const Monsters: Creature[] = [
   {
     "id": "670d1340-c829-4746-b112-d96960ebd650",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Aarakocra",
     "type": "humanoid",
     "src": "MM p.12",
@@ -40,7 +40,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "87662fb6-772f-4a82-95c2-b69b89fe88c9",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Aboleth",
     "type": "aberration",
     "src": "MM p.13",
@@ -77,7 +77,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "fd3f9795-7245-4dc7-8b94-8f3ab40bdb81",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Abominable Yeti",
   "type": "monstrosity",
   "src": "MM p.306",
@@ -114,7 +114,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "49ef9dcd-9979-492e-847d-99d84b628df6",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Acolyte",
   "type": "humanoid",
   "src": "MM p.342",
@@ -161,7 +161,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "c31c90a0-e1be-4e46-9228-c8ec1552adc7",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Adult Black Dragon",
     "type": "dragon",
     "src": "MM p.88",
@@ -210,7 +210,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "fdb7834b-7fd3-4a57-9707-f32919fedf52",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Adult Blue Dracolich",
     "type": "undead",
     "src": "MM p.84",
@@ -271,7 +271,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "a263d640-d061-44c2-892b-be047158b062",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Adult Blue Dragon",
     "type": "dragon",
     "src": "MM p.91",
@@ -332,7 +332,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "0ed2abc9-8d07-4ee5-b484-b9c4a81adf7e",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Adult Brass Dragon",
     "type": "dragon",
     "src": "MM p.105",
@@ -393,7 +393,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "fb20948d-3e44-4e70-9e7c-e14dbc7ebdce",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Adult Bronze Dragon",
     "type": "dragon",
     "src": "MM p.108",
@@ -454,7 +454,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "1fe45e0d-5b28-47d7-8845-b80f33f7c89f",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Adult Copper Dragon",
     "type": "dragon",
     "src": "MM p.112",
@@ -515,7 +515,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "7269d37a-84b7-49ad-97d6-8acea6879702",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Adult Gold Dragon",
     "type": "dragon",
     "src": "MM p.114",
@@ -576,7 +576,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "078b1a31-90e6-4d22-8771-181d1e3dfdf3",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Adult Green Dragon",
     "type": "dragon",
     "src": "MM p.94",
@@ -637,7 +637,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "ea13476e-36e1-41d5-b49f-e38cd45c47e6",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Adult Red Dragon",
     "type": "dragon",
     "src": "MM p.98",
@@ -698,7 +698,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "b843f472-7ac4-480b-817c-bf19555fe93e",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Adult Silver Dragon",
     "type": "dragon",
     "src": "MM p.117",
@@ -759,7 +759,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "bfa089de-ac91-4bc7-ab48-07cdea928321",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Adult White Dragon",
     "type": "dragon",
     "src": "MM p.101",
@@ -820,7 +820,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "1e0a476b-6d35-4270-93aa-81f7c8f87c8d",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Air Elemental",
     "type": "elemental",
     "src": "MM p.124",
@@ -857,7 +857,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "0ae9f40c-eea4-4435-a340-7bad2b7666c1",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Allosaurus",
   "type": "beast",
   "src": "MM p.79",
@@ -894,7 +894,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "ceea94c3-3779-4e65-8c4a-53b3a3c7cea2",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Ancient Black Dragon",
     "type": "dragon",
     "src": "MM p.87",
@@ -955,7 +955,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "f6fc9474-9fd0-4030-936f-fe98ef0cb1d4",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Ancient Blue Dragon",
     "type": "dragon",
     "src": "MM p.90",
@@ -1016,7 +1016,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "16d0ea8f-6f23-414c-addd-0a8209b96f9b",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Ancient Brass Dragon",
     "type": "dragon",
     "src": "MM p.104",
@@ -1077,7 +1077,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "a8fd1fe6-6369-4488-ad08-9e89d1cfc564",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Ancient Bronze Dragon",
     "type": "dragon",
     "src": "MM p.107",
@@ -1138,7 +1138,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "7af215b8-6294-410e-aadf-1d7cfdfb7fdb",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Ancient Copper Dragon",
     "type": "dragon",
     "src": "MM p.110",
@@ -1199,7 +1199,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "b1f87dbf-3cc7-4d89-a60b-8d25876e085e",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Ancient Gold Dragon",
     "type": "dragon",
     "src": "MM p.113",
@@ -1260,7 +1260,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "98d61253-9c93-41b0-ad2b-5c5ef3636d35",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Ancient Green Dragon",
     "type": "dragon",
     "src": "MM p.93",
@@ -1321,7 +1321,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "72da0ddc-6de9-45f0-85f6-beec46f50ad9",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Ancient Red Dragon",
     "type": "dragon",
     "src": "MM p.97",
@@ -1382,7 +1382,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "3fe9f9fd-b57a-4356-bd37-a6e201a10446",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Ancient Silver Dragon",
     "type": "dragon",
     "src": "MM p.116",
@@ -1443,7 +1443,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "4313af63-2ace-4817-a868-62d53c614783",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Ancient White Dragon",
     "type": "dragon",
     "src": "MM p.100",
@@ -1504,7 +1504,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "e8727d49-ecad-4670-9084-35443b476a90",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Androsphinx",
     "type": "monstrosity",
     "src": "MM p.281",
@@ -1553,7 +1553,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "b2b88224-735a-48cd-8da9-c2f7de4f93bc",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Animated Armor",
   "type": "construct",
   "src": "MM p.19",
@@ -1578,7 +1578,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "5273bc53-066d-4f93-8611-4b2a4706f718",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Ankheg",
   "type": "monstrosity",
   "src": "MM p.21",
@@ -1615,7 +1615,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "fe0f0f77-2f3b-4b98-8f58-926b37b8fabb",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Ankylosaurus",
     "type": "beast",
     "src": "MM p.79",
@@ -1640,7 +1640,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "244ed7c9-e5fa-4e7e-8472-2df4109b6fea",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Ape",
     "type": "beast",
     "src": "MM p.317",
@@ -1677,7 +1677,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "b62cd8d8-0c6b-42ba-98a7-a7b95fe3bb4d",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Arcanaloth",
     "type": "fiend",
     "src": "MM p.313",
@@ -1726,7 +1726,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "7fc873f3-6fc6-4de6-945c-069affba2790",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Archmage",
   "type": "humanoid",
   "src": "MM p.342",
@@ -1772,7 +1772,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "31ec2574-8542-4774-8e96-788967123840",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Assassin",
   "type": "humanoid",
   "src": "MM p.343",
@@ -1809,7 +1809,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "e3831bbb-a866-4171-8714-264ea1e50cf3",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Awakened Shrub",
     "type": "plant",
     "src": "MM p.317",
@@ -1821,7 +1821,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "f06b694f-4396-497d-b200-1240c83afc0b",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Awakened Tree",
     "type": "plant",
     "src": "MM p.317",
@@ -1846,7 +1846,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "bae7ed6b-d10c-4334-877c-33d12b5c4b9a",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Axe Beak",
     "type": "beast",
     "src": "MM p.317",
@@ -1871,7 +1871,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "afccb9f9-b09a-414d-a6ff-cfa3b1d9c6e1",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Azer",
     "type": "elemental",
     "src": "MM p.22",
@@ -1896,7 +1896,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "450748da-427b-4659-a3b3-3b33cf70fa87",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Baboon",
     "type": "beast",
     "src": "MM p.318",
@@ -1908,7 +1908,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "01a1d8ec-1459-4195-aeda-adb3e610ba7f",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Badger",
     "type": "beast",
     "src": "MM p.318",
@@ -1920,7 +1920,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "63f3e05d-31ee-4e3b-8abe-7b2b6f3696c4",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Balor",
     "type": "fiend",
     "src": "MM p.55",
@@ -1957,7 +1957,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "e9b29ddd-d20a-4032-a8b9-e84bef0a567e",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Bandit",
     "type": "humanoid",
     "src": "MM p.343",
@@ -1994,7 +1994,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "6e6f8923-d087-4e08-81b5-7ee56290422d",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Bandit Captain",
     "type": "humanoid",
     "src": "MM p.344",
@@ -2019,7 +2019,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "1e5718d2-8d53-4f30-88b0-8494dca076f4",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Banshee",
   "type": "undead",
   "src": "MM p.23",
@@ -2056,7 +2056,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "a673dd37-704f-4db6-a1d8-a9668f526556",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Barbed Devil",
   "type": "fiend",
   "src": "MM p.70",
@@ -2081,7 +2081,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "2b7a76c4-67e6-44de-9e87-1731d61a08fa",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Barlgura",
   "type": "fiend",
   "src": "MM p.56",
@@ -2118,7 +2118,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "322a7317-42b8-4c7d-b919-427c40507ac7",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Basilisk",
     "type": "monstrosity",
     "src": "MM p.24",
@@ -2143,7 +2143,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "9c158be6-d19f-4f08-b113-53d0b40b4c36",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Bat",
     "type": "beast",
     "src": "MM p.318",
@@ -2155,7 +2155,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "dfce0028-07ae-4124-8044-e1df952f4da7",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Bearded Devil",
     "type": "fiend",
     "src": "MM p.70",
@@ -2180,7 +2180,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "8f01228f-9041-450f-b151-dc2010ed844a",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Behir",
     "type": "monstrosity",
     "src": "MM p.25",
@@ -2217,7 +2217,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "2474a4e5-7978-4dc1-bcb9-67e5c7f08bc1",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Beholder",
   "type": "aberration",
   "src": "MM p.28",
@@ -2254,7 +2254,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "e465ed53-396b-4cc4-8604-7d60b1c63d93",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Beholder Zombie",
   "type": "undead",
   "src": "MM p.316",
@@ -2279,7 +2279,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "a8eb3afc-a5f9-4dfe-be31-ecd9e8ed4dfb",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Berserker",
   "type": "humanoid",
   "src": "MM p.344",
@@ -2316,7 +2316,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "a74a363f-c5d0-415f-baa2-a71fdac08caf",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Black Bear",
     "type": "beast",
     "src": "MM p.318",
@@ -2341,7 +2341,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "a77f20a2-9e9c-43ff-8880-7f4020877afc",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Black Dragon Wyrmling",
     "type": "dragon",
     "src": "MM p.88",
@@ -2378,7 +2378,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "8fc28abc-bf5f-4dce-bcd2-78905c3cf645",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Black Pudding",
     "type": "ooze",
     "src": "MM p.241",
@@ -2403,7 +2403,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "9d4c19d5-2353-48c6-93ac-40ed6427b697",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Blink Dog",
     "type": "fey",
     "src": "MM p.318",
@@ -2428,7 +2428,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "8009fca0-f600-4022-972f-593a7a42632c",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Blood Hawk",
     "type": "beast",
     "src": "MM p.319",
@@ -2453,7 +2453,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "b2ec74b2-c4b0-42e1-90e3-5972de8541c9",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Blue Dragon Wyrmling",
     "type": "dragon",
     "src": "MM p.91",
@@ -2490,7 +2490,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "99a9eb14-95a8-44b3-9ab1-a923c6705dc5",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Blue Slaad",
     "type": "aberration",
     "src": "MM p.276",
@@ -2515,7 +2515,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "55475542-5766-4d2c-92b2-d29e343b1324",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Boar",
     "type": "beast",
     "src": "MM p.319",
@@ -2540,7 +2540,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "ac85a7a2-fc8d-476a-9cb4-520b24119a51",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Bone Devil",
     "type": "fiend",
     "src": "MM p.71",
@@ -2565,7 +2565,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "deca2ed1-b53f-48c0-befa-5e6fde95baba",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Bone Naga (Guardian)",
     "type": "undead",
     "src": "MM p.233",
@@ -2590,7 +2590,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "2a66dcb6-ff9a-444f-ac78-569bc96b70bb",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Bone Naga (Spirit)",
     "type": "undead",
     "src": "MM p.233",
@@ -2615,7 +2615,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "57e768d2-0489-4d9a-89ba-d634e905e887",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Brass Dragon Wyrmling",
     "type": "dragon",
     "src": "MM p.106",
@@ -2652,7 +2652,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "41232eba-e6d9-4b05-9bbf-bc714d948777",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Bronze Dragon Wyrmling",
     "type": "dragon",
     "src": "MM p.109",
@@ -2689,7 +2689,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "4c30e302-f633-428d-8f35-ff7f5d8484c8",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Brown Bear",
     "type": "beast",
     "src": "MM p.319",
@@ -2714,7 +2714,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "848d678b-fd96-49b8-b23d-fb1b67aa49f6",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Bugbear",
     "type": "humanoid",
     "src": "MM p.33",
@@ -2751,7 +2751,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "604ae944-8c66-4d0d-8f69-4bc57157a9d3",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Bugbear Chief",
     "type": "humanoid",
     "src": "MM p.33",
@@ -2788,7 +2788,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "fd0e8aaf-795f-4d19-b4c6-f47c677e618b",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Bulette",
   "type": "monstrosity",
   "src": "MM p.34",
@@ -2813,7 +2813,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "0c47523e-ada4-4a06-92e0-a2270d031a67",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Bullywug",
     "type": "humanoid",
     "src": "MM p.35",
@@ -2838,7 +2838,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "f3e4de74-9d0c-4138-a045-e53ac2a69412",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Cambion",
     "type": "fiend",
     "src": "MM p.36",
@@ -2863,7 +2863,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "0851c7cf-bcdb-4116-800b-872a60c50dd1",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Camel",
     "type": "beast",
     "src": "MM p.320",
@@ -2888,7 +2888,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "ae8c686e-90b9-4a26-ab88-7fafe8f53e94",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Carrion Crawler",
     "type": "monstrosity",
     "src": "MM p.37",
@@ -2913,7 +2913,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "3b8bc241-213c-4be7-844f-cc2a458e796e",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Cat",
     "type": "beast",
     "src": "MM p.320",
@@ -2925,7 +2925,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "3cba0c5e-2445-4739-8f59-51ea711c268e",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Cave Bear",
     "type": "beast",
     "src": "MM p.334",
@@ -2950,7 +2950,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "7ff684d8-2e1c-48f4-a0c0-e6c98fdb1f2b",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Centaur",
     "type": "monstrosity",
     "src": "MM p.38",
@@ -2975,7 +2975,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "70556ee4-8160-406b-9a92-807cd02f75b5",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Chain Devil",
     "type": "fiend",
     "src": "MM p.72",
@@ -3036,7 +3036,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "b6a28eb0-56d6-467d-bb10-f5cc59491280",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Chasme",
     "type": "fiend",
     "src": "MM p.57",
@@ -3061,7 +3061,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "bea6f524-a895-482d-a7fe-f5f28b479477",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Chimera",
     "type": "monstrosity",
     "src": "MM p.39",
@@ -3098,7 +3098,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "f616e2d2-dd2e-4ff0-84a6-2a1a481b82f6",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Chuul",
     "type": "aberration",
     "src": "MM p.40",
@@ -3123,7 +3123,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "0266704f-030a-412b-926e-4babe200571f",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Clay Golem",
     "type": "construct",
     "src": "MM p.168",
@@ -3160,7 +3160,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "84e1835e-cb07-4601-a27f-82e034dfd422",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Cloaker",
     "type": "aberration",
     "src": "MM p.41",
@@ -3185,7 +3185,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "259a0694-05b1-4e6d-acd6-b08daa10b318",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Cloud Giant",
     "type": "giant",
     "src": "MM p.154",
@@ -3222,7 +3222,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "ed94198c-46ef-414c-8bc3-25e85871c905",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Cockatrice",
     "type": "monstrosity",
     "src": "MM p.42",
@@ -3247,7 +3247,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "21f6771d-ab3e-4eef-92c6-7f59dd479a5d",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Commoner",
     "type": "humanoid",
     "src": "MM p.345",
@@ -3272,7 +3272,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "b6c3b295-1902-4de6-9fcc-96d37f6ba1bd",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Constrictor Snake",
     "type": "beast",
     "src": "MM p.320",
@@ -3309,7 +3309,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "a7575e4c-ca6c-4dd1-aac8-287fa09a1591",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Copper Dragon Wyrmling",
     "type": "dragon",
     "src": "MM p.111",
@@ -3346,7 +3346,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "e54f4d66-ff77-4262-821c-be917e61efb2",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Couatl",
     "type": "celestial",
     "src": "MM p.43",
@@ -3383,7 +3383,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "3d3b6634-a221-465f-a78b-52c422c4db6f",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Crab",
     "type": "beast",
     "src": "MM p.320",
@@ -3395,7 +3395,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "4e8a3d62-e2ff-4b34-a951-7a210fd49da9",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Crawling Claw",
     "type": "undead",
     "src": "MM p.44",
@@ -3420,7 +3420,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "0614613b-eb8e-4474-889a-79e89a93840f",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Crocodile",
     "type": "beast",
     "src": "MM p.320",
@@ -3445,7 +3445,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "4802f251-2d5b-44f1-b9fe-c8ec1d2b488c",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Cult Fanatic",
     "type": "humanoid",
     "src": "MM p.345",
@@ -3482,7 +3482,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "3f8b9016-f96e-4d78-b4d9-9a38e5e6c9cc",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Cultist",
     "type": "humanoid",
     "src": "MM p.345",
@@ -3507,7 +3507,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "77228276-e739-48ca-8d3f-0be88b524d27",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Cyclops",
     "type": "giant",
     "src": "MM p.45",
@@ -3544,7 +3544,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "ba94e3ee-503d-4348-afca-7589f0e8f436",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Dao",
     "type": "elemental",
     "src": "MM p.143",
@@ -3569,7 +3569,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "ec306480-e235-48a9-87c7-d19f6fa9b9ce",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Darkmantle",
     "type": "monstrosity",
     "src": "MM p.46",
@@ -3594,7 +3594,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "2144126f-a8a7-4640-a692-848f26940c27",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Death Dog",
     "type": "monstrosity",
     "src": "MM p.321",
@@ -3619,7 +3619,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "72fcb263-a873-439d-88f0-1d1d1a03a1d9",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Death Knight",
     "type": "undead",
     "src": "MM p.47",
@@ -3667,7 +3667,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "7880234e-6575-4b7e-866b-8d4390c3f351",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Death Slaad",
   "type": "aberration",
   "src": "MM p.278",
@@ -3703,7 +3703,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "29b4b922-d5ba-436a-a307-d43523bb5485",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Death Tyrant",
   "type": "undead",
   "src": "MM p.29",
@@ -3740,7 +3740,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "23d96bb6-71db-4f5d-abdf-7f89022793a5",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Deep Gnome (Svirfneblin)",
     "type": "humanoid",
     "src": "MM p.164",
@@ -3777,7 +3777,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "19d874fd-c020-42ae-9b62-dd9ece151aaf",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Deer",
     "type": "beast",
     "src": "MM p.321",
@@ -3802,7 +3802,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "3206d4c0-15f0-4824-9251-a45aa097617c",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Demilich",
     "type": "undead",
     "src": "MM p.48",
@@ -3850,7 +3850,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "8ba765e8-1930-4680-8c13-992a40726465",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Deva",
   "type": "celestial",
   "src": "MM p.16",
@@ -3886,7 +3886,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "7c982d18-a2eb-4f2f-880d-43471be6255d",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Dire Wolf",
     "type": "beast",
     "src": "MM p.321",
@@ -3911,7 +3911,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "37b1a459-194a-46a7-ab62-d62fa4ce03ce",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Displacer Beast",
     "type": "monstrosity",
     "src": "MM p.81",
@@ -3936,7 +3936,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "4ffca5be-94f2-48f1-b4ad-cd4d4c4a70ee",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Djinni",
     "type": "elemental",
     "src": "MM p.144",
@@ -3961,7 +3961,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "1c15a258-5e2f-4eb5-93ff-5ab186add6b2",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Doppelganger",
     "type": "monstrosity",
     "src": "MM p.82",
@@ -3986,7 +3986,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "d63a478e-4fba-4e40-8866-6a19e41f2b25",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Draft Horse",
     "type": "beast",
     "src": "MM p.321",
@@ -4011,7 +4011,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "522d25a4-dd6e-4c52-9d3e-5f298e27f5db",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Dragon Turtle",
     "type": "dragon",
     "src": "MM p.119",
@@ -4048,7 +4048,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "75a45ce2-501f-49ba-855d-be8de61273b0",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Dretch",
     "type": "fiend",
     "src": "MM p.57",
@@ -4073,7 +4073,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "1d08066b-2245-4c9a-8ca3-06245166c005",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Drider",
     "type": "monstrosity",
     "src": "MM p.120",
@@ -4098,7 +4098,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "3036d622-9685-4cb2-a224-8cc794e40240",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Drow",
     "type": "humanoid",
     "src": "MM p.128",
@@ -4135,7 +4135,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "6f104376-8e82-4e43-bd37-c4c54d3437b3",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Drow Elite Warrior",
     "type": "humanoid",
     "src": "MM p.128",
@@ -4171,7 +4171,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "f5d51178-2c3e-4f9c-bc6b-82d232aaf950",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Drow Mage",
   "type": "humanoid",
   "src": "MM p.129",
@@ -4207,7 +4207,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "aee7f112-64d0-40a4-998b-bdb240be3723",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Drow Priestess of Lolth",
   "type": "humanoid",
   "src": "MM p.129",
@@ -4243,7 +4243,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "61b96c5d-5d9d-42bf-9b54-02df85b1b755",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Druid",
   "type": "humanoid",
   "src": "MM p.346",
@@ -4280,7 +4280,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "1eb426f2-0bd1-4ae1-b185-01b9d4cb1799",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Dryad",
   "type": "fey",
   "src": "MM p.121",
@@ -4317,7 +4317,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "c6d418e7-db65-4007-9db7-3159431940c0",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Duergar",
     "type": "humanoid",
     "src": "MM p.122",
@@ -4354,7 +4354,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "f9480d74-40bb-45a9-9fb3-12c0c95b0d84",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Duodrone",
     "type": "construct",
     "src": "MM p.225",
@@ -4379,7 +4379,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "e817f4c7-4c5a-4813-b2eb-47adf740ca25",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Dust Mephit",
     "type": "elemental",
     "src": "MM p.215",
@@ -4404,7 +4404,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "e08e964d-0a19-4ec5-ac66-28652da64314",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Eagle",
     "type": "beast",
     "src": "MM p.322",
@@ -4429,7 +4429,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "0ba17a7f-91e0-4af7-8774-074de3aad3eb",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Earth Elemental",
     "type": "elemental",
     "src": "MM p.124",
@@ -4454,7 +4454,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "d76da28b-0c62-482c-b6f4-29a7ba1dad1c",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Efreeti",
     "type": "elemental",
     "src": "MM p.145",
@@ -4491,7 +4491,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "d03a6991-68a3-47a7-bff0-02f8a9ef58a8",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Elephant",
     "type": "beast",
     "src": "MM p.322",
@@ -4528,7 +4528,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "01d4becd-0e01-4db4-9f8c-de468489658f",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Elk",
     "type": "beast",
     "src": "MM p.322",
@@ -4565,7 +4565,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "6e0a5807-4869-4a76-894f-8d841879ed39",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Empyrean",
     "type": "celestial",
     "src": "MM p.130",
@@ -4602,7 +4602,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "70863ae7-ffa3-4bd5-9fa6-50130111aa0a",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Erinyes",
   "type": "fiend",
   "src": "MM p.73",
@@ -4627,7 +4627,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "740e0792-348b-4e6f-9b5c-8294634a942c",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Ettercap",
     "type": "monstrosity",
     "src": "MM p.131",
@@ -4652,7 +4652,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "717cb659-b2a3-43f2-b0cd-df4d77b66c6b",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Ettin",
     "type": "giant",
     "src": "MM p.132",
@@ -4677,7 +4677,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "f6448846-4f84-482c-b376-5285fd769aa8",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Faerie Dragon (Blue)",
     "type": "dragon",
     "src": "MM p.133",
@@ -4689,7 +4689,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "d08ae51d-bf5a-4041-9ecc-b0ea0f35f5f7",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Faerie Dragon (Green)",
     "type": "dragon",
     "src": "MM p.133",
@@ -4701,7 +4701,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "8be0edba-356e-4c28-beb9-0f81912fe498",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Faerie Dragon (Indigo)",
     "type": "dragon",
     "src": "MM p.133",
@@ -4713,7 +4713,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "40e06caa-4869-4610-b13f-5ddc276fe109",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Faerie Dragon (Orange)",
     "type": "dragon",
     "src": "MM p.133",
@@ -4725,7 +4725,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "6c8d320a-783c-4ee5-82d7-92343f40d455",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Faerie Dragon (Red)",
     "type": "dragon",
     "src": "MM p.133",
@@ -4737,7 +4737,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "329c8944-c583-469b-9b8b-ae4e8dd0c93b",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Faerie Dragon (Violet)",
     "type": "dragon",
     "src": "MM p.133",
@@ -4749,7 +4749,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "32dcb639-cbb6-4ebf-9ea9-807479f854fa",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Faerie Dragon (Yellow)",
     "type": "dragon",
     "src": "MM p.133",
@@ -4761,7 +4761,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "1f28c0ad-10d1-4309-8b51-a85ad9c7ad3c",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Fire Elemental",
     "type": "elemental",
     "src": "MM p.125",
@@ -4786,7 +4786,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "2c650efa-38e4-4529-9ecd-bf0291122dd3",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Fire Giant",
     "type": "giant",
     "src": "MM p.154",
@@ -4823,7 +4823,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "3ba8c51b-6f5c-4c46-bc2b-d4506789de38",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Fire Snake",
     "type": "elemental",
     "src": "MM p.265",
@@ -4848,7 +4848,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "94256225-2947-48f6-b4df-c5044f7a11bb",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Flameskull",
     "type": "undead",
     "src": "MM p.134",
@@ -4896,7 +4896,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "bc9b45d8-6c4e-4b16-8f91-f58971aa489c",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Flesh Golem",
     "type": "construct",
     "src": "MM p.169",
@@ -4921,7 +4921,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "1c35b5a4-b211-4f8d-a010-423e1fa05498",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Flumph",
     "type": "aberration",
     "src": "MM p.135",
@@ -4946,7 +4946,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "3a9cc7fa-793d-4a4d-a321-550c49266e0f",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Flying Snake",
     "type": "beast",
     "src": "MM p.322",
@@ -4971,7 +4971,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "3589199e-b19a-401a-86b2-ed2abf0a2247",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Flying Sword",
     "type": "construct",
     "src": "MM p.20",
@@ -4996,7 +4996,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "df1b943d-163f-45ee-ae4e-149ceb8e26e5",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Fomorian",
     "type": "giant",
     "src": "MM p.136",
@@ -5033,7 +5033,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "31fc5606-4b22-4b62-92ca-3c25386e4ecd",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Frog",
     "type": "beast",
     "src": "MM p.322",
@@ -5045,7 +5045,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "7e16065c-bf2f-482f-bbb2-f1f334f0398f",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Frost Giant",
     "type": "giant",
     "src": "MM p.155",
@@ -5082,7 +5082,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "43283309-01fc-4d98-bb1a-434cb1294e14",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Galeb Duhr",
     "type": "elemental",
     "src": "MM p.139",
@@ -5107,7 +5107,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "b2a646b7-4f9e-45bd-878c-17b44a509abb",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Gargoyle",
     "type": "elemental",
     "src": "MM p.140",
@@ -5132,7 +5132,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "9ca4fa81-6d47-4e99-879b-76af52448cd5",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Gas Spore",
     "type": "plant",
     "src": "MM p.138",
@@ -5144,7 +5144,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "8a4a66a7-179c-4929-95b6-f14b7088d370",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Gelatinous Cube",
     "type": "ooze",
     "src": "MM p.242",
@@ -5181,7 +5181,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "64f1c78b-be7a-49e6-8385-3522560efdf1",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Ghast",
     "type": "undead",
     "src": "MM p.148",
@@ -5218,7 +5218,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "b69ec87f-7a65-434d-9fd9-62a450b4ffb9",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Ghost",
     "type": "undead",
     "src": "MM p.147",
@@ -5243,7 +5243,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "e3359ffc-2606-4182-91e6-91b8a1a538eb",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Ghoul",
     "type": "undead",
     "src": "MM p.148",
@@ -5280,7 +5280,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "63ac73ef-e36f-4753-b68b-af3346fca66e",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Giant Ape",
     "type": "beast",
     "src": "MM p.323",
@@ -5317,7 +5317,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "6e54dbea-2672-447b-b1cb-ad85f038ab51",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Giant Badger",
     "type": "beast",
     "src": "MM p.323",
@@ -5342,7 +5342,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "55737446-8bb6-43f8-9281-0d042b1a2480",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Giant Bat",
     "type": "beast",
     "src": "MM p.323",
@@ -5367,7 +5367,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "0041fbc1-3402-4702-926c-122d40911ced",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Giant Boar",
     "type": "beast",
     "src": "MM p.323",
@@ -5392,7 +5392,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "b37d7b10-b340-4677-97bc-a5f16d72393e",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Giant Centipede",
     "type": "beast",
     "src": "MM p.323",
@@ -5417,7 +5417,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "0d8c18b7-a4b7-490d-8aee-bad7317cf840",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Giant Constrictor Snake",
     "type": "beast",
     "src": "MM p.324",
@@ -5454,7 +5454,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "4d4e8887-3825-43e7-bf63-8b1a3061c727",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Giant Crab",
     "type": "beast",
     "src": "MM p.324",
@@ -5479,7 +5479,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "142eed0a-39be-4953-96f1-e31b09860519",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Giant Crocodile",
     "type": "beast",
     "src": "MM p.324",
@@ -5504,7 +5504,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "c0af16e9-2246-41dd-abd9-e537d31ebffa",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Giant Eagle",
     "type": "beast",
     "src": "MM p.324",
@@ -5529,7 +5529,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "18c26e4c-08d0-493b-9e1a-b1c88e175b65",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Giant Elk",
     "type": "beast",
     "src": "MM p.325",
@@ -5566,7 +5566,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "5ef4d953-0b4a-47bc-bfce-c123facc1bba",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Giant Fire Beetle",
     "type": "beast",
     "src": "MM p.325",
@@ -5578,7 +5578,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "417d89e4-3884-4ae3-99d2-f14ce3de7763",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Giant Frog",
     "type": "beast",
     "src": "MM p.325",
@@ -5615,7 +5615,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "da412937-8494-4132-84f9-46d1f6f26817",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Giant Goat",
     "type": "beast",
     "src": "MM p.326",
@@ -5640,7 +5640,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "8051fd9e-1b3f-48df-841c-27bc07971357",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Giant Hyena",
     "type": "beast",
     "src": "MM p.326",
@@ -5665,7 +5665,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "2e079fc2-6f69-442b-9681-2b1a5e520b9e",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Giant Lizard",
     "type": "beast",
     "src": "MM p.326",
@@ -5690,7 +5690,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "1c793897-a44a-4b04-ae0e-0e459e467308",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Giant Octopus",
     "type": "beast",
     "src": "MM p.326",
@@ -5715,7 +5715,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "aab3bff1-d012-4070-8f89-74878826d445",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Giant Owl",
     "type": "beast",
     "src": "MM p.327",
@@ -5740,7 +5740,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "a6f46a85-d714-41d9-afbc-cfaf0c7989ec",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Giant Poisonous Snake",
     "type": "beast",
     "src": "MM p.327",
@@ -5765,7 +5765,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "03d50c58-30ed-4e50-af5e-f35012e31190",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Giant Rat",
     "type": "beast",
     "src": "MM p.327",
@@ -5790,7 +5790,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "5fddf610-1e88-48ae-b206-eb8159cf85f2",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Giant Scorpion",
     "type": "beast",
     "src": "MM p.327",
@@ -5815,7 +5815,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "3bccf80b-e384-4d50-a774-3c0ab02684e1",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Giant Sea Horse",
     "type": "beast",
     "src": "MM p.328",
@@ -5840,7 +5840,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "44ed6891-8688-4428-9250-a8e188b7f592",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Giant Shark",
     "type": "beast",
     "src": "MM p.328",
@@ -5865,7 +5865,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "c412bd7f-2d9a-4a81-a359-36979185ef9c",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Giant Spider",
     "type": "beast",
     "src": "MM p.328",
@@ -5890,7 +5890,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "e09252a9-c99a-4d70-b234-c30f4e7685b9",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Giant Toad",
     "type": "beast",
     "src": "MM p.329",
@@ -5927,7 +5927,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "1bb49bf3-602b-4576-9d0d-e2540d899f76",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Giant Vulture",
     "type": "beast",
     "src": "MM p.329",
@@ -5952,7 +5952,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "f55ee8db-9f03-4459-8759-7176a6011b70",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Giant Wasp",
     "type": "beast",
     "src": "MM p.329",
@@ -5977,7 +5977,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "3b3b6786-05aa-4f03-b816-67b8b83ccae9",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Giant Weasel",
     "type": "beast",
     "src": "MM p.329",
@@ -6002,7 +6002,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "53e41eca-b162-48c8-9ac9-778e4327d01e",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Giant Wolf Spider",
     "type": "beast",
     "src": "MM p.330",
@@ -6027,7 +6027,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "54823945-43d9-4f29-a52d-4b4a9ed784c3",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Gibbering Mouther",
     "type": "aberration",
     "src": "MM p.157",
@@ -6052,7 +6052,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "7c068a8d-d84f-4add-a1b9-562d592270e5",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Githyanki Knight",
     "type": "humanoid",
     "src": "MM p.160",
@@ -6077,7 +6077,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "59772bc1-260e-46dd-b26a-a899173377f1",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Githyanki Warrior",
     "type": "humanoid",
     "src": "MM p.160",
@@ -6102,7 +6102,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "f23d3796-80de-40ef-bf27-18c0eea8d912",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Githzerai Monk",
     "type": "humanoid",
     "src": "MM p.161",
@@ -6127,7 +6127,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "b33d2e78-00b9-435c-bf67-c7f2fdd8f8b6",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Githzerai Zerth",
     "type": "humanoid",
     "src": "MM p.161",
@@ -6152,7 +6152,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "61092a97-9ffa-4107-8f00-91d9627a1923",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Glabrezu",
     "type": "fiend",
     "src": "MM p.58",
@@ -6177,7 +6177,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "9d98ca5a-6f72-4d2b-a85f-c892e9f6127e",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Githzerai Enlightened",
     "type": "humanoid",
     "src": "MPMM p.143",
@@ -6225,7 +6225,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "b209ee47-6ca4-4b7f-96c3-e5528edd8be0",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Gnoll",
     "type": "humanoid",
     "src": "MM p.163",
@@ -6274,7 +6274,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "2671c697-fa9d-436c-a9a3-8348a29d131d",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Gnoll Fang of Yeenoghu",
     "type": "fiend",
     "src": "MM p.163",
@@ -6299,7 +6299,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "56d68e78-578a-481b-a179-2fb23ceec318",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Gnoll Pack Lord",
     "type": "humanoid",
     "src": "MM p.163",
@@ -6335,7 +6335,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "5cbc365e-443e-443a-b68f-1eeb914921f1",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Goat",
     "type": "beast",
     "src": "MM p.330",
@@ -6360,7 +6360,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "a98ee6f6-2a36-4096-b816-56efe7191d3d",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Goblin",
     "type": "humanoid",
     "src": "MM p.166",
@@ -6397,7 +6397,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "c132609d-a013-4223-8b9e-8377107cff5f",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Goblin Boss",
     "type": "humanoid",
     "src": "MM p.166",
@@ -6434,7 +6434,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "3dba101b-2473-4cd2-8663-013ddc68c130",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Gold Dragon Wyrmling",
     "type": "dragon",
     "src": "MM p.115",
@@ -6471,7 +6471,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "24dcbab7-5cde-4bd0-a969-88da6e6b97fe",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Gorgon",
     "type": "monstrosity",
     "src": "MM p.171",
@@ -6508,7 +6508,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "ccc98fa2-3a46-414d-a4b5-964780737755",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Goristro",
     "type": "fiend",
     "src": "MM p.59",
@@ -6545,7 +6545,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "5fc0ad62-0de1-46da-abe6-bc424e33eafc",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Gray Ooze",
     "type": "ooze",
     "src": "MM p.243",
@@ -6570,7 +6570,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "0a46314a-170e-474f-a15b-6ef54c4c66ea",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Gray Slaad",
     "type": "aberration",
     "src": "MM p.277",
@@ -6595,7 +6595,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "ebe72089-9124-4d8b-84df-1561f2e956e9",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Green Dragon Wyrmling",
     "type": "dragon",
     "src": "MM p.95",
@@ -6632,7 +6632,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "2c01e70d-86d3-472e-8db0-45f48cc6b9ed",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Green Hag",
     "type": "fey",
     "src": "MM p.177",
@@ -6657,7 +6657,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "cc428d7f-0efd-492d-9b7c-f0be2c00c6c6",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Green Slaad",
     "type": "aberration",
     "src": "MM p.277",
@@ -6682,7 +6682,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "66d2962c-6b87-4f5f-b551-50c6cc61c1dd",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Grell",
     "type": "aberration",
     "src": "MM p.172",
@@ -6707,7 +6707,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "b56662bd-9143-4cee-b53b-7a21d35e0829",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Grick",
     "type": "monstrosity",
     "src": "MM p.173",
@@ -6732,7 +6732,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "1805e722-c864-40dc-a684-d07795f0eb9c",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Grick Alpha",
     "type": "monstrosity",
     "src": "MM p.173",
@@ -6757,7 +6757,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "32ccd37e-2cf7-4fd6-b06f-928d6d4c1ef7",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Griffon",
     "type": "monstrosity",
     "src": "MM p.174",
@@ -6782,7 +6782,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "1a346ec7-93fd-4f73-a2ad-2571cce43528",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Grimlock",
     "type": "humanoid",
     "src": "MM p.175",
@@ -6807,7 +6807,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "c83c232f-60ec-43bf-9b36-c42b68291daa",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Guard",
     "type": "humanoid",
     "src": "MM p.347",
@@ -6832,7 +6832,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "21d5c106-e6b0-4cd3-93fc-2d39986100a9",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Guardian Naga",
     "type": "monstrosity",
     "src": "MM p.234",
@@ -6869,7 +6869,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "941a3627-07c6-44c7-9e61-d3fc618a3060",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Gynosphinx",
     "type": "monstrosity",
     "src": "MM p.282",
@@ -6917,7 +6917,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "f6fc46b6-68bc-4cc0-a20e-44b9b517ca2f",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Half-Ogre (Ogrillon)",
     "type": "giant",
     "src": "MM p.238",
@@ -6954,7 +6954,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "f414b9ae-17c1-496a-8390-d65a87ef00bd",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Half-Red Dragon Veteran",
     "type": "humanoid",
     "src": "MM p.180",
@@ -6991,7 +6991,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "5dd1d14d-a6d8-4dc0-b2d9-ab72d23b3092",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Harpy",
     "type": "monstrosity",
     "src": "MM p.181",
@@ -7016,7 +7016,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "5273ef22-3914-4655-bac5-7bcc69acc47a",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Hawk",
     "type": "beast",
     "src": "MM p.330",
@@ -7028,7 +7028,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "6f70d861-b922-4c4f-bb0d-8f63ba8f1a17",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Hell Hound",
     "type": "fiend",
     "src": "MM p.182",
@@ -7065,7 +7065,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "10e70140-dab7-43af-a0e6-11a1465c8d3f",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Helmed Horror",
     "type": "construct",
     "src": "MM p.183",
@@ -7090,7 +7090,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "85d54d65-0b97-4936-874c-c832a3c27eb4",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Hezrou",
     "type": "fiend",
     "src": "MM p.60",
@@ -7115,7 +7115,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "71a5fb98-13e0-42f1-a9b5-bd577cc3722d",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Hill Giant",
     "type": "giant",
     "src": "MM p.155",
@@ -7152,7 +7152,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "29f80d77-e71c-4501-badc-d2c205366a2e",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Hippogriff",
     "type": "monstrosity",
     "src": "MM p.184",
@@ -7177,7 +7177,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "c62854c5-5b84-472e-bb2d-0821cacec2ac",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Hobgoblin",
     "type": "humanoid",
     "src": "MM p.186",
@@ -7214,7 +7214,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "46a09fb4-0680-4bd8-9b6e-91003a5ceaa6",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Hobgoblin Captain",
     "type": "humanoid",
     "src": "MM p.186",
@@ -7239,7 +7239,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "ac8958e4-f9b9-4572-9a61-5317a15cbd29",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Hobgoblin Warlord",
   "type": "humanoid",
   "src": "MM p.187",
@@ -7287,7 +7287,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "ca088a3c-708b-4cd5-9119-ad73f6241c40",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Homunculus",
     "type": "construct",
     "src": "MM p.188",
@@ -7299,7 +7299,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "77d0fb11-d30e-43e6-8ec4-5a517c8e13c2",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Hook Horror",
     "type": "monstrosity",
     "src": "MM p.189",
@@ -7324,7 +7324,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "b172197e-4533-4904-8624-38ce99c4daf0",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Horned Devil",
     "type": "fiend",
     "src": "MM p.74",
@@ -7361,7 +7361,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "1c7b36a8-bd35-4c91-aa4f-b14f92f8d340",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Hunter Shark",
     "type": "beast",
     "src": "MM p.330",
@@ -7386,7 +7386,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "d53336e0-5e29-4353-b280-ab0209e63d19",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Hydra",
     "type": "monstrosity",
     "src": "MM p.190",
@@ -7459,7 +7459,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "5dd0d50d-9a90-4437-a171-5166787fd90e",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Hyena",
     "type": "beast",
     "src": "MM p.331",
@@ -7484,7 +7484,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "2f6f9fc3-9816-49ef-9b93-f851f40cc1f4",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Ice Devil",
     "type": "fiend",
     "src": "MM p.75",
@@ -7521,7 +7521,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "d23dba29-3138-4c82-8554-61ca78efde94",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Ice Mephit",
     "type": "elemental",
     "src": "MM p.215",
@@ -7558,7 +7558,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "f046ef68-2e9e-4ed8-abdc-f3e0b1b7c43b",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Imp",
     "type": "fiend",
     "src": "MM p.76",
@@ -7583,7 +7583,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "95f45f5a-7c4e-422f-aff2-39d8eb1c8524",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Incubus",
     "type": "fiend",
     "src": "MM p.285",
@@ -7620,7 +7620,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "d2e40f05-1562-4169-a46a-52a4094a58cc",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Intellect Devourer",
     "type": "aberration",
     "src": "MM p.191",
@@ -7657,7 +7657,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "9449102f-296e-4512-af17-37c95ad69e13",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Invisible Stalker",
     "type": "elemental",
     "src": "MM p.192",
@@ -7682,7 +7682,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "38624976-c038-4eaa-acc3-343ed288aa73",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Iron Golem",
     "type": "construct",
     "src": "MM p.170",
@@ -7719,7 +7719,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "6a6b7446-0e23-4bd5-bd4c-9a1e0f93b5a2",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Jackal",
     "type": "beast",
     "src": "MM p.331",
@@ -7731,7 +7731,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "52045efe-898b-4995-b61a-e67289a0bfd3",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Jackalwere",
     "type": "humanoid",
     "src": "MM p.193",
@@ -7768,7 +7768,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "ce816f87-302f-437d-8cef-243a00283e79",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Kenku",
     "type": "humanoid",
     "src": "MM p.194",
@@ -7805,7 +7805,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "9e226da2-3dbd-428f-bc7b-4241f3a13fcf",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Killer Whale",
     "type": "beast",
     "src": "MM p.331",
@@ -7830,7 +7830,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "9cef1b43-5700-41d3-9c76-ea3d05699ec1",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Knight",
     "type": "humanoid",
     "src": "MM p.347",
@@ -7878,7 +7878,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "5ba734ba-ecd2-4387-a69b-a816a3c8b0a0",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Kobold",
     "type": "humanoid",
     "src": "MM p.195",
@@ -7915,7 +7915,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "e1561319-8c40-4682-b0a4-978bacf6718d",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Kraken",
     "type": "monstrosity",
     "src": "MM p.197",
@@ -7952,7 +7952,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "1f21d8c0-76d4-4cdf-8139-35fd263cb6fe",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Kuo-toa",
     "type": "humanoid",
     "src": "MM p.199",
@@ -7989,7 +7989,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "28bcabcd-63ca-4268-8c79-63aa74461594",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Kuo-toa Archpriest",
     "type": "humanoid",
     "src": "MM p.200",
@@ -8048,7 +8048,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "af91e3fa-8d08-4d69-b48f-c198a609e3d3",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Kuo-toa Monitor",
     "type": "humanoid",
     "src": "MM p.198",
@@ -8073,7 +8073,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "6bf140fe-342a-4e5c-9d89-0b17fe1e5320",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Kuo-toa Whip",
     "type": "humanoid",
     "src": "MM p.200",
@@ -8098,7 +8098,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "526f667f-1730-44ca-ab63-2c4672623290",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Lamia",
     "type": "monstrosity",
     "src": "MM p.201",
@@ -8123,7 +8123,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "767e1929-e7fd-40b7-90a4-337477546874",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Lemure",
     "type": "fiend",
     "src": "MM p.76",
@@ -8148,7 +8148,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "767c98d3-1b86-4bd2-8e99-eace3d42e3ef",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Lich",
     "type": "undead",
     "src": "MM p.202",
@@ -8208,7 +8208,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "78baaf96-8224-4c72-84d5-cea2c311e438",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Lion",
     "type": "beast",
     "src": "MM p.331",
@@ -8245,7 +8245,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "2ab71128-ba3c-4624-9bf6-58e5aab4002c",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Lizard",
     "type": "beast",
     "src": "MM p.332",
@@ -8257,7 +8257,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "38c07406-d0f1-45e6-92cf-0d340b15fcaf",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Lizard King",
     "type": "humanoid",
     "src": "MM p.205",
@@ -8282,7 +8282,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "c9471d5e-8b43-41b3-9111-eaba30de5583",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Lizard Queen",
     "type": "humanoid",
     "src": "MM p.205",
@@ -8307,7 +8307,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "96f3e784-f147-4ca5-bc4a-011c9be5fe9d",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Lizardfolk",
     "type": "humanoid",
     "src": "MM p.204",
@@ -8368,7 +8368,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "37c4c927-816c-4344-8210-904fb7aeb535",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Lizardfolk Shaman",
     "type": "humanoid",
     "src": "MM p.205",
@@ -8405,7 +8405,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "6364c013-818b-4098-b397-4f6ad3bfb58a",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Mage",
     "type": "humanoid",
     "src": "MM p.347",
@@ -8453,7 +8453,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "393b7b9a-3b34-4443-ace4-d76e3440fa74",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Magma Mephit",
     "type": "elemental",
     "src": "MM p.216",
@@ -8490,7 +8490,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "69b6cdb3-6d8f-4c3b-a1c9-91a4ad83b302",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Magmin",
     "type": "elemental",
     "src": "MM p.212",
@@ -8515,7 +8515,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "a1072c58-6cd3-4203-9541-a756be382495",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Mammoth",
     "type": "beast",
     "src": "MM p.332",
@@ -8552,7 +8552,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "e2e5edb0-449d-4e7e-a180-b92f6d88b60c",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Manes",
     "type": "fiend",
     "src": "MM p.60",
@@ -8577,7 +8577,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "a6cafc4d-29e7-4325-ad3a-66e4a05317b1",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Manticore",
     "type": "monstrosity",
     "src": "MM p.213",
@@ -8614,7 +8614,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "14ee352f-0198-459c-b664-771b4b5a4fb2",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Marid",
   "type": "elemental",
   "src": "MM p.146",
@@ -8639,7 +8639,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "92a63810-82ff-43cd-9ec0-6c092d890eda",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Marilith",
     "type": "fiend",
     "src": "MM p.61",
@@ -8664,7 +8664,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "05f66a75-9464-47b8-8360-3968436bcb24",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Mastiff",
     "type": "beast",
     "src": "MM p.332",
@@ -8689,7 +8689,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "ed3c1f2b-1870-4ed9-9273-230733ede368",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Medusa",
     "type": "monstrosity",
     "src": "MM p.214",
@@ -8714,7 +8714,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "ebc894cf-c3e4-4169-b935-659aa4abe059",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Merfolk",
     "type": "humanoid",
     "src": "MM p.218",
@@ -8739,7 +8739,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "7a1f270f-d155-4beb-8be1-7c15fd1c0744",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Merrow",
     "type": "monstrosity",
     "src": "MM p.219",
@@ -8764,7 +8764,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "cf61b445-33f8-4936-916e-8c66e6760530",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Mezzoloth",
     "type": "fiend",
     "src": "MM p.313",
@@ -8789,7 +8789,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "dabb88de-ea57-448f-9417-a461ed5c9bbf",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Mimic",
     "type": "monstrosity",
     "src": "MM p.220",
@@ -8826,7 +8826,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "768783cd-32fd-4290-95de-20a003584f0b",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Mind Flayer",
     "type": "aberration",
     "src": "MM p.222",
@@ -8875,7 +8875,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "2d0d3fb2-2fab-442d-9892-b43fe8afb888",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Mind Flayer Arcanist",
   "type": "aberration",
   "src": "MM p.222",
@@ -8911,7 +8911,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "9be5b832-4386-4dcb-8d32-ea37a0cd9e60",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Minotaur",
     "type": "monstrosity",
     "src": "MM p.223",
@@ -8948,7 +8948,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "56365a31-c28b-4bc1-987d-fccbaf0d7a1b",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Minotaur Skeleton",
     "type": "undead",
     "src": "MM p.273",
@@ -8985,7 +8985,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "dc7806bc-ad59-40e4-ba80-af98df54cb32",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Monodrone",
     "type": "construct",
     "src": "MM p.224",
@@ -9022,7 +9022,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "48486f0d-b733-4695-80d7-77de79ea27a5",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Mud Mephit",
     "type": "elemental",
     "src": "MM p.216",
@@ -9047,7 +9047,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "5b7c1f98-7df2-4d2f-8e37-3d25d2e35f5e",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Mule",
     "type": "beast",
     "src": "MM p.333",
@@ -9072,7 +9072,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "e99d9b01-9211-48be-b866-32486a9ca429",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Mummy",
     "type": "undead",
     "src": "MM p.228",
@@ -9097,7 +9097,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "b037ee17-3de1-4716-818f-722f02966ac6",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Mummy Lord",
     "type": "undead",
     "src": "MM p.229",
@@ -9146,7 +9146,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "b47dd5f9-b55c-480d-8744-2bd9780615f5",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Myconid Adult",
     "type": "plant",
     "src": "MM p.232",
@@ -9171,7 +9171,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "c33036a6-7fc4-4a97-9ccd-03485da2f270",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Myconid Sovereign",
     "type": "plant",
     "src": "MM p.232",
@@ -9196,7 +9196,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "0e893267-50e3-4258-a2fd-9f5196f22b1f",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Myconid Sprout",
     "type": "plant",
     "src": "MM p.230",
@@ -9221,7 +9221,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "2e3380a0-91a6-424c-8af1-bfbe77c84a95",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Nalfeshnee",
     "type": "fiend",
     "src": "MM p.62",
@@ -9246,7 +9246,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "2a6f3102-6205-452d-821c-5c228aac75af",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Needle Blight",
     "type": "plant",
     "src": "MM p.32",
@@ -9283,7 +9283,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "8b01b340-c208-478b-8fc8-000e721f4a41",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Night Hag",
     "type": "fiend",
     "src": "MM p.178",
@@ -9308,7 +9308,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "d3e1faa4-6370-4592-aaea-05ac867b9ee1",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Nightmare",
     "type": "fiend",
     "src": "MM p.235",
@@ -9333,7 +9333,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "960fc001-964c-4fcd-afaf-932442649ade",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Noble",
     "type": "humanoid",
     "src": "MM p.348",
@@ -9358,7 +9358,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "4b66b8c1-c163-4ee2-91f6-190db04b8510",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Nothic",
     "type": "aberration",
     "src": "MM p.236",
@@ -9395,7 +9395,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "79899e9f-ecba-4d19-8f2f-196613a0547b",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Nycaloth",
     "type": "fiend",
     "src": "MM p.314",
@@ -9444,7 +9444,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "14f3b545-3b83-4b5e-a019-abc5f8a6a1dd",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Ochre Jelly",
     "type": "ooze",
     "src": "MM p.243",
@@ -9469,7 +9469,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "f7fc7d16-a6ff-4695-851d-fc230fe94820",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Octopus",
     "type": "beast",
     "src": "MM p.333",
@@ -9481,7 +9481,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "d720cb22-2901-4219-a632-40fb667d9050",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Ogre",
     "type": "giant",
     "src": "MM p.237",
@@ -9518,7 +9518,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "5e09a866-da33-4f82-b16b-81643d8b23cc",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Ogre Zombie",
     "type": "undead",
     "src": "MM p.316",
@@ -9543,7 +9543,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "796d0936-091a-4be1-884f-b143076d4f31",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Oni",
     "type": "giant",
     "src": "MM p.239",
@@ -9568,7 +9568,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "05f2d617-bffb-410b-9184-2aa93da5e33e",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Orc",
     "type": "humanoid",
     "src": "MM p.246",
@@ -9605,7 +9605,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "cef41780-3bb5-45f4-839b-2f5448e66960",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Orc Eye of Gruumsh",
     "type": "humanoid",
     "src": "MM p.247",
@@ -9630,7 +9630,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "95ca9c15-b5df-4664-92e8-625c42f09716",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Orc War Chief",
     "type": "humanoid",
     "src": "MM p.246",
@@ -9678,7 +9678,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "69e4df64-a91e-4420-bd58-29bc0b9b32a6",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Orog",
     "type": "humanoid",
     "src": "MM p.247",
@@ -9715,7 +9715,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "743f64ba-9a56-40d5-805e-b2ed5beed877",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Otyugh",
     "type": "aberration",
     "src": "MM p.248",
@@ -9752,7 +9752,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "f76966e9-c243-402b-bde5-4b331a9fb44b",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Owl",
     "type": "beast",
     "src": "MM p.333",
@@ -9764,7 +9764,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "534546b7-e0ff-432e-9938-ee0ebaa1048d",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Owlbear",
     "type": "monstrosity",
     "src": "MM p.249",
@@ -9789,7 +9789,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "82ad0148-723e-4cbf-8bea-df3dcf827e53",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Panther",
     "type": "beast",
     "src": "MM p.333",
@@ -9826,7 +9826,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "d4d7b632-4647-4292-b49d-61e1f7914fd2",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Pegasus",
     "type": "celestial",
     "src": "MM p.250",
@@ -9851,7 +9851,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "f04af3f5-b2b5-42c9-a841-5f4616d3e8c3",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Pentadrone",
     "type": "construct",
     "src": "MM p.226",
@@ -9876,7 +9876,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "3f3e2365-8f81-4cda-bbe9-3fc87ba68ed7",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Peryton",
     "type": "monstrosity",
     "src": "MM p.251",
@@ -9913,7 +9913,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "5262b049-14ce-4486-bfa2-8acf3347bcbc",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Phase Spider",
     "type": "monstrosity",
     "src": "MM p.334",
@@ -9938,7 +9938,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "63403e4f-865f-4f36-8a0c-5bb3128253ae",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Piercer",
     "type": "monstrosity",
     "src": "MM p.252",
@@ -9963,7 +9963,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "96f3d715-0db4-4f9b-a70e-3086d330a29a",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Pit Fiend",
     "type": "fiend",
     "src": "MM p.77",
@@ -9988,7 +9988,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "0589dd0f-196f-4bad-94bf-3ded8c650e87",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Pixie",
     "type": "fey",
     "src": "MM p.253",
@@ -10000,7 +10000,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "55916595-0c3b-406e-889b-770daf0d125b",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Planetar",
     "type": "celestial",
     "src": "MM p.17",
@@ -10036,7 +10036,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "415d0828-b935-40cd-ac6d-df38d8d1c87e",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Plesiosaurus",
     "type": "beast",
     "src": "MM p.80",
@@ -10061,7 +10061,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "9cf0f91f-236b-450e-afc8-e6fa3c181c82",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Poisonous Snake",
     "type": "beast",
     "src": "MM p.334",
@@ -10086,7 +10086,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "745ebcdd-18f3-4f89-acea-c6855aaa1938",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Polar Bear",
     "type": "beast",
     "src": "MM p.334",
@@ -10111,7 +10111,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "98463a43-a202-4604-ac42-0e338c5827b0",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Poltergeist",
     "type": "undead",
     "src": "MM p.279",
@@ -10148,7 +10148,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "98d5c941-556d-4d68-a8f7-ed0eea30d548",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Pony",
     "type": "beast",
     "src": "MM p.335",
@@ -10173,7 +10173,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "77a74527-2255-4bfd-a644-19af96cba664",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Priest",
     "type": "humanoid",
     "src": "MM p.348",
@@ -10232,7 +10232,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "8a596547-6cb9-4ebc-b90c-9cff74807e3e",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Pseudodragon",
     "type": "dragon",
     "src": "MM p.254",
@@ -10269,7 +10269,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "d0baeb50-7e4b-432f-99c5-81dc86047169",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Pteranodon",
     "type": "beast",
     "src": "MM p.80",
@@ -10294,7 +10294,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "6b8338c3-7c74-4fde-a084-ee47bd6c022d",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Purple Worm",
     "type": "monstrosity",
     "src": "MM p.255",
@@ -10319,7 +10319,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "0a8fe163-f79c-419b-aff0-6c682afa2edb",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Quadrone",
     "type": "construct",
     "src": "MM p.226",
@@ -10344,7 +10344,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "b8098256-4d88-4da5-a5cd-e399d6b4a02d",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Quaggoth",
     "type": "humanoid",
     "src": "MM p.256",
@@ -10369,7 +10369,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "542a083a-ced6-4066-887d-056a4fb466bf",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Quaggoth Spore Servant",
     "type": "plant",
     "src": "MM p.230",
@@ -10394,7 +10394,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "3c236dab-29e0-4dd1-8623-80c2a6d0627f",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Quaggoth Thonot",
     "type": "humanoid",
     "src": "MM p.256",
@@ -10419,7 +10419,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "a0a0c13f-5ccc-440b-862d-6cd71e49d5c5",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Quasit",
     "type": "fiend",
     "src": "MM p.63",
@@ -10444,7 +10444,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "e6555a35-9648-48ae-b5cd-369fcd6078e6",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Quipper",
     "type": "beast",
     "src": "MM p.335",
@@ -10456,7 +10456,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "32f2ce1b-8d0f-4f42-a7f1-534a4239e39d",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Rakshasa",
     "type": "fiend",
     "src": "MM p.257",
@@ -10481,7 +10481,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "cc2b52f9-a732-4eb7-8a41-66f9af7eb802",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Rat",
     "type": "beast",
     "src": "MM p.335",
@@ -10493,7 +10493,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "d5de086f-f0dd-4538-ac30-c84b2ec2b011",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Raven",
     "type": "beast",
     "src": "MM p.335",
@@ -10505,7 +10505,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "16e49c6d-6104-4840-aef4-b2e778502e31",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Red Dragon Wyrmling",
     "type": "dragon",
     "src": "MM p.98",
@@ -10542,7 +10542,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "0a0e41b7-9cd5-4bfd-9f60-a90a2ce92326",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Red Slaad",
     "type": "aberration",
     "src": "MM p.276",
@@ -10567,7 +10567,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "b7c32a64-e9ae-4991-830d-5d66dbb32393",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Reef Shark",
     "type": "beast",
     "src": "MM p.336",
@@ -10592,7 +10592,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "43f8f9d2-09b3-4e49-b432-07ea1e470adf",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Remorhaz",
     "type": "monstrosity",
     "src": "MM p.258",
@@ -10629,7 +10629,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "e36b1136-9241-42d3-b4da-714758a94c92",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Revenant",
     "type": "undead",
     "src": "MM p.259",
@@ -10654,7 +10654,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "69977337-0191-42ed-a411-3ec48bc758e9",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Rhinoceros",
     "type": "beast",
     "src": "MM p.336",
@@ -10679,7 +10679,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "0561bc0a-15ef-447a-92f0-992afe5867c2",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Riding Horse",
     "type": "beast",
     "src": "MM p.336",
@@ -10704,7 +10704,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "093f0010-f0bb-4f18-8ec3-46a75a0b4023",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Roc",
     "type": "monstrosity",
     "src": "MM p.260",
@@ -10729,7 +10729,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "ad78200a-7df2-45a2-9ab9-9fc2e4fed2dc",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Roper",
     "type": "monstrosity",
     "src": "MM p.261",
@@ -10754,7 +10754,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "a4fef78a-ed37-4149-908f-94f153be43da",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Rug of Smothering",
     "type": "construct",
     "src": "MM p.20",
@@ -10779,7 +10779,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "1b5cbe2e-6639-4874-978c-e0bf7c635e55",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Rust Monster",
     "type": "monstrosity",
     "src": "MM p.262",
@@ -10804,7 +10804,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "6ac483b7-0a13-49d2-90fc-4b4df1132cb9",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Saber-Toothed Tiger",
     "type": "beast",
     "src": "MM p.336",
@@ -10841,7 +10841,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "daf7b989-c1b6-4274-ace8-454a1645e135",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Sahuagin",
     "type": "humanoid",
     "src": "MM p.263",
@@ -10877,7 +10877,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "734c22ff-b9f1-45c7-8093-25936ae24377",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Sahuagin Baron",
     "type": "humanoid",
     "src": "MM p.264",
@@ -10913,7 +10913,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "63701bd4-a4e2-4963-be29-2ab1cc8911d7",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Sahuagin Priestess",
     "type": "humanoid",
     "src": "MM p.264",
@@ -10938,7 +10938,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "cf5dfbc5-4129-45d1-a941-23f800fd7896",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Salamander",
     "type": "elemental",
     "src": "MM p.266",
@@ -10963,7 +10963,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "a548caaa-fcfa-4bb2-a494-682deeed0787",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Satyr",
     "type": "fey",
     "src": "MM p.267",
@@ -11012,7 +11012,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "d028e231-a1fb-40dd-b414-55148e18ee9d",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Scarecrow",
     "type": "construct",
     "src": "MM p.268",
@@ -11037,7 +11037,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "c4fa361f-7965-4648-a973-b81bb09f3c23",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Scorpion",
     "type": "beast",
     "src": "MM p.337",
@@ -11062,7 +11062,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "d900d814-c6dd-4cbe-8c2d-39ddd72d99e1",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Scout",
     "type": "humanoid",
     "src": "MM p.349",
@@ -11099,7 +11099,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "68b2c933-6745-4d38-8e4b-618f1890ffb6",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Sea Hag",
     "type": "fey",
     "src": "MM p.179",
@@ -11124,7 +11124,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "69340f93-c0d1-41bd-80c4-8e40272c6816",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Sea Horse",
     "type": "beast",
     "src": "MM p.337",
@@ -11136,7 +11136,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "85feab16-971b-44bb-b34c-2876e7e3328d",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Shadow",
     "type": "undead",
     "src": "MM p.269",
@@ -11161,7 +11161,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "ae0bd78f-e017-4039-916c-79c4ccdb2e6c",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Shadow Demon",
     "type": "fiend",
     "src": "MM p.64",
@@ -11186,7 +11186,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "995a706e-a370-4266-bb75-4414117c8bd2",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Shambling Mound",
     "type": "plant",
     "src": "MM p.270",
@@ -11223,7 +11223,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "c8619ec3-ffbc-4426-82f5-73d32e2647c8",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Shield Guardian",
   "type": "construct",
   "src": "MM p.271",
@@ -11270,7 +11270,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "b8db536e-8650-46bf-9854-813aec2ad696",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Shrieker",
     "type": "plant",
     "src": "MM p.138",
@@ -11282,7 +11282,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "1db5aee7-7980-4744-a363-9c6bd711b481",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Silver Dragon Wyrmling",
     "type": "dragon",
     "src": "MM p.118",
@@ -11319,7 +11319,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "04618ac6-d0c5-4b03-afd1-29ef09df5896",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Skeleton",
     "type": "undead",
     "src": "MM p.272",
@@ -11356,7 +11356,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "bb894a8c-f6a5-4f5a-a413-bc6feae7f3ad",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Slaad Tadpole",
     "type": "aberration",
     "src": "MM p.276",
@@ -11381,7 +11381,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "48ad329d-d7ad-4712-b513-83d1aa3bad2c",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Smoke Mephit",
     "type": "elemental",
     "src": "MM p.217",
@@ -11406,7 +11406,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "919209c0-7d15-49ae-80f8-335340310c55",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Solar",
     "type": "celestial",
     "src": "MM p.18",
@@ -11454,7 +11454,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "779419ba-11b2-4a11-bb91-91d708cf22d6",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Spectator",
     "type": "aberration",
     "src": "MM p.30",
@@ -11479,7 +11479,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "892c7766-d7d6-40fa-823b-9a8d1c297b8f",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Specter",
     "type": "undead",
     "src": "MM p.279",
@@ -11504,7 +11504,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "361d0f09-1cae-44e3-b50d-97ea83ca59eb",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Spider",
     "type": "beast",
     "src": "MM p.337",
@@ -11529,7 +11529,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "ad8cc049-02f2-4944-a148-d2476f3f9b6d",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Spined Devil",
     "type": "fiend",
     "src": "MM p.78",
@@ -11554,7 +11554,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "149491f8-4f34-4593-901c-c821a697eda0",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Spirit Naga",
   "type": "monstrosity",
   "src": "MM p.234",
@@ -11579,7 +11579,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "9c66c68f-3866-4a57-bdb9-4de651ab83e1",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Sprite",
     "type": "fey",
     "src": "MM p.283",
@@ -11591,7 +11591,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "a82de5a3-4308-475a-b963-41d0c4cba7da",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Spy",
     "type": "humanoid",
     "src": "MM p.349",
@@ -11616,7 +11616,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "553dc32b-f805-4a11-a2c6-2c06b32b35b5",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Steam Mephit",
     "type": "elemental",
     "src": "MM p.217",
@@ -11653,7 +11653,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "e60ae451-2bdc-4838-9085-fc30e23ddf88",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Stirge",
     "type": "beast",
     "src": "MM p.284",
@@ -11678,7 +11678,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "0d47b2de-a50a-4c76-9323-0b3291db0241",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Stone Giant",
     "type": "giant",
     "src": "MM p.156",
@@ -11715,7 +11715,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "f528471e-bcaf-4642-b3b5-5bb17a183eec",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Stone Golem",
     "type": "construct",
     "src": "MM p.170",
@@ -11740,7 +11740,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "e174dd08-0676-40fb-9beb-611949210ca0",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Storm Giant",
     "type": "giant",
     "src": "MM p.156",
@@ -11789,7 +11789,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "28b285ab-5f32-4505-83d8-3f09a6dd2d31",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Succubus",
     "type": "fiend",
     "src": "MM p.285",
@@ -11826,7 +11826,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "77d65f4e-5b4e-4bc6-aecc-143b94d6178c",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Swarm of Bats",
     "type": "beast",
     "src": "MM p.337",
@@ -11851,7 +11851,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "11b34766-a996-4836-ab35-82f4c07c2fc0",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Swarm of Beetles",
     "type": "beast",
     "src": "MM p.338",
@@ -11876,7 +11876,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "4bb805c4-2971-444d-acb5-1deee1e43050",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Swarm of Centipedes",
     "type": "beast",
     "src": "MM p.338",
@@ -11901,7 +11901,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "0a43ec3d-c431-4e25-b5ab-a272bd025d34",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Swarm of Insects",
     "type": "beast",
     "src": "MM p.338",
@@ -11926,7 +11926,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "9278a3cc-da9b-4d10-815b-d36efc7a4e49",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Swarm of Poisonous Snakes",
     "type": "beast",
     "src": "MM p.338",
@@ -11951,7 +11951,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "bf36aada-d1e5-4f0e-a12b-1a3c3914d49c",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Swarm of Quippers",
     "type": "beast",
     "src": "MM p.338",
@@ -11976,7 +11976,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "674dca8b-4f22-41a9-9c33-bf1d7517a26b",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Swarm of Rats",
     "type": "beast",
     "src": "MM p.339",
@@ -12001,7 +12001,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "057221a1-fa13-48b5-8c70-5bbf845120d9",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Swarm of Ravens",
     "type": "beast",
     "src": "MM p.339",
@@ -12026,7 +12026,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "ac59caf5-7b50-4903-81b4-43578f3e3f4d",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Swarm of Spiders",
     "type": "beast",
     "src": "MM p.338",
@@ -12051,7 +12051,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "d7131094-72f9-4e64-9403-0a12bc13fd06",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Swarm of Wasps",
     "type": "beast",
     "src": "MM p.338",
@@ -12076,7 +12076,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "953df334-be8b-4122-95c5-f60c85aa1ac3",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Tarrasque",
     "type": "monstrosity",
     "src": "MM p.286",
@@ -12113,7 +12113,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "b9fdb47a-5263-46c8-b338-d08fcb084adc",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Thri-kreen",
     "type": "humanoid",
     "src": "MM p.288",
@@ -12138,7 +12138,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "8da999bc-c6b9-453e-93de-11221f2ccbd8",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Thug",
     "type": "humanoid",
     "src": "MM p.350",
@@ -12175,7 +12175,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "52a57b38-fa99-4a5f-ae9a-988486fdbe56",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Tiger",
     "type": "beast",
     "src": "MM p.339",
@@ -12212,7 +12212,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "1604711e-b3a6-40f6-a6ef-744da5cb572c",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Treant",
     "type": "plant",
     "src": "MM p.289",
@@ -12249,7 +12249,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "b43e48dd-e901-4953-b79b-f8609b2c79f0",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Tribal Warrior",
     "type": "humanoid",
     "src": "MM p.350",
@@ -12274,7 +12274,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "4183e1af-4d69-44a0-887d-5eac117f7101",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Triceratops",
     "type": "beast",
     "src": "MM p.80",
@@ -12311,7 +12311,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "bdf3e681-3262-4ec6-9966-f5e2e879434c",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Tridrone",
     "type": "construct",
     "src": "MM p.225",
@@ -12336,7 +12336,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "019f2b67-aa98-49dd-8fe6-30a243c877ab",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Troglodyte",
     "type": "humanoid",
     "src": "MM p.290",
@@ -12361,7 +12361,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "4f724228-356b-44be-8e49-dec2e9fe8a2c",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Troll",
     "type": "giant",
     "src": "MM p.291",
@@ -12386,7 +12386,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "2965f7cc-f4de-4bc0-b4ff-c08cb3f16781",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Twig Blight",
     "type": "plant",
     "src": "MM p.32",
@@ -12411,7 +12411,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "4c896294-4b4d-48f0-bcc3-1e8f40675d48",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Tyrannosaurus Rex",
     "type": "beast",
     "src": "MM p.80",
@@ -12436,7 +12436,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "cb9926c2-c95e-487f-90fa-c0591bd5dc1e",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Ultroloth",
     "type": "fiend",
     "src": "MM p.314",
@@ -12484,7 +12484,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "38d35170-7348-4102-bac8-4d925f98b7c4",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Umber Hulk",
     "type": "monstrosity",
     "src": "MM p.292",
@@ -12509,7 +12509,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "4b6d1e97-d3f0-4667-b772-eb7742ccbcd8",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Unicorn",
     "type": "celestial",
     "src": "MM p.294",
@@ -12534,7 +12534,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "2b663478-6aa1-4cab-822c-75a164ef9114",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Vampire",
     "type": "undead",
     "src": "MM p.297",
@@ -12582,7 +12582,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "a2bfe648-cfca-4812-883e-c021d5fbb68b",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Vampire Spawn",
   "type": "undead",
   "src": "MM p.298",
@@ -12607,7 +12607,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "5d921ed8-b12c-42c9-8725-64897de91d31",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Vampire Spellcaster",
   "type": "undead",
   "src": "MM p.298",
@@ -12655,7 +12655,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "9f6d99c6-920a-4d41-b835-db8bef5219fc",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Vampire Warrior",
   "type": "undead",
   "src": "MM p.298",
@@ -12703,7 +12703,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "bd61fe23-3cc4-40d5-a6ff-542df1904128",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Veteran",
   "type": "humanoid",
   "src": "MM p.350",
@@ -12728,7 +12728,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "7f778d0e-14ed-45cc-9ae5-8c5a21b0b885",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Vine Blight",
     "type": "plant",
     "src": "MM p.32",
@@ -12753,7 +12753,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "1a63be0e-7724-40e5-916c-4306b1030956",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Violet Fungus",
     "type": "plant",
     "src": "MM p.138",
@@ -12778,7 +12778,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "623ea38d-867b-4b2f-982e-a877005ce934",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Vrock",
     "type": "fiend",
     "src": "MM p.64",
@@ -12815,7 +12815,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "344ffcc8-8bbc-4eb5-a6d5-38300245b7f0",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Vulture",
     "type": "beast",
     "src": "MM p.339",
@@ -12840,7 +12840,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "0f6232bf-44b7-49d4-87c8-1715ea13c7f7",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Warhorse",
     "type": "beast",
     "src": "MM p.340",
@@ -12865,7 +12865,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "13e1517f-9f14-4cad-82d4-14d32f1d39de",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Warhorse Skeleton",
     "type": "undead",
     "src": "MM p.273",
@@ -12890,7 +12890,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "9588b5b5-c785-4fc4-900c-3a57f9d2f3c0",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Water Elemental",
     "type": "elemental",
     "src": "MM p.125",
@@ -12927,7 +12927,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "120d02c4-0eca-4406-854b-0c1b6aeaccf4",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Water Weird",
     "type": "elemental",
     "src": "MM p.299",
@@ -12952,7 +12952,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "be1bffb2-4551-4d98-a35d-8b95c00a05cc",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Weasel",
     "type": "beast",
     "src": "MM p.340",
@@ -12964,7 +12964,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "cc14aaf2-4997-455c-b058-72c7c1636cc9",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Werebear",
     "type": "humanoid",
     "src": "MM p.208",
@@ -13013,7 +13013,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "f1bcc01b-a7e8-4448-98f0-8dc474e4cf1f",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Wereboar",
     "type": "humanoid",
     "src": "MM p.209",
@@ -13050,7 +13050,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "8f74f0e0-abf2-41ba-96d9-5a97c353c6f1",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Wererat",
     "type": "humanoid",
     "src": "MM p.209",
@@ -13099,7 +13099,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "cbb3dfed-f622-4989-93dc-3a2e211202ee",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Weretiger",
     "type": "humanoid",
     "src": "MM p.210",
@@ -13160,7 +13160,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "ead12594-aa80-49b0-80d7-7ba1e36a0c72",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Werewolf",
     "type": "humanoid",
     "src": "MM p.211",
@@ -13209,7 +13209,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "033bfa67-56f0-485a-8973-410c9a287683",
-    "mode": "custom",
+    "mode": "monster",
     "name": "White Dragon Wyrmling",
     "type": "dragon",
     "src": "MM p.102",
@@ -13246,7 +13246,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "c5820f6e-9beb-476e-82b0-65519cb2b029",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Wight",
     "type": "undead",
     "src": "MM p.300",
@@ -13283,7 +13283,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "15f94887-c4bc-4ece-92f3-389ed74e83cd",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Will-o'-Wisp",
     "type": "undead",
     "src": "MM p.301",
@@ -13308,7 +13308,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "9acdf7cd-7d55-4e85-aa4b-7c1d0753407d",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Winged Kobold",
     "type": "humanoid",
     "src": "MM p.195",
@@ -13345,7 +13345,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "e1a8f8ca-c85d-4aa1-8809-2ca55b38a18d",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Winter Wolf",
     "type": "monstrosity",
     "src": "MM p.340",
@@ -13382,7 +13382,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "faec22c5-04d8-4f9f-9832-67010db7f729",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Wolf",
     "type": "beast",
     "src": "MM p.341",
@@ -13407,7 +13407,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "c0827e2d-0e09-4ed5-923a-88db5f29eeef",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Worg",
     "type": "monstrosity",
     "src": "MM p.341",
@@ -13432,7 +13432,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "7501d470-09f1-46da-ac1c-fbd856f59634",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Wraith",
     "type": "undead",
     "src": "MM p.302",
@@ -13457,7 +13457,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "4d79fca0-701f-44bb-a1c7-04f5ea1d8486",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Wyvern",
     "type": "dragon",
     "src": "MM p.303",
@@ -13482,7 +13482,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "13e872fe-c560-4eba-936e-1b8cbef43337",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Xorn",
     "type": "elemental",
     "src": "MM p.304",
@@ -13507,7 +13507,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "779db6e1-3d30-403c-a195-891c794ceff9",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Yeti",
     "type": "monstrosity",
     "src": "MM p.305",
@@ -13544,7 +13544,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "c237d09b-8523-4568-9f81-360d19261352",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Yochlol",
     "type": "fiend",
     "src": "MM p.65",
@@ -13569,7 +13569,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "63f00587-a88a-46fe-a1a4-021062c87eb6",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Young Black Dragon",
     "type": "dragon",
     "src": "MM p.88",
@@ -13606,7 +13606,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "a29c82ac-1927-4b77-be04-2a0ba136c460",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Young Blue Dragon",
     "type": "dragon",
     "src": "MM p.91",
@@ -13643,7 +13643,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "00ca67a2-d043-4d2a-be00-7b4291cb8bb9",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Young Brass Dragon",
     "type": "dragon",
     "src": "MM p.105",
@@ -13680,7 +13680,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "b6d3d343-6ea6-4ace-8518-21ca9adb0e58",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Young Bronze Dragon",
     "type": "dragon",
     "src": "MM p.108",
@@ -13717,7 +13717,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "facc566f-4946-49f8-881b-6c1983bc4f69",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Young Copper Dragon",
     "type": "dragon",
     "src": "MM p.112",
@@ -13754,7 +13754,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "e675da60-2924-4262-aca8-aeb06d2b084c",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Young Gold Dragon",
     "type": "dragon",
     "src": "MM p.115",
@@ -13791,7 +13791,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "d7671e4d-05a9-42c9-ad47-43db92297f9b",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Young Green Dragon",
     "type": "dragon",
     "src": "MM p.94",
@@ -13828,7 +13828,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "b26b04c5-40d9-4705-b3b5-22584f8ff2e1",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Young Red Dragon",
     "type": "dragon",
     "src": "MM p.98",
@@ -13865,7 +13865,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "e02dc654-27cf-45f4-ba80-b3efff2b3bfd",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Young Red Shadow Dragon",
     "type": "dragon",
     "src": "MM p.85",
@@ -13902,7 +13902,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "057bbb6b-04dc-46d9-bbb2-3ade0f93ad57",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Young Remorhaz",
     "type": "monstrosity",
     "src": "MM p.258",
@@ -13927,7 +13927,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "d65dca4e-847b-42a1-bcde-d170578f407a",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Young Silver Dragon",
     "type": "dragon",
     "src": "MM p.118",
@@ -13964,7 +13964,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "b168761b-a826-4f9c-80be-c0eed924f45b",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Young White Dragon",
     "type": "dragon",
     "src": "MM p.101",
@@ -14001,7 +14001,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "0b55489e-6810-4197-bb16-c126ef5ce796",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Yuan-ti Abomination",
     "type": "monstrosity",
     "src": "MM p.308",
@@ -14026,7 +14026,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "975b267b-dc24-4e76-92a2-f3ebd21c8898",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Yuan-ti Malison (Type 1)",
     "type": "monstrosity",
     "src": "MM p.309",
@@ -14075,7 +14075,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "58d8229a-59bb-417b-ae10-c95e5115d38b",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Yuan-ti Malison (Type 2)",
     "type": "monstrosity",
     "src": "MM p.309",
@@ -14100,7 +14100,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "4c831c64-6c49-484f-8436-bbeec28bc942",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Yuan-ti Malison (Type 3)",
     "type": "monstrosity",
     "src": "MM p.309",
@@ -14161,7 +14161,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "368dc9a9-cfbd-4936-bc17-a468ca38ff73",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Yuan-ti Pureblood",
     "type": "humanoid",
     "src": "MM p.310",
@@ -14198,7 +14198,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "574eb146-56f3-43c6-b179-a1d1a618814d",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Zombie",
     "type": "undead",
     "src": "MM p.316",
@@ -14223,7 +14223,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "9f65bf3c-ef12-4bba-b22e-182e05db33d6",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Abjurer Wizard",
     "type": "humanoid",
     "src": "MPMM p.260",
@@ -14260,7 +14260,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "06a392a3-f266-4ae2-be06-e89978b3f519",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Adult Kruthik",
     "type": "monstrosity",
     "src": "MPMM p.169",
@@ -14297,7 +14297,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "d8d40e4a-f289-472e-838d-f2f563cd1fd9",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Adult Oblex",
     "type": "ooze",
     "src": "MPMM p.198",
@@ -14322,7 +14322,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "a11b5bc3-94e1-4475-b714-15a1913e6bd4",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Air Elemental Myrmidon",
   "type": "elemental",
   "src": "MPMM p.122",
@@ -14359,7 +14359,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "0b11d0e4-ce01-428a-bd8c-6b989b849587",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Alhoon",
   "type": "undead",
   "src": "MPMM p.43",
@@ -14396,7 +14396,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "ccd0b4cd-7818-4063-a90e-e86a0089f38b",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Alkilith",
   "type": "fiend",
   "src": "MPMM p.44",
@@ -14421,7 +14421,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "0d488d8b-7acd-4a55-83f3-63de1a2b9bcd",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Allip",
   "type": "undead",
   "src": "MPMM p.45",
@@ -14446,7 +14446,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "32eb68e2-e3ee-44cb-9be0-0d53c1772328",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Amnizu",
   "type": "fiend",
   "src": "MPMM p.46",
@@ -14495,7 +14495,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "ae9d26e7-d36c-4ea0-82e3-c69863c43c49",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Angry Sorrowsworn",
   "type": "monstrosity",
   "src": "MPMM p.222",
@@ -14520,7 +14520,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "3ed95e22-bf32-464d-b88b-76d1478ba75e",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Annis Hag",
   "type": "fey",
   "src": "MPMM p.47",
@@ -14557,7 +14557,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "b6eaa528-94ba-4351-81fa-1b7815e8060c",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Apprentice Wizard",
   "type": "humanoid",
   "src": "MPMM p.259",
@@ -14594,7 +14594,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "947716b0-2ac8-4d30-bc25-a015aad22ef0",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Archdruid",
   "type": "humanoid",
   "src": "MPMM p.48",
@@ -14653,7 +14653,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "db451e14-6681-458b-9016-dca1ceee7c83",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Archer",
   "type": "humanoid",
   "src": "MPMM p.49",
@@ -14678,7 +14678,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "0ae504fa-1ecc-4972-be40-2a4a2ee49f68",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Armanite",
   "type": "fiend",
   "src": "MPMM p.50",
@@ -14715,7 +14715,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "955fb4b5-cbd5-4f16-aa3d-5cf3ab37922b",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Astral Dreadnought",
   "type": "monstrosity",
   "src": "MPMM p.51",
@@ -14752,7 +14752,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "861f7459-036b-4f1a-972e-78f7ede64ad7",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Aurochs",
     "type": "beast",
     "src": "MPMM p.71",
@@ -14777,7 +14777,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "cea84c99-1130-408e-950f-5880def85f9d",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Autumn Eladrin",
     "type": "fey",
     "src": "MPMM p.115",
@@ -14825,7 +14825,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "48505162-dc43-4186-a3bd-808a250df5ee",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Babau",
   "type": "fiend",
   "src": "MPMM p.52",
@@ -14850,7 +14850,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "99f3465a-0c49-445e-ac65-aed0067534c2",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Bael",
   "type": "fiend",
   "src": "MPMM p.54",
@@ -14910,7 +14910,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "995e2325-024b-4a0a-95c7-09358cde65cd",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Balhannoth",
   "type": "aberration",
   "src": "MPMM p.55",
@@ -14947,7 +14947,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "2e842bf4-1155-4a1d-a5eb-851fba0ecd9c",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Banderhobb",
   "type": "monstrosity",
   "src": "MPMM p.56",
@@ -14972,7 +14972,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "f95ac642-fc4b-4002-9340-a6f1b69c8d0e",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Baphomet",
   "type": "fiend",
   "src": "MPMM p.58",
@@ -15009,7 +15009,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "9e7de75e-9f3b-42f4-88d2-a901ba372190",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Bard",
   "type": "humanoid",
   "src": "MPMM p.59",
@@ -15057,7 +15057,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "75c83b13-a71f-4512-8695-ec2a9fa0d9e7",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Barghest",
   "type": "fiend",
   "src": "MPMM p.60",
@@ -15082,7 +15082,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "18b01640-f11a-4242-97c3-debbe1863e6b",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Berbalang",
   "type": "aberration",
   "src": "MPMM p.61",
@@ -15107,7 +15107,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "0f5c1142-9811-41d1-9534-44d092632c3e",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Bheur Hag",
   "type": "fey",
   "src": "MPMM p.62",
@@ -15144,7 +15144,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "60bd2b09-9d42-4cc2-941d-28f28ec3fd8d",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Black Abishai",
   "type": "fiend",
   "src": "MPMM p.38",
@@ -15169,7 +15169,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "6ef8b06d-d289-4f8d-848a-2a33ee06f01d",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Blackguard",
   "type": "humanoid",
   "src": "MPMM p.63",
@@ -15194,7 +15194,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "3dd62147-27b8-417c-b7ec-61c0cf02a1bc",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Blue Abishai",
   "type": "fiend",
   "src": "MPMM p.39",
@@ -15219,7 +15219,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "f5f6ad8d-502e-493e-98a7-59aa2d175798",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Bodak",
   "type": "undead",
   "src": "MPMM p.64",
@@ -15267,7 +15267,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "466f42cd-64f9-45fc-8990-e3fc7c0777a1",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Boggle",
     "type": "fey",
     "src": "MPMM p.65",
@@ -15279,7 +15279,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "e579802e-a2ed-4526-b88d-3e892a8c1b6a",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Boneclaw",
     "type": "undead",
     "src": "MPMM p.66",
@@ -15316,7 +15316,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "fbfd8123-5308-4de3-993f-6e11e62befe3",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Brontosaurus",
     "type": "beast",
     "src": "MPMM p.95",
@@ -15353,7 +15353,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "e26a691c-66ff-4789-9f5f-e1f3a8c95320",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Bulezau",
     "type": "fiend",
     "src": "MPMM p.67",
@@ -15390,7 +15390,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "e91d1db6-8817-4aec-9a21-c4d3990726c6",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Cadaver Collector",
   "type": "construct",
   "src": "MPMM p.68",
@@ -15415,7 +15415,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "f41d4beb-5dd2-4f3c-a1d0-2b4961d7049e",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Canoloth",
   "type": "fiend",
   "src": "MPMM p.69",
@@ -15440,7 +15440,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "20dbaf7a-3df6-4751-b31a-d7c651e1fec6",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Catoblepas",
   "type": "monstrosity",
   "src": "MPMM p.70",
@@ -15477,7 +15477,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "c36c962f-1474-4c55-b1f2-e25125feebd9",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Cave Fisher",
     "type": "monstrosity",
     "src": "MPMM p.73",
@@ -15502,7 +15502,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "7958ed84-bcb4-490c-ab0b-0c6afaabcbfc",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Champion",
     "type": "humanoid",
     "src": "MPMM p.74",
@@ -15550,7 +15550,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "c6eb543f-29a4-462b-a36e-fdd327624a98",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Chitine",
     "type": "monstrosity",
     "src": "MPMM p.75",
@@ -15575,7 +15575,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "2d5657c5-039b-4c4e-983a-4e840012f1c2",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Choker",
     "type": "aberration",
     "src": "MPMM p.76",
@@ -15600,7 +15600,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "6c3dc9fa-369a-4774-81dd-5523ce3a651f",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Choldrith",
     "type": "monstrosity",
     "src": "MPMM p.77",
@@ -15625,7 +15625,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "62d093f1-87a1-458a-8250-e8486fc162c5",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Clockwork Bronze Scout",
     "type": "construct",
     "src": "MPMM p.79",
@@ -15662,7 +15662,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "59a7505c-3a09-4bb4-81cb-ef5a57e3e093",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Clockwork Iron Cobra",
     "type": "construct",
     "src": "MPMM p.79",
@@ -15687,7 +15687,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "7d20584f-5c45-492b-bf37-6b1ff161473c",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Clockwork Oaken Bolter",
     "type": "construct",
     "src": "MPMM p.80",
@@ -15724,7 +15724,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "080ce702-ea99-40cd-95c1-3b3a7fca5741",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Clockwork Stone Defender",
   "type": "construct",
   "src": "MPMM p.80",
@@ -15760,7 +15760,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "8338afea-93e8-4bdc-a0c9-5c8edd14c27a",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Cloud Giant Smiling One",
   "type": "giant",
   "src": "MPMM p.81",
@@ -15785,7 +15785,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "8338afea-93e8-4bdc-a0c9-5c8edd14c27a",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Cloud Giant Smiling One",
   "type": "giant",
   "src": "MPMM p.81",
@@ -15810,7 +15810,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "499e661f-b592-49e6-8673-99cc30a1e585",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Corpse Flower",
   "type": "plant",
   "src": "MPMM p.82",
@@ -15846,7 +15846,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "5ab796f4-66a1-4180-9b6f-aa167656d2ac",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Cranium Rat",
     "type": "aberration",
     "src": "MPMM p.83",
@@ -15858,7 +15858,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "e5492281-46ff-4c82-8fa4-dd57864e4630",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Darkling",
     "type": "fey",
     "src": "MPMM p.84",
@@ -15883,7 +15883,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "9196d6c3-7312-4e93-a579-e6ae55d62bd3",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Darkling Elder",
     "type": "fey",
     "src": "MPMM p.84",
@@ -15908,7 +15908,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "5ba54709-efeb-447f-9382-3e0588e763dd",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Death Kiss",
     "type": "aberration",
     "src": "MPMM p.85",
@@ -15945,7 +15945,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "e70a9579-27c5-424f-b1a5-091a48c21016",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Deathlock",
   "type": "undead",
   "src": "MPMM p.86",
@@ -15970,7 +15970,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "933096e6-5404-4043-9268-a6348e09eaec",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Deathlock Mastermind",
     "type": "undead",
     "src": "MPMM p.87",
@@ -15995,7 +15995,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "2a6f4ff6-3d02-4135-ad29-629aa04dd590",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Deathlock Wight",
     "type": "undead",
     "src": "MPMM p.87",
@@ -16020,7 +16020,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "d141d8b8-2557-42a8-a596-290a5629a567",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Deep Rothé",
     "type": "beast",
     "src": "MPMM p.71",
@@ -16045,7 +16045,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "d3cf6e05-a723-462a-9fe9-4de969bd5eb5",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Deep Scion",
     "type": "monstrosity",
     "src": "MPMM p.88",
@@ -16070,7 +16070,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "d9a31fad-5ddf-49cf-b747-b1676ec34a84",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Deinonychus",
   "type": "beast",
   "src": "MPMM p.95",
@@ -16095,7 +16095,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "bcb6ab50-a138-475f-a92b-8821eea05b64",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Demogorgon",
   "type": "fiend",
   "src": "MPMM p.90",
@@ -16132,7 +16132,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "f129a5ce-18a4-42cb-9c24-0763534e0cf7",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Derro",
     "type": "aberration",
     "src": "MPMM p.91",
@@ -16169,7 +16169,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "9b9db92f-5b47-4c10-9d95-2e8b38e3d0d4",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Derro Savant",
     "type": "aberration",
     "src": "MPMM p.92",
@@ -16194,7 +16194,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "89763784-00d0-48d8-988f-26802abf3b86",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Devourer",
     "type": "undead",
     "src": "MPMM p.93",
@@ -16231,7 +16231,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "80a4908a-f3ac-4181-9eff-119a4e068256",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Dhergoloth",
   "type": "fiend",
   "src": "MPMM p.94",
@@ -16268,7 +16268,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "bea6f173-1373-4f2c-b2db-81849fce1325",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Dimetrodon",
     "type": "beast",
     "src": "MPMM p.95",
@@ -16293,7 +16293,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "34fedfec-2658-4f71-aa84-e2ba8a7d8d49",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Dire Troll",
     "type": "giant",
     "src": "MPMM p.246",
@@ -16341,7 +16341,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "a374bdda-802f-4f45-a139-b985e657e77d",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Diviner Wizard",
   "type": "humanoid",
   "src": "MPMM p.261",
@@ -16378,7 +16378,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "010b26ec-0a78-491e-bf6a-39f8ac8ed34d",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Dolphin",
     "type": "beast",
     "src": "MPMM p.97",
@@ -16403,7 +16403,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "a215c70c-7de2-4070-890c-9344b0f3f5e7",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Dolphin Delighter",
     "type": "fey",
     "src": "MPMM p.97",
@@ -16428,7 +16428,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "20c7b41f-3a97-421c-a1a6-01b1dff2c168",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Draegloth",
     "type": "fiend",
     "src": "MPMM p.98",
@@ -16453,7 +16453,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "0e6663cd-4666-46c3-9f68-b84300189921",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Drow Arachnomancer",
   "type": "humanoid",
   "src": "MPMM p.99",
@@ -16478,7 +16478,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "d4d70922-e881-4a58-9ac5-c09f1180e4e6",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Drow Favored Consort",
   "type": "humanoid",
   "src": "MPMM p.100",
@@ -16514,7 +16514,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "86fe8cbf-04c6-4df0-bc92-7032bbf1eb2d",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Drow House Captain",
   "type": "humanoid",
   "src": "MPMM p.101",
@@ -16572,7 +16572,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "25cb4935-5242-461d-a04e-698f48dc7c2e",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Drow Inquisitor",
   "type": "humanoid",
   "src": "MPMM p.102",
@@ -16609,7 +16609,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "965e2df5-41e7-4e5a-bcd0-acb1955372c8",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Drow Matron Mother",
   "type": "humanoid",
   "src": "MPMM p.104",
@@ -16657,7 +16657,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "8057809b-163d-4585-ad7a-c07967ccb6f8",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Drow Shadowblade",
   "type": "humanoid",
   "src": "MPMM p.105",
@@ -16682,7 +16682,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "ca3e1dc0-365e-415d-8b6e-24177944ff45",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Duergar Despot",
   "type": "humanoid",
   "src": "MPMM p.107",
@@ -16719,7 +16719,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "45c3eee5-2e90-42b8-a730-97eae600ee15",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Duergar Hammerer",
   "type": "construct",
   "src": "MPMM p.112",
@@ -16744,7 +16744,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "79188723-7167-4775-9362-3c6fd0624611",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Duergar Kavalrachni",
   "type": "humanoid",
   "src": "MPMM p.107",
@@ -16769,7 +16769,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "4fe0fce5-427a-4823-a15f-f107872e7322",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Duergar Mind Master",
   "type": "humanoid",
   "src": "MPMM p.108",
@@ -16794,7 +16794,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "63db243c-4b0f-4a2d-ba33-62542cf93951",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Duergar Screamer",
   "type": "construct",
   "src": "MPMM p.111",
@@ -16831,7 +16831,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "5671953b-faab-4b59-9eab-f76b1bc05d9e",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Duergar Soulblade",
     "type": "humanoid",
     "src": "MPMM p.109",
@@ -16856,7 +16856,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "15fd4615-c90c-4c5a-8214-2a68c0cc7b9c",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Duergar Stone Guard",
     "type": "humanoid",
     "src": "MPMM p.110",
@@ -16893,7 +16893,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "e80741ad-7578-48c5-b22d-fe5dce3abb09",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Duergar Warlord",
   "type": "humanoid",
   "src": "MPMM p.111",
@@ -16940,7 +16940,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "063d6ed3-2625-4fb6-a42e-4b5ef3f36cc5",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Duergar Xarrorn",
     "type": "humanoid",
     "src": "MPMM p.111",
@@ -16977,7 +16977,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "ac3ff074-c0ac-4b89-b6b1-5abd9b635eab",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Dybbuk",
     "type": "fiend",
     "src": "MPMM p.113",
@@ -17013,7 +17013,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "3316cd33-cf2a-4668-afca-c63e489cfd1f",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Earth Elemental Myrmidon",
     "type": "elemental",
     "src": "MPMM p.122",
@@ -17050,7 +17050,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "70966c2a-bf46-4968-87dd-152e78c9baf6",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Eidolon",
     "type": "undead",
     "src": "MPMM p.114",
@@ -17062,7 +17062,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "f6fb4fed-7f59-4cf6-9ead-d5757c9d1c57",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Elder Brain",
     "type": "aberration",
     "src": "MPMM p.120",
@@ -17111,7 +17111,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "cfb1927c-f1d2-4fa5-bb1b-f64ff8db9714",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Elder Oblex",
   "type": "ooze",
   "src": "MPMM p.199",
@@ -17148,7 +17148,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "6abf09d1-a835-4a71-9461-d9cd0b44b5e4",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Elder Tempest",
   "type": "elemental",
   "src": "MPMM p.121",
@@ -17197,7 +17197,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "cee501b6-de3f-4b9f-af5b-775240774d4e",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Enchanter Wizard",
     "type": "humanoid",
     "src": "MPMM p.261",
@@ -17222,7 +17222,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "9af37558-e745-41a8-982b-61ad9008ed90",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Evoker Wizard",
     "type": "humanoid",
     "src": "MPMM p.262",
@@ -17259,7 +17259,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "fc172007-500a-4831-83f7-962c16df4ea7",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Female Steeder",
     "type": "monstrosity",
     "src": "MPMM p.231",
@@ -17284,7 +17284,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "88d7ce3b-4a1a-4611-9e35-0a8279af249d",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Fire Elemental Myrmidon",
     "type": "elemental",
     "src": "MPMM p.123",
@@ -17321,7 +17321,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "e58ebb6f-c36a-4e6a-8c73-781df439ef22",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Fire Giant Dreadnought",
     "type": "giant",
     "src": "MPMM p.124",
@@ -17358,7 +17358,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "ca71f48b-70f3-4059-a6fd-eb31a433f57e",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Firenewt Warlock of Imix",
     "type": "elemental",
     "src": "MPMM p.125",
@@ -17395,7 +17395,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "174a7a8a-f263-4c6d-91d8-7e00e1e950b0",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Firenewt Warrior",
     "type": "elemental",
     "src": "MPMM p.125",
@@ -17432,7 +17432,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "2a9f2b82-4189-4630-946b-a4f5238a4dea",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Flail Snail",
     "type": "elemental",
     "src": "MPMM p.126",
@@ -17457,7 +17457,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "5c9cee64-f340-4dda-91f5-2c9e7837931f",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Flind",
     "type": "fiend",
     "src": "MPMM p.127",
@@ -17482,7 +17482,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "85c18495-4ce6-42a5-bdd5-7cfe0ff2d18f",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Fraz-Urb'luu",
   "type": "fiend",
   "src": "MPMM p.129",
@@ -17531,7 +17531,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "d61a7e7f-5522-4e41-a629-8035fc6de699",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Froghemoth",
   "type": "monstrosity",
   "src": "MPMM p.130",
@@ -17556,7 +17556,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "ce73d46f-e9bd-4939-9f59-4b3faebc4087",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Frost Giant Everlasting One",
   "type": "giant",
   "src": "MPMM p.131",
@@ -17581,7 +17581,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "87ac0785-226c-4c8e-bd20-4ee0c0427b7d",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Frost Salamander",
     "type": "elemental",
     "src": "MPMM p.132",
@@ -17630,7 +17630,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "762ebebe-667f-4b42-a193-6b83f050b081",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Gauth",
     "type": "aberration",
     "src": "MPMM p.133",
@@ -17667,7 +17667,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "5d5114b3-1288-4ed0-ba52-7ff376daa97c",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Gazer",
     "type": "aberration",
     "src": "MPMM p.134",
@@ -17692,7 +17692,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "7d626809-7dd6-44ea-84bd-5f3394a7f536",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Geryon",
     "type": "fiend",
     "src": "MPMM p.136",
@@ -17729,7 +17729,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "91a998a4-3665-46e2-95aa-9b282537a366",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Giant Strider",
     "type": "elemental",
     "src": "MPMM p.137",
@@ -17766,7 +17766,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "2996d687-c5ac-4344-801b-f4b6ea0c2330",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Giff",
     "type": "humanoid",
     "src": "MPMM p.138",
@@ -17827,7 +17827,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "386d73dd-f991-42de-b48d-0a3804498a80",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Girallon",
     "type": "monstrosity",
     "src": "MPMM p.139",
@@ -17852,7 +17852,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "9616bc1e-21dc-4f57-8bd4-8e885677a602",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Githyanki Gish",
   "type": "humanoid",
   "src": "MPMM p.140",
@@ -17877,7 +17877,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "6a895552-4a5b-4423-86cb-0e081264c126",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Githyanki Kith'rak",
   "type": "humanoid",
   "src": "MPMM p.140",
@@ -17913,7 +17913,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "67f81589-0f07-4506-aa5d-9ca4496e8030",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Githyanki Supreme Commander",
   "type": "humanoid",
   "src": "MPMM p.141",
@@ -17960,7 +17960,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "bb68294e-f9af-4819-b99c-c836573853e2",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Githzerai Anarch",
   "type": "humanoid",
   "src": "MPMM p.142",
@@ -17997,7 +17997,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "9d98ca5a-6f72-4d2b-a85f-c892e9f6127e",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Githzerai Enlightened",
   "type": "humanoid",
   "src": "MPMM p.143",
@@ -18045,7 +18045,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "cc43548d-d174-42c0-b94f-17fa8e3a4a77",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Gnoll Flesh Gnawer",
   "type": "monstrosity",
   "src": "MPMM p.144",
@@ -18070,7 +18070,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "323a6193-e3fd-4691-8d9a-5e3ac8f76ffc",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Gnoll Hunter",
   "type": "monstrosity",
   "src": "MPMM p.144",
@@ -18095,7 +18095,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "6a79d38d-b87a-4767-b942-09baea47a0e8",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Gnoll Witherling",
     "type": "undead",
     "src": "MPMM p.145",
@@ -18132,7 +18132,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "a8a990e3-bfe0-4257-bb80-aa44aa064bc4",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Gray Render",
     "type": "monstrosity",
     "src": "MPMM p.146",
@@ -18157,7 +18157,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "2e2cfd20-52e7-4299-9d3b-4ca9c9d4dbf3",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Graz'zt",
   "type": "fiend",
   "src": "MPMM p.148",
@@ -18194,7 +18194,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "4a5da7ac-188b-44f1-921e-632e71446102",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Green Abishai",
   "type": "fiend",
   "src": "MPMM p.40",
@@ -18219,7 +18219,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "63ea5640-2210-4ee8-9ace-6341273a2473",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Grung",
     "type": "humanoid",
     "src": "MPMM p.149",
@@ -18244,7 +18244,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "76d48a08-bb14-4b04-9ade-515022563394",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Grung Elite Warrior",
     "type": "humanoid",
     "src": "MPMM p.150",
@@ -18281,7 +18281,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "4a7ba693-3cff-4b30-83c6-655414f455b6",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Grung Wildling",
     "type": "humanoid",
     "src": "MPMM p.150",
@@ -18318,7 +18318,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "7fb9f94c-d3fb-41be-a61a-180866b5b5d7",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Guard Drake",
     "type": "dragon",
     "src": "MPMM p.151",
@@ -18355,7 +18355,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "4ca30fe5-354e-410c-9867-6a2d8436e991",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Hadrosaurus",
     "type": "beast",
     "src": "MPMM p.96",
@@ -18380,7 +18380,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "efed2bfb-afa2-4f0e-ac85-63dd7f24dd9a",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Hellfire Engine",
     "type": "construct",
     "src": "MPMM p.152",
@@ -18405,7 +18405,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "32bfa272-9ed2-4ac2-b796-8efafd1cd804",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Hobgoblin Devastator",
   "type": "fey",
   "src": "MPMM p.153",
@@ -18430,7 +18430,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "59ed178b-a932-4c5f-9b5a-825f14da9955",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Hobgoblin Iron Shadow",
   "type": "fey",
   "src": "MPMM p.154",
@@ -18455,7 +18455,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "91db2c29-4ff9-465c-ad73-039d003e7cbb",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Howler",
     "type": "fiend",
     "src": "MPMM p.155",
@@ -18492,7 +18492,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "a628824e-b10c-4a73-bfd1-f5ef30d545fc",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Hungry Sorrowsworn",
     "type": "monstrosity",
     "src": "MPMM p.223",
@@ -18540,7 +18540,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "60c45ba7-8631-4568-b30c-9920dfa4cef6",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Hutijin",
   "type": "fiend",
   "src": "MPMM p.157",
@@ -18577,7 +18577,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "ba2199e6-7119-473b-92b8-442de0e67084",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Hydroloth",
   "type": "fiend",
   "src": "MPMM p.158",
@@ -18602,7 +18602,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "9e289ee4-6867-4013-a7ad-cb9503fa06ae",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Illusionist Wizard",
   "type": "humanoid",
   "src": "MPMM p.263",
@@ -18627,7 +18627,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "f07a68a1-8154-4a5c-90fb-251c7d1096a9",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Juiblex",
   "type": "fiend",
   "src": "MPMM p.160",
@@ -18664,7 +18664,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "92e0b543-9a7d-4f24-a9ff-ee66435c9bf7",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Ki-rin",
   "type": "celestial",
   "src": "MPMM p.162",
@@ -18701,7 +18701,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "c0da8ddb-c005-464d-a27d-e0a355996c27",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Kobold Dragonshield",
     "type": "dragon",
     "src": "MPMM p.163",
@@ -18726,7 +18726,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "4d768309-2d1e-4805-91c4-bf69c83e852c",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Kobold Inventor",
     "type": "humanoid",
     "src": "MPMM p.164",
@@ -18775,7 +18775,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "faaaf11f-91b1-46b4-8048-b328f79a87c0",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Kobold Scale Sorcerer",
     "type": "humanoid",
     "src": "MPMM p.165",
@@ -18812,7 +18812,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "286e4faf-2c9f-4920-90d6-3cc43e952d2c",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Korred",
     "type": "fey",
     "src": "MPMM p.166",
@@ -18849,7 +18849,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "edd382bd-7f87-4bfd-999f-8d6d6edf8e88",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Kraken Priest",
     "type": "monstrosity",
     "src": "MPMM p.167",
@@ -18874,7 +18874,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "35123082-9cad-4ac9-b125-5ee737f0c860",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Kruthik Hive Lord",
     "type": "monstrosity",
     "src": "MPMM p.169",
@@ -18923,7 +18923,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "d17d36be-14cf-435d-9f74-df634fb44671",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Leucrotta",
     "type": "monstrosity",
     "src": "MPMM p.170",
@@ -18960,7 +18960,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "9264398c-c684-47d2-bb03-46d994ab106b",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Leviathan",
     "type": "elemental",
     "src": "MPMM p.171",
@@ -19009,7 +19009,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "dc013a3c-8f33-4478-8dd0-54971255057f",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Lonely Sorrowsworn",
   "type": "monstrosity",
   "src": "MPMM p.223",
@@ -19058,7 +19058,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "d6289978-7204-44b6-8569-bde38eb2ffb6",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Lost Sorrowsworn",
   "type": "monstrosity",
   "src": "MPMM p.224",
@@ -19095,7 +19095,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "91aceb57-e010-4a9e-b079-b4504aae5b3c",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Male Steeder",
     "type": "monstrosity",
     "src": "MPMM p.231",
@@ -19120,7 +19120,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "84e44ae9-da20-40ef-b9ee-7886c1dcea44",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Martial Arts Adept",
     "type": "humanoid",
     "src": "MPMM p.172",
@@ -19157,7 +19157,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "37c3154b-1979-402c-afa8-6bf261fc25f7",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Marut",
   "type": "construct",
   "src": "MPMM p.173",
@@ -19194,7 +19194,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "a2c624b0-c464-405e-ad7d-7cb6698e856d",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Master Thief",
   "type": "humanoid",
   "src": "MPMM p.174",
@@ -19230,7 +19230,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "a074c98a-510d-4224-b5fd-82332461a3be",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Maurezhi",
   "type": "fiend",
   "src": "MPMM p.175",
@@ -19255,7 +19255,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "52d0d8d1-1d40-412f-9c52-46dc9c0e687c",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Maw Demon",
     "type": "fiend",
     "src": "MPMM p.176",
@@ -19292,7 +19292,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "5df327a5-ec11-4740-b4a3-ca887cf75485",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Meazel",
     "type": "monstrosity",
     "src": "MPMM p.177",
@@ -19329,7 +19329,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "df442262-fd5a-4d6b-bd7d-2543f88b2ae2",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Meenlock",
     "type": "fey",
     "src": "MPMM p.178",
@@ -19354,7 +19354,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "38b701a5-348a-48ce-97d7-a89cb7cb0be4",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Merregon",
     "type": "fiend",
     "src": "MPMM p.179",
@@ -19379,7 +19379,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "9346a7cc-3bbe-4ca5-ad18-e43a82d1f13a",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Merrenoloth",
     "type": "fiend",
     "src": "MPMM p.180",
@@ -19404,7 +19404,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "449801b8-8928-4800-9252-4595a60c5e57",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Mindwitness",
     "type": "aberration",
     "src": "MPMM p.181",
@@ -19429,7 +19429,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "1704931e-f395-429d-b72e-3abac411d816",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Moloch",
   "type": "fiend",
   "src": "MPMM p.183",
@@ -19466,7 +19466,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "ec6174e7-40e2-4985-a7ca-e3dd0106e412",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Molydeus",
   "type": "fiend",
   "src": "MPMM p.184",
@@ -19503,7 +19503,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "c0a74f32-9fe4-455b-ae89-cd562e833930",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Morkoth",
   "type": "aberration",
   "src": "MPMM p.186",
@@ -19540,7 +19540,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "2ac224f9-2154-40f5-b818-8125ebcb5b74",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Mouth of Grolantor",
     "type": "giant",
     "src": "MPMM p.187",
@@ -19577,7 +19577,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "b513c9ff-8768-4f37-b654-d604559451c1",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Nabassu",
     "type": "fiend",
     "src": "MPMM p.188",
@@ -19613,7 +19613,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "db706245-2b95-4bbb-9af1-4d283e3b76f2",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Nagpa",
   "type": "monstrosity",
   "src": "MPMM p.189",
@@ -19650,7 +19650,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "024f8133-9435-4558-80d5-c2864de03cae",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Narzugon",
   "type": "fiend",
   "src": "MPMM p.190",
@@ -19675,7 +19675,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "d2c2c64f-d552-4902-90bf-76557f8a7de7",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Necromancer Wizard",
   "type": "humanoid",
   "src": "MPMM p.264",
@@ -19700,7 +19700,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "e3f4d148-10a6-4bf1-850e-3a7b7a6681aa",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Neogi",
   "type": "aberration",
   "src": "MPMM p.192",
@@ -19725,7 +19725,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "554adf6c-9114-417d-9ffb-7b1e40bb9a06",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Neogi Hatchling",
     "type": "aberration",
     "src": "MPMM p.191",
@@ -19750,7 +19750,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "7163a172-72c8-4ac1-81cd-b11ac465837e",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Neogi Master",
     "type": "aberration",
     "src": "MPMM p.192",
@@ -19775,7 +19775,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "cb7110b8-4a54-44b1-bc0c-db22c47f16d1",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Neothelid",
     "type": "aberration",
     "src": "MPMM p.193",
@@ -19812,7 +19812,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "5ca39e72-1aa7-49d8-93c2-560400996e01",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Nightwalker",
     "type": "undead",
     "src": "MPMM p.194",
@@ -19873,7 +19873,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "ae98fafa-55ed-4ec9-bf08-5773f49febdd",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Nilbog",
     "type": "fey",
     "src": "MPMM p.195",
@@ -19910,7 +19910,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "61745a03-7875-429c-95fb-980bf97b7f57",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Nupperibo",
     "type": "fiend",
     "src": "MPMM p.196",
@@ -19947,7 +19947,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "1521a4a8-cdf8-46c7-a0da-55e139ac27f9",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Oblex Spawn",
     "type": "ooze",
     "src": "MPMM p.197",
@@ -19972,7 +19972,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "a1e5d44f-394f-4ab8-8117-dc3c78faabc3",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Ogre Battering Ram",
     "type": "giant",
     "src": "MPMM p.200",
@@ -19997,7 +19997,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "653a12a4-e5ae-4462-97d3-868727508669",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Ogre Bolt Launcher",
     "type": "giant",
     "src": "MPMM p.200",
@@ -20034,7 +20034,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "13622743-8bb1-4e2f-8cea-3b1f05f609d7",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Ogre Chain Brute",
     "type": "giant",
     "src": "MPMM p.201",
@@ -20071,7 +20071,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "b28a2578-8009-48d8-8ca0-517cc84d6592",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Ogre Howdah",
     "type": "giant",
     "src": "MPMM p.201",
@@ -20096,7 +20096,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "428792a7-8df8-42fc-b3c3-340149d9bf26",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Oinoloth",
     "type": "fiend",
     "src": "MPMM p.202",
@@ -20156,7 +20156,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "3652df2a-1315-469c-b32c-0bb0afee8f90",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Orcus",
   "type": "fiend",
   "src": "MPMM p.204",
@@ -20205,7 +20205,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "0f4e09ef-ef20-4d43-942e-86bfa949413f",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Orthon",
   "type": "fiend",
   "src": "MPMM p.205",
@@ -20242,7 +20242,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "378e57a4-ac17-4947-ad5a-9a767a02d94a",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Ox",
     "type": "beast",
     "src": "MPMM p.72",
@@ -20267,7 +20267,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "3ac5c99c-6cf5-4849-8596-fa0b9cf6664d",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Phoenix",
     "type": "elemental",
     "src": "MPMM p.206",
@@ -20304,7 +20304,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "381aa7b1-8805-461c-844e-85540990677e",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Quetzalcoatlus",
     "type": "beast",
     "src": "MPMM p.96",
@@ -20329,7 +20329,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "1daa121a-9dc2-4846-91ae-5c9e59baa922",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Quickling",
     "type": "fey",
     "src": "MPMM p.207",
@@ -20354,7 +20354,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "c72ff0b2-e7ad-49e9-ac39-cfc79c301650",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Red Abishai",
     "type": "fiend",
     "src": "MPMM p.40",
@@ -20390,7 +20390,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "a8f21244-70ae-4285-8420-2bd260bb4f5d",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Redcap",
     "type": "fey",
     "src": "MPMM p.208",
@@ -20427,7 +20427,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "b248cbc8-4d53-40da-93fd-476d5cfc52d2",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Retriever",
     "type": "construct",
     "src": "MPMM p.209",
@@ -20452,7 +20452,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "3c172227-8c29-4641-8879-535252a5ae0c",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Rot Troll",
   "type": "giant",
   "src": "MPMM p.247",
@@ -20489,7 +20489,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "782932aa-c73c-4f43-842a-27e61c89c95d",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Rutterkin",
     "type": "fiend",
     "src": "MPMM p.210",
@@ -20514,7 +20514,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "e4a2fa87-4e24-4af1-a629-2c35f57dd6c6",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Sacred Statue",
     "type": "construct",
     "src": "MPMM p.114",
@@ -20551,7 +20551,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "a7929d8d-a80f-4f49-b5bd-779347348d16",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Sea Spawn",
     "type": "monstrosity",
     "src": "MPMM p.211",
@@ -20588,7 +20588,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "47e925cf-4fa2-48fb-8e0f-48ebcd6a130e",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Shadar-kai Gloom Weaver",
     "type": "humanoid",
     "src": "MPMM p.213",
@@ -20613,7 +20613,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "73626dac-16e0-4d62-a65e-f70b083deff5",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Shadar-kai Shadow Dancer",
   "type": "humanoid",
   "src": "MPMM p.213",
@@ -20638,7 +20638,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "f4640161-0f31-4747-bec8-7870da16f6ea",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Shadar-kai Soul Monger",
   "type": "humanoid",
   "src": "MPMM p.214",
@@ -20687,7 +20687,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "d6266494-7bdf-49e7-a6b5-3f7f9c2668f3",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Shadow Mastiff",
     "type": "monstrosity",
     "src": "MPMM p.215",
@@ -20712,7 +20712,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "90d78350-f44c-4963-9a13-93aeccd9f43c",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Shadow Mastiff Alpha",
     "type": "monstrosity",
     "src": "MPMM p.215",
@@ -20737,7 +20737,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "f3963c0a-0969-4acd-9448-d352ddfa75b6",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Shoosuva",
     "type": "fiend",
     "src": "MPMM p.216",
@@ -20774,7 +20774,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "079a8bff-1367-4173-a99b-58fb3fb3b6a8",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Sibriex",
     "type": "fiend",
     "src": "MPMM p.217",
@@ -20823,7 +20823,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "45909288-ea97-4966-8e2e-6cc8703f4a32",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Skulk",
     "type": "monstrosity",
     "src": "MPMM p.219",
@@ -20848,7 +20848,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "a5c0099e-e652-443e-beca-4ee163902f52",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Skull Lord",
     "type": "undead",
     "src": "MPMM p.220",
@@ -20896,7 +20896,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "ba9eb546-1ad2-4940-9208-5f1f2a033b39",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Slithering Tracker",
     "type": "ooze",
     "src": "MPMM p.221",
@@ -20933,7 +20933,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "3be75e60-faf0-4455-a6cb-3e79533e2d69",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Spawn of Kyuss",
     "type": "undead",
     "src": "MPMM p.225",
@@ -20970,7 +20970,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "d058a411-88c4-49a5-b7e0-7354eb74d83c",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Spirit Troll",
     "type": "giant",
     "src": "MPMM p.247",
@@ -21006,7 +21006,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "bc7fee1e-586b-4a70-b2a2-b2f446b89487",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Spring Eladrin",
   "type": "fey",
   "src": "MPMM p.116",
@@ -21031,7 +21031,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "3579ff1b-6553-4b35-8d58-bb52f7813d65",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Star Spawn Grue",
     "type": "aberration",
     "src": "MPMM p.227",
@@ -21056,7 +21056,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "ec1cf1ab-678f-4d33-835a-831202b644c9",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Star Spawn Hulk",
     "type": "aberration",
     "src": "MPMM p.227",
@@ -21081,7 +21081,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "fec56836-61b1-4f0e-b66d-f134d39ec118",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Star Spawn Larva Mage",
   "type": "aberration",
   "src": "MPMM p.228",
@@ -21130,7 +21130,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "5d07b115-e703-49a7-ab0d-b0936b9468f5",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Star Spawn Mangler",
   "type": "aberration",
   "src": "MPMM p.229",
@@ -21167,7 +21167,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "2cccb05d-481d-4c03-86cc-aad52b40a5bb",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Star Spawn Seer",
   "type": "aberration",
   "src": "MPMM p.230",
@@ -21192,7 +21192,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "5bc14753-75da-4097-961b-e88082c01168",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Steel Predator",
   "type": "construct",
   "src": "MPMM p.232",
@@ -21229,7 +21229,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "d938b47c-2a83-41aa-b0cb-ea34158522ca",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Stegosaurus",
     "type": "beast",
     "src": "MPMM p.96",
@@ -21254,7 +21254,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "69df4200-a2a4-42b1-a4c5-508665b790e0",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Stench Kow",
     "type": "fiend",
     "src": "MPMM p.72",
@@ -21279,7 +21279,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "ce8acfb7-5e53-4a92-842f-02117da89ba7",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Stone Cursed",
     "type": "construct",
     "src": "MPMM p.233",
@@ -21304,7 +21304,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "5be47106-701d-407f-b2e2-602abc05c265",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Stone Giant Dreamwalker",
     "type": "giant",
     "src": "MPMM p.234",
@@ -21341,7 +21341,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "202146aa-1324-4a59-9129-405ae7648549",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Storm Giant Quintessent",
     "type": "giant",
     "src": "MPMM p.235",
@@ -21378,7 +21378,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "e885888c-54d7-47d8-9fb0-530e8e861eb1",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Summer Eladrin",
   "type": "fey",
   "src": "MPMM p.116",
@@ -21414,7 +21414,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "32029dde-d1f2-437a-9503-dad3d925cf9b",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Swarm of Cranium Rats",
     "type": "aberration",
     "src": "MPMM p.83",
@@ -21439,7 +21439,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "20cab8dc-3024-415c-81ef-cc7be7b06b73",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Swarm of Rot Grubs",
     "type": "beast",
     "src": "MPMM p.237",
@@ -21464,7 +21464,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "90989be0-fff2-43e0-b5e8-29e9a447aebf",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Swashbuckler",
     "type": "humanoid",
     "src": "MPMM p.238",
@@ -21501,7 +21501,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "6e0508ea-0265-48f4-8f2d-9b10a1636211",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Sword Wraith Commander",
     "type": "undead",
     "src": "MPMM p.239",
@@ -21538,7 +21538,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "702fbbd0-9e61-41f5-8a54-95f59d9e5502",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Sword Wraith Warrior",
     "type": "undead",
     "src": "MPMM p.239",
@@ -21575,7 +21575,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "6502955c-0968-4444-bd49-8ed66e138837",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Tanarukk",
     "type": "fiend",
     "src": "MPMM p.240",
@@ -21612,7 +21612,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "4a133432-c409-43af-902e-8d5c231c5a73",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Thorny Vegepygmy",
     "type": "plant",
     "src": "MPMM p.253",
@@ -21637,7 +21637,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "2f2bbfbb-b4ee-43e5-991f-38721bebac48",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Titivilus",
     "type": "fiend",
     "src": "MPMM p.242",
@@ -21662,7 +21662,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "a1803d9a-832b-4441-8351-b2ff418b6099",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Tlincalli",
     "type": "monstrosity",
     "src": "MPMM p.242",
@@ -21711,7 +21711,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "2642f938-3130-42d3-85c4-08d15da061b5",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Tortle",
     "type": "humanoid",
     "src": "MPMM p.244",
@@ -21760,7 +21760,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "03a193eb-655c-4fa4-9d48-0b34486e7d81",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Tortle Druid",
     "type": "humanoid",
     "src": "MPMM p.244",
@@ -21797,7 +21797,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "8a20d38f-1fe5-4d34-82a6-117bf5767fc1",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Transmuter Wizard",
     "type": "humanoid",
     "src": "MPMM p.265",
@@ -21822,7 +21822,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "3ecc89cc-8aec-4c6f-baf6-a25007d9722d",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Trapper",
     "type": "monstrosity",
     "src": "MPMM p.245",
@@ -21847,7 +21847,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "21dbf853-5e17-4d3e-9540-08aa7cfa99f4",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Ulitharid",
     "type": "aberration",
     "src": "MPMM p.249",
@@ -21896,7 +21896,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "b4088877-d310-4ddc-801d-628fc6b4c37b",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Vampiric Mist",
     "type": "undead",
     "src": "MPMM p.250",
@@ -21921,7 +21921,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "e40721b5-f795-4b36-bce2-ff19136c0c21",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Vargouille",
     "type": "fiend",
     "src": "MPMM p.251",
@@ -21946,7 +21946,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "2048f52d-dc04-4ca7-ac73-84ac3357e073",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Vegepygmy",
     "type": "plant",
     "src": "MPMM p.252",
@@ -21983,7 +21983,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "8c2adc55-cb77-49f3-a57b-1031beebcbcb",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Vegepygmy Chief",
     "type": "plant",
     "src": "MPMM p.253",
@@ -22032,7 +22032,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "034eb653-f6b4-40b6-a91b-7532d283598c",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Velociraptor",
     "type": "beast",
     "src": "MPMM p.96",
@@ -22069,7 +22069,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "2eda8619-2d76-4c6a-8bec-ff3ad8fc29a9",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Venom Troll",
     "type": "giant",
     "src": "MPMM p.248",
@@ -22118,7 +22118,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "ca508c95-267e-4d39-978e-0a060b350f4e",
-  "mode": "custom",
+  "mode": "monster",
   "name": "War Priest",
   "type": "humanoid",
   "src": "MPMM p.254",
@@ -22154,7 +22154,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "0374af21-8217-4711-9e1f-0c9aa1d5322f",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Warlock of the Archfey",
   "type": "humanoid",
   "src": "MPMM p.255",
@@ -22179,7 +22179,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "35ca8df1-5383-42ff-80a3-10588d4a9296",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Warlock of the Fiend",
   "type": "humanoid",
   "src": "MPMM p.255",
@@ -22228,7 +22228,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "9dd0bf2d-94ed-483b-94f5-0a8c5214ce90",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Warlock of the Great Old One",
   "type": "humanoid",
   "src": "MPMM p.256",
@@ -22265,7 +22265,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "3a0a0ed2-1bad-4fc3-84cc-260ed8d81bc7",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Warlord",
   "type": "humanoid",
   "src": "MPMM p.257",
@@ -22313,7 +22313,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "c7bafa11-e943-4e5e-b134-06bf75d5d1ec",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Wastrilith",
   "type": "fiend",
   "src": "MPMM p.258",
@@ -22362,7 +22362,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "3e8280dd-7877-4e8f-9638-da337aa84aa2",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Water Elemental Myrmidon",
     "type": "elemental",
     "src": "MPMM p.123",
@@ -22399,7 +22399,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "dc7c3c31-868d-4d59-a50e-7831dca0b174",
-    "mode": "custom",
+    "mode": "monster",
     "name": "White Abishai",
     "type": "fiend",
     "src": "MPMM p.41",
@@ -22436,7 +22436,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "d040e6a6-dbe7-4faf-a23c-012b746da950",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Winter Eladrin",
   "type": "fey",
   "src": "MPMM p.117",
@@ -22461,7 +22461,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "11219b45-3fe9-434f-84b6-4f621e845b5d",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Wood Woad",
     "type": "plant",
     "src": "MPMM p.266",
@@ -22486,7 +22486,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "f7f46cdb-f605-4b5b-acff-af1a34e1ffeb",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Wretched Sorrowsworn",
     "type": "monstrosity",
     "src": "MPMM p.224",
@@ -22511,7 +22511,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "b50435a4-e98f-4ab3-999b-a874ce47ae23",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Xvart",
     "type": "monstrosity",
     "src": "MPMM p.267",
@@ -22536,7 +22536,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "e3dcbc72-2d18-4280-8c1d-215717a94d58",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Xvart Warlock of Raxivort",
     "type": "monstrosity",
     "src": "MPMM p.267",
@@ -22561,7 +22561,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "e4391ae0-38e6-4f1f-a6a9-9d6847f0fbde",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Yagnoloth",
     "type": "fiend",
     "src": "MPMM p.268",
@@ -22609,7 +22609,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "6a7efc43-9b22-4536-ace6-0f9768505c6d",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Yeenoghu",
   "type": "fiend",
   "src": "MPMM p.270",
@@ -22646,7 +22646,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "0865bd2b-814e-4642-860d-a0a6ddd67adc",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Yeth Hound",
     "type": "fey",
     "src": "MPMM p.271",
@@ -22671,7 +22671,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "354463b1-94f4-46f6-9e29-2eeb2387010d",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Young Kruthik",
     "type": "monstrosity",
     "src": "MPMM p.168",
@@ -22696,7 +22696,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "7af7e86f-0b22-4431-8f9a-1a16e85bb25c",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Yuan-ti Anathema",
     "type": "monstrosity",
     "src": "MPMM p.272",
@@ -22733,7 +22733,7 @@ export const Monsters: Creature[] = [
 },
   {
     "id": "9e5e59e6-ef02-4bfc-b4a3-fbaf7210532f",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Yuan-ti Broodguard",
     "type": "monstrosity",
     "src": "MPMM p.273",
@@ -22770,7 +22770,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "74c00592-3bef-4cf2-b951-48948d51e4b0",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Yuan-ti Mind Whisperer",
     "type": "monstrosity",
     "src": "MPMM p.274",
@@ -22819,7 +22819,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "a5c6a3e0-8903-448e-aa1b-2951981019e4",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Yuan-ti Nightmare Speaker",
     "type": "monstrosity",
     "src": "MPMM p.275",
@@ -22880,7 +22880,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "e5b079e1-1b7b-4d71-8886-ceb4b3d0dce9",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Yuan-ti Pit Master",
     "type": "monstrosity",
     "src": "MPMM p.276",
@@ -22917,7 +22917,7 @@ export const Monsters: Creature[] = [
   },
   {
     "id": "07ab8859-1c47-4ce3-ada9-68d4ad64c75a",
-    "mode": "custom",
+    "mode": "monster",
     "name": "Zaratan",
     "type": "elemental",
     "src": "MPMM p.278",
@@ -22966,7 +22966,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "ad458979-bcc6-41f0-8504-f0a22350630f",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Zariel",
   "type": "fiend",
   "src": "MPMM p.280",
@@ -23015,7 +23015,7 @@ export const Monsters: Creature[] = [
 },
 {
   "id": "b5f8e216-be4f-4c28-ba26-6fb9939f2839",
-  "mode": "custom",
+  "mode": "monster",
   "name": "Zuggtmoy",
   "type": "fiend",
   "src": "MPMM p.281",
@@ -23051,3 +23051,7 @@ export const Monsters: Creature[] = [
   "count": 1
 },
 ]
+
+export function getMonster(name: string) {
+  return Monsters.find(monster => (monster.name === name))
+}

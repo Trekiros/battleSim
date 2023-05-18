@@ -48,6 +48,11 @@ const ActionOptions: Options<number> = [
 const TargetCountOptions: Options<number> = [
     { value: 1, label: 'Single target' },
     { value: 2, label: 'Multi target' },
+    { value: 3, label: '3 targets' },
+    { value: 4, label: '4 targets' },
+    { value: 5, label: '5 targets' },
+    { value: 6, label: '6 targets' },
+    { value: 100, label: 'Target everything' },
 ]
 
 const EnemyTargetOptions: Options<EnemyTarget> = [
