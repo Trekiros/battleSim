@@ -14,7 +14,7 @@ export function useStoredState<T>(key: string, defaultValue: T, parser: (str: st
         if (storedValue === null) return
         
         try {
-            const parsedValue = parser(storedValue)
+            const parsedValue = parser(JSON.parse(storedValue))
             if (parsedValue !== null) setState(parsedValue)
             else console.error('Could not parse', key, 'from localStorage')
         } catch (e) {

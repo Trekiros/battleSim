@@ -26,7 +26,6 @@ const Simulation:FC<PropType> = ({}) => {
 
     useEffect(() => {
         const results = runSimulation(players, encounters)
-        console.log(results)
         setSimulationResults(results)
     }, [players, encounters])
 

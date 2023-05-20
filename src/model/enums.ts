@@ -12,6 +12,10 @@ export const ActionTypeList = ['atk', 'heal', 'buff', 'debuff'] as const
 export const ActionTypeSchema = z.enum(ActionTypeList)
 export type ActionType = z.infer<typeof ActionTypeSchema>
 
+export const BuffDurationList = ['until next attack made', 'until next attack taken', '1 round', 'entire encounter'] as const
+export const BuffDurationSchema = z.enum(BuffDurationList)
+export type BuffDuration = z.infer<typeof BuffDurationSchema>
+
 export const ClassesList = [ 'barbarian', 'bard', 'cleric', 'druid', 'fighter', 'monk', 'paladin', 'ranger', 'rogue', 'sorcerer', 'warlock', 'wizard' ] as const
 export const ClassesSchema = z.enum(ClassesList)
 export type Class = z.infer<typeof ClassesSchema>

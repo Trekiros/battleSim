@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { ChallengeRatingSchema, ClassesSchema, ConditionSchema, CreatureTypeSchema, FrequencySchema } from './enums'
+import { BuffDurationSchema, ChallengeRatingSchema, ClassesSchema, ConditionSchema, CreatureTypeSchema, FrequencySchema } from './enums'
 import { ClassOptionsSchema } from './classOptions'
 
 const EnemyTargetSchema = z.enum([
@@ -41,20 +41,31 @@ const HealActionSchema = ActionSchemaBase.merge(z.object({
     target: AllyTargetSchema,
 }))
 
+const BuffSchema = z.object({
+    duration: BuffDurationSchema,
+
+    ac: z.number().optional(),
+    toHit: z.number().optional(),
+    damage: z.number().optional(),
+    damageMultiplier: z.number().optional(),
+    damageTakenMultiplier: z.number().optional(),
+    dc: z.number().optional(),
+    save: z.number().optional(),
+})
+
 const BuffActionSchema = ActionSchemaBase.merge(z.object({
     type: z.literal('buff'),
-    acBonus: z.number().optional(),
-    toHitBonus: z.number().optional(),
-    damageBonus: z.number().optional(),
     target: AllyTargetSchema,
+
+    buff: BuffSchema,
 }))
 
 const DebuffActionSchema = ActionSchemaBase.merge(z.object({
     type: z.literal('debuff'),
-    acDebuff: z.number().optional(),
-    toHitDebuff: z.number().optional(),
-    damageDebuff: z.number().optional(),
     target: EnemyTargetSchema,
+    saveDC: z.number(),
+
+    buff: BuffSchema,
 }))
 
 const ActionSchema = z.discriminatedUnion('type', [HealActionSchema, AtkActionSchema, BuffActionSchema, DebuffActionSchema])
@@ -76,21 +87,16 @@ export const CreatureSchema = z.object({
     count: z.number(),
     hp: z.number(),
     AC: z.number(),
+    saveBonus: z.number(),
 
     actions: z.array(ActionSchema),
 })
 
 const TeamSchema = z.array(CreatureSchema)
 
-const BuffSchema = z.object({
-    ac: z.number().optional(),
-    toHit: z.number().optional(),
-    damage: z.number().optional(),
-})
-
 const CreatureStateSchema = z.object({
     currentHP: z.number(),
-    buffs: z.array(BuffSchema),
+    buffs: z.map(z.string(), BuffSchema),
     remainingUses: z.map(z.string(), z.number()),
 })
 

@@ -1,11 +1,12 @@
-import { FC } from "react"
-import { Action, AllyTarget, AtkAction, BuffAction, DebuffAction, EnemyTarget, HealAction } from "../../model/model"
+import { FC, useContext, useEffect, useState } from "react"
+import { Action, AllyTarget, AtkAction, Buff, BuffAction, DebuffAction, EnemyTarget, HealAction } from "../../model/model"
 import styles from './actionForm.module.scss'
 import { clone } from "../../model/utils"
-import { ActionType, Condition, Frequency } from "../../model/enums"
+import { ActionType, BuffDuration, Condition, Frequency } from "../../model/enums"
 import Select from "../utils/select"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { validateContext } from "../../context/simulationContext"
 
 type PropType = {
     value: Action,
@@ -72,6 +73,89 @@ const AllyTargetOptions: Options<AllyTarget> = [
     { value: 'ally with the highest AC', label: 'Ally with the highest AC' },
 ]
 
+const BuffDurationOptions: Options<BuffDuration> = [
+    { value: '1 round', label: "1 Round" },
+    { value: 'entire encounter', label: 'Entire Encounter' },
+    { value: 'until next attack taken', label: 'Until the next attack taken' },
+    { value: 'until next attack made', label: 'Until the next attack made' }
+]
+
+const BuffStatOptions: Options<keyof Omit<Buff, 'duration'>> = [
+    { value: 'ac', label: 'Armor Class' },
+    { value: 'save', label: 'Bonus to Saves' },
+    { value: 'toHit', label: 'Bonus to hit' },
+    { value: 'dc', label: 'Save DC Bonus' },
+    { value: 'damage', label: 'Extra Damage' },
+    { value: 'damageMultiplier', label: 'Damage Multiplier' },
+    { value: 'damageTakenMultiplier', label: 'Damage Taken Multiplier' },
+]
+
+const BuffForm:FC<{value: Buff, onUpdate: (newValue: Buff) => void}> = ({ value, onUpdate }) => {
+    const [modifiers, setModifiers] = useState<(keyof Omit<Buff, 'duration'>)[]>(Object.keys(value).filter(key => (key !== 'duration')) as any)
+    const {validate} = useContext(validateContext)
+
+    useEffect(() => {
+        validate(Object.keys(value).length > 1)
+    }, [value])
+
+    function setModifier(index: number, newValue: keyof Omit<Buff, 'duration'> | null) {
+        const oldModifier = modifiers[index]
+        if (oldModifier === newValue) return
+
+        const buffClone = clone(value)
+        delete buffClone[oldModifier]
+        onUpdate(buffClone)
+
+        const modifiersClone = clone(modifiers)
+        if (newValue === null) modifiersClone.splice(index, 1)
+        else modifiersClone[index] = newValue
+        setModifiers(modifiersClone)
+    }
+
+    function updateValue(modifier: keyof Omit<Buff, 'duration'>, newValue: number) {
+        const buffClone = clone(value)
+        buffClone[modifier] = newValue
+        onUpdate(buffClone)
+    }
+
+    function addModifier() {
+        const newModifier = BuffStatOptions.find(({value}) => !modifiers.includes(value))
+        if (!newModifier) return;
+        setModifiers([...modifiers, newModifier.value])
+    }
+
+    return (
+        <>
+            Effects: 
+            {modifiers.map((modifier, index) => (
+                <div key={modifier} className={styles.modifier}>
+                    <Select 
+                        value={modifier} 
+                        onChange={newValue => setModifier(index, newValue)} 
+                        options={BuffStatOptions.filter(option => (modifier === option.value) || !modifiers.includes(option.value))}
+                    />
+                    <input 
+                        type='number' 
+                        value={value[modifier]} 
+                        onChange={e => updateValue(modifier, Number(e.target.value))}
+                    />
+                    <button onClick={() => setModifier(index, null)}>
+                        <FontAwesomeIcon icon={faTrash} />
+                    </button>
+                </div>
+            ))}
+
+            <button 
+                className="tooltipContainer" 
+                disabled={modifiers.length === BuffStatOptions.length}
+                onClick={addModifier}>
+                    <FontAwesomeIcon icon={faPlus} />
+                    <div className="tooltip">Add effect to the buff/debuff</div>
+            </button>
+        </>
+    )
+}
+
 const ActionForm:FC<PropType> = ({ value, onChange, onDelete }) => {
 
     function update(callback: (valueClone: Action) => void) {
@@ -95,8 +179,8 @@ const ActionForm:FC<PropType> = ({ value, onChange, onDelete }) => {
         switch (type) {
             case "atk": { onChange({...common, type, target: "enemy with most HP", dpr: 0, toHit: 0 }); return }
             case "heal": { onChange({...common, type, amount: 0, target: "ally with the least HP" }); return }
-            case "buff": { onChange({...common, type, target: "ally with the highest DPR" }); return }
-            case "debuff": { onChange({...common, type, target: "enemy with highest DPR" }); return }
+            case "buff": { onChange({...common, type, target: "ally with the highest DPR", buff: { duration: '1 round' } }); return }
+            case "debuff": { onChange({...common, type, target: "enemy with highest DPR", saveDC: 10, buff: { duration: '1 round' } }); return }
         }
     }
 
@@ -117,6 +201,8 @@ const ActionForm:FC<PropType> = ({ value, onChange, onDelete }) => {
             <Select value={value.type} options={TypeOptions} onChange={updateType} />
             <Select value={value.freq} options={FreqOptions} onChange={freq => update(v => { v.freq = freq })} />
             <Select value={value.targets} options={TargetCountOptions} onChange={targets => update(v => { v.targets = targets })} />
+            Use this action if:
+            <Select value={value.condition} options={ConditionOptions} onChange={condition => update(v => { v.condition = condition })} />
 
             { (value.type === "atk") ? (
                 <>
@@ -140,29 +226,22 @@ const ActionForm:FC<PropType> = ({ value, onChange, onDelete }) => {
                 <>
                     Target:
                     <Select value={value.target} options={AllyTargetOptions} onChange={target => update(v => { v.target = target })} />
-                    AC Bonus:
-                    <input type='number' value={value.acBonus} onChange={e => update(v => { (v as BuffAction).acBonus = (e.target.value === '') ? undefined : Number(e.target.value) })} />
-                    To Hit Bonus:
-                    <input type='number' value={value.toHitBonus} onChange={e => update(v => { (v as BuffAction).toHitBonus = (e.target.value === '') ? undefined : Number(e.target.value) })} />
-                    Damage Bonus (per hit):
-                    <input type='number' value={value.damageBonus} onChange={e => update(v => { (v as BuffAction).damageBonus = (e.target.value === '') ? undefined : Number(e.target.value) })} />
+                    Duration:
+                    <Select value={value.buff.duration} options={BuffDurationOptions} onChange={duration => update(v => { (v as BuffAction).buff.duration = duration })} />
+                    <BuffForm value={value.buff} onUpdate={newValue => update(v => { (v as BuffAction).buff = newValue })} />
                 </>
             ) : null }
             { (value.type === "debuff") ? (
                 <>
                     Target:
                     <Select value={value.target} options={EnemyTargetOptions} onChange={target => update(v => { v.target = target })} />
-                    AC Debuff:
-                    <input type='number' value={value.acDebuff} onChange={e => update(v => { (v as DebuffAction).acDebuff = (e.target.value === '') ? undefined : Number(e.target.value) })} />
-                    To Hit Debuff:
-                    <input type='number' value={value.toHitDebuff} onChange={e => update(v => { (v as DebuffAction).toHitDebuff = (e.target.value === '') ? undefined : Number(e.target.value) })} />
-                    Damage Debuff (per hit):
-                    <input type='number' value={value.damageDebuff} onChange={e => update(v => { (v as DebuffAction).damageDebuff = (e.target.value === '') ? undefined : Number(e.target.value) })} />
+                    Duration:
+                    <Select value={value.buff.duration} options={BuffDurationOptions} onChange={duration => update(v => { (v as DebuffAction).buff.duration = duration })} />
+                    Save DC:
+                    <input type='number' value={value.saveDC} onChange={e => update(v => { (v as DebuffAction).saveDC = Number(e.target.value) })} />
+                    <BuffForm value={value.buff} onUpdate={newValue => update(v => { (v as DebuffAction).buff = newValue })} />
                 </>
             ) : null }
-
-            Use this action if:
-            <Select value={value.condition} options={ConditionOptions} onChange={condition => update(v => { v.condition = condition })} />
         </div>
     )
 }

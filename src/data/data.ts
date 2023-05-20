@@ -14,6 +14,7 @@ function barbarian(level: number, options: z.infer<typeof ClassOptions.barbarian
         id: crypto.randomUUID(),
         name: name('Barbarian', level),
         AC: 10 + DEX + CON,
+        saveBonus: PB,
         hp: hp(level, 12, CON) * 2,
         count: 1,
         mode: 'player',
@@ -43,8 +44,11 @@ function barbarian(level: number, options: z.infer<typeof ClassOptions.barbarian
             condition: 'default',
             freq: 'at will',
             target: 'self',
-            acBonus: -4,
-            toHitBonus: 4,
+            buff: {
+                duration: '1 round',
+                ac: -4,
+                toHit: 4,
+            }
         })
     }
 
@@ -64,6 +68,7 @@ function bard(level: number, options: z.infer<typeof ClassOptions.bard>): Creatu
         id: crypto.randomUUID(),
         name: name('Bard', level),
         AC: 13 + DEX,
+        saveBonus: PB,
         hp: hp(level, 8, CON),
         count: 1,
         mode: 'player',
@@ -78,7 +83,12 @@ function bard(level: number, options: z.infer<typeof ClassOptions.bard>): Creatu
                     condition: 'default',
                     freq: 'at will',
                     target: 'enemy with highest DPR',
-                    toHitDebuff: -2,
+                    saveDC: DC,
+                    buff: {
+                        duration: 'entire encounter',
+                        toHit: -2.5,
+                        save: -2.5,
+                    }
                 },
                 {
                     id: crypto.randomUUID(),
@@ -89,7 +99,10 @@ function bard(level: number, options: z.infer<typeof ClassOptions.bard>): Creatu
                     condition: (level < 5) ? 'is available' : 'default',
                     freq: (level < 5) ? '1/fight' : 'at will',
                     target: 'ally with the highest DPR',
-                    toHitBonus: BARDIC_INSPI / 2,
+                    buff: {
+                        duration: '1 round',
+                        toHit: BARDIC_INSPI / 2,
+                    },
                 },
                 {
                     id: crypto.randomUUID(),
@@ -120,6 +133,7 @@ function cleric(level: number, options: z.infer<typeof ClassOptions.cleric>): Cr
         id: crypto.randomUUID(),
         name: name('Cleric', level),
         AC: scale(level, { 1: 17, 3: 18, 5: 19, 8: 20 }),
+        saveBonus: PB,
         hp: hp(level, 8, CON),
         count: 1,
         mode: 'player',
@@ -127,15 +141,30 @@ function cleric(level: number, options: z.infer<typeof ClassOptions.cleric>): Cr
             1: [
                 {
                     id: crypto.randomUUID(),
+                    name: 'Sacred Flame',
+                    actionSlot: ACTION,
+                    type: 'atk',
+                    targets: 1,
+                    freq: 'at will',
+                    condition: 'default',
+                    target: 'enemy with least HP',
+                    toHit: DC - 10,
+                    dpr: scale(level, {1: 4.5, 5: 9, 8: 13.5, 11: 18, 17: 22.5}),
+                },
+                {
+                    id: crypto.randomUUID(),
                     name: 'Bless',
                     actionSlot: ACTION,
                     type: 'buff',
                     targets: 2,
-                    freq: 'at will',
-                    condition: 'default',
+                    freq: '1/fight',
+                    condition: 'is available',
                     target: 'ally with the highest DPR',
-                    acBonus: 2,
-                    toHitBonus: 2,
+                    buff: {
+                        duration: 'entire encounter',
+                        save: 2.5,
+                        toHit: 2.5,
+                    }
                 },
                 {
                     id: crypto.randomUUID(),
@@ -205,6 +234,7 @@ function druid(level: number, options: z.infer<typeof ClassOptions.druid>): Crea
             id: crypto.randomUUID(),
             name: name('Druid', level),
             AC: 14 + DEX,
+            saveBonus: PB,
             hp: hp(level, 8, CON),
             count: 1,
             mode: 'player',
@@ -248,6 +278,7 @@ function druid(level: number, options: z.infer<typeof ClassOptions.druid>): Crea
         id: crypto.randomUUID(),
         name: name('Druid', level),
         AC: wildshape.AC,
+        saveBonus: PB,
         hp: hp(level, 8, CON) + wildshape.hp,
         count: 1,
         mode: 'player',
@@ -287,15 +318,16 @@ function fighter(level: number, options: z.infer<typeof ClassOptions.fighter>): 
         freq: 'at will',
         condition: 'default',
         target: 'enemy with least HP',
-        targets: attacks,
+        targets: 1,
         toHit: toHit,
-        dpr: 7 + STR + options.weaponBonus + (options.gwm ? 10 : 0),
+        dpr: (7 + STR + options.weaponBonus + (options.gwm ? 10 : 0)) * attacks,
     }
 
     return {
         id: crypto.randomUUID(),
         name: name('Fighter', level),
         AC: AC,
+        saveBonus: PB,
         hp: hp(level, 10, CON),
         count: 1,
         mode: 'player',
@@ -323,7 +355,7 @@ function fighter(level: number, options: z.infer<typeof ClassOptions.fighter>): 
                     condition: 'is available',
                     type: 'atk',
                     target: 'enemy with least HP',
-                    targets: attacks,
+                    targets: 1,
                     toHit: toHit,
                     dpr: action.dpr,
                 }
@@ -337,7 +369,7 @@ function fighter(level: number, options: z.infer<typeof ClassOptions.fighter>): 
                     condition: 'is available',
                     type: 'atk',
                     target: 'enemy with least HP',
-                    targets: attacks,
+                    targets: 1,
                     toHit: toHit,
                     dpr: action.dpr,
                 }
@@ -361,6 +393,7 @@ function monk(level: number, options: z.infer<typeof ClassOptions.monk>): Creatu
         id: crypto.randomUUID(),
         name: name('Monk', level),
         AC: AC,
+        saveBonus: PB,
         hp: hp(level, 8, CON),
         count: 1,
         mode: 'player',
@@ -373,10 +406,10 @@ function monk(level: number, options: z.infer<typeof ClassOptions.monk>): Creatu
                     type: 'atk',
                     freq: 'at will',
                     condition: 'default',
-                    targets: (level < 5) ? 1 : 2,
+                    targets: 1,
                     target: 'enemy with least HP',
                     toHit: toHit,
-                    dpr: 5.5 + DEX,
+                    dpr: (5.5 + DEX) * (level < 5 ? 1 : 2),
                 },
                 {
                     id: crypto.randomUUID(),
@@ -385,10 +418,10 @@ function monk(level: number, options: z.infer<typeof ClassOptions.monk>): Creatu
                     type: 'atk',
                     freq: 'at will',
                     condition: 'default',
-                    targets: (level < 5) ? 1 : 2,
+                    targets: 1,
                     target: 'enemy with least HP',
                     toHit: toHit,
-                    dpr: martialArtsDie + DEX,
+                    dpr: (martialArtsDie + DEX) * (level < 5 ? 1 : 2),
                 },
             ],
             5: [
@@ -401,8 +434,12 @@ function monk(level: number, options: z.infer<typeof ClassOptions.monk>): Creatu
                     freq: (level < 10) ? '1/fight' : 'at will',
                     targets: (level < 15) ? 1 : 2,
                     target: 'enemy with highest DPR',
-                    toHitDebuff: -5,
-                    damageDebuff: -20,
+                    saveDC: DC,
+                    buff: {
+                        duration: '1 round',
+                        damageMultiplier: 0,
+                        ac: -4,
+                    },
                 },
             ],
         }),
@@ -410,27 +447,405 @@ function monk(level: number, options: z.infer<typeof ClassOptions.monk>): Creatu
 }
 
 function paladin(level: number, options: z.infer<typeof ClassOptions.paladin>): Creature {
-    return null as any
+    const CON = 2
+    const STR = scale(level, {1: 4, 4: 5})
+    const CHA = scale(level, {1: 2, 8: 3, 12: 5})
+    const PB = pb(level)
+    const AC = scale(level, {1: 17, 3: 18, 5: 19, 8: 20, 11: 21, 16: 22})
+    const toHit = PB + STR + options.weaponBonus + (options.gwm ? -5 : 0)
+
+    return {
+        id: crypto.randomUUID(),
+        name: name('Paladin', level),
+        AC: AC,
+        saveBonus: PB,
+        hp: hp(level, 10, CON),
+        count: 1,
+        mode: 'player',
+        actions: scaleArray<Action>(level, {
+            1: [
+                {
+                    id: crypto.randomUUID(),
+                    name: scale(level, {1: 'Longsword', 5: 'Longsword x2'}),
+                    actionSlot: ACTION,
+                    type: 'atk',
+                    freq: 'at will',
+                    condition: 'default',
+                    targets: 1,
+                    target: 'enemy with least HP',
+                    toHit: toHit,
+                    dpr: (
+                        6.5 + STR                       // Longsword + duelist fighting style
+                        + options.weaponBonus           // Weapon
+                        + (options.gwm ? 10 : 0)        // GWM
+                        + (level >= 10 ? 4.5 : 0)       // Improved Divine Smite
+                    ) * (level < 5 ? 1 : 2),            // Multiattack
+                },
+                {
+                    id: crypto.randomUUID(),
+                    name: 'Lay on Hands',
+                    actionSlot: ACTION,
+                    type: 'heal',
+                    freq: '1/day',
+                    condition: 'ally at 0 HP',
+                    targets: 1,
+                    target: 'ally with the least HP',
+                    amount: 5 * level,
+                },
+            ],
+            2: [
+                {
+                    id: crypto.randomUUID(),
+                    name: 'Divine Smite',
+                    actionSlot: 4,
+                    type: 'buff',
+                    freq: scale(level, {1: "1/day", 5: "1/fight", 11: 'at will'}),
+                    condition: scale(level, {1: "is available", 11: 'default'}),
+                    targets: 1,
+                    target: 'self',
+                    buff: {
+                        duration: 'until next attack made',
+                        damage: scale(level, {1: 9, 5: 13.5, 11: 18, 17: 23.5}),
+                    }
+                },
+            ],
+            6: [
+                {
+                    id: crypto.randomUUID(),
+                    name: 'Aura of Protection',
+                    actionSlot: 5,
+                    type: 'buff',
+                    freq: 'at will',
+                    condition: 'default',
+                    targets: 2,
+                    target: 'ally with the least HP',
+                    buff: {
+                        duration: '1 round',
+                        save: CHA,
+                    },
+                },
+            ],
+        }),
+    }
 }
 
 function ranger(level: number, options: z.infer<typeof ClassOptions.ranger>): Creature {
-    return null as any
+    const CON = 2
+    const DEX = scale(level, {1: 4, 4: 5})
+    const WIS = scale(level, {1: 2, 8: 3, 12: 5})
+    const PB = pb(level)
+    const AC = DEX + scale(level, {1: 12, 5: 13, 11: 14 })
+    const toHit = PB + DEX + options.weaponBonus + (options.ss ? -5 : 0) + 2 // +2 from Archery fighting style
+
+    return {
+        id: crypto.randomUUID(),
+        name: name('Ranger', level),
+        AC: AC,
+        saveBonus: PB,
+        hp: hp(level, 10, CON),
+        count: 1,
+        mode: 'player',
+        actions: scaleArray<Action>(level, {
+            1: [
+                {
+                    id: crypto.randomUUID(),
+                    name: scale(level, { 
+                        1: "Hand Crossbow + Hunter's Mark", 
+                        4: "Hand Crossbow + Crossbow Expert + Hunter's Mark", 
+                        5: "Hand Crossbow x2 + Crossbow Expert + Hunter's Mark" 
+                    }),
+                    actionSlot: ACTION,
+                    type: 'atk',
+                    freq: 'at will',
+                    condition: 'default',
+                    targets: 1,
+                    target: 'enemy with least HP',
+                    toHit: toHit,
+                    dpr: (3.5 + DEX + options.weaponBonus + (options.ss ? 10 : 0)) * scale(level, { 1: 1, 4: 2, 5: 3 }),
+                },
+            ],
+        }),
+    }
 }
 
 function rogue(level: number, options: z.infer<typeof ClassOptions.rogue>): Creature {
-    return null as any
+    const CON = 2
+    const DEX = scale(level, {1: 4, 4: 5})
+    const PB = pb(level)
+    const AC = DEX + scale(level, {1: 12, 5: 13, 11: 14 })
+    const toHit = PB + DEX + options.weaponBonus + (options.ss ? -5 : 0)
+    const sneakAttack = 3.5 * Math.ceil(level/2)
+
+    return {
+        id: crypto.randomUUID(),
+        name: name('Rogue', level),
+        AC: AC,
+        saveBonus: PB,
+        hp: hp(level, 8, CON),
+        count: 1,
+        mode: 'player',
+        actions: scaleArray<Action>(level, {
+            1: [
+                {
+                    id: crypto.randomUUID(),
+                    name: scale(level, { 
+                        1: "Dagger x2 + Sneak Attack", 
+                        4: "Hand Crossbow + Crossbow Expert + Sneak Attack" 
+                    }),
+                    actionSlot: ACTION,
+                    type: 'atk',
+                    freq: 'at will',
+                    condition: 'default',
+                    targets: 1,
+                    target: 'enemy with least HP',
+                    toHit: toHit,
+                    dpr: (3.5 + DEX + options.weaponBonus + (options.ss ? 10 : 0)) * scale(level, { 1: 1, 4: 2 }) + sneakAttack,
+                },
+            ],
+            5: [
+                {
+                    id: crypto.randomUUID(),
+                    name: 'Uncanny Dodge',
+                    actionSlot: 4,
+                    type: 'buff',
+                    target: 'self',
+                    targets: 1,
+                    freq: 'at will',
+                    condition: 'default',
+                    buff: {
+                        duration: 'until next attack taken',
+                        damageTakenMultiplier: 0.5,
+                    },
+                }
+            ]
+        }),
+    }
 }
 
 function sorcerer(level: number, options: z.infer<typeof ClassOptions.sorcerer>): Creature {
-    return null as any
+    const CON = 2
+    const DEX = 2
+    const CHA = scale(level, {1: 4, 4: 5})
+    const PB = pb(level)
+    const AC = 13 + DEX
+    const toHit = PB + CHA
+    const DC = 8 + PB + CHA
+
+    return {
+        id: crypto.randomUUID(),
+        name: name('Sorcerer', level),
+        AC: AC,
+        saveBonus: PB,
+        hp: hp(level, 6, CON),
+        count: 1,
+        mode: 'player',
+        actions: scaleArray<Action>(level, {
+            1: [
+                {
+                    id: crypto.randomUUID(),
+                    name: 'Fire Bolt',
+                    actionSlot: ACTION,
+                    type: 'atk',
+                    freq: 'at will',
+                    condition: 'default',
+                    targets: 1,
+                    target: 'enemy with least HP',
+                    toHit: toHit,
+                    dpr: scale(level, {1: 5.5, 5: 11, 11: 16.5, 17: 22}),
+                }
+            ],
+            3: [
+                {
+                    id: crypto.randomUUID(),
+                    name: 'Quickened Mirror Image',
+                    actionSlot: BONUS_ACTION,
+                    type: 'buff',
+                    freq: '1/fight',
+                    condition: 'is available',
+                    targets: 1,
+                    target: 'self',
+                    buff: {
+                        duration: 'entire encounter',
+                        damageTakenMultiplier: 0.25,
+                    },
+                },
+            ],
+            5: [
+                {
+                    id: crypto.randomUUID(),
+                    name: 'Quickened Fireball',
+                    actionSlot: BONUS_ACTION,
+                    type: 'atk',
+                    freq: scale(level, {1: '1/fight', 11: 'at will'}),
+                    condition: scale(level, {1: 'is available', 11: 'default'}),
+                    targets: 2,
+                    target: 'enemy with least HP',
+                    toHit: DC - 10,
+                    dpr: scale(level, {1: 28, 11: 35}),
+                }
+            ]
+        }),
+    }
 }
 
 function warlock(level: number, options: z.infer<typeof ClassOptions.warlock>): Creature {
-    return null as any
+    const CON = 2
+    const DEX = 2
+    const CHA = scale(level, {1: 4, 4: 5})
+    const PB = pb(level)
+    const AC = 13 + DEX
+    const toHit = PB + CHA
+    const DC = 8 + PB + CHA
+
+    return {
+        id: crypto.randomUUID(),
+        name: name('Warlock', level),
+        AC: AC,
+        saveBonus: PB,
+        hp: hp(level, 8, CON),
+        count: 1,
+        mode: 'player',
+        actions: scaleArray<Action>(level, {
+            1: [
+                {
+                    id: crypto.randomUUID(),
+                    name: 'Eldritch Blast + Hex',
+                    actionSlot: ACTION,
+                    type: 'atk',
+                    freq: 'at will',
+                    condition: 'default',
+                    targets: 1,
+                    target: 'enemy with least HP',
+                    toHit: toHit,
+                    dpr: (5.5 + (level > 1 ? CHA : 0)) * scale(level, {1: 1, 5: 2, 11: 3, 17: 4}),
+                },
+            ],
+            5: [
+                {
+                    id: crypto.randomUUID(),
+                    name: 'Hypnotic Pattern',
+                    actionSlot: ACTION,
+                    type: 'debuff',
+                    freq: '1/fight',
+                    condition: 'is available',
+                    targets: 2,
+                    target: 'enemy with highest DPR',
+                    saveDC: DC,
+                    buff: {
+                        duration: '1 round',
+                        damageMultiplier: 0,
+                    },
+                },
+            ],
+        }),
+    }
 }
 
 function wizard(level: number, options: z.infer<typeof ClassOptions.wizard>): Creature {
-    return null as any
+    const CON = 2
+    const DEX = 2
+    const INT = scale(level, {1: 4, 4: 5})
+    const PB = pb(level)
+    const AC = 13 + DEX
+    const toHit = PB + INT
+    const DC = 8 + PB + INT
+
+    return {
+        id: crypto.randomUUID(),
+        name: name('Wizard', level),
+        AC: AC,
+        saveBonus: PB,
+        hp: hp(level, 6, CON),
+        count: 1,
+        mode: 'player',
+        actions: scaleArray<Action>(level, {
+            1: [
+                {
+                    id: crypto.randomUUID(),
+                    name: 'Fire Bolt',
+                    actionSlot: ACTION,
+                    type: 'atk',
+                    freq: 'at will',
+                    condition: 'default',
+                    targets: 1,
+                    target: 'enemy with least HP',
+                    toHit: toHit,
+                    dpr: scale(level, {1: 5.5, 5: 11, 11: 16.5, 17: 22}),
+                },
+                {
+                    id: crypto.randomUUID(),
+                    name: 'Shield',
+                    actionSlot: REACTION,
+                    type: 'buff',
+                    freq: scale(level, {1: '1/day', 3: '1/fight', 8: 'at will'}),
+                    condition: scale(level, {1: 'is under half HP', 8: 'default'}),
+                    targets: 1,
+                    target: 'self',
+                    buff: {
+                        duration: '1 round',
+                        ac: 5,
+                    },
+                },
+            ],
+            5: [
+                {
+                    id: crypto.randomUUID(),
+                    name: 'Fireball',
+                    actionSlot: ACTION,
+                    type: 'atk',
+                    freq: scale(level, {1: '1/fight', 11: 'at will'}),
+                    condition: scale(level, {1: 'is available', 11: 'default'}),
+                    targets: 2,
+                    target: 'enemy with least HP',
+                    toHit: DC - 10,
+                    dpr: scale(level, {1: 28, 11: 35}),
+                },
+                {
+                    id: crypto.randomUUID(),
+                    name: 'Hypnotic Pattern',
+                    actionSlot: ACTION,
+                    type: 'debuff',
+                    freq: '1/fight',
+                    condition: 'is available',
+                    targets: 2,
+                    target: 'enemy with highest DPR',
+                    saveDC: DC,
+                    buff: {
+                        duration: '1 round',
+                        damageMultiplier: 0,
+                    },
+                },
+            ],
+            13: [
+                {
+                    id: crypto.randomUUID(),
+                    name: 'Draconic transformation',
+                    actionSlot: BONUS_ACTION,
+                    type: 'atk',
+                    freq: 'at will',
+                    condition: 'default',
+                    targets: 2,
+                    target: 'enemy with least HP',
+                    toHit: DC - 10,
+                    dpr: 28,
+                },
+            ],
+            17: [
+                {
+                    id: crypto.randomUUID(),
+                    name: 'Meteor Swarm',
+                    actionSlot: ACTION,
+                    type: 'atk',
+                    freq: '1/day',
+                    condition: 'is available',
+                    targets: 3,
+                    target: 'enemy with least HP',
+                    toHit: DC - 10,
+                    dpr: 140,
+                },
+            ]
+        }),
+    }
 }
 
 export const PlayerTemplates = {

@@ -25,4 +25,12 @@
         svg { transition: color 0.3s }
         &:hover { color: #bbb }
     }
+
+    .modifier {
+        display: flex; 
+        flex-direction: row;
+        > input[type=number] { width: 45px }
+        > input[type=text] { width: 50px; min-width: fit-content }
+        svg { margin: 0 }
+    }
 }

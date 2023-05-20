@@ -24,6 +24,7 @@ function newCreature(mode: 'player'|'monster'): Creature {
         mode,
         name: (mode === 'player') ? 'Player Character' : 'Monster',
         AC: 10,
+        saveBonus: 2,
         count: 1,
         hp: 10,
         actions: [],

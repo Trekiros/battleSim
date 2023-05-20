@@ -78,7 +78,6 @@ const PlayerForm:FC<PropType> = ({ value, onChange }) => {
         const chosenClassClone = clone(chosenClass)
         callback(chosenClassClone.options)
         setChosenClass(chosenClassClone)
-        console.log(chosenClassClone)
     }
 
     return (

@@ -1,5 +1,5 @@
 import { ActionType } from "./enums"
-import { Action, AtkAction, BuffAction, Combattant, Creature, CreatureState, DebuffAction, Encounter, EncounterResult, HealAction, Round, SimulationResult, Team } from "./model"
+import { Action, AtkAction, Buff, BuffAction, Combattant, Creature, CreatureState, DebuffAction, Encounter, EncounterResult, HealAction, Round, SimulationResult, Team } from "./model"
 import { clone, range } from "./utils"
 
 function getRemainingUses(creature: Creature, rest: 'short rest'|'long rest', oldValue?: Map<string, number>) {
@@ -18,7 +18,7 @@ function getRemainingUses(creature: Creature, rest: 'short rest'|'long rest', ol
 
 export function creatureToCombattant(creature: Creature) {
     const creatureState: CreatureState = {
-        buffs: [],
+        buffs: new Map(),
         currentHP: creature.hp,
         remainingUses: getRemainingUses(creature, 'short rest'),
     }
@@ -40,7 +40,10 @@ export function creatureToCombattant(creature: Creature) {
 
 function iterateCombattant(combattant: Combattant) {
     const newInitialState: CreatureState = clone(combattant.finalState)
-    newInitialState.buffs = []
+    newInitialState.buffs = new Map()
+    combattant.finalState.buffs.forEach((buff, name) => {
+        if (buff.duration === 'entire encounter') newInitialState.buffs.set(name, clone(buff))
+    })
 
     const result: Combattant = {
         id: combattant.id,
@@ -65,8 +68,8 @@ function getActions(combattant: Combattant, allies: Combattant[]): Action[] {
     }
 
     function matchCondition(action: Action) {
-        if (action.condition === 'is under half HP') return (combattant.initialState.currentHP * 2 < combattant.creature.hp)
-        if (action.condition === 'ally at 0 HP') return (!!allies.find(ally => (ally.initialState.currentHP === 0)))
+        if (action.condition === 'is under half HP') return (combattant.finalState.currentHP * 2 < combattant.creature.hp)
+        if (action.condition === 'ally at 0 HP') return (!!allies.find(ally => (ally.finalState.currentHP === 0)))
         
         // Default or "is use available"
         return true
@@ -89,21 +92,46 @@ function getActions(combattant: Combattant, allies: Combattant[]): Action[] {
         if (!actions.length) return []
         return [actions[0]]
     })
+
+    // Handle heals now, so the next creature doesn't have to waste actions healing the same target
+    result.forEach(action => {
+            if (action.type !== 'heal') return
+
+            let targetCount = action.targets
+            const targettableAllies = new Set(allies)
+            while ((targettableAllies.size > 0) && (targetCount > 0)) {
+                targetCount--
+                const target = getNextTarget(combattant, action, Array.from(allies), [])
+
+                if (!target) break;
+
+                targettableAllies.delete(target)
+                useHealAction(action, target)
+            }
+        })
+
     return result
 }
 
 function getNextTarget(combattant: Combattant, action: Action, allies: Combattant[], enemies: Combattant[]): Combattant|undefined {
     const getHighestDPR = (group: Combattant[]) => {
         const getDPR = (combattant: Combattant) => {
-            const dmgBonus = combattant.finalState.buffs
+            const dmgBonus = Array.from(combattant.finalState.buffs)
+                .map(([_, buff]) => buff)
                 .filter(buff => !!buff.damage)
                 .map(buff => buff.damage!)
                 .reduce((a, b) => (a+b), 0)
+
+            const dmgMult = Array.from(combattant.finalState.buffs)
+                .map(([_, buff]) => buff)
+                .filter(buff => !!buff.damageMultiplier)
+                .map(buff => buff.damageMultiplier!)
+                .reduce((a, b) => (a*b), 1)
             
             return getActions(combattant, allies)
             .map(action => {
                 if (action.type !== "atk") return 0
-                return (action.dpr + dmgBonus) * action.targets
+                return (action.dpr + dmgBonus) * action.targets * dmgMult
             })
             .reduce((dpr1, dpr2) => (dpr1 + dpr2), 0)
         }
@@ -142,6 +170,7 @@ function generateActions(allies: Combattant[], enemies: Combattant[]) {
                 targets: [],
             }))
 
+        // Save uses for limited-use actions
         ally.actions.filter(({ action }) => (action.freq !== 'at will'))
             .forEach(({ action }) => {
                 let remainingUses = ally.initialState.remainingUses.get(action.id) || 0
@@ -160,7 +189,7 @@ function handleActions(allies: Combattant[], enemies: Combattant[], actionTypes:
                 let targettableEnemies = new Set(enemies.filter(enemy => (enemy.finalState.currentHP > 0)))
                 while ((targetsCount > 0) && (targettableAllies.size > 0) && (targettableEnemies.size > 0)) {
                     targetsCount--
-            
+                    
                     const target = getNextTarget(combattant, turn.action, Array.from(targettableAllies), Array.from(targettableEnemies))
                     if (target) {
                         targettableAllies.delete(target)
@@ -168,7 +197,7 @@ function handleActions(allies: Combattant[], enemies: Combattant[], actionTypes:
                         turn.targets.push(target.id)
 
                         if (turn.action.type === "buff") useBuffAction(turn.action, target)
-                        if (turn.action.type === "debuff") useDebuffAction(turn.action, target)
+                        if (turn.action.type === "debuff") useDebuffAction(combattant, turn.action, target)
                         if (turn.action.type === "heal") useHealAction(turn.action, target)
                         if (turn.action.type === "atk") useAtkAction(combattant, turn.action, target)
                     }
@@ -177,29 +206,59 @@ function handleActions(allies: Combattant[], enemies: Combattant[], actionTypes:
     })
 }
 
-function useBuffAction(action: BuffAction, target: Combattant) {
-    target.finalState.buffs.push({
-        ac: action.acBonus,
-        damage: action.damageBonus,
-        toHit: action.toHitBonus,
-    })
+function mergeBuff(newBuff: Buff, existingBuff: Buff | undefined, comparator: (a?: number, b?: number) => number|undefined) {
+    if (!existingBuff) return newBuff
+
+    const result: Buff = {
+        duration: newBuff.duration,
+        ac: comparator(newBuff.ac, existingBuff.ac),
+        damage: comparator(newBuff.damage, existingBuff.damage),
+        toHit: comparator(newBuff.toHit, existingBuff.toHit),
+        damageMultiplier: comparator(newBuff.damageMultiplier, existingBuff.damageMultiplier),
+        damageTakenMultiplier: comparator(newBuff.damageTakenMultiplier, existingBuff.damageTakenMultiplier),
+        dc: comparator(newBuff.dc, existingBuff.dc),
+        save: comparator(newBuff.save, existingBuff.save),
+    }
+
+    return result
 }
 
-function useDebuffAction(action: DebuffAction, target: Combattant) {
-    target.finalState.buffs.push({
-        ac: action.acDebuff,
-        damage: action.damageDebuff,
-        toHit: action.toHitDebuff,
-    })
+function useBuffAction(action: BuffAction, target: Combattant) {
+    const existingBuff = target.finalState.buffs.get(action.name)
+    target.finalState.buffs.set(
+        action.name, 
+        mergeBuff(action.buff, existingBuff, 
+        (a,b) => (a===undefined) ? b : (b===undefined) ? a : Math.max(a,b)))
+}
+
+function useDebuffAction(attacker: Combattant, action: DebuffAction, target: Combattant) {
+    const saveBonus = target.creature.saveBonus + Array.from(target.finalState.buffs).map(([_, buff]) => (buff.save || 0)).reduce((a, b) => (a+b), 0)
+    const saveDC = action.saveDC + Array.from(attacker.finalState.buffs).map(([_, buff]) => (buff.dc || 0)).reduce((a, b) => (a+b), 0)
+    const chanceToFail = 1 - Math.min(1, Math.max(0, (11 + saveBonus - (saveDC - 10)) / 20))
+
+    const damageMultiplier = (action.buff.damageMultiplier !== undefined) ? (1 + (action.buff.damageMultiplier - 1) * chanceToFail) : undefined
+    const damageTakenMultiplier = (action.buff.damageTakenMultiplier !== undefined) ? (1 + (action.buff.damageTakenMultiplier - 1) * chanceToFail) * chanceToFail : undefined
+
+    const existingBuff = target.finalState.buffs.get(action.name)
+    target.finalState.buffs.set(action.name, mergeBuff(
+        {...action.buff, damageMultiplier, damageTakenMultiplier}, 
+        existingBuff,
+        (a,b) => (a===undefined) ? b : (b===undefined) ? a : Math.min(a,b)
+    ))
 }
 
 function useAtkAction(attacker: Combattant, action: AtkAction, target: Combattant) {
-    const toHit  = action.toHit + attacker.finalState.buffs.map(buff => (buff.toHit || 0)) .reduce((a, b) => (a+b), 0)
-    const ac     = target.creature.AC + target.finalState.buffs.map(buff => (buff.ac || 0)).reduce((a, b) => (a+b), 0)
-    const damage = action.dpr + attacker.finalState.buffs.map(buff => (buff.damage || 0))  .reduce((a, b) => (a+b), 0)
+    const toHit  = action.toHit + Array.from(attacker.finalState.buffs).map(([_, buff]) => (buff.toHit || 0)) .reduce((a, b) => (a+b), 0)
+    const ac     = target.creature.AC + Array.from(target.finalState.buffs).map(([_, buff]) => (buff.ac || 0)).reduce((a, b) => (a+b), 0)
+    const damage = (action.dpr + Array.from(attacker.finalState.buffs).map(([_, buff]) => (buff.damage || 0)) .reduce((a, b) => (a+b), 0))
+        * Array.from(attacker.finalState.buffs).map(([_, buff]) => (buff.damageMultiplier || 1)).reduce((a, b) => (a*b), 1)
+        * Array.from(target.finalState.buffs).map(([_, buff]) => (buff.damageTakenMultiplier || 1)).reduce((a, b) => (a*b), 1);
 
     const hitChance = Math.min(1, Math.max(0, (11 + toHit - (ac - 10)) / 20))
     target.finalState.currentHP = Math.min(target.finalState.currentHP, Math.max(0, target.finalState.currentHP - damage * hitChance))
+
+    Array.from(attacker.finalState.buffs).forEach(([name, buff]) => { if (buff.duration === 'until next attack made') attacker.finalState.buffs.delete(name) })
+    Array.from(target.finalState.buffs).forEach(([name, buff]) => { if (buff.duration === 'until next attack taken') target.finalState.buffs.delete(name) })
 }
 
 function useHealAction(action: HealAction, target: Combattant) {
@@ -216,12 +275,14 @@ function runRound(team1: Combattant[], team1Surprised: boolean, team2: Combattan
     if (!team1Surprised) generateActions(round.team1, round.team2)
     if (!team2Surprised) generateActions(round.team2, round.team1)
 
-    //Buffs/Debuffs are resolved first
+    // Heals are resolved as soon as the actions are declared, to avoid situations where multiple creatures needlessly waste actions healing the same target
+    // Then buffs/debuffs are resolved 
     handleActions(round.team1, round.team2, ['buff', 'debuff'])
     handleActions(round.team2, round.team1, ['buff', 'debuff'])
 
-    handleActions(round.team1, round.team2, ['atk', 'heal'])
-    handleActions(round.team2, round.team1, ['atk', 'heal'])
+    // And finally, attacks
+    handleActions(round.team1, round.team2, ['atk'])
+    handleActions(round.team2, round.team1, ['atk'])
 
     return round
 }
@@ -263,7 +324,7 @@ export function runSimulation(players: Creature[], encounters: Encounter[]) {
 
     let playersWithState = players.flatMap(player => range(player.count).map((i) => ({
         creature: {...player, name: (player.count > 1) ? `${player.name} ${i+1}` : player.name } as Creature,
-        state: { buffs: [], currentHP: player.hp, remainingUses: getRemainingUses(player, 'long rest') } as CreatureState,
+        state: { buffs: new Map(), currentHP: player.hp, remainingUses: getRemainingUses(player, 'long rest') } as CreatureState,
     })))
 
     encounters.forEach(encounter => {
@@ -274,7 +335,7 @@ export function runSimulation(players: Creature[], encounters: Encounter[]) {
         playersWithState = lastRound.team1.map(({ creature, finalState }) => {
             const state: CreatureState = {
                 currentHP: finalState.currentHP,
-                buffs: [],
+                buffs: new Map(),
                 remainingUses: getRemainingUses(creature, 'short rest', finalState.remainingUses)
             }
             
