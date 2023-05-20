@@ -1,5 +1,5 @@
 import ClassOptions from '../model/classOptions'
-import { Action, Creature } from "../model/model"
+import { Action, AtkAction, Creature } from "../model/model"
 import {z} from 'zod'
 import { getMonster } from './monsters'
 
@@ -807,6 +807,20 @@ function wizard(level: number, options: z.infer<typeof ClassOptions.wizard>): Cr
         mode: 'player',
         actions: scaleArray<Action>(level, {
             1: [
+                ...(level > 11 ? [] : [
+                    {
+                        id: crypto.randomUUID(),
+                        name: 'Fire Bolt',
+                        actionSlot: ACTION,
+                        type: 'atk',
+                        freq: 'at will',
+                        condition: 'default',
+                        targets: 1,
+                        target: 'enemy with least HP',
+                        toHit: toHit,
+                        dpr: scale(level, {1: 5.5, 5: 11, 11: 16.5, 17: 22}),
+                    } as AtkAction
+                ]),
                 {
                     id: crypto.randomUUID(),
                     name: 'Shield',
@@ -877,21 +891,6 @@ function wizard(level: number, options: z.infer<typeof ClassOptions.wizard>): Cr
                     target: 'enemy with least HP',
                     toHit: DC - 10,
                     dpr: 140,
-                },
-            ]
-        }, {
-            10: [
-                {
-                    id: crypto.randomUUID(),
-                    name: 'Fire Bolt',
-                    actionSlot: ACTION,
-                    type: 'atk',
-                    freq: 'at will',
-                    condition: 'default',
-                    targets: 1,
-                    target: 'enemy with least HP',
-                    toHit: toHit,
-                    dpr: scale(level, {1: 5.5, 5: 11, 11: 16.5, 17: 22}),
                 },
             ]
         }),
