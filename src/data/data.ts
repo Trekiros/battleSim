@@ -809,18 +809,6 @@ function wizard(level: number, options: z.infer<typeof ClassOptions.wizard>): Cr
             1: [
                 {
                     id: crypto.randomUUID(),
-                    name: 'Fire Bolt',
-                    actionSlot: ACTION,
-                    type: 'atk',
-                    freq: 'at will',
-                    condition: 'default',
-                    targets: 1,
-                    target: 'enemy with least HP',
-                    toHit: toHit,
-                    dpr: scale(level, {1: 5.5, 5: 11, 11: 16.5, 17: 22}),
-                },
-                {
-                    id: crypto.randomUUID(),
                     name: 'Shield',
                     actionSlot: REACTION,
                     type: 'buff',
@@ -889,6 +877,21 @@ function wizard(level: number, options: z.infer<typeof ClassOptions.wizard>): Cr
                     target: 'enemy with least HP',
                     toHit: DC - 10,
                     dpr: 140,
+                },
+            ]
+        }, {
+            10: [
+                {
+                    id: crypto.randomUUID(),
+                    name: 'Fire Bolt',
+                    actionSlot: ACTION,
+                    type: 'atk',
+                    freq: 'at will',
+                    condition: 'default',
+                    targets: 1,
+                    target: 'enemy with least HP',
+                    toHit: toHit,
+                    dpr: scale(level, {1: 5.5, 5: 11, 11: 16.5, 17: 22}),
                 },
             ]
         }),
