@@ -15,7 +15,7 @@ function barbarian(level: number, options: z.infer<typeof ClassOptions.barbarian
         name: name('Barbarian', level),
         AC: 10 + DEX + CON,
         saveBonus: PB,
-        hp: hp(level, 12, CON) * 2,
+        hp: hp(level, 12, CON),
         count: 1,
         mode: 'player',
         actions: [
@@ -31,6 +31,20 @@ function barbarian(level: number, options: z.infer<typeof ClassOptions.barbarian
                 toHit: PB + STR + options.weaponBonus + (options.gwm ? -5 : 0),
                 dpr: (7 + STR + RAGE + options.weaponBonus + (options.gwm ? 10 : 0)) * (level >= 5 ? 2 : 1), 
             },
+            {
+                id: crypto.randomUUID(),
+                name: 'Rage',
+                actionSlot: BONUS_ACTION,
+                type: 'buff',
+                targets: 1,
+                target: 'self',
+                freq: '1/fight',
+                condition: 'is available',
+                buff: {
+                    duration: 'entire encounter',
+                    damageTakenMultiplier: 0.5,
+                },
+            },
         ],
     }
 
@@ -38,7 +52,7 @@ function barbarian(level: number, options: z.infer<typeof ClassOptions.barbarian
         result.actions.push({
             id: crypto.randomUUID(),
             name: 'Reckless Attack',
-            actionSlot: BONUS_ACTION,
+            actionSlot: PASSIVE,
             type: 'buff',
             targets: 1,
             condition: 'default',
@@ -76,19 +90,34 @@ function bard(level: number, options: z.infer<typeof ClassOptions.bard>): Creatu
             1: [
                 {
                     id: crypto.randomUUID(),
+                    name: 'Vicious Mockery',
+                    actionSlot: ACTION,
+                    type: 'debuff',
+                    targets: 1,
+                    condition: 'default',
+                    freq: 'at will',
+                    target: 'enemy with highest DPR',
+                    saveDC: DC,
+                    buff: {
+                        duration: 'until next attack made',
+                        toHit: -4,
+                    },
+                },
+                {
+                    id: crypto.randomUUID(),
                     name: 'Bane',
                     actionSlot: ACTION,
                     type: 'debuff',
-                    targets: 2,
-                    condition: 'default',
-                    freq: 'at will',
+                    targets: 3,
+                    condition: 'is available',
+                    freq: '1/fight',
                     target: 'enemy with highest DPR',
                     saveDC: DC,
                     buff: {
                         duration: 'entire encounter',
                         toHit: -2.5,
                         save: -2.5,
-                    }
+                    },
                 },
                 {
                     id: crypto.randomUUID(),
@@ -115,6 +144,23 @@ function bard(level: number, options: z.infer<typeof ClassOptions.bard>): Creatu
                     target: 'ally with the least HP',
                     amount: Math.ceil(level / 3) * 4.5 + CHA,
                 }
+            ],
+            5: [
+                {
+                    id: crypto.randomUUID(),
+                    name: 'Hypnotic Pattern',
+                    actionSlot: ACTION,
+                    type: 'debuff',
+                    freq: '1/fight',
+                    condition: 'is available',
+                    targets: 2,
+                    target: 'enemy with highest DPR',
+                    saveDC: DC,
+                    buff: {
+                        duration: '1 round',
+                        damageMultiplier: 0,
+                    },
+                },
             ]
         }),
     }
@@ -156,7 +202,7 @@ function cleric(level: number, options: z.infer<typeof ClassOptions.cleric>): Cr
                     name: 'Bless',
                     actionSlot: ACTION,
                     type: 'buff',
-                    targets: 2,
+                    targets: 3,
                     freq: '1/fight',
                     condition: 'is available',
                     target: 'ally with the highest DPR',
