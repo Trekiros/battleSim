@@ -596,7 +596,8 @@ function ranger(level: number, options: z.infer<typeof ClassOptions.ranger>): Cr
                 {
                     id: crypto.randomUUID(),
                     name: scale(level, { 
-                        1: "Hand Crossbow + Hunter's Mark", 
+                        1: "Hand Crossbow", 
+                        2: "Hand Crossbow + Hunter's Mark", 
                         4: "Hand Crossbow + Crossbow Expert + Hunter's Mark", 
                         5: "Hand Crossbow x2 + Crossbow Expert + Hunter's Mark" 
                     }),
@@ -607,7 +608,7 @@ function ranger(level: number, options: z.infer<typeof ClassOptions.ranger>): Cr
                     targets: 1,
                     target: 'enemy with least HP',
                     toHit: toHit,
-                    dpr: (3.5 + DEX + options.weaponBonus + (options.ss ? 10 : 0)) * scale(level, { 1: 1, 4: 2, 5: 3 }),
+                    dpr: (3.5 + DEX + options.weaponBonus + (options.ss ? 10 : 0) + (level > 1 ? 3.5 : 0)) * scale(level, { 1: 1, 4: 2, 5: 3 }),
                 },
             ],
         }),
