@@ -764,7 +764,7 @@ function warlock(level: number, options: z.infer<typeof ClassOptions.warlock>): 
                     targets: 1,
                     target: 'enemy with least HP',
                     toHit: toHit,
-                    dpr: (5.5 + (level > 1 ? CHA : 0)) * scale(level, {1: 1, 5: 2, 11: 3, 17: 4}),
+                    dpr: (5.5 + (level > 1 ? CHA : 0) + 3.5) * scale(level, {1: 1, 5: 2, 11: 3, 17: 4}),
                 },
             ],
             5: [
