@@ -2,13 +2,13 @@ import { ActionType } from "./enums"
 import { Action, AtkAction, Buff, BuffAction, Combattant, Creature, CreatureState, DebuffAction, Encounter, EncounterResult, HealAction, Round, SimulationResult, Team } from "./model"
 import { clone, range } from "./utils"
 
-function getRemainingUses(creature: Creature, rest: 'short rest'|'long rest', oldValue?: Map<string, number>) {
+function getRemainingUses(creature: Creature, rest: 'none'|'short rest'|'long rest', oldValue?: Map<string, number>) {
     const result = new Map<string, number>()
 
     creature.actions.forEach(action => {
         if (action.freq === "at will") return
 
-        if ((action.freq === "1/fight")) result.set(action.id, 1)
+        if ((action.freq === "1/fight")) result.set(action.id, ((rest === "long rest") || (rest === "short rest")) ? 1 : (oldValue?.get(action.name) || 0))
 
         if ((action.freq === "1/day")) result.set(action.id, (rest === "long rest") ? 1 : (oldValue?.get(action.name) || 0))
     })
@@ -16,11 +16,12 @@ function getRemainingUses(creature: Creature, rest: 'short rest'|'long rest', ol
     return result
 }
 
+// Used to generate monsters, never players
 export function creatureToCombattant(creature: Creature) {
     const creatureState: CreatureState = {
         buffs: new Map(),
         currentHP: creature.hp,
-        remainingUses: getRemainingUses(creature, 'short rest'),
+        remainingUses: getRemainingUses(creature, 'long rest'),
     }
 
     creature.actions.forEach(action => {
@@ -97,6 +98,12 @@ function getActions(combattant: Combattant, allies: Combattant[]): Action[] {
     result.forEach(action => {
             if (action.type !== 'heal') return
 
+            const combattantAction: Combattant['actions'][0] = {
+                action,
+                targets: [],
+            }
+            combattant.actions.push(combattantAction)
+
             let targetCount = action.targets
             const targettableAllies = new Set(allies)
             while ((targettableAllies.size > 0) && (targetCount > 0)) {
@@ -106,6 +113,7 @@ function getActions(combattant: Combattant, allies: Combattant[]): Action[] {
                 if (!target) break;
 
                 targettableAllies.delete(target)
+                combattantAction.targets.push(target.id)
                 useHealAction(action, target)
             }
         })
@@ -164,11 +172,11 @@ function generateActions(allies: Combattant[], enemies: Combattant[]) {
     allies.forEach(ally => {
         if (ally.initialState.currentHP <= 0) return
 
-        ally.actions = getActions(ally, allies)
+        ally.actions.push(...getActions(ally, allies)
             .map(action => ({
                 action: action, 
                 targets: [],
-            }))
+            })))
 
         // Save uses for limited-use actions
         ally.actions.filter(({ action }) => (action.freq !== 'at will'))
@@ -198,7 +206,7 @@ function handleActions(allies: Combattant[], enemies: Combattant[], actionTypes:
 
                         if (turn.action.type === "buff") useBuffAction(turn.action, target)
                         if (turn.action.type === "debuff") useDebuffAction(combattant, turn.action, target)
-                        if (turn.action.type === "heal") useHealAction(turn.action, target)
+                        //if (turn.action.type === "heal") useHealAction(turn.action, target) // Already handled before, in generateActions
                         if (turn.action.type === "atk") useAtkAction(combattant, turn.action, target)
                     }
                 }
@@ -266,7 +274,7 @@ function useHealAction(action: HealAction, target: Combattant) {
 }
 
 // The attackers & defenders must be clones here, they will both be mutated
-function runRound(team1: Combattant[], team1Surprised: boolean, team2: Combattant[], team2Surprised: boolean): Round {
+function runRound(team1: Combattant[], team1Surprised: boolean|undefined, team2: Combattant[], team2Surprised: boolean|undefined): Round {
     const round: Round = {
         team1: team1.map(iterateCombattant),
         team2: team2.map(iterateCombattant),
@@ -327,16 +335,17 @@ export function runSimulation(players: Creature[], encounters: Encounter[]) {
         state: { buffs: new Map(), currentHP: player.hp, remainingUses: getRemainingUses(player, 'long rest') } as CreatureState,
     })))
 
-    encounters.forEach(encounter => {
+    encounters.forEach((encounter, index) => {
         const encounterResult = runEncounter(playersWithState, encounter)
         results.push(encounterResult)
 
         const lastRound = encounterResult[encounterResult.length - 1]
+        const nextEncounter = encounters[index + 1]
         playersWithState = lastRound.team1.map(({ creature, finalState }) => {
             const state: CreatureState = {
-                currentHP: finalState.currentHP,
+                currentHP: nextEncounter?.shortRest ? creature.hp : finalState.currentHP,
                 buffs: new Map(),
-                remainingUses: getRemainingUses(creature, 'short rest', finalState.remainingUses)
+                remainingUses: getRemainingUses(creature, nextEncounter?.shortRest ? 'short rest' : 'none', finalState.remainingUses),
             }
             
             return { creature, state }

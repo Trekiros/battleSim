@@ -18,7 +18,7 @@ type Options<T> = { value: T, label: string}[]
 
 const FreqOptions: Options<Frequency> = [
     { value: 'at will', label: 'At will' },
-    { value: '1/fight', label: '1/encounter' },
+    { value: '1/fight', label: '1/short rest' },
     { value: '1/day', label: '1/day' },
 ]
 

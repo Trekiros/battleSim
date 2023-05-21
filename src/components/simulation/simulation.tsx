@@ -56,23 +56,17 @@ const Simulation:FC<PropType> = ({}) => {
 
             <EncounterForm
                 mode='player'
-                creatures={players}
-                onCreaturesUpdate={(newValue) => setPlayers(newValue)}
+                encounter={{ monsters: players }}
+                onUpdate={(newValue) => setPlayers(newValue.monsters)}
             />
 
             { encounters.map((encounter, index) => (
                 <div className={styles.encounter} key={index}>
                     <EncounterForm
                         mode='monster'
-                        creatures={encounter.monsters}
-                        onCreaturesUpdate={(monsters) => updateEncounter(index, {...encounter, monsters})}
+                        encounter={encounter}
+                        onUpdate={(newValue) => updateEncounter(index, newValue)}
                         onDelete={(index > 0) ? () => deleteEncounter(index) : undefined}
-
-                        playersSurprised={encounter.playersSurprised}
-                        togglePlayersSurprised={() => updateEncounter(index, {...encounter, playersSurprised: !encounter.playersSurprised})}
-
-                        monstersSurprised={encounter.monstersSurprised}
-                        toggleMonstersSurprised={() => updateEncounter(index, {...encounter, monstersSurprised: !encounter.monstersSurprised})}
                     />
                     { (!simulationResults[index] ? null : (
                         <EncounterResult value={simulationResults[index]} />

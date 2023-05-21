@@ -119,8 +119,9 @@ const RoundSchema = z.object({
 
 export const EncounterSchema = z.object({
     monsters: TeamSchema,
-    playersSurprised: z.boolean(),
-    monstersSurprised: z.boolean(),
+    playersSurprised: z.boolean().optional(),
+    monstersSurprised: z.boolean().optional(),
+    shortRest: z.boolean().optional(),
 })
 
 const EncounterResultSchema = z.array(RoundSchema)
