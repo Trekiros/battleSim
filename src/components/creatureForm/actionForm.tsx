@@ -90,6 +90,11 @@ const BuffStatOptions: Options<keyof Omit<Buff, 'duration'>> = [
     { value: 'damageTakenMultiplier', label: 'Damage Taken Multiplier' },
 ]
 
+const AtkOptions: Options<boolean> = [
+    { value: true, label: 'Save DC:' },
+    { value: false, label: 'To Hit:' },
+]
+
 const BuffForm:FC<{value: Buff, onUpdate: (newValue: Buff) => void}> = ({ value, onUpdate }) => {
     const [modifiers, setModifiers] = useState<(keyof Omit<Buff, 'duration'>)[]>(Object.keys(value).filter(key => (key !== 'duration')) as any)
     const {validate} = useContext(validateContext)
@@ -206,7 +211,7 @@ const ActionForm:FC<PropType> = ({ value, onChange, onDelete }) => {
 
             { (value.type === "atk") ? (
                 <>
-                    To Hit:
+                    <Select value={!!value.useSaves} options={AtkOptions} onChange={useSaves => update(v => { (v as AtkAction).useSaves = useSaves })} />
                     <input type='number' value={value.toHit} onChange={e => update(v => { (v as AtkAction).toHit = Number(e.target.value) })} />
                     Damage: 
                     <input type='number' value={value.dpr} onChange={e => update(v => { (v as AtkAction).dpr = Number(e.target.value) })} />

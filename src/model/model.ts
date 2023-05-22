@@ -33,6 +33,7 @@ const AtkActionSchema = ActionSchemaBase.merge(z.object({
     dpr: z.number(),
     toHit: z.number(),
     target: EnemyTargetSchema,
+    useSaves: z.boolean().optional(),
 }))
 
 const HealActionSchema = ActionSchemaBase.merge(z.object({

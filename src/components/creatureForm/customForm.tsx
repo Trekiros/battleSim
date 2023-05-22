@@ -90,7 +90,7 @@ const CustomForm:FC<PropType> = ({ value, onChange }) => {
                 <input type='number' min={0} value={value.AC} onChange={e => update(v => { v.AC = Number(e.target.value) })} />
             </section>
             <section className="tooltipContainer">
-                <h3>Save Bonus</h3>
+                <h3>Average Save</h3>
                 <input type='number' min={0} value={value.saveBonus} onChange={e => update(v => { v.saveBonus = Number(e.target.value) })} />
                 <div className="tooltip">Average of all saves' bonuses</div>
             </section>

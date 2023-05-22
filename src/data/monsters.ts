@@ -95,9 +95,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 45,
-              "toHit": 8,
+              "toHit": 18,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "5276dccb-4d33-4580-8460-45aaacc07a87",
@@ -146,10 +147,10 @@ export const Monsters: Creature[] = [
               "targets": 2,
               "type": "buff",
               "target": "ally with the highest DPR",
-              buff: {
-                duration: "entire encounter",
-                toHit: 2.5,
-                save: 2.5,
+              "buff": {
+                  "duration": "entire encounter",
+                  "toHit": 2.5,
+                  "save": 2.5
               }
           },
           {
@@ -197,9 +198,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 54,
-              "toHit": 8,
+              "toHit": 18,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "cddcb08e-c967-409e-a2e4-0f8d20918cc8",
@@ -259,9 +261,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 66,
-              "toHit": 10,
+              "toHit": 20,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "f6fe761c-5787-4f8a-839a-48d70f1470e9",
@@ -321,9 +324,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 66,
-              "toHit": 9,
+              "toHit": 19,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "b6cd4ca6-b42a-4016-9f3a-040284202292",
@@ -383,9 +387,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 45.5,
-              "toHit": 8,
+              "toHit": 18,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "d2830ead-bb4e-4da3-93c5-a743a6350fc5",
@@ -445,9 +450,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 66,
-              "toHit": 9,
+              "toHit": 19,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "bb0563d6-c791-470c-ba4d-d014d46f224a",
@@ -507,9 +513,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 54,
-              "toHit": 8,
+              "toHit": 18,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "323fdb8e-c634-4f69-acdb-7d0c59bf44b4",
@@ -569,9 +576,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 66,
-              "toHit": 11,
+              "toHit": 21,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "a6aff193-41b3-4afb-a74b-799612371cba",
@@ -631,9 +639,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 56,
-              "toHit": 8,
+              "toHit": 18,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "7c567762-4f4e-4635-96e3-8f765087e62a",
@@ -693,9 +702,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 63,
-              "toHit": 11,
+              "toHit": 21,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "7f265b70-1538-4cd0-95c4-2e7e6fc02508",
@@ -755,9 +765,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 58.5,
-              "toHit": 10,
+              "toHit": 20,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "d2a9b56b-102e-4cc9-be30-6bb932a48064",
@@ -817,9 +828,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 54,
-              "toHit": 9,
+              "toHit": 19,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "2e614fe9-c255-465e-ad09-081d26adb414",
@@ -855,9 +867,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 21,
-              "toHit": 3,
+              "toHit": 13,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "d74b15eb-4693-4d9f-8838-b59bfc82b008",
@@ -955,9 +968,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 67.5,
-              "toHit": 12,
+              "toHit": 22,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "1284bfe9-4a96-454e-a262-ae99cc114b91",
@@ -1017,9 +1031,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 88,
-              "toHit": 13,
+              "toHit": 23,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "e98c4a93-1543-41a3-a16a-370f77fff26e",
@@ -1079,9 +1094,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 56,
-              "toHit": 11,
+              "toHit": 21,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "e1f2ae3a-75a9-499b-800a-986ee621d4cd",
@@ -1141,9 +1157,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 88,
-              "toHit": 13,
+              "toHit": 23,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "45726449-fd61-4ce4-b4a6-fba8d9584e79",
@@ -1203,9 +1220,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 63,
-              "toHit": 12,
+              "toHit": 22,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "7974d7c3-7b63-4608-abf0-bd86981702cf",
@@ -1265,9 +1283,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 71.5,
-              "toHit": 14,
+              "toHit": 24,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "ed79aebe-8501-4ac0-928c-a12f5a6d4152",
@@ -1327,9 +1346,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 77,
-              "toHit": 12,
+              "toHit": 22,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "a9e0af14-c238-422c-ae58-759c0c1b1fc4",
@@ -1389,9 +1409,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 91,
-              "toHit": 14,
+              "toHit": 24,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "03814064-6589-43a8-be4c-780c7474ef7a",
@@ -1451,9 +1472,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 67.5,
-              "toHit": 14,
+              "toHit": 24,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "c6035be3-bb5e-469f-9de6-8b8c30abe06d",
@@ -1513,9 +1535,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 72,
-              "toHit": 12,
+              "toHit": 22,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "e1509600-8808-440c-9c26-09acc3937377",
@@ -1551,9 +1574,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is under half HP",
               "dpr": 44,
-              "toHit": 8,
+              "toHit": 18,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "b550ce8f-26b8-49ab-b4e0-0955ca7d16c3",
@@ -1639,9 +1663,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "default",
               "dpr": 10.5,
-              "toHit": 3,
+              "toHit": 13,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -1780,9 +1805,9 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "buff",
               "target": "self",
-              buff: {
-                duration: "1 round",
-                ac: 5,
+              "buff": {
+                  "duration": "1 round",
+                  "ac": 5
               }
           },
           {
@@ -1794,9 +1819,9 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "buff",
               "target": "self",
-              buff: {
-                duration: "entire encounter",
-                damageTakenMultiplier: 0.5,
+              "buff": {
+                  "duration": "entire encounter",
+                  "damageTakenMultiplier": 0.5
               }
           },
           {
@@ -2102,9 +2127,10 @@ export const Monsters: Creature[] = [
               "freq": "1/day",
               "condition": "is available",
               "dpr": 30,
-              "toHit": 3,
+              "toHit": 13,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -2167,11 +2193,10 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "buff",
               "target": "self",
-              
-              buff: {
-                duration: "1 round",
-                toHit: 4,
-                ac: -4,
+              "buff": {
+                  "duration": "1 round",
+                  "toHit": 4,
+                  "ac": -4
               }
           }
       ],
@@ -2261,9 +2286,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 66,
-              "toHit": 6,
+              "toHit": 16,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "bf0d23e6-4bb4-4e79-b8fb-5d801a45617a",
@@ -2299,9 +2325,10 @@ export const Monsters: Creature[] = [
               "freq": "at will",
               "condition": "default",
               "dpr": 20,
-              "toHit": 6,
+              "toHit": 16,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              useSaves: true,
           },
           {
               "id": "fbed8014-e61f-4f75-a986-b90ff094289a",
@@ -2312,8 +2339,9 @@ export const Monsters: Creature[] = [
               "targets": 2,
               "type": "atk",
               "dpr": 20,
-              "toHit": 6,
-              "target": "enemy with most HP"
+              "toHit": 16,
+              "target": "enemy with most HP",
+              useSaves: true,
           }
       ],
       "count": 1,
@@ -2337,9 +2365,10 @@ export const Monsters: Creature[] = [
               "freq": "at will",
               "condition": "default",
               "dpr": 21,
-              "toHit": 4,
+              "toHit": 14,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -2376,11 +2405,10 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "buff",
               "target": "self",
-              
-              buff: {
-                duration: "1 round",
-                toHit: 4,
-                ac: -4,
+              "buff": {
+                  "duration": "1 round",
+                  "toHit": 4,
+                  "ac": -4
               }
           }
       ],
@@ -2443,9 +2471,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 22.5,
-              "toHit": 1,
+              "toHit": 11,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -2559,9 +2588,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 22,
-              "toHit": 2,
+              "toHit": 12,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -2727,9 +2757,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 14,
-              "toHit": 1,
+              "toHit": 11,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -2765,9 +2796,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 16.5,
-              "toHit": 2,
+              "toHit": 12,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -3176,9 +3208,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 31.5,
-              "toHit": 5,
+              "toHit": 15,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "a7ebcc75-d157-43ca-9817-157a4e5c39db",
@@ -3444,9 +3477,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 18,
-              "toHit": 1,
+              "toHit": 11,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -3753,9 +3787,10 @@ export const Monsters: Creature[] = [
               "freq": "1/day",
               "condition": "is available",
               "dpr": 70,
-              "toHit": 8,
+              "toHit": 18,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "46c60fe1-40bb-42e1-b017-9611451f9980",
@@ -3778,10 +3813,9 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "buff",
               "target": "self",
-              
-              buff: {
-                duration: "until next attack taken",
-                ac: 6,
+              "buff": {
+                  "duration": "until next attack taken",
+                  "ac": 6
               }
           }
       ],
@@ -3843,9 +3877,10 @@ export const Monsters: Creature[] = [
               "freq": "at will",
               "condition": "default",
               "dpr": 20,
-              "toHit": 7,
+              "toHit": 17,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              useSaves: true,
           },
           {
               "id": "9d4a3e1e-93d9-44e9-8440-9cdbcefd06a6",
@@ -3856,8 +3891,9 @@ export const Monsters: Creature[] = [
               "targets": 2,
               "type": "atk",
               "dpr": 20,
-              "toHit": 7,
-              "target": "enemy with most HP"
+              "toHit": 17,
+              "target": "enemy with most HP",
+              useSaves: true,
           }
       ],
       "count": 1,
@@ -3945,9 +3981,10 @@ export const Monsters: Creature[] = [
               "freq": "at will",
               "condition": "default",
               "dpr": 21,
-              "toHit": 9,
+              "toHit": 19,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "2b24d950-f846-4ed5-8ca2-795541a2f471",
@@ -3969,11 +4006,11 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "debuff",
               "target": "enemy with highest DPR",
-              saveDC: 15,
-              buff: {
-                duration: 'entire encounter',
-                toHit: -4,
-                save: -4,
+              "saveDC": 15,
+              "buff": {
+                  "duration": "entire encounter",
+                  "toHit": -4,
+                  "save": -4
               }
           }
       ],
@@ -4165,9 +4202,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 52.5,
-              "toHit": 8,
+              "toHit": 18,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "09738be7-fb2c-4194-91db-9025a11a4de7",
@@ -4306,9 +4344,9 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "buff",
               "target": "self",
-              buff: {
-                duration: "until next attack taken",
-                ac: 3,
+              "buff": {
+                  "duration": "until next attack taken",
+                  "ac": 3
               }
           }
       ],
@@ -4334,10 +4372,9 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "buff",
               "target": "self",
-              
-              buff: {
-                duration: "1 round",
-                ac: 5,
+              "buff": {
+                  "duration": "1 round",
+                  "ac": 5
               }
           },
           {
@@ -4424,11 +4461,11 @@ export const Monsters: Creature[] = [
               "targets": 2,
               "type": "debuff",
               "target": "enemy with highest DPR",
-              saveDC: 12,
-              buff: {
-                duration: "1 round",
-                toHit: -4,
-                ac: -4,
+              "saveDC": 12,
+              "buff": {
+                  "duration": "1 round",
+                  "toHit": -4,
+                  "ac": -4
               }
           }
       ],
@@ -4466,11 +4503,11 @@ export const Monsters: Creature[] = [
               "targets": 2,
               "type": "debuff",
               "target": "enemy with highest DPR",
-              saveDC: 14,
-              buff: {
-                duration: "1 round",
-                toHit: -4,
-                ac: -4,
+              "saveDC": 14,
+              "buff": {
+                  "duration": "1 round",
+                  "toHit": -4,
+                  "ac": -4
               }
           }
       ],
@@ -5073,9 +5110,9 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "buff",
               "target": "self",
-              buff: {
-                duration: "1 round",
-                ac: 5,
+              "buff": {
+                  "duration": "1 round",
+                  "ac": 5
               }
           }
       ],
@@ -5204,9 +5241,10 @@ export const Monsters: Creature[] = [
               "freq": "at will",
               "condition": "default",
               "dpr": 27,
-              "toHit": 4,
+              "toHit": 14,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+              "useSaves": true
           },
           {
               "id": "7ecae848-28ab-4acc-8d27-0b58fc68579f",
@@ -5370,9 +5408,10 @@ export const Monsters: Creature[] = [
               "freq": "at will",
               "condition": "default",
               "dpr": 31.5,
-              "toHit": 2,
+              "toHit": 12,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -6454,12 +6493,12 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "debuff",
               "target": "enemy with least HP",
-              saveDC: 16,
-              buff: {
-                duration: '1 round',
-                damageMultiplier: 0,
-                damageTakenMultiplier: 0,
-              },
+              "saveDC": 16,
+              "buff": {
+                  "duration": "1 round",
+                  "damageMultiplier": 0,
+                  "damageTakenMultiplier": 0
+              }
           }
       ],
       "count": 1,
@@ -6572,10 +6611,9 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "buff",
               "target": "ally with the least HP",
-              
-              buff: {
-                duration: "1 round",
-                damageMultiplier: 1.5,
+              "buff": {
+                  "duration": "1 round",
+                  "damageMultiplier": 1.5
               }
           }
       ],
@@ -6714,9 +6752,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 22,
-              "toHit": 3,
+              "toHit": 13,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -6880,9 +6919,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 21,
-              "toHit": 1,
+              "toHit": 11,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -7153,9 +7193,9 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "buff",
               "target": "self",
-              buff: {
-                duration: "1 round",
-                ac: 5,
+              "buff": {
+                  "duration": "1 round",
+                  "ac": 5
               }
           },
           {
@@ -7242,9 +7282,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 24.5,
-              "toHit": 5,
+              "toHit": 15,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "939df6ab-01a5-40be-9961-d99afe4c2c77",
@@ -7331,9 +7372,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 21,
-              "toHit": 2,
+              "toHit": 12,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -7550,11 +7592,10 @@ export const Monsters: Creature[] = [
               "targets": 2,
               "type": "buff",
               "target": "ally with the highest DPR",
-              
-              buff: {
-                duration: "entire encounter",
-                toHit: 2.5,
-                save: 2.5,
+              "buff": {
+                  "duration": "entire encounter",
+                  "toHit": 2.5,
+                  "save": 2.5
               }
           },
           {
@@ -7566,9 +7607,9 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "buff",
               "target": "self",
-              buff: {
-                duration: "until next attack taken",
-                ac: 3,
+              "buff": {
+                  "duration": "until next attack taken",
+                  "ac": 3
               }
           }
       ],
@@ -7790,15 +7831,16 @@ export const Monsters: Creature[] = [
       "actions": [
           {
               "id": "a88f759a-9f28-406f-b448-ce01abb549fc",
-              "name": "Wall of Ice {@recharge}",
+              "name": "Wall of Ice",
               "type": "atk",
               "actionSlot": 0,
-              "freq": "at will",
-              "condition": "default",
+              "freq": "1/fight",
+              "condition": "is available",
               "dpr": 52.5,
-              "toHit": 7,
+              "toHit": 17,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 2,
+              useSaves: true,
           },
           {
               "id": "23211340-757d-499d-8d21-6cbb8bf69021",
@@ -7840,15 +7882,16 @@ export const Monsters: Creature[] = [
           },
           {
               "id": "562819c1-6187-4a8a-9651-f72f2402716c",
-              "name": "Frost Breath {@recharge}",
+              "name": "Frost Breath",
               "type": "atk",
               "actionSlot": 0,
-              "freq": "at will",
-              "condition": "default",
+              "freq": "1/fight",
+              "condition": "is available",
               "dpr": 5,
-              "toHit": 0,
+              "toHit": 10,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              useSaves: true,
           }
       ],
       "count": 1,
@@ -7930,15 +7973,28 @@ export const Monsters: Creature[] = [
       "actions": [
           {
               "id": "0f69b990-fed0-4fa8-a88c-65ec63198af8",
-              "name": "Claws + Devour Intellect",
+              "name": "Claws",
               "type": "atk",
               "actionSlot": 0,
               "freq": "at will",
               "condition": "default",
-              "dpr": 18,
-              "toHit": 2,
+              "dpr": 7.5,
+              "toHit": 4,
               "target": "enemy with most HP",
               "targets": 1
+          },
+          {
+              "id": "0f69b990-fed0-4fa8-a88c-65ec63198af9",
+              "name": "Devour Intellect",
+              "type": "atk",
+              "actionSlot": 1,
+              "freq": "at will",
+              "condition": "default",
+              "dpr": 11,
+              "toHit": 12,
+              "target": "enemy with highest AC",
+              "targets": 1,
+              useSaves: true,
           },
           {
               "id": "7a7b6aeb-897f-43df-9749-dd0c29fcb57f",
@@ -7949,12 +8005,12 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "debuff",
               "target": "enemy with highest AC",
-              saveDC: 12,
-              buff: {
-                duration: '1 round',
-                damageMultiplier: 0,
-                ac: -4,
-              },
+              "saveDC": 12,
+              "buff": {
+                  "duration": "1 round",
+                  "damageMultiplier": 0,
+                  "ac": -4
+              }
           }
       ],
       "count": 1,
@@ -8016,9 +8072,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 45,
-              "toHit": 9,
+              "toHit": 19,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -8170,10 +8227,10 @@ export const Monsters: Creature[] = [
               "targets": 2,
               "type": "buff",
               "target": "ally with the least HP",
-              buff: {
-                duration: "1 round",
-                toHit: 2.5,
-                save: 2.5,
+              "buff": {
+                  "duration": "1 round",
+                  "toHit": 2.5,
+                  "save": 2.5
               }
           },
           {
@@ -8185,9 +8242,9 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "buff",
               "target": "self",
-              buff: {
-                duration: "until next attack taken",
-                ac: 2,
+              "buff": {
+                  "duration": "until next attack taken",
+                  "ac": 2
               }
           }
       ],
@@ -8491,9 +8548,9 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "buff",
               "target": "self",
-              buff: {
-                duration: "1 round",
-                ac: 5,
+              "buff": {
+                  "duration": "1 round",
+                  "ac": 5
               }
           },
           {
@@ -8758,9 +8815,9 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "buff",
               "target": "self",
-              buff: {
-                duration: "1 round",
-                ac: 5,
+              "buff": {
+                  "duration": "1 round",
+                  "ac": 5
               }
           },
           {
@@ -8815,15 +8872,16 @@ export const Monsters: Creature[] = [
           },
           {
               "id": "d4bc1eac-4795-4e0d-8386-e41c92c6fcb9",
-              "name": "Fire Breath {@recharge}",
+              "name": "Fire Breath",
               "type": "atk",
               "actionSlot": 0,
-              "freq": "at will",
-              "condition": "default",
+              "freq": "1/fight",
+              "condition": "is available",
               "dpr": 7,
-              "toHit": 1,
+              "toHit": 11,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              useSaves: true,
           }
       ],
       "count": 1,
@@ -8975,9 +9033,10 @@ export const Monsters: Creature[] = [
               "freq": "at will",
               "condition": "default",
               "dpr": 21,
-              "toHit": 6,
+              "toHit": 16,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -9258,9 +9317,9 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "buff",
               "target": "self",
-              buff: {
-                duration: "1 round",
-                ac: 5,
+              "buff": {
+                  "duration": "1 round",
+                  "ac": 5
               }
           }
       ],
@@ -9747,9 +9806,10 @@ export const Monsters: Creature[] = [
               "freq": "at will",
               "condition": "default",
               "dpr": 10.5,
-              "toHit": 2,
+              "toHit": 12,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+              "useSaves": true
           },
           {
               "id": "fb2592e3-6ce3-493f-85be-898028c1fcef",
@@ -10041,10 +10101,9 @@ export const Monsters: Creature[] = [
               "targets": 4,
               "type": "buff",
               "target": "ally with the least HP",
-              
-              buff: {
-                duration: "1 round",
-                toHit: 4,
+              "buff": {
+                  "duration": "1 round",
+                  "toHit": 4
               }
           },
           {
@@ -10619,9 +10678,9 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "buff",
               "target": "ally with the highest DPR",
-              buff: {
-                duration: "until next attack made",
-                toHit: 4,
+              "buff": {
+                  "duration": "until next attack made",
+                  "toHit": 4
               }
           },
           {
@@ -10954,9 +11013,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 24.5,
-              "toHit": 3,
+              "toHit": 13,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -11303,9 +11363,9 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "buff",
               "target": "self",
-              buff: {
-                duration: "1 round",
-                toHit: 4,
+              "buff": {
+                  "duration": "1 round",
+                  "toHit": 4
               }
           }
       ],
@@ -11343,9 +11403,9 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "buff",
               "target": "self",
-              buff: {
-                duration: "1 round",
-                toHit: 4,
+              "buff": {
+                  "duration": "1 round",
+                  "toHit": 4
               }
           }
       ],
@@ -11715,9 +11775,9 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "buff",
               "target": "ally with the highest DPR",
-              buff: {
-                duration: "until next attack taken",
-                ac: 2,
+              "buff": {
+                  "duration": "until next attack taken",
+                  "ac": 2
               }
           }
       ],
@@ -11767,9 +11827,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 18,
-              "toHit": 3,
+              "toHit": 13,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -11932,9 +11993,10 @@ export const Monsters: Creature[] = [
               "freq": "at will",
               "condition": "default",
               "dpr": 16.5,
-              "toHit": 3,
+              "toHit": 13,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -12110,12 +12172,13 @@ export const Monsters: Creature[] = [
               "name": "Steam Breath {@recharge}",
               "type": "atk",
               "actionSlot": 0,
-              "freq": "at will",
-              "condition": "default",
+              "freq": "1/fight",
+              "condition": "is available",
               "dpr": 4.5,
-              "toHit": 0,
+              "toHit": 10,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              useSaves: true,
           }
       ],
       "count": 1,
@@ -12241,9 +12304,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 54,
-              "toHit": 7,
+              "toHit": 17,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+              "useSaves": true
           },
           {
               "id": "181d3cf1-a062-44df-9595-3a4cebbc3ab3",
@@ -12974,11 +13038,11 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "debuff",
               "target": "enemy with highest DPR",
-              saveDC: 17,
-              buff: {
-                duration: "1 round",
-                damageMultiplier: 0,
-                ac: -4,
+              "saveDC": 17,
+              "buff": {
+                  "duration": "1 round",
+                  "damageMultiplier": 0,
+                  "ac": -4
               }
           }
       ],
@@ -13300,15 +13364,16 @@ export const Monsters: Creature[] = [
       "actions": [
           {
               "id": "52f862f9-e9e2-43b2-b9e7-7834f99affc5",
-              "name": "Spores {@recharge}",
+              "name": "Spores",
               "type": "atk",
               "actionSlot": 0,
-              "freq": "at will",
-              "condition": "default",
+              "freq": "1/fight",
+              "condition": "is available",
               "dpr": 5.5,
-              "toHit": 4,
+              "toHit": 14,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+              useSaves: true,
           },
           {
               "id": "48535d91-55de-45dc-96ce-c773a0f400ee",
@@ -13321,6 +13386,22 @@ export const Monsters: Creature[] = [
               "toHit": 6,
               "target": "enemy with most HP",
               "targets": 1
+          },
+          {
+              "id": "48535d91-55de-45dc-96ce-c773a0f400ef",
+              "name": "Stunning Screech",
+              "type": "debuff",
+              "actionSlot": 0,
+              "freq": "1/day",
+              "condition": "is available",
+              "target": "enemy with highest DPR",
+              "targets": 2,
+              saveDC: 14,
+              buff: {
+                duration: '1 round',
+                damageMultiplier: 0,
+                ac: -4,
+              },
           }
       ],
       "count": 1,
@@ -13761,9 +13842,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 22.5,
-              "toHit": 2,
+              "toHit": 12,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -13901,9 +13983,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 18,
-              "toHit": 2,
+              "toHit": 12,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -14057,9 +14140,10 @@ export const Monsters: Creature[] = [
               "freq": "at will",
               "condition": "default",
               "dpr": 10.5,
-              "toHit": 3,
+              "toHit": 13,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+              "useSaves": true
           },
           {
               "id": "31d7c66c-d8f1-4b60-b707-514e373c5e97",
@@ -14121,9 +14205,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 49.5,
-              "toHit": 4,
+              "toHit": 14,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "1e5118aa-6d13-492d-ac57-c5242a561041",
@@ -14159,9 +14244,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 55,
-              "toHit": 6,
+              "toHit": 16,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "6f3ec5b8-12a7-4c15-ac14-c4b0dacd9b78",
@@ -14197,9 +14283,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 42,
-              "toHit": 4,
+              "toHit": 14,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "014adc71-8e90-4b64-92bc-56e524162c58",
@@ -14235,9 +14322,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 55,
-              "toHit": 5,
+              "toHit": 15,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "86c4899c-8b99-4c31-bd6e-7fc0d642866e",
@@ -14273,9 +14361,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 40.5,
-              "toHit": 4,
+              "toHit": 14,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "9f6a4cd7-a369-4026-bdff-8b6366af3bb2",
@@ -14311,9 +14400,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 55,
-              "toHit": 7,
+              "toHit": 17,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "57b85450-f9a3-4eb4-801b-9ea5f0fa45bc",
@@ -14349,9 +14439,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 42,
-              "toHit": 4,
+              "toHit": 14,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "7f5b55c8-a3b6-423d-a7cc-7921f2261772",
@@ -14387,9 +14478,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 56,
-              "toHit": 7,
+              "toHit": 17,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "a122fd1b-f3fa-4da7-87ee-fd847b584a79",
@@ -14425,9 +14517,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 56,
-              "toHit": 8,
+              "toHit": 18,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "be96a9ab-56f7-4404-ba0f-fbd56f3b6155",
@@ -14489,9 +14582,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 54,
-              "toHit": 7,
+              "toHit": 17,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "cfa159c4-7c0e-4594-8061-2f612284aaf4",
@@ -14527,9 +14621,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 45,
-              "toHit": 5,
+              "toHit": 15,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "04039aae-9cc1-4c7a-8499-3331313b3dc5",
@@ -14805,9 +14900,10 @@ export const Monsters: Creature[] = [
               "freq": "at will",
               "condition": "default",
               "dpr": 36,
-              "toHit": 6,
+              "toHit": 16,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -14861,18 +14957,46 @@ export const Monsters: Creature[] = [
       "hp": 75,
       "AC": 14,
       "actions": [
-          {
-              "id": "878ace34-a467-4ac3-9673-b6a8b46bc434",
-              "name": "Pseudopod x 2 + Eat Memories",
-              "type": "atk",
-              "actionSlot": 0,
-              "freq": "at will",
-              "condition": "default",
-              "dpr": 54,
-              "toHit": 7,
-              "target": "enemy with most HP",
-              "targets": 1
-          }
+        {
+            "id": "878ace34-a467-4ac3-9673-b6a8b46bc434",
+            "name": "Pseudopod x 2",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 28,
+            "toHit": 7,
+            "target": "enemy with most HP",
+            "targets": 1
+        },
+        {
+            "id": "878ace34-a467-4ac3-9673-b6a8b46bc434",
+            "name": "Eat Memories",
+            "type": "atk",
+            "actionSlot": 1,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 18,
+            "toHit": 15,
+            "target": "enemy with highest DPR",
+            "targets": 1,
+            useSaves: true,
+        },
+        {
+            "id": "878ace34-a467-4ac3-9673-b6a8b46bc435",
+            "name": "Eat Memories Debuff",
+            "type": "debuff",
+            "actionSlot": 4,
+            "freq": "at will",
+            "condition": "default",
+            "target": "enemy with highest DPR",
+            "targets": 1,
+            saveDC: 15,
+            buff: {
+              duration: "entire encounter",
+              toHit: -2.5,
+            },
+        },
       ],
       "count": 1,
       "saveBonus": 2.5
@@ -14907,9 +15031,10 @@ export const Monsters: Creature[] = [
               "freq": "at will",
               "condition": "default",
               "dpr": 18,
-              "toHit": 3,
+              "toHit": 13,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -15035,9 +15160,10 @@ export const Monsters: Creature[] = [
               "freq": "at will",
               "condition": "default",
               "dpr": 26,
-              "toHit": 9,
+              "toHit": 19,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "d6dbcb51-65f4-41ce-9ba0-0d2e9b948a32",
@@ -15047,9 +15173,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 26,
-              "toHit": 8,
+              "toHit": 18,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -15273,9 +15400,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 36,
-              "toHit": 5,
+              "toHit": 15,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -15474,10 +15602,10 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "buff",
               "target": "self",
-              buff: {
-                duration: "1 round",
-                ac: 4,
-                toHit: 4,
+              "buff": {
+                  "duration": "1 round",
+                  "ac": 4,
+                  "toHit": 4
               }
           }
       ],
@@ -15616,9 +15744,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 9,
-              "toHit": 2,
+              "toHit": 12,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "ccf3afbf-b31e-4199-b68f-33e5101571da",
@@ -15629,11 +15758,11 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "debuff",
               "target": "enemy with highest DPR",
-              saveDC: 12,
-              buff: {
-                duration: "1 round",
-                toHit: -4,
-                save: -4,
+              "saveDC": 12,
+              "buff": {
+                  "duration": "1 round",
+                  "toHit": -4,
+                  "save": -4
               }
           }
       ],
@@ -15826,9 +15955,10 @@ export const Monsters: Creature[] = [
               "freq": "at will",
               "condition": "default",
               "dpr": 22,
-              "toHit": 3,
+              "toHit": 13,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+              "useSaves": true
           },
           {
               "id": "6b4b4bf9-4fed-4649-90eb-f19484fc3283",
@@ -15851,11 +15981,11 @@ export const Monsters: Creature[] = [
               "targets": 2,
               "type": "debuff",
               "target": "enemy with highest DPR",
-              saveDC: 100,
-              buff: {
-                duration: "1 round",
-                toHit: -4,
-                ac: -4,
+              "saveDC": 100,
+              "buff": {
+                  "duration": "1 round",
+                  "toHit": -4,
+                  "ac": -4
               }
           }
       ],
@@ -16071,9 +16201,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 64,
-              "toHit": 1,
+              "toHit": 16,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -16262,9 +16393,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 14,
-              "toHit": 3,
+              "toHit": 13,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -16326,9 +16458,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 17.5,
-              "toHit": 5,
+              "toHit": 15,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -16365,9 +16498,9 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "buff",
               "target": "ally with the lowest AC",
-              buff: {
-                duration: "until next attack taken",
-                ac: 5,
+              "buff": {
+                  "duration": "until next attack taken",
+                  "ac": 5
               }
           }
       ],
@@ -16559,8 +16692,9 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "atk",
               "dpr": 22,
-              "toHit": 6,
-              "target": "enemy with least HP"
+              "toHit": 16,
+              "target": "enemy with least HP",
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -16816,9 +16950,10 @@ export const Monsters: Creature[] = [
               "freq": "at will",
               "condition": "default",
               "dpr": 21,
-              "toHit": 2,
+              "toHit": 12,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -16854,9 +16989,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "default",
               "dpr": 44,
-              "toHit": 8,
+              "toHit": 18,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -16956,9 +17092,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 44,
-              "toHit": 9,
+              "toHit": 19,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "5ac77f74-0e34-42cf-95ca-db22888fa34c",
@@ -17005,9 +17142,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 45,
-              "toHit": 5,
+              "toHit": 15,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -17148,9 +17286,9 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "buff",
               "target": "ally with the least HP",
-              buff: {
-                duration: "1 round",
-                ac: 5,
+              "buff": {
+                  "duration": "1 round",
+                  "ac": 5
               }
           }
       ],
@@ -17188,9 +17326,9 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "buff",
               "target": "ally with the least HP",
-              buff: {
-                duration: "1 round",
-                ac: 4,
+              "buff": {
+                  "duration": "1 round",
+                  "ac": 4
               }
           },
           {
@@ -17202,9 +17340,9 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "buff",
               "target": "ally with the highest DPR",
-              buff: {
-                duration: "1 round",
-                damageMultiplier: 1.5,
+              "buff": {
+                  "duration": "1 round",
+                  "damageMultiplier": 1.5
               }
           },
           {
@@ -17216,9 +17354,9 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "buff",
               "target": "self",
-              buff: {
-                duration: "until next attack taken",
-                ac: 3,
+              "buff": {
+                  "duration": "until next attack taken",
+                  "ac": 3
               }
           }
       ],
@@ -17306,9 +17444,9 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "buff",
               "target": "ally with the least HP",
-              buff: {
-                duration: "until next attack made",
-                toHit: 4,
+              "buff": {
+                  "duration": "until next attack made",
+                  "toHit": 4
               }
           }
       ],
@@ -17371,9 +17509,10 @@ export const Monsters: Creature[] = [
               "freq": "at will",
               "condition": "default",
               "dpr": 18,
-              "toHit": 6,
+              "toHit": 16,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -17487,9 +17626,10 @@ export const Monsters: Creature[] = [
               "freq": "at will",
               "condition": "default",
               "dpr": 7,
-              "toHit": 1,
+              "toHit": 11,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -17590,10 +17730,9 @@ export const Monsters: Creature[] = [
               "targets": 3,
               "type": "buff",
               "target": "ally with the least HP",
-              
-              buff: {
-                duration: "1 round",
-                damageMultiplier: 1.5,
+              "buff": {
+                  "duration": "1 round",
+                  "damageMultiplier": 1.5
               }
           },
           {
@@ -17605,9 +17744,9 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "buff",
               "target": "ally with the least HP",
-              buff: {
-                duration: "until next attack made",
-                toHit: 3.5,
+              "buff": {
+                  "duration": "until next attack made",
+                  "toHit": 3.5
               }
           }
       ],
@@ -17644,9 +17783,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 10.5,
-              "toHit": 2,
+              "toHit": 12,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -17713,15 +17853,15 @@ export const Monsters: Creature[] = [
           },
           {
               "id": "208acf77-55fa-49a8-8bec-c26ce048a58e",
-              "name": "Thunderous Strike {@recharge}",
+              "name": "Thunderous Strike",
               "type": "atk",
               "actionSlot": 0,
-              "freq": "at will",
-              "condition": "default",
-              "dpr": 22,
-              "toHit": 4,
+              "freq": "1/fight",
+              "condition": "is available",
+              "dpr": 33,
+              "toHit": 7,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
           }
       ],
       "count": 1,
@@ -17820,10 +17960,26 @@ export const Monsters: Creature[] = [
               "freq": "at will",
               "condition": "default",
               "dpr": 44,
-              "toHit": 8,
+              "toHit": 18,
               "target": "enemy with most HP",
-              "targets": 1
-          }
+              "targets": 1,
+              "useSaves": true
+          },
+          {
+              "id": "878ace34-a467-4ac3-9673-b6a8b46bc435",
+              "name": "Eat Memories Debuff",
+              "type": "debuff",
+              "actionSlot": 4,
+              "freq": "at will",
+              "condition": "default",
+              "target": "enemy with highest DPR",
+              "targets": 1,
+              saveDC: 18,
+              buff: {
+                duration: "entire encounter",
+                toHit: -2.5,
+              },
+          },
       ],
       "count": 1,
       "saveBonus": 5
@@ -17858,9 +18014,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 27,
-              "toHit": 11,
+              "toHit": 21,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "df386e16-9ea8-4d5b-9414-3782cf8ac39a",
@@ -17934,9 +18091,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 40.5,
-              "toHit": 5,
+              "toHit": 15,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -18036,9 +18194,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 50,
-              "toHit": 11,
+              "toHit": 21,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -18112,9 +18271,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 9,
-              "toHit": 1,
+              "toHit": 11,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -18202,9 +18362,10 @@ export const Monsters: Creature[] = [
               "freq": "at will",
               "condition": "default",
               "dpr": 16.5,
-              "toHit": 13,
+              "toHit": 23,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+              "useSaves": true
           },
           {
               "id": "2870c3d3-242d-4008-8fec-f2f5e7f7403b",
@@ -18310,13 +18471,14 @@ export const Monsters: Creature[] = [
           },
           {
               "id": "b19afa45-32c3-4ca6-8846-3c7feae3b8f8",
-              "name": "Freezing Breath {@recharge}",
+              "name": "Freezing Breath",
               "type": "atk",
               "actionSlot": 0,
-              "freq": "at will",
-              "condition": "default",
+              "freq": "1/fight",
+              "condition": "is available",
+              useSaves: true,
               "dpr": 44,
-              "toHit": 7,
+              "toHit": 17,
               "target": "enemy with most HP",
               "targets": 2
           }
@@ -18354,9 +18516,10 @@ export const Monsters: Creature[] = [
               "freq": "at will",
               "condition": "default",
               "dpr": 40,
-              "toHit": 4,
+              "toHit": 14,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -18380,9 +18543,10 @@ export const Monsters: Creature[] = [
               "freq": "at will",
               "condition": "default",
               "dpr": 10.5,
-              "toHit": 2,
+              "toHit": 12,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -18456,9 +18620,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 14,
-              "toHit": 2,
+              "toHit": 12,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -18518,9 +18683,10 @@ export const Monsters: Creature[] = [
               "freq": "1/day",
               "condition": "is available",
               "dpr": 17.5,
-              "toHit": 5,
+              "toHit": 15,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -18609,9 +18775,9 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "buff",
               "target": "self",
-              buff: {
-                duration: "until next attack taken",
-                ac: 4,
+              "buff": {
+                  "duration": "until next attack taken",
+                  "ac": 4
               }
           }
       ],
@@ -18649,10 +18815,9 @@ export const Monsters: Creature[] = [
               "targets": 3,
               "type": "buff",
               "target": "ally with the least HP",
-              
-              buff: {
-                duration: "1 round",
-                damageMultiplier: 1.5,
+              "buff": {
+                  "duration": "1 round",
+                  "damageMultiplier": 1.5
               }
           },
           {
@@ -18664,9 +18829,9 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "buff",
               "target": "self",
-              buff: {
-                duration: "until next attack taken",
-                ac: 5,
+              "buff": {
+                  "duration": "until next attack taken",
+                  "ac": 5
               }
           }
       ],
@@ -18754,11 +18919,11 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "debuff",
               "target": "enemy with least HP",
-              saveDC: 16,
-              buff: {
-                duration: "1 round",
-                damageMultiplier: 0,
-                damageTakenMultiplier: 0,
+              "saveDC": 16,
+              "buff": {
+                  "duration": "1 round",
+                  "damageMultiplier": 0,
+                  "damageTakenMultiplier": 0
               }
           }
       ],
@@ -19129,9 +19294,10 @@ export const Monsters: Creature[] = [
               "freq": "at will",
               "condition": "default",
               "dpr": 138,
-              "toHit": 10,
+              "toHit": 20,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              useSaves: true,
           }
       ],
       "count": 1,
@@ -19219,9 +19385,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 16.5,
-              "toHit": 3,
+              "toHit": 13,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -19270,9 +19437,9 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "buff",
               "target": "self",
-              buff: {
-                duration: "1 round",
-                toHit: 4,
+              "buff": {
+                  "duration": "1 round",
+                  "toHit": 4
               }
           }
       ],
@@ -19665,9 +19832,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 22,
-              "toHit": 4,
+              "toHit": 14,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -19753,9 +19921,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 45.5,
-              "toHit": 14,
+              "toHit": 24,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -19791,9 +19960,10 @@ export const Monsters: Creature[] = [
               "freq": "at will",
               "condition": "default",
               "dpr": 18,
-              "toHit": 5,
+              "toHit": 15,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "a8b70424-4718-4007-976e-f1e559952e1a",
@@ -19982,9 +20152,9 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "buff",
               "target": "self",
-              buff: {
-                duration: "until next attack taken",
-                damageTakenMultiplier: 0.5,
+              "buff": {
+                  "duration": "until next attack taken",
+                  "damageTakenMultiplier": 0.5
               }
           }
       ],
@@ -20041,15 +20211,16 @@ export const Monsters: Creature[] = [
           },
           {
               "id": "7062fcde-6679-4b7a-bd85-66a630959421",
-              "name": "Disgorge {@recharge}",
+              "name": "Disgorge",
               "type": "atk",
               "actionSlot": 0,
-              "freq": "at will",
-              "condition": "default",
+              "freq": "1/fight",
+              "condition": "is available",
+              useSaves: true,
               "dpr": 11,
-              "toHit": 1,
+              "toHit": 11,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 2
           }
       ],
       "count": 1,
@@ -20361,20 +20532,33 @@ export const Monsters: Creature[] = [
       "actions": [
           {
               "id": "207a0b51-d34f-4b4b-b9e4-19b0b2dabe51",
-              "name": "Bite + Claw +Soul-Stealing Gaze",
+              "name": "Bite + Claw",
               "type": "atk",
               "actionSlot": 0,
               "freq": "at will",
               "condition": "default",
-              "dpr": 79.5,
+              "dpr": 66,
               "toHit": 11,
+              "target": "enemy with most HP",
+              "targets": 1
+          },
+          {
+              "id": "207a0b51-d34f-4b4b-b9e4-19b0b2dabe52",
+              "name": "Soul-Stealing Gaze",
+              "type": "atk",
+              "actionSlot": 1,
+              "freq": "at will",
+              "condition": "default",
+              "dpr": 13,
+              "toHit": 16,
+              useSaves: true,
               "target": "enemy with most HP",
               "targets": 1
           },
           {
               "id": "ed3ae0ab-778e-4439-96ca-dbf884cea544",
               "name": "Heal from Soul-Stealing Gaze",
-              "actionSlot": 1,
+              "actionSlot": 4,
               "condition": "default",
               "freq": "at will",
               "targets": 1,
@@ -20417,12 +20601,12 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "debuff",
               "target": "enemy with highest DPR",
-              saveDC: 20,
-              buff: {
-                duration: "1 round",
-                ac: -4,
-                damageMultiplier: 0,
-                damageTakenMultiplier: 2,
+              "saveDC": 20,
+              "buff": {
+                  "duration": "1 round",
+                  "ac": -4,
+                  "damageMultiplier": 0,
+                  "damageTakenMultiplier": 2
               }
           }
       ],
@@ -20589,9 +20773,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 35,
-              "toHit": 8,
+              "toHit": 18,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -20627,9 +20812,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 39,
-              "toHit": 11,
+              "toHit": 21,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+              "useSaves": true
           },
           {
               "id": "1c3a401c-264c-4859-872a-696a62d5ce20",
@@ -20689,9 +20875,10 @@ export const Monsters: Creature[] = [
               "freq": "at will",
               "condition": "default",
               "dpr": 5,
-              "toHit": 2,
+              "toHit": 12,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -20920,10 +21107,10 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "buff",
               "target": "self",
-              buff: {
-                duration: "1 round",
-                ac: 4,
-                toHit: 4,
+              "buff": {
+                  "duration": "1 round",
+                  "ac": 4,
+                  "toHit": 4
               }
           },
           {
@@ -21034,10 +21221,10 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "buff",
               "target": "self",
-              buff: {
-                duration: "1 round",
-                ac: 4,
-                toHit: 4,
+              "buff": {
+                  "duration": "1 round",
+                  "ac": 4,
+                  "toHit": 4
               }
           }
       ],
@@ -21191,9 +21378,9 @@ export const Monsters: Creature[] = [
               "targets": 4,
               "type": "buff",
               "target": "ally with the highest DPR",
-              buff: {
-                duration: "1 round",
-                toHit: 4,
+              "buff": {
+                  "duration": "1 round",
+                  "toHit": 4
               }
           }
       ],
@@ -21248,18 +21435,31 @@ export const Monsters: Creature[] = [
       "hp": 210,
       "AC": 19,
       "actions": [
-          {
-              "id": "4f37a5cb-fac0-4406-9a07-87ff660fcb61",
-              "name": "Force Beam & Foreleg x2",
-              "type": "atk",
-              "actionSlot": 0,
-              "freq": "at will",
-              "condition": "default",
-              "dpr": 57,
-              "toHit": 11,
-              "target": "enemy with most HP",
-              "targets": 1
-          }
+        {
+            "id": "4f37a5cb-fac0-4406-9a07-87ff660fcb61",
+            "name": "Foreleg x2",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 30,
+            "toHit": 11,
+            "target": "enemy with most HP",
+            "targets": 1
+        },
+        {
+            "id": "4f37a5cb-fac0-4406-9a07-87ff660fcb62",
+            "name": "Forcebeam",
+            "type": "atk",
+            "actionSlot": 1,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 27,
+            "toHit": 16,
+            useSaves: true,
+            "target": "enemy with most HP",
+            "targets": 1
+        },
       ],
       "count": 1,
       "saveBonus": 7
@@ -21364,7 +21564,7 @@ export const Monsters: Creature[] = [
           }
       ],
       "count": 1,
-      "saveBonus": 1,
+      "saveBonus": 1
   },
   {
       "id": "a7929d8d-a80f-4f49-b5bd-779347348d16",
@@ -21486,9 +21686,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 45,
-              "toHit": 6,
+              "toHit": 16,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "11d530a9-d2e8-4b65-b673-fefcfb75ac3e",
@@ -21608,13 +21809,26 @@ export const Monsters: Creature[] = [
       "actions": [
           {
               "id": "c8426e66-f9a3-432d-ba7f-55f7c1e6e9b9",
-              "name": "Chain x3 + Squirt Bile",
+              "name": "Chain x3",
               "type": "atk",
               "actionSlot": 0,
               "freq": "at will",
               "condition": "default",
-              "dpr": 91,
+              "dpr": 60,
               "toHit": 13,
+              "target": "enemy with most HP",
+              "targets": 1
+          },
+          {
+              "id": "c8426e66-f9a3-432d-ba7f-55f7c1e6e9ba",
+              "name": "Squirt Bile",
+              "type": "atk",
+              "actionSlot": 1,
+              "freq": "at will",
+              "condition": "default",
+              "dpr": 31.5,
+              "toHit": 20,
+              useSaves: true,
               "target": "enemy with most HP",
               "targets": 1
           },
@@ -21751,9 +21965,10 @@ export const Monsters: Creature[] = [
               "freq": "at will",
               "condition": "default",
               "dpr": 16.5,
-              "toHit": 3,
+              "toHit": 13,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -21789,9 +22004,10 @@ export const Monsters: Creature[] = [
               "freq": "at will",
               "condition": "default",
               "dpr": 42,
-              "toHit": 1,
+              "toHit": 11,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -21954,9 +22170,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 45,
-              "toHit": 9,
+              "toHit": 19,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -22010,18 +22227,31 @@ export const Monsters: Creature[] = [
       "hp": 153,
       "AC": 17,
       "actions": [
-          {
-              "id": "3beda408-af25-4f08-a711-d400e4234f66",
-              "name": "Comet Staff x2",
-              "type": "atk",
-              "actionSlot": 0,
-              "freq": "at will",
-              "condition": "default",
-              "dpr": 57,
-              "toHit": 11,
-              "target": "enemy with most HP",
-              "targets": 1
-          }
+        {
+            "id": "3beda408-af25-4f08-a711-d400e4234f66",
+            "name": "Comet Staff x2",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 57,
+            "toHit": 11,
+            "target": "enemy with most HP",
+            "targets": 1
+        },
+        {
+            "id": "3beda408-af25-4f08-a711-d400e4234f67",
+            "name": "Collapse Distance",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "1/fight",
+            "condition": "is available",
+            "dpr": 39,
+            "toHit": 19,
+            useSaves: true,
+            "target": "enemy with most HP",
+            "targets": 2
+        }
       ],
       "count": 1,
       "saveBonus": 6.5
@@ -22056,9 +22286,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 33,
-              "toHit": 9,
+              "toHit": 19,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -22249,9 +22480,9 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "buff",
               "target": "self",
-              buff: {
-                duration: "until next attack taken",
-                ac: 3,
+              "buff": {
+                  "duration": "until next attack taken",
+                  "ac": 3
               }
           }
       ],
@@ -22302,9 +22533,10 @@ export const Monsters: Creature[] = [
               "freq": "at will",
               "condition": "default",
               "dpr": 10.5,
-              "toHit": 0,
+              "toHit": 10,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -22696,9 +22928,10 @@ export const Monsters: Creature[] = [
               "freq": "at will",
               "condition": "default",
               "dpr": 17,
-              "toHit": 4,
+              "toHit": 14,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -22886,9 +23119,10 @@ export const Monsters: Creature[] = [
               "freq": "1/day",
               "condition": "is available",
               "dpr": 9,
-              "toHit": 2,
+              "toHit": 12,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -22962,9 +23196,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 18,
-              "toHit": 6,
+              "toHit": 16,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "3d90cf5c-b1f8-48de-a17a-6443cba1682e",
@@ -23075,9 +23310,10 @@ export const Monsters: Creature[] = [
               "freq": "at will",
               "condition": "default",
               "dpr": 27.5,
-              "toHit": 5,
+              "toHit": 15,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           },
           {
               "id": "aaacec51-4963-4e85-9921-4c32d10cf1dc",
@@ -23126,7 +23362,8 @@ export const Monsters: Creature[] = [
               "targets": 2,
               "type": "atk",
               "dpr": 10,
-              "toHit": 5,
+              "toHit": 15,
+              useSaves: true,
               "target": "enemy with most HP"
           }
       ],
@@ -23301,10 +23538,10 @@ export const Monsters: Creature[] = [
               "targets": 1,
               "type": "buff",
               "target": "self",
-              buff: {
-                duration: "1 round",
-                ac: -4,
-                toHit: 4,
+              "buff": {
+                  "duration": "1 round",
+                  "ac": -4,
+                  "toHit": 4
               }
           }
       ],
@@ -23760,9 +23997,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 33,
-              "toHit": 3,
+              "toHit": 13,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+              "useSaves": true
           }
       ],
       "count": 1,
@@ -23848,9 +24086,10 @@ export const Monsters: Creature[] = [
               "freq": "1/fight",
               "condition": "is available",
               "dpr": 33,
-              "toHit": 15,
+              "toHit": 25,
               "target": "enemy with most HP",
-              "targets": 2
+              "targets": 2,
+              "useSaves": true
           }
       ],
       "count": 1,

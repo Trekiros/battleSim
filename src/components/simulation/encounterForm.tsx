@@ -58,7 +58,7 @@ const EncounterForm:FC<PropType> = ({ mode, encounter, onUpdate, onDelete }) => 
                     { (mode === 'player') ? 'Player Characters' : 'Encounter' }
                 </h2>
 
-                <div className={styles.formBody}>
+                <div className={mode === "monster" ? styles.formBody : undefined}>
                     <div className={styles.creatures}>
                         { encounter.monsters.map((creature, index) => (
                             <div key={creature.id} className={styles.creature}>
@@ -79,10 +79,10 @@ const EncounterForm:FC<PropType> = ({ mode, encounter, onUpdate, onDelete }) => 
                     { mode === 'player' ? null : (
                         <div className={styles.encounterSettings}>
                             <Checkbox value={!!encounter.playersSurprised} onToggle={() => update(e => { e.playersSurprised = !e.playersSurprised })}>
-                                Surprise round for the enemies
+                                The players are surprised
                             </Checkbox>
                             <Checkbox value={!!encounter.monstersSurprised} onToggle={() => update(e => { e.monstersSurprised = !e.monstersSurprised })}>
-                                Surprise round for the players
+                                The enemies are surprised
                             </Checkbox>
                             { !onDelete ? null : (
                                 <Checkbox value={!!encounter.shortRest} onToggle={() => update(e => { e.shortRest = !e.shortRest })}>

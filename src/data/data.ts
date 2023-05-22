@@ -194,7 +194,8 @@ function cleric(level: number, options: z.infer<typeof ClassOptions.cleric>): Cr
                     freq: 'at will',
                     condition: 'default',
                     target: 'enemy with least HP',
-                    toHit: DC - 10,
+                    useSaves: true,
+                    toHit: DC,
                     dpr: scale(level, {1: 4.5, 5: 9, 8: 13.5, 11: 18, 17: 22.5}),
                 },
                 {
@@ -248,7 +249,8 @@ function cleric(level: number, options: z.infer<typeof ClassOptions.cleric>): Cr
                     freq: 'at will',
                     condition: 'default',
                     target: 'enemy with least HP',
-                    toHit: DC - 10,
+                    useSaves: true,
+                    toHit: DC,
                     dpr: (Math.ceil(level / 5) + 2) * 3.5,
                 },
                 {
@@ -439,7 +441,7 @@ function monk(level: number, options: z.infer<typeof ClassOptions.monk>): Creatu
         id: crypto.randomUUID(),
         name: name('Monk', level),
         AC: AC,
-        saveBonus: PB,
+        saveBonus: scale(level, {1: PB, 14: PB + 3}),
         hp: hp(level, 8, CON),
         count: 1,
         mode: 'player',
@@ -608,7 +610,11 @@ function ranger(level: number, options: z.infer<typeof ClassOptions.ranger>): Cr
                     targets: 1,
                     target: 'enemy with least HP',
                     toHit: toHit,
-                    dpr: (3.5 + DEX + options.weaponBonus + (options.ss ? 10 : 0) + (level > 1 ? 3.5 : 0)) * scale(level, { 1: 1, 4: 2, 5: 3 }),
+                    dpr: (
+                        3.5 + DEX + options.weaponBonus     // Crossbow
+                        + (options.ss ? 10 : 0)             // Sharpshooter 
+                        + (level > 1 ? 3.5 : 0)             // Hunter's Mark
+                    ) * scale(level, { 1: 1, 4: 2, 5: 3 }), // Crossbow Expert
                 },
             ],
         }),
@@ -727,7 +733,8 @@ function sorcerer(level: number, options: z.infer<typeof ClassOptions.sorcerer>)
                     condition: scale(level, {1: 'is available', 11: 'default'}),
                     targets: 2,
                     target: 'enemy with least HP',
-                    toHit: DC - 10,
+                    useSaves: true,
+                    toHit: DC,
                     dpr: scale(level, {1: 28, 11: 35}),
                 }
             ]
@@ -846,7 +853,8 @@ function wizard(level: number, options: z.infer<typeof ClassOptions.wizard>): Cr
                     condition: scale(level, {1: 'is available', 11: 'default'}),
                     targets: 2,
                     target: 'enemy with least HP',
-                    toHit: DC - 10,
+                    useSaves: true,
+                    toHit: DC,
                     dpr: scale(level, {1: 28, 11: 35}),
                 },
                 {
@@ -875,7 +883,8 @@ function wizard(level: number, options: z.infer<typeof ClassOptions.wizard>): Cr
                     condition: 'default',
                     targets: 2,
                     target: 'enemy with least HP',
-                    toHit: DC - 10,
+                    useSaves: true,
+                    toHit: DC,
                     dpr: 28,
                 },
             ],
@@ -889,7 +898,8 @@ function wizard(level: number, options: z.infer<typeof ClassOptions.wizard>): Cr
                     condition: 'is available',
                     targets: 3,
                     target: 'enemy with least HP',
-                    toHit: DC - 10,
+                    useSaves: true,
+                    toHit: DC,
                     dpr: 140,
                 },
             ]

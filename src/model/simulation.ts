@@ -256,13 +256,16 @@ function useDebuffAction(attacker: Combattant, action: DebuffAction, target: Com
 }
 
 function useAtkAction(attacker: Combattant, action: AtkAction, target: Combattant) {
-    const toHit  = action.toHit + Array.from(attacker.finalState.buffs).map(([_, buff]) => (buff.toHit || 0)) .reduce((a, b) => (a+b), 0)
-    const ac     = target.creature.AC + Array.from(target.finalState.buffs).map(([_, buff]) => (buff.ac || 0)).reduce((a, b) => (a+b), 0)
+    const toHit  = action.toHit + Array.from(attacker.finalState.buffs).map(([_, buff]) => ((action.useSaves ? buff.dc : buff.toHit) || 0)) .reduce((a, b) => (a+b), 0)
+    const ac     = (action.useSaves ? target.creature.saveBonus : target.creature.AC) 
+        + Array.from(target.finalState.buffs).map(([_, buff]) => ((action.useSaves ? buff.save : buff.ac) || 0)).reduce((a, b) => (a+b), 0)
     const damage = (action.dpr + Array.from(attacker.finalState.buffs).map(([_, buff]) => (buff.damage || 0)) .reduce((a, b) => (a+b), 0))
         * Array.from(attacker.finalState.buffs).map(([_, buff]) => (buff.damageMultiplier || 1)).reduce((a, b) => (a*b), 1)
         * Array.from(target.finalState.buffs).map(([_, buff]) => (buff.damageTakenMultiplier || 1)).reduce((a, b) => (a*b), 1);
 
-    const hitChance = Math.min(1, Math.max(0, (11 + toHit - (ac - 10)) / 20))
+    const hitChance = action.useSaves ? 
+        (1 - Math.min(1, Math.max(0, (11 + ac - (toHit - 10)) / 20)))
+           : Math.min(1, Math.max(0, (11 + toHit - (ac - 10)) / 20))
     target.finalState.currentHP = Math.min(target.finalState.currentHP, Math.max(0, target.finalState.currentHP - damage * hitChance))
 
     Array.from(attacker.finalState.buffs).forEach(([name, buff]) => { if (buff.duration === 'until next attack made') attacker.finalState.buffs.delete(name) })
