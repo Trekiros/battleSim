@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-export const validateContext = createContext({
-    isValid: false, 
-    validate: (newValue: boolean) => {}
+export const semiPersistentContext = createContext({
+    state: new Map<string, any>(), 
+    setState: (newValue: Map<string, any>) => {},
 })

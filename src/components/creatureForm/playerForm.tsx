@@ -2,13 +2,12 @@ import { FC, useContext, useEffect, useState } from "react"
 import { Creature } from "../../model/model"
 import styles from './playerForm.module.scss'
 import { Class, ClassesList } from "../../model/enums"
-import { capitalize, clone, range } from "../../model/utils"
+import { capitalize, clone, range, useValidation } from "../../model/utils"
 import { PlayerTemplates } from "../../data/data"
 import ClassOptions from "../../model/classOptions"
 import { z } from "zod"
 import Checkbox from "../utils/checkbox"
 import Range from "../utils/range"
-import { validateContext } from "../../context/simulationContext"
 
 type PropType = {
     value?: Creature,
@@ -49,11 +48,10 @@ const DefaultLevel = 1
 const PlayerForm:FC<PropType> = ({ value, onChange }) => {
     const [chosenClass, setChosenClass] = useState<ClassForm|null>((value && value.class) ? { type: value.class.type, options: value.class.options } as any : DefaultClass)
     const [level, setLevel] = useState<number | null>((value && value.class) ? value.class.level : DefaultLevel)
-    const {validate} = useContext(validateContext)
-
+    
+    useValidation(() => (!!level && !!chosenClass), [level, chosenClass])
+    
     useEffect(() => {
-        validate(!!level && !!chosenClass)
-
         if (!level || !chosenClass) return
 
         const template = PlayerTemplates[chosenClass.type]

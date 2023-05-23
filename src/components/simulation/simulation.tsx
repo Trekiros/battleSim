@@ -8,6 +8,7 @@ import EncounterForm from "./encounterForm"
 import EncounterResult from "./encounterResult"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlus } from "@fortawesome/free-solid-svg-icons"
+import { semiPersistentContext } from "../../context/simulationContext"
 
 type PropType = {
     // TODO
@@ -23,6 +24,7 @@ const Simulation:FC<PropType> = ({}) => {
     const [players, setPlayers] = useStoredState<Creature[]>('players', [], z.array(CreatureSchema).parse)
     const [encounters, setEncounters] = useStoredState<Encounter[]>('encounters', [emptyEncounter], z.array(EncounterSchema).parse)
     const [simulationResults, setSimulationResults] = useState<SimulationResult>([])
+    const [state, setState] = useState(new Map<string, any>())
 
     useEffect(() => {
         const results = runSimulation(players, encounters)
@@ -52,34 +54,36 @@ const Simulation:FC<PropType> = ({}) => {
 
     return (
         <div className={styles.simulation}>
-            <h1 className={styles.header}>BattleSim</h1>
+            <semiPersistentContext.Provider value={{state, setState}}>
+                <h1 className={styles.header}>BattleSim</h1>
 
-            <EncounterForm
-                mode='player'
-                encounter={{ monsters: players }}
-                onUpdate={(newValue) => setPlayers(newValue.monsters)}
-            />
+                <EncounterForm
+                    mode='player'
+                    encounter={{ monsters: players }}
+                    onUpdate={(newValue) => setPlayers(newValue.monsters)}
+                />
 
-            { encounters.map((encounter, index) => (
-                <div className={styles.encounter} key={index}>
-                    <EncounterForm
-                        mode='monster'
-                        encounter={encounter}
-                        onUpdate={(newValue) => updateEncounter(index, newValue)}
-                        onDelete={(index > 0) ? () => deleteEncounter(index) : undefined}
-                    />
-                    { (!simulationResults[index] ? null : (
-                        <EncounterResult value={simulationResults[index]} />
-                    ))}
-                </div>
-            )) }
+                { encounters.map((encounter, index) => (
+                    <div className={styles.encounter} key={index}>
+                        <EncounterForm
+                            mode='monster'
+                            encounter={encounter}
+                            onUpdate={(newValue) => updateEncounter(index, newValue)}
+                            onDelete={(index > 0) ? () => deleteEncounter(index) : undefined}
+                        />
+                        { (!simulationResults[index] ? null : (
+                            <EncounterResult value={simulationResults[index]} />
+                        ))}
+                    </div>
+                )) }
 
-            <button 
-                onClick={createEncounter}
-                className={styles.addEncounterBtn}>
-                    <FontAwesomeIcon icon={faPlus} />
-                    Add Encounter
-            </button>
+                <button 
+                    onClick={createEncounter}
+                    className={styles.addEncounterBtn}>
+                        <FontAwesomeIcon icon={faPlus} />
+                        Add Encounter
+                </button>
+            </semiPersistentContext.Provider>
         </div>
     )
 }

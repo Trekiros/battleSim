@@ -1,11 +1,11 @@
-import { FC, useContext, useEffect } from "react"
+import { FC } from "react"
 import { Action, Creature } from "../../model/model"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCheck, faPlus, faSave, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faPlus, faSave } from "@fortawesome/free-solid-svg-icons"
 import styles from './customForm.module.scss'
-import { clone, inDevEnvironment } from "../../model/utils"
+import { clone, useValidation } from "../../model/utils"
 import ActionForm from "./actionForm"
-import { validateContext } from "../../context/simulationContext"
+import DecimalInput from "../utils/DecimalInput"
 
 type PropType = {
     value: Creature,
@@ -13,16 +13,13 @@ type PropType = {
 }
 
 const CustomForm:FC<PropType> = ({ value, onChange }) => {
-    const {validate} = useContext(validateContext)
-
-    useEffect(() => {
-        validate(!!value.name
+    useValidation(() => (
+               !!value.name
             && !!value.AC
             && !!value.hp
             && !!value.actions.length
             && !value.actions.find(action => (!action.name))
-        )
-    }, [value])
+    ), [value])
 
     function update(callback: (valueClone: Creature) => void) {
         const valueClone = clone(value)
@@ -83,15 +80,15 @@ const CustomForm:FC<PropType> = ({ value, onChange }) => {
             </section>
             <section>
                 <h3>Hit Points</h3>
-                <input type='number' min={0} value={value.hp} onChange={e => update(v => { v.hp = Number(e.target.value) })} />
+                <DecimalInput min={0} value={value.hp} onChange={hp => update(v => { v.hp = hp || 0 })} />
             </section>
             <section>
                 <h3>Armor Class</h3>
-                <input type='number' min={0} value={value.AC} onChange={e => update(v => { v.AC = Number(e.target.value) })} />
+                <DecimalInput min={0} value={value.AC} onChange={ac => update(v => { v.AC = ac || 0 })} />
             </section>
             <section className="tooltipContainer">
                 <h3>Average Save</h3>
-                <input type='number' min={0} value={value.saveBonus} onChange={e => update(v => { v.saveBonus = Number(e.target.value) })} />
+                <DecimalInput min={0} value={value.saveBonus} onChange={save => update(v => { v.saveBonus = save || 0 })} />
                 <div className="tooltip">Average of all saves' bonuses</div>
             </section>
             

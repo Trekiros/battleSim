@@ -16534,32 +16534,6 @@ export const Monsters: Creature[] = [
       "saveBonus": 5.5
   },
   {
-      "id": "8338afea-93e8-4bdc-a0c9-5c8edd14c27a",
-      "mode": "monster",
-      "name": "Cloud Giant Smiling One",
-      "type": "giant",
-      "src": "MPMM p.81",
-      "cr": "11",
-      "hp": 250,
-      "AC": 15,
-      "actions": [
-          {
-              "id": "49d090b4-5b44-48f2-b5ff-c3c0d425ae00",
-              "name": "Slam x2",
-              "type": "atk",
-              "actionSlot": 0,
-              "freq": "at will",
-              "condition": "default",
-              "dpr": 54,
-              "toHit": 12,
-              "target": "enemy with most HP",
-              "targets": 1
-          }
-      ],
-      "count": 1,
-      "saveBonus": 5.5
-  },
-  {
       "id": "499e661f-b592-49e6-8673-99cc30a1e585",
       "mode": "monster",
       "name": "Corpse Flower",
@@ -18875,60 +18849,6 @@ export const Monsters: Creature[] = [
       ],
       "count": 1,
       "saveBonus": 8
-  },
-  {
-      "id": "9d98ca5a-6f72-4d2b-a85f-c892e9f6127e",
-      "mode": "monster",
-      "name": "Githzerai Enlightened",
-      "type": "humanoid",
-      "src": "MPMM p.143",
-      "cr": "10",
-      "hp": 112,
-      "AC": 18,
-      "actions": [
-          {
-              "id": "1aece606-132c-4dc6-80e4-ad4ee1bd4ca8",
-              "name": "Unarmed Strike x3",
-              "type": "atk",
-              "actionSlot": 0,
-              "freq": "at will",
-              "condition": "default",
-              "dpr": 93,
-              "toHit": 8,
-              "target": "enemy with most HP",
-              "targets": 1
-          },
-          {
-              "id": "6d83ae63-a363-44f5-97bd-db87b34d45a9",
-              "name": "Temporal Strike",
-              "type": "atk",
-              "actionSlot": 0,
-              "freq": "1/fight",
-              "condition": "is available",
-              "dpr": 65,
-              "toHit": 8,
-              "target": "enemy with most HP",
-              "targets": 1
-          },
-          {
-              "id": "5a564dda-333b-4a3e-a5c7-b1306411e017",
-              "name": "Temporal Strike Debuff",
-              "actionSlot": 4,
-              "condition": "is available",
-              "freq": "1/fight",
-              "targets": 1,
-              "type": "debuff",
-              "target": "enemy with least HP",
-              "saveDC": 16,
-              "buff": {
-                  "duration": "1 round",
-                  "damageMultiplier": 0,
-                  "damageTakenMultiplier": 0
-              }
-          }
-      ],
-      "count": 1,
-      "saveBonus": 5
   },
   {
       "id": "cc43548d-d174-42c0-b94f-17fa8e3a4a77",

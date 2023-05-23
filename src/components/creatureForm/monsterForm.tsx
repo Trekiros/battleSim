@@ -4,11 +4,9 @@ import styles from './monsterForm.module.scss'
 import { ChallengeRating, ChallengeRatingList, CreatureType, CreatureTypeList, numericCR } from "../../model/enums"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons"
-import { capitalize, clone, useCalculatedState } from "../../model/utils"
+import { capitalize, clone, sharedStateGenerator, useCalculatedState, useValidation } from "../../model/utils"
 import { Monsters } from "../../data/monsters"
 import Range from "../utils/range"
-import { validateContext } from "../../context/simulationContext"
-
 
 type PropType = {
     value: Creature,
@@ -25,16 +23,14 @@ const Comparators = {
 } as const
 
 const MonsterForm:FC<PropType> = ({ onChange, value }) => {
-    const [creatureType, setCreatureType] = useState<{[type in CreatureType]: boolean}>(defaultTypeFilter)
-    const [minCR, setMinCR] = useState<ChallengeRating>(ChallengeRatingList[0])
-    const [maxCR, setMaxCR] = useState<ChallengeRating>(ChallengeRatingList[ChallengeRatingList.length - 1])
-    const [name, setName] = useState<string>('')
-    const [sortBy, setSortBy] = useState<keyof typeof Comparators>('nameAsc')
+    const useSharedState = sharedStateGenerator('monsterForm')
+    const [creatureType, setCreatureType] = useSharedState(defaultTypeFilter)
+    const [minCR, setMinCR] = useSharedState<ChallengeRating>(ChallengeRatingList[0])
+    const [maxCR, setMaxCR] = useSharedState<ChallengeRating>(ChallengeRatingList[ChallengeRatingList.length - 1])
+    const [name, setName] = useSharedState<string>('')
+    const [sortBy, setSortBy] = useSharedState<keyof typeof Comparators>('nameAsc')
 
-    const {validate} = useContext(validateContext)
-    useEffect(() => {
-        validate(!!value.cr)
-    }, [value])
+    useValidation(() => !!value.cr, [value])
 
     const searchResults = useCalculatedState(() => Monsters.filter(monster => {
         if (!monster.name.toLocaleLowerCase().includes(name.toLocaleLowerCase())) return false
@@ -99,7 +95,7 @@ const MonsterForm:FC<PropType> = ({ onChange, value }) => {
                     values={[ChallengeRatingList.indexOf(minCR), ChallengeRatingList.indexOf(maxCR)]}
                     min={0}
                     max={ChallengeRatingList.length - 1}
-                    onChange={(values: number[]) => { setMinCR(ChallengeRatingList[values[0]]); setMaxCR(ChallengeRatingList[values[1]]) }}
+                    onChange={async (values: number[]) => { await setMaxCR(ChallengeRatingList[values[1]]); await setMinCR(ChallengeRatingList[values[0]]) }}
                     label={minCR}
                     upperLabel={maxCR}
                 />
@@ -126,6 +122,7 @@ const MonsterForm:FC<PropType> = ({ onChange, value }) => {
                     ) : (
                         searchResults.map(monster => (
                             <button
+                                key={monster.id}
                                 onClick={() => selectMonster(monster)}
                                 className={`${styles.monster} ${value?.id === monster.id ? styles.active : ''}`}>
                                     <span className={styles.name}>{monster.name}</span>

@@ -1,12 +1,12 @@
-import { FC, useContext, useEffect, useState } from "react"
+import { FC, useState } from "react"
 import { Action, AllyTarget, AtkAction, Buff, BuffAction, DebuffAction, EnemyTarget, HealAction } from "../../model/model"
 import styles from './actionForm.module.scss'
-import { clone } from "../../model/utils"
+import { clone, useValidation } from "../../model/utils"
 import { ActionType, BuffDuration, Condition, Frequency } from "../../model/enums"
 import Select from "../utils/select"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
-import { validateContext } from "../../context/simulationContext"
+import DecimalInput from "../utils/DecimalInput"
 
 type PropType = {
     value: Action,
@@ -97,11 +97,7 @@ const AtkOptions: Options<boolean> = [
 
 const BuffForm:FC<{value: Buff, onUpdate: (newValue: Buff) => void}> = ({ value, onUpdate }) => {
     const [modifiers, setModifiers] = useState<(keyof Omit<Buff, 'duration'>)[]>(Object.keys(value).filter(key => (key !== 'duration')) as any)
-    const {validate} = useContext(validateContext)
-
-    useEffect(() => {
-        validate(Object.keys(value).length > 1)
-    }, [value])
+    useValidation(() => (Object.keys(value).length > 1), [value])
 
     function setModifier(index: number, newValue: keyof Omit<Buff, 'duration'> | null) {
         const oldModifier = modifiers[index]
@@ -139,10 +135,9 @@ const BuffForm:FC<{value: Buff, onUpdate: (newValue: Buff) => void}> = ({ value,
                         onChange={newValue => setModifier(index, newValue)} 
                         options={BuffStatOptions.filter(option => (modifier === option.value) || !modifiers.includes(option.value))}
                     />
-                    <input 
-                        type='number' 
+                    <DecimalInput 
                         value={value[modifier]} 
-                        onChange={e => updateValue(modifier, Number(e.target.value))}
+                        onChange={v => updateValue(modifier, v || 0)}
                     />
                     <button onClick={() => setModifier(index, null)}>
                         <FontAwesomeIcon icon={faTrash} />
@@ -212,9 +207,9 @@ const ActionForm:FC<PropType> = ({ value, onChange, onDelete }) => {
             { (value.type === "atk") ? (
                 <>
                     <Select value={!!value.useSaves} options={AtkOptions} onChange={useSaves => update(v => { (v as AtkAction).useSaves = useSaves })} />
-                    <input type='number' value={value.toHit} onChange={e => update(v => { (v as AtkAction).toHit = Number(e.target.value) })} />
+                    <DecimalInput value={value.toHit} onChange={toHit => update(v => { (v as AtkAction).toHit = toHit || 0 })} />
                     Damage: 
-                    <input type='number' value={value.dpr} onChange={e => update(v => { (v as AtkAction).dpr = Number(e.target.value) })} />
+                    <DecimalInput value={value.dpr} onChange={dpr => update(v => { (v as AtkAction).dpr = dpr || 0 })} />
                     Target:
                     <Select value={value.target} options={EnemyTargetOptions} onChange={target => update(v => { v.target = target })} />
                 </>
@@ -222,7 +217,7 @@ const ActionForm:FC<PropType> = ({ value, onChange, onDelete }) => {
             { (value.type === "heal") ? (
                 <>
                     Heal amount:
-                    <input type='number' value={value.amount} onChange={e => update(v => { (v as HealAction).amount = Number(e.target.value) })} />
+                    <DecimalInput value={value.amount} onChange={heal => update(v => { (v as HealAction).amount = heal || 0 })} />
                     Target:
                     <Select value={value.target} options={AllyTargetOptions} onChange={target => update(v => { v.target = target })} />
                 </>
