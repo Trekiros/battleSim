@@ -278,8 +278,8 @@ function useDebuffAction(attacker: Combattant, action: DebuffAction, target: Com
     ))
     
     if (attacker.id !== target.id) {
-        getStats(stats, attacker).charactersBuffed++
-        getStats(stats, target).buffsReceived++
+        getStats(stats, attacker).charactersDebuffed++
+        getStats(stats, target).debuffsReceived++
     }
 }
 
