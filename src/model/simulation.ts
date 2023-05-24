@@ -1,5 +1,5 @@
 import { ActionType } from "./enums"
-import { Action, AtkAction, Buff, BuffAction, Combattant, Creature, CreatureState, DebuffAction, Encounter, EncounterResult, HealAction, Round, SimulationResult, Team } from "./model"
+import { Action, AtkAction, Buff, BuffAction, Combattant, Creature, CreatureState, DebuffAction, Encounter, EncounterResult, EncounterStats, HealAction, Round, SimulationResult, Team } from "./model"
 import { clone, range } from "./utils"
 
 function getRemainingUses(creature: Creature, rest: 'none'|'short rest'|'long rest', oldValue?: Map<string, number>) {
@@ -57,7 +57,7 @@ function iterateCombattant(combattant: Combattant) {
     return result
 }
 
-function getActions(combattant: Combattant, allies: Combattant[], handleHeals?: boolean): Action[] {
+function getActions(combattant: Combattant, allies: Combattant[], handleHeals: boolean, stats: Map<string, EncounterStats>): Action[] {
     const actionSlots = new Set()
     combattant.creature.actions.forEach(action => actionSlots.add(action.actionSlot))
 
@@ -108,20 +108,20 @@ function getActions(combattant: Combattant, allies: Combattant[], handleHeals?: 
             const targettableAllies = new Set(allies)
             while ((targettableAllies.size > 0) && (targetCount > 0)) {
                 targetCount--
-                const target = getNextTarget(combattant, action, Array.from(targettableAllies), [])
+                const target = getNextTarget(combattant, action, Array.from(targettableAllies), [], stats)
 
                 if (!target) break;
 
                 targettableAllies.delete(target)
                 combattantAction.targets.push(target.id)
-                useHealAction(action, target)
+                useHealAction(combattant, action, target, stats)
             }
         })
 
     return result
 }
 
-function getNextTarget(combattant: Combattant, action: Action, allies: Combattant[], enemies: Combattant[]): Combattant|undefined {
+function getNextTarget(combattant: Combattant, action: Action, allies: Combattant[], enemies: Combattant[], stats: Map<string, EncounterStats>): Combattant|undefined {
     const getHighestDPR = (group: Combattant[]) => {
         const getDPR = (combattant: Combattant) => {
             const dmgBonus = Array.from(combattant.finalState.buffs)
@@ -136,7 +136,7 @@ function getNextTarget(combattant: Combattant, action: Action, allies: Combattan
                 .map(buff => buff.damageMultiplier!)
                 .reduce((a, b) => (a*b), 1)
             
-            return getActions(combattant, allies)
+            return getActions(combattant, allies, false, stats)
             .map(action => {
                 if (action.type !== "atk") return 0
                 return (action.dpr + dmgBonus) * action.targets * dmgMult
@@ -168,11 +168,11 @@ function getNextTarget(combattant: Combattant, action: Action, allies: Combattan
     /* if (action.target === "enemy with highest DPR") */ return getHighestDPR(enemies)
 }
 
-function generateActions(allies: Combattant[], enemies: Combattant[]) {
+function generateActions(allies: Combattant[], enemies: Combattant[], stats: Map<string, EncounterStats>) {
     allies.forEach(ally => {
         if (ally.initialState.currentHP <= 0) return
 
-        ally.actions.push(...getActions(ally, allies, true)
+        ally.actions.push(...getActions(ally, allies, true, stats)
             .map(action => ({
                 action: action, 
                 targets: [],
@@ -188,7 +188,7 @@ function generateActions(allies: Combattant[], enemies: Combattant[]) {
     })
 }
 
-function handleActions(allies: Combattant[], enemies: Combattant[], actionTypes: ActionType[]) {
+function handleActions(allies: Combattant[], enemies: Combattant[], actionTypes: ActionType[], stats: Map<string, EncounterStats>) {
     allies.forEach(combattant => {
         combattant.actions.filter(({ action }) => (actionTypes.includes(action.type)))
             .forEach((turn) => {
@@ -198,16 +198,16 @@ function handleActions(allies: Combattant[], enemies: Combattant[], actionTypes:
                 while ((targetsCount > 0) && (targettableAllies.size > 0) && (targettableEnemies.size > 0)) {
                     targetsCount--
                     
-                    const target = getNextTarget(combattant, turn.action, Array.from(targettableAllies), Array.from(targettableEnemies))
+                    const target = getNextTarget(combattant, turn.action, Array.from(targettableAllies), Array.from(targettableEnemies), stats)
                     if (target) {
                         targettableAllies.delete(target)
                         targettableEnemies.delete(target)
                         turn.targets.push(target.id)
 
-                        if (turn.action.type === "buff") useBuffAction(turn.action, target)
-                        if (turn.action.type === "debuff") useDebuffAction(combattant, turn.action, target)
+                        if (turn.action.type === "buff") useBuffAction(combattant, turn.action, target, stats)
+                        if (turn.action.type === "debuff") useDebuffAction(combattant, turn.action, target, stats)
                         //if (turn.action.type === "heal") useHealAction(turn.action, target) // Already handled before, in generateActions
-                        if (turn.action.type === "atk") useAtkAction(combattant, turn.action, target)
+                        if (turn.action.type === "atk") useAtkAction(combattant, turn.action, target, stats)
                     }
                 }
             })
@@ -231,15 +231,38 @@ function mergeBuff(newBuff: Buff, existingBuff: Buff | undefined, comparator: (a
     return result
 }
 
-function useBuffAction(action: BuffAction, target: Combattant) {
+function getStats(statsMap: Map<string, EncounterStats>, combattant: Combattant) {
+    const id = combattant.id // Using this since the team can have multiples of a creature
+    if (!statsMap.has(id)) {
+        statsMap.set(id, {
+            buffsReceived: 0,
+            charactersBuffed: 0,
+            charactersDebuffed: 0,
+            damageDealt: 0,
+            damageTaken: 0,
+            debuffsReceived: 0,
+            healGiven: 0,
+            healReceived: 0,
+            timesUnconscious: 0,
+        })
+    }
+    return statsMap.get(id)!
+}
+
+function useBuffAction(buffer: Combattant, action: BuffAction, target: Combattant, stats: Map<string, EncounterStats>) {
     const existingBuff = target.finalState.buffs.get(action.name)
     target.finalState.buffs.set(
         action.name, 
         mergeBuff(action.buff, existingBuff, 
         (a,b) => (a===undefined) ? b : (b===undefined) ? a : Math.max(a,b)))
+
+    if (buffer.id !== target.id) {
+        getStats(stats, buffer).charactersBuffed++
+        getStats(stats, target).buffsReceived++
+    }
 }
 
-function useDebuffAction(attacker: Combattant, action: DebuffAction, target: Combattant) {
+function useDebuffAction(attacker: Combattant, action: DebuffAction, target: Combattant, stats: Map<string, EncounterStats>) {
     const saveBonus = target.creature.saveBonus + Array.from(target.finalState.buffs).map(([_, buff]) => (buff.save || 0)).reduce((a, b) => (a+b), 0)
     const saveDC = action.saveDC + Array.from(attacker.finalState.buffs).map(([_, buff]) => (buff.dc || 0)).reduce((a, b) => (a+b), 0)
     const chanceToFail = 1 - Math.min(1, Math.max(0, (11 + saveBonus - (saveDC - 10)) / 20))
@@ -253,9 +276,14 @@ function useDebuffAction(attacker: Combattant, action: DebuffAction, target: Com
         existingBuff,
         (a,b) => (a===undefined) ? b : (b===undefined) ? a : Math.min(a,b)
     ))
+    
+    if (attacker.id !== target.id) {
+        getStats(stats, attacker).charactersBuffed++
+        getStats(stats, target).buffsReceived++
+    }
 }
 
-function useAtkAction(attacker: Combattant, action: AtkAction, target: Combattant) {
+function useAtkAction(attacker: Combattant, action: AtkAction, target: Combattant, stats: Map<string, EncounterStats>) {
     const toHit  = action.toHit + Array.from(attacker.finalState.buffs).map(([_, buff]) => ((action.useSaves ? buff.dc : buff.toHit) || 0)) .reduce((a, b) => (a+b), 0)
     const ac     = (action.useSaves ? target.creature.saveBonus : target.creature.AC) 
         + Array.from(target.finalState.buffs).map(([_, buff]) => ((action.useSaves ? buff.save : buff.ac) || 0)).reduce((a, b) => (a+b), 0)
@@ -266,34 +294,43 @@ function useAtkAction(attacker: Combattant, action: AtkAction, target: Combattan
     const hitChance = action.useSaves ? 
         (1 - Math.min(1, Math.max(0, (11 + ac - (toHit - 10)) / 20)))
            : Math.min(1, Math.max(0, (11 + toHit - (ac - 10)) / 20))
-    target.finalState.currentHP = Math.min(target.finalState.currentHP, Math.max(0, target.finalState.currentHP - damage * hitChance))
+
+    const actualDamage = damage * hitChance
+    target.finalState.currentHP = Math.min(target.finalState.currentHP, Math.max(0, target.finalState.currentHP - actualDamage))
 
     Array.from(attacker.finalState.buffs).forEach(([name, buff]) => { if (buff.duration === 'until next attack made') attacker.finalState.buffs.delete(name) })
     Array.from(target.finalState.buffs).forEach(([name, buff]) => { if (buff.duration === 'until next attack taken') target.finalState.buffs.delete(name) })
+
+    getStats(stats, attacker).damageDealt += actualDamage
+    getStats(stats, target).damageTaken += actualDamage
 }
 
-function useHealAction(action: HealAction, target: Combattant) {
-    target.finalState.currentHP = Math.max(target.finalState.currentHP, Math.min(target.creature.hp, target.finalState.currentHP + action.amount))
+function useHealAction(healer: Combattant, action: HealAction, target: Combattant, stats: Map<string, EncounterStats>) {
+    if ((target.finalState.currentHP === 0) && (action.amount > 0)) getStats(stats, target).timesUnconscious++
+    getStats(stats, healer).healGiven += action.amount
+    getStats(stats, target).healReceived += action.amount
+
+    target.finalState.currentHP = Math.max(target.finalState.currentHP, Math.min(target.creature.hp, target.finalState.currentHP + action.amount)) 
 }
 
 // The attackers & defenders must be clones here, they will both be mutated
-function runRound(team1: Combattant[], team1Surprised: boolean|undefined, team2: Combattant[], team2Surprised: boolean|undefined): Round {
+function runRound(team1: Combattant[], team1Surprised: boolean|undefined, team2: Combattant[], team2Surprised: boolean|undefined, stats: Map<string, EncounterStats>): Round {
     const round: Round = {
         team1: team1.map(iterateCombattant),
         team2: team2.map(iterateCombattant),
     }
 
-    if (!team1Surprised) generateActions(round.team1, round.team2)
-    if (!team2Surprised) generateActions(round.team2, round.team1)
+    if (!team1Surprised) generateActions(round.team1, round.team2, stats)
+    if (!team2Surprised) generateActions(round.team2, round.team1, stats)
 
     // Heals are resolved as soon as the actions are declared, to avoid situations where multiple creatures needlessly waste actions healing the same target
     // Then buffs/debuffs are resolved 
-    handleActions(round.team1, round.team2, ['buff', 'debuff'])
-    handleActions(round.team2, round.team1, ['buff', 'debuff'])
+    handleActions(round.team1, round.team2, ['buff', 'debuff'], stats)
+    handleActions(round.team2, round.team1, ['buff', 'debuff'], stats)
 
     // And finally, attacks
-    handleActions(round.team1, round.team2, ['atk'])
-    handleActions(round.team2, round.team1, ['atk'])
+    handleActions(round.team1, round.team2, ['atk'], stats)
+    handleActions(round.team2, round.team1, ['atk'], stats)
 
     return round
 }
@@ -315,11 +352,12 @@ function runEncounter(players: {creature: Creature, state: CreatureState}[], enc
     let playersSurprised = encounter.playersSurprised
     let monstersSurprised = encounter.monstersSurprised
     const rounds: Round[] = []
+    const stats = new Map<string, EncounterStats>()
 
     const hasLivingCombattant = (team: Combattant[]) => !!team.find(combattant => (combattant.finalState.currentHP > 0))
 
     do {
-        const round = runRound(team1, playersSurprised, team2, monstersSurprised)
+        const round = runRound(team1, playersSurprised, team2, monstersSurprised, stats)
         rounds.push(round)
         playersSurprised = false
         monstersSurprised = false
@@ -327,7 +365,7 @@ function runEncounter(players: {creature: Creature, state: CreatureState}[], enc
         team2 = round.team2
     } while (hasLivingCombattant(team1) && hasLivingCombattant(team2) && (rounds.length < 20))
 
-    return rounds
+    return { rounds, stats }
 }
 
 export function runSimulation(players: Creature[], encounters: Encounter[]) {
@@ -342,7 +380,7 @@ export function runSimulation(players: Creature[], encounters: Encounter[]) {
         const encounterResult = runEncounter(playersWithState, encounter)
         results.push(encounterResult)
 
-        const lastRound = encounterResult[encounterResult.length - 1]
+        const lastRound = encounterResult.rounds[encounterResult.rounds.length - 1]
         const nextEncounter = encounters[index + 1]
         playersWithState = lastRound.team1.map(({ creature, finalState }) => {
             const state: CreatureState = {

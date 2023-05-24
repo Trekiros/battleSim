@@ -1,5 +1,9 @@
 import {z} from 'zod'
 
+export const ArtificerOptions = z.object({
+
+})
+
 export const BarbarianOptions = z.object({
     weaponBonus: z.number(),
     gwm: z.boolean(),
@@ -54,6 +58,7 @@ export const WizardOptions = z.object({
 })
 
 export default {
+    artificer: ArtificerOptions,
     barbarian: BarbarianOptions,
     bard: BardOptions,
     cleric: ClericOptions,
@@ -69,6 +74,7 @@ export default {
 } as const
 
 export const ClassOptionsSchema = z.union([
+    ArtificerOptions,
     BarbarianOptions,
     BardOptions,
     ClericOptions,

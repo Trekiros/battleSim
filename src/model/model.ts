@@ -125,7 +125,26 @@ export const EncounterSchema = z.object({
     shortRest: z.boolean().optional(),
 })
 
-const EncounterResultSchema = z.array(RoundSchema)
+const EncounterStatsSchema = z.object({
+    damageDealt: z.number(),
+    damageTaken: z.number(),
+    
+    healGiven: z.number(),
+    healReceived: z.number(),
+
+    charactersBuffed: z.number(),
+    buffsReceived: z.number(),
+    
+    charactersDebuffed: z.number(),
+    debuffsReceived: z.number(),
+
+    timesUnconscious: z.number(),
+})
+
+const EncounterResultSchema = z.object({
+    stats: z.map(z.string(), EncounterStatsSchema),
+    rounds: z.array(RoundSchema),
+})
 const SimulationResultSchema = z.array(EncounterResultSchema)
 
 export type Buff = z.infer<typeof BuffSchema>
@@ -141,6 +160,7 @@ export type Team = z.infer<typeof TeamSchema>
 export type CreatureState = z.infer<typeof CreatureStateSchema>
 export type Combattant = z.infer<typeof CombattantSchema>
 export type Round = z.infer<typeof RoundSchema>
+export type EncounterStats = z.infer<typeof EncounterStatsSchema>
 export type Encounter = z.infer<typeof EncounterSchema>
 export type EncounterResult = z.infer<typeof EncounterResultSchema>
 export type SimulationResult = z.infer<typeof SimulationResultSchema>

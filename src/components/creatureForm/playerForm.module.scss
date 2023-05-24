@@ -5,15 +5,12 @@
     .classes {
         overflow: hidden;
         border-radius: 8px;
-        display: grid;
-        
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-        @media (width < 900px) { grid-template-columns: 1fr 1fr 1fr 1fr }
-        @media (width < 600px) { grid-template-columns: 1fr 1fr 1fr }
-        @media (width < 450px) { grid-template-columns: 1fr 1fr }
-        @media (width < 300px) { grid-template-columns: 1fr }
+        display: flex;
+        flex-wrap: wrap;
 
         .class {
+            flex: 1 1 0;
+            min-width: 200px;
             padding-left: 0;
             padding-right: 0;
             margin: 0;

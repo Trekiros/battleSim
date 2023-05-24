@@ -3,6 +3,86 @@ import { Action, AtkAction, Creature } from "../model/model"
 import {z} from 'zod'
 import { getMonster } from './monsters'
 
+function artificer(level: number, options: z.infer<typeof ClassOptions.artificer>): Creature {
+    const INT = scale(level, { 1: 4, 4: 5 })
+    const CON = scale(level, { 1: 2, 8: 3, 12: 4, 16: 5 })
+    const PB = pb(level)
+    const AC = scale(level, {1: 17, 3: 18, 5: 19, 8: 20, 11: 21, 16: 22})
+    const toHit = INT + PB
+    const DC = 8 + PB + INT
+
+    const fireBolt = cantrip(level) * d8
+    const arcaneFireArm = scale(level, {1: 0, 6: d8})
+
+    const result: Creature = {
+        id: crypto.randomUUID(),
+        name: name('Artificer', level),
+        AC: AC,
+        saveBonus: scale(level, {1: PB, 20: PB + 6}),
+        hp: hp(level, 12, CON),
+        count: 1,
+        mode: 'player',
+        actions: scaleArray<Action>(level, {
+            1: [
+                {
+                    id: crypto.randomUUID(),
+                    name: 'Firebolt',
+                    actionSlot: ACTION,
+                    type: 'atk',
+                    freq: 'at will',
+                    targets: 1,
+                    target: 'enemy with least HP',
+                    toHit: toHit,
+                    dpr: fireBolt + arcaneFireArm,
+                    condition: 'default',
+                },
+                {
+                    id: crypto.randomUUID(),
+                    name: 'Shield',
+                    actionSlot: REACTION,
+                    type: 'buff',
+                    freq: scale(level, {1: '1/day', 3: '1/fight', 8: 'at will'}),
+                    condition: 'is under half HP',
+                    targets: 1,
+                    target: 'self',
+                    buff: {
+                        duration: '1 round',
+                        ac: 5,
+                    },
+                },
+            ],
+            2: [{
+                id: crypto.randomUUID(),
+                name: 'Artificer Infusions',
+                actionSlot: PASSIVE,
+                type: 'buff',
+                freq: '1/fight',
+                condition: 'is available',
+                targets: 100,
+                target: 'ally with the most HP',
+                buff: {
+                    duration: 'entire encounter',
+                    toHit: scale(level, {1: 1, 12: 2}),
+                    ac: scale(level, {1: 1, 12: 2}),
+                }
+            }],
+            3: [{
+                id: crypto.randomUUID(),
+                name: 'Shield Turret',
+                actionSlot: BONUS_ACTION,
+                type: 'heal',
+                freq: 'at will',
+                condition: 'default',
+                targets: 2,
+                target: 'ally with the most HP',
+                amount: d8 + INT,
+            }],
+        }),
+    }
+
+    return result
+}
+
 function barbarian(level: number, options: z.infer<typeof ClassOptions.barbarian>): Creature {
     const STR = scale(level, { 1: 4, 4: 5, 20: 7 })
     const CON = scale(level, { 1: 2, 8: 3, 12: 4, 16: 5, 20: 7 })
@@ -908,6 +988,7 @@ function wizard(level: number, options: z.infer<typeof ClassOptions.wizard>): Cr
 }
 
 export const PlayerTemplates = {
+    artificer,
     barbarian,
     bard,
     cleric,
@@ -952,6 +1033,13 @@ function scaleArray<T>(currentLevel: number, minLevelScale: {[minLevel: number]:
             .flatMap(level => minLevelScale[level]),
     ]
 }
+
+
+const d6 = 3.5
+const d8 = 4.5
+const d10 = 5.5
+const d12 = 6.5
+const cantrip = (level: number) => scale(level, {1: 1, 5: 2, 11: 3, 17: 4})
 
 function hp(level: number, dieSize: number, con: number) {
     return (level) * (con + dieSize / 2) + (dieSize / 2) 

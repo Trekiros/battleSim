@@ -14,7 +14,8 @@ type PropType = {
     onChange: (newvalue: Creature) => void,
 }
 
-type ClassForm = { type: 'barbarian', options: z.infer<typeof ClassOptions.barbarian> }
+type ClassForm = { type: 'artificer', options: z.infer<typeof ClassOptions.artificer> }
+    | { type: 'barbarian', options: z.infer<typeof ClassOptions.barbarian> }
     | { type: 'bard', options: z.infer<typeof ClassOptions.bard> }
     | { type: 'cleric', options: z.infer<typeof ClassOptions.cleric> }
     | { type: 'druid', options: z.infer<typeof ClassOptions.druid> }
@@ -28,6 +29,7 @@ type ClassForm = { type: 'barbarian', options: z.infer<typeof ClassOptions.barba
     | { type: 'wizard', options: z.infer<typeof ClassOptions.wizard> }
 
 const DefaultOptions: {[key in Class]: z.infer<typeof ClassOptions[key]>} = {
+    artificer: {},
     barbarian: { gwm: false, weaponBonus: 0 },
     bard: {},
     cleric: {},
