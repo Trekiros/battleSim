@@ -2,6 +2,8 @@ import ClassOptions from '../model/classOptions'
 import { Action, AtkAction, Creature } from "../model/model"
 import {z} from 'zod'
 import { getMonster } from './monsters'
+import { v4 as uuid } from 'uuid'
+
 
 function artificer(level: number, options: z.infer<typeof ClassOptions.artificer>): Creature {
     const INT = scale(level, { 1: 4, 4: 5 })
@@ -15,7 +17,7 @@ function artificer(level: number, options: z.infer<typeof ClassOptions.artificer
     const arcaneFireArm = scale(level, {1: 0, 6: d8})
 
     const result: Creature = {
-        id: crypto.randomUUID(),
+        id: uuid(),
         name: name('Artificer', level),
         AC: AC,
         saveBonus: scale(level, {1: PB, 20: PB + 6}),
@@ -25,7 +27,7 @@ function artificer(level: number, options: z.infer<typeof ClassOptions.artificer
         actions: scaleArray<Action>(level, {
             1: [
                 {
-                    id: crypto.randomUUID(),
+                    id: uuid(),
                     name: 'Firebolt',
                     actionSlot: ACTION,
                     type: 'atk',
@@ -37,7 +39,7 @@ function artificer(level: number, options: z.infer<typeof ClassOptions.artificer
                     condition: 'default',
                 },
                 {
-                    id: crypto.randomUUID(),
+                    id: uuid(),
                     name: 'Shield',
                     actionSlot: REACTION,
                     type: 'buff',
@@ -52,7 +54,7 @@ function artificer(level: number, options: z.infer<typeof ClassOptions.artificer
                 },
             ],
             2: [{
-                id: crypto.randomUUID(),
+                id: uuid(),
                 name: 'Artificer Infusions',
                 actionSlot: PASSIVE,
                 type: 'buff',
@@ -67,7 +69,7 @@ function artificer(level: number, options: z.infer<typeof ClassOptions.artificer
                 }
             }],
             3: [{
-                id: crypto.randomUUID(),
+                id: uuid(),
                 name: 'Shield Turret',
                 actionSlot: BONUS_ACTION,
                 type: 'heal',
@@ -91,7 +93,7 @@ function barbarian(level: number, options: z.infer<typeof ClassOptions.barbarian
     const RAGE = scale(level, { 1: 2, 9: 3, 16: 4 })
 
     const result: Creature = {
-        id: crypto.randomUUID(),
+        id: uuid(),
         name: name('Barbarian', level),
         AC: 10 + DEX + CON,
         saveBonus: PB,
@@ -100,7 +102,7 @@ function barbarian(level: number, options: z.infer<typeof ClassOptions.barbarian
         mode: 'player',
         actions: [
             {
-                id: crypto.randomUUID(),
+                id: uuid(),
                 name: `Greatsword${level >= 5 ? ' x2' : ''}`,
                 actionSlot: ACTION,
                 type: 'atk',
@@ -112,7 +114,7 @@ function barbarian(level: number, options: z.infer<typeof ClassOptions.barbarian
                 dpr: (7 + STR + RAGE + options.weaponBonus + (options.gwm ? 10 : 0)) * (level >= 5 ? 2 : 1), 
             },
             {
-                id: crypto.randomUUID(),
+                id: uuid(),
                 name: 'Rage',
                 actionSlot: BONUS_ACTION,
                 type: 'buff',
@@ -130,7 +132,7 @@ function barbarian(level: number, options: z.infer<typeof ClassOptions.barbarian
 
     if (level >= 2) {
         result.actions.push({
-            id: crypto.randomUUID(),
+            id: uuid(),
             name: 'Reckless Attack',
             actionSlot: PASSIVE,
             type: 'buff',
@@ -159,7 +161,7 @@ function bard(level: number, options: z.infer<typeof ClassOptions.bard>): Creatu
     const BARDIC_INSPI = scale(level, {1: 6, 5: 8, 10: 10, 15: 12})
 
     const result: Creature = {
-        id: crypto.randomUUID(),
+        id: uuid(),
         name: name('Bard', level),
         AC: 13 + DEX,
         saveBonus: PB,
@@ -169,7 +171,7 @@ function bard(level: number, options: z.infer<typeof ClassOptions.bard>): Creatu
         actions: scaleArray<Action>(level, {
             1: [
                 {
-                    id: crypto.randomUUID(),
+                    id: uuid(),
                     name: 'Vicious Mockery',
                     actionSlot: ACTION,
                     type: 'debuff',
@@ -184,7 +186,7 @@ function bard(level: number, options: z.infer<typeof ClassOptions.bard>): Creatu
                     },
                 },
                 {
-                    id: crypto.randomUUID(),
+                    id: uuid(),
                     name: 'Bane',
                     actionSlot: ACTION,
                     type: 'debuff',
@@ -200,7 +202,7 @@ function bard(level: number, options: z.infer<typeof ClassOptions.bard>): Creatu
                     },
                 },
                 {
-                    id: crypto.randomUUID(),
+                    id: uuid(),
                     name: 'Bardic Inspiration',
                     actionSlot: BONUS_ACTION,
                     type: 'buff',
@@ -214,7 +216,7 @@ function bard(level: number, options: z.infer<typeof ClassOptions.bard>): Creatu
                     },
                 },
                 {
-                    id: crypto.randomUUID(),
+                    id: uuid(),
                     name: (level <= 9) ? 'Cure Wounds' : 'Mass Cure Wounds',
                     actionSlot: ACTION,
                     type: 'heal',
@@ -227,7 +229,7 @@ function bard(level: number, options: z.infer<typeof ClassOptions.bard>): Creatu
             ],
             5: [
                 {
-                    id: crypto.randomUUID(),
+                    id: uuid(),
                     name: 'Hypnotic Pattern',
                     actionSlot: ACTION,
                     type: 'debuff',
@@ -256,7 +258,7 @@ function cleric(level: number, options: z.infer<typeof ClassOptions.cleric>): Cr
     const toHit = PB + WIS
     
     return {
-        id: crypto.randomUUID(),
+        id: uuid(),
         name: name('Cleric', level),
         AC: scale(level, { 1: 17, 3: 18, 5: 19, 8: 20 }),
         saveBonus: PB,
@@ -266,7 +268,7 @@ function cleric(level: number, options: z.infer<typeof ClassOptions.cleric>): Cr
         actions: scaleArray<Action>(level, {
             1: [
                 {
-                    id: crypto.randomUUID(),
+                    id: uuid(),
                     name: 'Sacred Flame',
                     actionSlot: ACTION,
                     type: 'atk',
@@ -279,7 +281,7 @@ function cleric(level: number, options: z.infer<typeof ClassOptions.cleric>): Cr
                     dpr: scale(level, {1: 4.5, 5: 9, 8: 13.5, 11: 18, 17: 22.5}),
                 },
                 {
-                    id: crypto.randomUUID(),
+                    id: uuid(),
                     name: 'Bless',
                     actionSlot: ACTION,
                     type: 'buff',
@@ -294,7 +296,7 @@ function cleric(level: number, options: z.infer<typeof ClassOptions.cleric>): Cr
                     }
                 },
                 {
-                    id: crypto.randomUUID(),
+                    id: uuid(),
                     name: scale(level, { 1: 'Cure Wounds', 11: 'Heal' }),
                     actionSlot: ACTION,
                     type: 'heal',
@@ -307,7 +309,7 @@ function cleric(level: number, options: z.infer<typeof ClassOptions.cleric>): Cr
             ],
             3: [
                 {
-                    id: crypto.randomUUID(),
+                    id: uuid(),
                     name: 'Spiritual Weapon',
                     actionSlot: BONUS_ACTION,
                     type: 'atk',
@@ -321,7 +323,7 @@ function cleric(level: number, options: z.infer<typeof ClassOptions.cleric>): Cr
             ],
             5: [
                 {
-                    id: crypto.randomUUID(),
+                    id: uuid(),
                     name: 'Spirit Guardians',
                     actionSlot: PASSIVE,
                     type: 'atk',
@@ -334,7 +336,7 @@ function cleric(level: number, options: z.infer<typeof ClassOptions.cleric>): Cr
                     dpr: (Math.ceil(level / 5) + 2) * 3.5,
                 },
                 {
-                    id: crypto.randomUUID(),
+                    id: uuid(),
                     name: scale(level, {1: 'Mass Healing Word', 9: 'Mass Cure Wounds', 17: 'Mass Heal' }),
                     actionSlot: ACTION,
                     type: 'heal',
@@ -359,7 +361,7 @@ function druid(level: number, options: z.infer<typeof ClassOptions.druid>): Crea
 
     if (level === 1) {
         return {
-            id: crypto.randomUUID(),
+            id: uuid(),
             name: name('Druid', level),
             AC: 14 + DEX,
             saveBonus: PB,
@@ -368,7 +370,7 @@ function druid(level: number, options: z.infer<typeof ClassOptions.druid>): Crea
             mode: 'player',
             actions: [
                 {
-                    id: crypto.randomUUID(),
+                    id: uuid(),
                     name: 'Shillelagh',
                     actionSlot: ACTION,
                     type: 'atk',
@@ -380,7 +382,7 @@ function druid(level: number, options: z.infer<typeof ClassOptions.druid>): Crea
                     dpr: 4.5 + WIS,
                 },
                 {
-                    id: crypto.randomUUID(),
+                    id: uuid(),
                     name: 'Cure Wounds',
                     actionSlot: ACTION,
                     type: 'heal',
@@ -403,7 +405,7 @@ function druid(level: number, options: z.infer<typeof ClassOptions.druid>): Crea
     })
 
     return {
-        id: crypto.randomUUID(),
+        id: uuid(),
         name: name('Druid', level),
         AC: wildshape.AC,
         saveBonus: PB,
@@ -414,7 +416,7 @@ function druid(level: number, options: z.infer<typeof ClassOptions.druid>): Crea
             1: [
                 ...wildshape.actions,
                 {
-                    id: crypto.randomUUID(),
+                    id: uuid(),
                     name: `${scale(level, {1: 'Wild Shape', 17: 'Shapechange'})}: ${wildshape.name}`,
                     actionSlot: 6,
                     type: 'heal',
@@ -439,7 +441,7 @@ function fighter(level: number, options: z.infer<typeof ClassOptions.fighter>): 
     const attacks = scale(level, {1: 1, 5: 2, 11: 3, 20: 4})
 
     const action: Action = {
-        id: crypto.randomUUID(),
+        id: uuid(),
         name: `Greatsword${level >= 5 ? ' x' + attacks : ''}`,
         actionSlot: ACTION,
         type: 'atk',
@@ -452,7 +454,7 @@ function fighter(level: number, options: z.infer<typeof ClassOptions.fighter>): 
     }
 
     return {
-        id: crypto.randomUUID(),
+        id: uuid(),
         name: name('Fighter', level),
         AC: AC,
         saveBonus: PB,
@@ -463,7 +465,7 @@ function fighter(level: number, options: z.infer<typeof ClassOptions.fighter>): 
             1: [
                 action,
                 {
-                    id: crypto.randomUUID(),
+                    id: uuid(),
                     name: 'Second Wind',
                     actionSlot: BONUS_ACTION,
                     type: 'heal',
@@ -476,7 +478,7 @@ function fighter(level: number, options: z.infer<typeof ClassOptions.fighter>): 
             ],
             2: [
                 {
-                    id: crypto.randomUUID(),
+                    id: uuid(),
                     name: `Action Surge: ${action.name}`,
                     actionSlot: 4,
                     freq: '1/fight',
@@ -490,7 +492,7 @@ function fighter(level: number, options: z.infer<typeof ClassOptions.fighter>): 
             ],
             17: [
                 {
-                    id: crypto.randomUUID(),
+                    id: uuid(),
                     name: `Action Surge: ${action.name}`,
                     actionSlot: 5,
                     freq: '1/fight',
@@ -518,7 +520,7 @@ function monk(level: number, options: z.infer<typeof ClassOptions.monk>): Creatu
     const martialArtsDie = scale(level, {1: 4, 5: 6, 11: 8, 17: 10})
 
     return {
-        id: crypto.randomUUID(),
+        id: uuid(),
         name: name('Monk', level),
         AC: AC,
         saveBonus: scale(level, {1: PB, 14: PB + 3}),
@@ -528,7 +530,7 @@ function monk(level: number, options: z.infer<typeof ClassOptions.monk>): Creatu
         actions: scaleArray<Action>(level, {
             1: [
                 {
-                    id: crypto.randomUUID(),
+                    id: uuid(),
                     name: scale(level, {1: 'Quarterstaff', 5: 'Quarterstaff x2'}),
                     actionSlot: ACTION,
                     type: 'atk',
@@ -540,7 +542,7 @@ function monk(level: number, options: z.infer<typeof ClassOptions.monk>): Creatu
                     dpr: (5.5 + DEX) * (level < 5 ? 1 : 2),
                 },
                 {
-                    id: crypto.randomUUID(),
+                    id: uuid(),
                     name: scale(level, {1: 'Unarmed Strike', 5: 'Flurry of Blows'}),
                     actionSlot: BONUS_ACTION,
                     type: 'atk',
@@ -554,7 +556,7 @@ function monk(level: number, options: z.infer<typeof ClassOptions.monk>): Creatu
             ],
             5: [
                 {
-                    id: crypto.randomUUID(),
+                    id: uuid(),
                     name: 'Stunning Strike',
                     actionSlot: 4,
                     type: 'debuff',
@@ -583,7 +585,7 @@ function paladin(level: number, options: z.infer<typeof ClassOptions.paladin>): 
     const toHit = PB + STR + options.weaponBonus + (options.gwm ? -5 : 0)
 
     return {
-        id: crypto.randomUUID(),
+        id: uuid(),
         name: name('Paladin', level),
         AC: AC,
         saveBonus: PB,
@@ -593,7 +595,7 @@ function paladin(level: number, options: z.infer<typeof ClassOptions.paladin>): 
         actions: scaleArray<Action>(level, {
             1: [
                 {
-                    id: crypto.randomUUID(),
+                    id: uuid(),
                     name: scale(level, {1: 'Longsword', 5: 'Longsword x2'}),
                     actionSlot: ACTION,
                     type: 'atk',
@@ -610,7 +612,7 @@ function paladin(level: number, options: z.infer<typeof ClassOptions.paladin>): 
                     ) * (level < 5 ? 1 : 2),            // Multiattack
                 },
                 {
-                    id: crypto.randomUUID(),
+                    id: uuid(),
                     name: 'Lay on Hands',
                     actionSlot: ACTION,
                     type: 'heal',
@@ -623,7 +625,7 @@ function paladin(level: number, options: z.infer<typeof ClassOptions.paladin>): 
             ],
             2: [
                 {
-                    id: crypto.randomUUID(),
+                    id: uuid(),
                     name: 'Divine Smite',
                     actionSlot: 4,
                     type: 'buff',
@@ -639,7 +641,7 @@ function paladin(level: number, options: z.infer<typeof ClassOptions.paladin>): 
             ],
             6: [
                 {
-                    id: crypto.randomUUID(),
+                    id: uuid(),
                     name: 'Aura of Protection',
                     actionSlot: 5,
                     type: 'buff',
@@ -666,7 +668,7 @@ function ranger(level: number, options: z.infer<typeof ClassOptions.ranger>): Cr
     const toHit = PB + DEX + options.weaponBonus + (options.ss ? -5 : 0) + 2 // +2 from Archery fighting style
 
     return {
-        id: crypto.randomUUID(),
+        id: uuid(),
         name: name('Ranger', level),
         AC: AC,
         saveBonus: PB,
@@ -676,7 +678,7 @@ function ranger(level: number, options: z.infer<typeof ClassOptions.ranger>): Cr
         actions: scaleArray<Action>(level, {
             1: [
                 {
-                    id: crypto.randomUUID(),
+                    id: uuid(),
                     name: scale(level, { 
                         1: "Hand Crossbow", 
                         2: "Hand Crossbow + Hunter's Mark", 
@@ -710,7 +712,7 @@ function rogue(level: number, options: z.infer<typeof ClassOptions.rogue>): Crea
     const sneakAttack = 3.5 * Math.ceil(level/2)
 
     return {
-        id: crypto.randomUUID(),
+        id: uuid(),
         name: name('Rogue', level),
         AC: AC,
         saveBonus: PB,
@@ -720,7 +722,7 @@ function rogue(level: number, options: z.infer<typeof ClassOptions.rogue>): Crea
         actions: scaleArray<Action>(level, {
             1: [
                 {
-                    id: crypto.randomUUID(),
+                    id: uuid(),
                     name: scale(level, { 
                         1: "Dagger x2 + Sneak Attack", 
                         4: "Hand Crossbow + Crossbow Expert + Sneak Attack" 
@@ -737,7 +739,7 @@ function rogue(level: number, options: z.infer<typeof ClassOptions.rogue>): Crea
             ],
             5: [
                 {
-                    id: crypto.randomUUID(),
+                    id: uuid(),
                     name: 'Uncanny Dodge',
                     actionSlot: 4,
                     type: 'buff',
@@ -765,7 +767,7 @@ function sorcerer(level: number, options: z.infer<typeof ClassOptions.sorcerer>)
     const DC = 8 + PB + CHA
 
     return {
-        id: crypto.randomUUID(),
+        id: uuid(),
         name: name('Sorcerer', level),
         AC: AC,
         saveBonus: PB,
@@ -775,7 +777,7 @@ function sorcerer(level: number, options: z.infer<typeof ClassOptions.sorcerer>)
         actions: scaleArray<Action>(level, {
             1: [
                 {
-                    id: crypto.randomUUID(),
+                    id: uuid(),
                     name: 'Fire Bolt',
                     actionSlot: ACTION,
                     type: 'atk',
@@ -789,7 +791,7 @@ function sorcerer(level: number, options: z.infer<typeof ClassOptions.sorcerer>)
             ],
             3: [
                 {
-                    id: crypto.randomUUID(),
+                    id: uuid(),
                     name: 'Quickened Mirror Image',
                     actionSlot: BONUS_ACTION,
                     type: 'buff',
@@ -805,7 +807,7 @@ function sorcerer(level: number, options: z.infer<typeof ClassOptions.sorcerer>)
             ],
             5: [
                 {
-                    id: crypto.randomUUID(),
+                    id: uuid(),
                     name: 'Quickened Fireball',
                     actionSlot: BONUS_ACTION,
                     type: 'atk',
@@ -832,7 +834,7 @@ function warlock(level: number, options: z.infer<typeof ClassOptions.warlock>): 
     const DC = 8 + PB + CHA
 
     return {
-        id: crypto.randomUUID(),
+        id: uuid(),
         name: name('Warlock', level),
         AC: AC,
         saveBonus: PB,
@@ -842,7 +844,7 @@ function warlock(level: number, options: z.infer<typeof ClassOptions.warlock>): 
         actions: scaleArray<Action>(level, {
             1: [
                 {
-                    id: crypto.randomUUID(),
+                    id: uuid(),
                     name: 'Eldritch Blast + Hex',
                     actionSlot: ACTION,
                     type: 'atk',
@@ -856,7 +858,7 @@ function warlock(level: number, options: z.infer<typeof ClassOptions.warlock>): 
             ],
             5: [
                 {
-                    id: crypto.randomUUID(),
+                    id: uuid(),
                     name: 'Hypnotic Pattern',
                     actionSlot: ACTION,
                     type: 'debuff',
@@ -885,7 +887,7 @@ function wizard(level: number, options: z.infer<typeof ClassOptions.wizard>): Cr
     const DC = 8 + PB + INT
 
     return {
-        id: crypto.randomUUID(),
+        id: uuid(),
         name: name('Wizard', level),
         AC: AC,
         saveBonus: PB,
@@ -896,7 +898,7 @@ function wizard(level: number, options: z.infer<typeof ClassOptions.wizard>): Cr
             1: [
                 ...(level > 11 ? [] : [
                     {
-                        id: crypto.randomUUID(),
+                        id: uuid(),
                         name: 'Fire Bolt',
                         actionSlot: ACTION,
                         type: 'atk',
@@ -909,7 +911,7 @@ function wizard(level: number, options: z.infer<typeof ClassOptions.wizard>): Cr
                     } as AtkAction
                 ]),
                 {
-                    id: crypto.randomUUID(),
+                    id: uuid(),
                     name: 'Shield',
                     actionSlot: REACTION,
                     type: 'buff',
@@ -925,7 +927,7 @@ function wizard(level: number, options: z.infer<typeof ClassOptions.wizard>): Cr
             ],
             5: [
                 {
-                    id: crypto.randomUUID(),
+                    id: uuid(),
                     name: 'Fireball',
                     actionSlot: ACTION,
                     type: 'atk',
@@ -938,7 +940,7 @@ function wizard(level: number, options: z.infer<typeof ClassOptions.wizard>): Cr
                     dpr: scale(level, {1: 28, 11: 35}),
                 },
                 {
-                    id: crypto.randomUUID(),
+                    id: uuid(),
                     name: 'Hypnotic Pattern',
                     actionSlot: ACTION,
                     type: 'debuff',
@@ -955,7 +957,7 @@ function wizard(level: number, options: z.infer<typeof ClassOptions.wizard>): Cr
             ],
             13: [
                 {
-                    id: crypto.randomUUID(),
+                    id: uuid(),
                     name: 'Draconic transformation',
                     actionSlot: BONUS_ACTION,
                     type: 'atk',
@@ -970,7 +972,7 @@ function wizard(level: number, options: z.infer<typeof ClassOptions.wizard>): Cr
             ],
             17: [
                 {
-                    id: crypto.randomUUID(),
+                    id: uuid(),
                     name: 'Meteor Swarm',
                     actionSlot: ACTION,
                     type: 'atk',

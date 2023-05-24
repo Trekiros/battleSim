@@ -1,6 +1,7 @@
 import { ActionType } from "./enums"
 import { Action, AtkAction, Buff, BuffAction, Combattant, Creature, CreatureState, DebuffAction, Encounter, EncounterResult, EncounterStats, HealAction, Round, SimulationResult, Team } from "./model"
 import { clone, range } from "./utils"
+import { v4 as uuid } from 'uuid'
 
 function getRemainingUses(creature: Creature, rest: 'none'|'short rest'|'long rest', oldValue?: Map<string, number>) {
     const result = new Map<string, number>()
@@ -29,7 +30,7 @@ export function creatureToCombattant(creature: Creature) {
     })
 
     const result: Combattant = {
-        id: crypto.randomUUID(),
+        id: uuid(),
         creature: clone(creature),
         initialState: creatureState,
         finalState: clone(creatureState),
@@ -337,7 +338,7 @@ function runRound(team1: Combattant[], team1Surprised: boolean|undefined, team2:
 
 function runEncounter(players: {creature: Creature, state: CreatureState}[], encounter: Encounter): EncounterResult {
     let team1: Combattant[] = players.map(({ creature, state }) => ({
-        id: crypto.randomUUID(),
+        id: uuid(),
         creature: clone(creature),
         actions: [],
         initialState: clone(state),

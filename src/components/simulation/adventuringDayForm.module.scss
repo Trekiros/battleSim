@@ -1,0 +1,117 @@
+.overlay {
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    padding: 2em;
+    top: 0;
+    left: 0;
+    background: #fff3;
+    display: flex;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+    &::-webkit-scrollbar { width: 12px; }
+    &::-webkit-scrollbar-track { background: #fff1 }
+    &::-webkit-scrollbar-thumb { background: #888 }
+
+    animation-name: fadeIn;
+    animation-duration: 0.3s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+
+    @keyframes fadeIn {
+        0%   { opacity: 0 }
+        100% { opacity: 1 }
+    }
+
+    .modal {
+        margin: auto 0;
+        width: 100%;
+        padding: 1em;
+        border-radius: 8px;
+        background: #544;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5em;
+
+        section {
+            display: grid;
+            grid-template-columns: 200px calc(100% - 200px);
+            align-items: center;
+            gap: 8px;
+    
+            @media (width < 800px) { grid-template-columns: 1fr }
+        }
+    
+        h3 { user-select: none; white-space: nowrap; margin: 0.5em 0 }
+    
+
+        .searchResults {
+            border-radius: 8px;
+            outline: 4px solid #fff1;
+    
+            .header {
+                width: 100%;
+                background-color: #fff1;
+                border-radius: 8px 8px 0 0;
+                padding: 0.5em 1em;
+                display: grid;
+                grid-template-columns: 1fr 1fr 50px;
+    
+                >div {
+                    flex: 1 1 0;
+                    padding: 0.5em 0;
+    
+                    svg { width: 1em; margin-left: 1em }
+                }
+            }
+    
+            .result {
+                height: 40vh;
+                min-height: 200px;
+                overflow-y: auto;
+                overflow-x: hidden;
+                
+                &::-webkit-scrollbar { width: 12px; }
+                &::-webkit-scrollbar-track { background: #fff1 }
+                &::-webkit-scrollbar-thumb { background: #888 }
+    
+                .placeholder { width: 100%; padding: 2em; text-align: center; color: #aaa; user-select: none; }
+    
+                .save {
+                    width: 100%;
+                    margin: 0;
+                    padding: 1em;
+                    border-radius: 0;
+                    display: grid;
+                    grid-template-columns: 1fr 1fr 50px;
+                    background: transparent;
+                    &:hover { background: #fff1 }
+                    &.active { background: #fff3 }
+    
+                    .fileName {
+                        font-weight: bold;
+                    }
+
+                    button {
+                        padding: 0;
+                        background: none;
+                        transition: color 0.3s;
+                        &:hover { color: #aaa }
+                    }
+                }
+            }
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: row;
+
+            button {
+                flex: 1 1 0;
+            }
+        }
+    }
+}

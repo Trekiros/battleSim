@@ -1,5 +1,6 @@
 import { DependencyList, FC, ReactNode, createContext, useContext, useEffect, useState } from "react"
 import { semiPersistentContext } from "../context/simulationContext"
+import { v4 as uuid } from 'uuid'
 
 export function clone<T>(obj: T): T {
     return structuredClone(obj)
@@ -54,7 +55,9 @@ export function sharedStateGenerator(componentName: string) {
             sharedState.set(mapKey, {value: newValue})
             await setState(sharedState)
         }
-        const value: T = state.get(mapKey)?.value || initialValue
+
+        const existingValue = state.get(mapKey)?.value
+        const value: T = (existingValue === undefined) ? initialValue : existingValue
     
         return [ value, setter ] as const
     }
@@ -141,7 +144,7 @@ export const ValidationContext:FC<{
     )
 }
 export function useValidation(validationCallback: () => boolean, dependencies: DependencyList) {
-    const [validationKey] = useState(crypto.randomUUID())
+    const [validationKey] = useState(uuid())
     const {validate} = useContext(validationContext)
 
     useEffect(() => {

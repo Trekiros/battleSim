@@ -7,6 +7,7 @@ import MonsterForm from "./monsterForm"
 import CustomForm from "./customForm"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCheck, faTrash, faWrench } from "@fortawesome/free-solid-svg-icons"
+import { v4 as uuid } from 'uuid'
 
 type PropType = {
     onSubmit: (value: Creature) => void,
@@ -19,7 +20,7 @@ type PropType = {
 
 function newCreature(mode: 'player'|'monster'): Creature {
     return {
-        id: crypto.randomUUID(),
+        id: uuid(),
         mode,
         name: (mode === 'player') ? 'Player Character' : 'Monster',
         AC: 10,

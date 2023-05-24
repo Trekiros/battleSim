@@ -7,8 +7,9 @@ import { runSimulation } from "../../model/simulation"
 import EncounterForm from "./encounterForm"
 import EncounterResult from "./encounterResult"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPlus } from "@fortawesome/free-solid-svg-icons"
+import { faFolder, faPlus, faSave, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { semiPersistentContext } from "../../context/simulationContext"
+import AdventuringDayForm from "./adventuringDayForm"
 
 type PropType = {
     // TODO
@@ -25,6 +26,24 @@ const Simulation:FC<PropType> = ({}) => {
     const [encounters, setEncounters] = useStoredState<Encounter[]>('encounters', [emptyEncounter], z.array(EncounterSchema).parse)
     const [simulationResults, setSimulationResults] = useState<SimulationResult>([])
     const [state, setState] = useState(new Map<string, any>())
+    
+    function isEmpty() {
+        const hasPlayers = !!players.length
+        const hasMonsters = !!encounters.find(encounter => !!encounter.monsters.length)
+        return !hasPlayers && !hasMonsters
+    }
+
+    const [saving, setSaving] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const [canSave, setCanSave] = useState(false)
+    useEffect(() => {
+        setCanSave(
+               !isEmpty()
+            && (typeof window !== "undefined")
+            && !!localStorage
+            && !!localStorage.getItem('useLocalStorage')
+        )
+    }, [players, encounters])
 
     useEffect(() => {
         const results = runSimulation(players, encounters)
@@ -60,8 +79,43 @@ const Simulation:FC<PropType> = ({}) => {
                 <EncounterForm
                     mode='player'
                     encounter={{ monsters: players }}
-                    onUpdate={(newValue) => setPlayers(newValue.monsters)}
-                />
+                    onUpdate={(newValue) => setPlayers(newValue.monsters)}>
+                        <>
+                            { !isEmpty() ? (
+                                <button onClick={() => { setPlayers([]); setEncounters([emptyEncounter]) }}>
+                                    <FontAwesomeIcon icon={faTrash} />
+                                    Clear Adventuring Day
+                                </button>
+                            ) : null }
+                            { canSave ? (
+                                <button onClick={() => setSaving(true)}>
+                                    <FontAwesomeIcon icon={faSave} />
+                                    Save Adventuring Day
+                                </button>
+                            ) : null}
+                            <button onClick={() => setLoading(true)}>
+                                <FontAwesomeIcon icon={faFolder} />
+                                Load Adventuring Day
+                            </button>
+                            { !saving ? null : (
+                                <AdventuringDayForm
+                                    players={players}
+                                    encounters={encounters}
+                                    onCancel={() => setSaving(false)} />
+                            ) }
+                            { !loading ? null : (
+                                <AdventuringDayForm
+                                    players={players}
+                                    encounters={encounters}
+                                    onCancel={() => setLoading(false)} 
+                                    onLoad={(p, e) => {
+                                        setPlayers(p)
+                                        setEncounters(e)
+                                        setLoading(false)
+                                    }} />
+                            ) }
+                        </>
+                </EncounterForm>
 
                 { encounters.map((encounter, index) => (
                     <div className={styles.encounter} key={index}>

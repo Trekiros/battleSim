@@ -6,6 +6,7 @@ import styles from './customForm.module.scss'
 import { clone, useValidation } from "../../model/utils"
 import ActionForm from "./actionForm"
 import DecimalInput from "../utils/DecimalInput"
+import { v4 as uuid } from 'uuid'
 
 type PropType = {
     value: Creature,
@@ -29,7 +30,7 @@ const CustomForm:FC<PropType> = ({ value, onChange }) => {
 
     function createAction() {
         update(v => { v.actions.push({
-            id: crypto.randomUUID(),
+            id: uuid(),
             actionSlot: 0,
             name: '',
             freq: 'at will',

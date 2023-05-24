@@ -1,4 +1,4 @@
-import { FC, useState } from "react"
+import { FC, ReactNode, useState } from "react"
 import { Creature, Encounter } from "../../model/model"
 import styles from './encounterForm.module.scss'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -12,9 +12,10 @@ type PropType = {
     encounter: Encounter,
     onUpdate: (newValue: Encounter) => void,
     onDelete?: () => void,
+    children?: ReactNode,
 }
 
-const EncounterForm:FC<PropType> = ({ mode, encounter, onUpdate, onDelete }) => {
+const EncounterForm:FC<PropType> = ({ mode, encounter, onUpdate, onDelete, children }) => {
     const [updating, setUpdating] = useState<number | null>(null)
     const [creating, setCreating] = useState(false)
 
@@ -58,7 +59,7 @@ const EncounterForm:FC<PropType> = ({ mode, encounter, onUpdate, onDelete }) => 
                     { (mode === 'player') ? 'Player Characters' : 'Encounter' }
                 </h2>
 
-                <div className={mode === "monster" ? styles.formBody : undefined}>
+                <div className={styles.formBody}>
                     <div className={styles.creatures}>
                         { encounter.monsters.map((creature, index) => (
                             <div key={creature.id} className={styles.creature}>
@@ -76,21 +77,23 @@ const EncounterForm:FC<PropType> = ({ mode, encounter, onUpdate, onDelete }) => 
                             </div>
                         )) }
                     </div>
-                    { mode === 'player' ? null : (
-                        <div className={styles.encounterSettings}>
-                            <Checkbox value={!!encounter.playersSurprised} onToggle={() => update(e => { e.playersSurprised = !e.playersSurprised })}>
-                                The players are surprised
-                            </Checkbox>
-                            <Checkbox value={!!encounter.monstersSurprised} onToggle={() => update(e => { e.monstersSurprised = !e.monstersSurprised })}>
-                                The enemies are surprised
-                            </Checkbox>
-                            { !onDelete ? null : (
-                                <Checkbox value={!!encounter.shortRest} onToggle={() => update(e => { e.shortRest = !e.shortRest })}>
-                                    The players get a short rest
+                    <div className={styles.encounterSettings}>
+                        { children || (encounter.monsters.length ? (
+                            <>
+                                <Checkbox value={!!encounter.playersSurprised} onToggle={() => update(e => { e.playersSurprised = !e.playersSurprised })}>
+                                    The players are surprised
                                 </Checkbox>
-                            )}
-                        </div>
-                    )}
+                                <Checkbox value={!!encounter.monstersSurprised} onToggle={() => update(e => { e.monstersSurprised = !e.monstersSurprised })}>
+                                    The enemies are surprised
+                                </Checkbox>
+                                { !onDelete ? null : (
+                                    <Checkbox value={!!encounter.shortRest} onToggle={() => update(e => { e.shortRest = !e.shortRest })}>
+                                        The players get a short rest
+                                    </Checkbox>
+                                )}
+                            </>
+                        ) : null)}
+                    </div>
                 </div>
 
                 <button className={styles.addCreatureBtn} onClick={() => setCreating(true)}>
