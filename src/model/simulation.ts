@@ -57,7 +57,7 @@ function iterateCombattant(combattant: Combattant) {
     return result
 }
 
-function getActions(combattant: Combattant, allies: Combattant[]): Action[] {
+function getActions(combattant: Combattant, allies: Combattant[], handleHeals?: boolean): Action[] {
     const actionSlots = new Set()
     combattant.creature.actions.forEach(action => actionSlots.add(action.actionSlot))
 
@@ -95,7 +95,7 @@ function getActions(combattant: Combattant, allies: Combattant[]): Action[] {
     })
 
     // Handle heals now, so the next creature doesn't have to waste actions healing the same target
-    result.forEach(action => {
+    if (handleHeals) result.forEach(action => {
             if (action.type !== 'heal') return
 
             const combattantAction: Combattant['actions'][0] = {
@@ -108,7 +108,7 @@ function getActions(combattant: Combattant, allies: Combattant[]): Action[] {
             const targettableAllies = new Set(allies)
             while ((targettableAllies.size > 0) && (targetCount > 0)) {
                 targetCount--
-                const target = getNextTarget(combattant, action, Array.from(allies), [])
+                const target = getNextTarget(combattant, action, Array.from(targettableAllies), [])
 
                 if (!target) break;
 
@@ -172,7 +172,7 @@ function generateActions(allies: Combattant[], enemies: Combattant[]) {
     allies.forEach(ally => {
         if (ally.initialState.currentHP <= 0) return
 
-        ally.actions.push(...getActions(ally, allies)
+        ally.actions.push(...getActions(ally, allies, true)
             .map(action => ({
                 action: action, 
                 targets: [],
