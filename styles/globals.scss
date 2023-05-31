@@ -63,10 +63,14 @@ input {
 }
 
 .tooltipContainer {
-    &:hover .tooltip {
-        display: initial;
-        opacity: 1;
-    }
+    position: relative;
+
+    &:hover {
+        .tooltip {
+            display: initial;
+            opacity: 1;
+        }
+    }    
 
     .tooltip {
         position: absolute;

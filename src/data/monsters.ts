@@ -2669,8 +2669,16 @@ export const Monsters: Creature[] = [
               "dpr": 47.5,
               "toHit": 8,
               "target": "enemy with most HP",
-              "targets": 1
-          }
+              "targets": 1,
+
+              riderEffect: {
+                dc: 14,
+                buff: {
+                    duration: 'entire encounter',
+                    toHit: -4.5,
+                },
+              },
+          },
       ],
       "count": 1,
       "saveBonus": 4.5
@@ -3122,7 +3130,16 @@ export const Monsters: Creature[] = [
               "dpr": 36,
               "toHit": 8,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+
+              riderEffect: {
+                dc: 100,
+                buff: {
+                    duration: '1 round',
+                    ac: -4.5,
+                    toHit: -4.5,
+                },
+              },
           },
           {
               "id": "4afdcd2d-8535-4089-a58a-eac0b940c148",
@@ -4854,8 +4871,16 @@ export const Monsters: Creature[] = [
               "dpr": 18,
               "toHit": 4,
               "target": "enemy with most HP",
-              "targets": 1
-          }
+              "targets": 1,
+
+              riderEffect: {
+                dc: 11,
+                buff: {
+                    duration: '1 round',
+                    toHit: -4.5,
+                },
+              },
+          },
       ],
       "count": 1,
       "saveBonus": 1
@@ -6172,20 +6197,17 @@ export const Monsters: Creature[] = [
               "dpr": 13,
               "toHit": 4,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+
+              riderEffect: {
+                dc: 11,
+                buff: {
+                    duration: '1 round',
+                    toHit: -4.5,
+                    ac: -4.5,
+                },
+              },
           },
-          {
-              "id": "89111346-1452-4a80-bfde-ce883db09ea8",
-              "name": "Swallow",
-              "type": "atk",
-              "actionSlot": 0,
-              "freq": "at will",
-              "condition": "default",
-              "dpr": 10.5,
-              "toHit": 0,
-              "target": "enemy with most HP",
-              "targets": 1
-          }
       ],
       "count": 1,
       "saveBonus": 0.5

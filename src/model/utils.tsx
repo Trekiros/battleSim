@@ -1,10 +1,40 @@
 import { DependencyList, FC, ReactNode, createContext, useContext, useEffect, useState } from "react"
 import { semiPersistentContext } from "../context/simulationContext"
 import { v4 as uuid } from 'uuid'
+import { DiceRoller } from "dice-roller-parser"
 
 export function clone<T>(obj: T): T {
     return structuredClone(obj)
 }
+
+const belowAverageRoller = new DiceRoller(() => 0.499, 100)
+const averageRoller = new DiceRoller(() => 0.5, 100)
+const minRoller = new DiceRoller(() => 0, 100)
+const maxRoller = new DiceRoller(() => 0.999, 100)
+export function validateDiceExpression(expr: number|string) {
+    if (typeof expr === 'number') return true
+
+    try {
+        const roll = averageRoller.roll(expr)
+        return true
+    } catch (e) {
+        return false
+    }
+}
+
+export function evaluateDiceExpression(expr: number|string, canCrit?: boolean): number {
+    if (typeof expr === 'number') return expr
+
+    if (!validateDiceExpression(expr)) throw 'invalid dice expression'
+
+    const average = (averageRoller.rollValue(expr) + belowAverageRoller.rollValue(expr)) / 2
+
+    const crit = (!canCrit) ? 0
+        : (maxRoller.rollValue(expr) - minRoller.rollValue(expr))/2/20
+
+    return average + crit
+}
+
 
 export function useStoredState<T>(key: string, defaultValue: T, parser: (str: string) => T|null) {
     const [state, setState] = useState(defaultValue)
@@ -106,49 +136,3 @@ if (process && process.env.NODE_ENV === 'development') {
 }
 
 export {inDevEnvironment};
-
-
-// Form Validation
-const validationContext = createContext({
-    isValid: true,
-    validate: (key: string, isValid: boolean) => {},
-})
-export const ValidationContext:FC<{
-    children: (reset: () => void) => ReactNode,
-    onChange?: (newValue: boolean) => void
-}> = ({children, onChange}) => {
-    const [validationMap, setValidationMap] = useState(new Map<string, boolean>())
-    const isValid = useCalculatedState(() => Array.from(validationMap.values()).reduce((a, b) => (a && b), true), [validationMap])
-    
-    useEffect(() => {
-        if (onChange) onChange(isValid)
-    }, [isValid])
-
-
-    function validate(key: string, isValid: boolean) {
-        if (isValid === validationMap.get(key)) return
-
-        const validationMapClone = clone(validationMap)
-        validationMapClone.set(key, isValid)
-        setValidationMap(validationMapClone)
-    }
-
-    function reset() {
-        setValidationMap(new Map())
-    }
-
-    return (
-        <validationContext.Provider value={{ isValid, validate }}>
-            {children(reset)}
-        </validationContext.Provider>
-    )
-}
-export function useValidation(validationCallback: () => boolean, dependencies: DependencyList) {
-    const [validationKey] = useState(uuid())
-    const {validate} = useContext(validationContext)
-
-    useEffect(() => {
-        validate(validationKey, validationCallback())
-        //return () => validate(validationKey, true)
-    }, [dependencies])
-}

@@ -1,7 +1,7 @@
-import { FC, useContext, useState } from "react"
-import { Creature } from "../../model/model"
+import { FC, useContext, useEffect, useState } from "react"
+import { Creature, CreatureSchema } from "../../model/model"
 import styles from './creatureForm.module.scss'
-import { ValidationContext, clone } from "../../model/utils"
+import { clone } from "../../model/utils"
 import PlayerForm from "./playerForm"
 import MonsterForm from "./monsterForm"
 import CustomForm from "./customForm"
@@ -34,7 +34,21 @@ function newCreature(mode: 'player'|'monster'): Creature {
 const CreatureForm:FC<PropType> = ({ initialMode, onSubmit, onCancel, initialValue, onDelete }) => {
     const [value, setValue] = useState<Creature>(initialValue || newCreature(initialMode || 'player'))
     const [isValid, setIsValid] = useState(false)
-    
+    useEffect(() => {
+        if (!CreatureSchema.safeParse(value).success) {
+            setIsValid(false)
+            return
+        }
+
+        if (value.mode === 'player') {
+            setIsValid(!!value.class)
+        } else if (value.mode === 'monster') {
+            setIsValid(!!value.cr)
+        } else {
+            setIsValid(true)
+        }
+    }, [value])
+
     function update(callback: (clonedValue: Creature) => void, condition?: boolean) {
         if (condition === false) return
         const clonedValue = clone(value)
@@ -45,83 +59,76 @@ const CreatureForm:FC<PropType> = ({ initialMode, onSubmit, onCancel, initialVal
     return (
         <div className={styles.overlay} onMouseDown={onCancel}>
             <div className={styles.modal} onMouseDown={e => e.stopPropagation()}>
-                <ValidationContext onChange={(newValue) => setIsValid(newValue)}>
-                    { (resetValidation) => (
-                        <>
-                            <div className={styles.modes}>
-                                <button
-                                    className={(value.mode === 'player') ? styles.active : undefined}
-                                    onClick={() => update(c => { c.mode = 'player'; resetValidation() })}
-                                >
-                                    Player Character
-                                </button>
-                                <button
-                                    className={(value.mode === 'monster') ? styles.active : undefined}
-                                    onClick={() => update(c => { c.mode = 'monster'; resetValidation() })}
-                                >
-                                    Monster
-                                </button>
-                                <button
-                                    className={(value.mode === 'custom') ? styles.active : undefined}
-                                    onClick={() => update(c => { c.mode = 'custom'; resetValidation() })}
-                                >
-                                    Custom
-                                </button>
+                <div className={styles.modes}>
+                    <button
+                        className={(value.mode === 'player') ? styles.active : undefined}
+                        onClick={() => update(c => { c.mode = 'player' })}
+                    >
+                        Player Character
+                    </button>
+                    <button
+                        className={(value.mode === 'monster') ? styles.active : undefined}
+                        onClick={() => update(c => { c.mode = 'monster' })}
+                    >
+                        Monster
+                    </button>
+                    <button
+                        className={(value.mode === 'custom') ? styles.active : undefined}
+                        onClick={() => update(c => { c.mode = 'custom' })}
+                    >
+                        Custom
+                    </button>
+                </div>
+
+                <div className={styles.form}>
+                    { (value.mode === "player") ? (
+                        <PlayerForm
+                            value={value}
+                            onChange={setValue}
+                        />
+                    ) : (value.mode === "monster") ? (
+                        <MonsterForm
+                            value={value}
+                            onChange={setValue}
+                        />
+                    ) : (
+                        <CustomForm
+                            value={value}
+                            onChange={setValue}
+                        />
+                    )}
+                </div>
+
+                <div className={styles.buttons}>
+                    <button onClick={() => onSubmit(value)} disabled={!isValid} className="tooltipContainer">
+                        <FontAwesomeIcon icon={faCheck} />
+                        OK
+                        
+                        <div className="tooltip">
+                            Save this creature for the current encounter
+                        </div>
+                    </button>
+                    { (value.mode === 'custom') ? null : (
+                        <button onClick={() => setValue({...value, mode: 'custom'})} disabled={!isValid} className="tooltipContainer">
+                            <FontAwesomeIcon icon={faWrench} />
+                            Customize
+
+                            <div className="tooltip">
+                                Go to the advanced editing mode
                             </div>
-
-                            <div className={styles.form}>
-                                { (value.mode === "player") ? (
-                                    <PlayerForm
-                                        value={value}
-                                        onChange={setValue}
-                                    />
-                                ) : (value.mode === "monster") ? (
-                                    <MonsterForm
-                                        value={value}
-                                        onChange={setValue}
-                                    />
-                                ) : (
-                                    <CustomForm
-                                        value={value}
-                                        onChange={setValue}
-                                    />
-                                )}
+                        </button>
+                    )}
+                    { !onDelete ? null : (
+                        <button onClick={onDelete} className="tooltipContainer">
+                            <FontAwesomeIcon icon={faTrash} />
+                            Delete
+                            
+                            <div className="tooltip">
+                                Remove this creature from the current encounter
                             </div>
-
-                            <div className={styles.buttons}>
-                                <button onClick={() => onSubmit(value)} disabled={!isValid} className="tooltipContainer">
-                                    <FontAwesomeIcon icon={faCheck} />
-                                    OK
-                                    
-                                    <div className="tooltip">
-                                        Save this creature for the current encounter
-                                    </div>
-                                </button>
-                                { (value.mode === 'custom') ? null : (
-                                    <button onClick={() => setValue({...value, mode: 'custom'})} disabled={!isValid} className="tooltipContainer">
-                                        <FontAwesomeIcon icon={faWrench} />
-                                        Customize
-
-                                        <div className="tooltip">
-                                            Go to the advanced editing mode
-                                        </div>
-                                    </button>
-                                )}
-                                { !onDelete ? null : (
-                                    <button onClick={onDelete} className="tooltipContainer">
-                                        <FontAwesomeIcon icon={faTrash} />
-                                        Delete
-                                        
-                                        <div className="tooltip">
-                                            Remove this creature from the current encounter
-                                        </div>
-                                    </button>
-                                )}
-                            </div>
-                        </>
-                    ) }
-                </ValidationContext>
-
+                        </button>
+                    )}
+                </div>
             </div>
         </div>
     )

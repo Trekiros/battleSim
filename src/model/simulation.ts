@@ -1,7 +1,12 @@
 import { ActionType } from "./enums"
-import { Action, AtkAction, Buff, BuffAction, Combattant, Creature, CreatureState, DebuffAction, Encounter, EncounterResult, EncounterStats, HealAction, Round, SimulationResult, Team } from "./model"
-import { clone, range } from "./utils"
+import { Action, AtkAction, Buff, BuffAction, Combattant, Creature, CreatureState, DebuffAction, DiceExpression, Encounter, EncounterResult, EncounterStats, HealAction, Round, SimulationResult, Team } from "./model"
+import { clone, evaluateDiceExpression, range } from "./utils"
 import { v4 as uuid } from 'uuid'
+
+function evalOptionalDiceExpression(expr: DiceExpression|undefined, canCrit?: boolean): number|undefined {
+    if (expr === undefined) return undefined
+    return evaluateDiceExpression(expr, canCrit)
+}
 
 function getRemainingUses(creature: Creature, rest: 'none'|'short rest'|'long rest', oldValue?: Map<string, number>) {
     const result = new Map<string, number>()
@@ -23,6 +28,7 @@ export function creatureToCombattant(creature: Creature) {
         buffs: new Map(),
         currentHP: creature.hp,
         remainingUses: getRemainingUses(creature, 'long rest'),
+        upcomingBuffs: new Map(),
     }
 
     creature.actions.forEach(action => {
@@ -45,6 +51,9 @@ function iterateCombattant(combattant: Combattant) {
     newInitialState.buffs = new Map()
     combattant.finalState.buffs.forEach((buff, name) => {
         if (buff.duration === 'entire encounter') newInitialState.buffs.set(name, clone(buff))
+    })
+    combattant.finalState.upcomingBuffs.forEach((buff, name) => {
+        newInitialState.buffs.set(name, clone(buff))
     })
 
     const result: Combattant = {
@@ -125,22 +134,13 @@ function getActions(combattant: Combattant, allies: Combattant[], handleHeals: b
 function getNextTarget(combattant: Combattant, action: Action, allies: Combattant[], enemies: Combattant[], stats: Map<string, EncounterStats>): Combattant|undefined {
     const getHighestDPR = (group: Combattant[]) => {
         const getDPR = (combattant: Combattant) => {
-            const dmgBonus = Array.from(combattant.finalState.buffs)
-                .map(([_, buff]) => buff)
-                .filter(buff => !!buff.damage)
-                .map(buff => buff.damage!)
-                .reduce((a, b) => (a+b), 0)
-
-            const dmgMult = Array.from(combattant.finalState.buffs)
-                .map(([_, buff]) => buff)
-                .filter(buff => !!buff.damageMultiplier)
-                .map(buff => buff.damageMultiplier!)
-                .reduce((a, b) => (a*b), 1)
+            const dmgBonus = getBuffs(combattant, b => b.damage, 'add')
+            const dmgMult = getBuffs(combattant, b => b.damageMultiplier, 'mult')
             
             return getActions(combattant, allies, false, stats)
             .map(action => {
                 if (action.type !== "atk") return 0
-                return (action.dpr + dmgBonus) * action.targets * dmgMult
+                return (evaluateDiceExpression(action.dpr) + dmgBonus) * action.targets * dmgMult
             })
             .reduce((dpr1, dpr2) => (dpr1 + dpr2), 0)
         }
@@ -215,21 +215,49 @@ function handleActions(allies: Combattant[], enemies: Combattant[], actionTypes:
     })
 }
 
-function mergeBuff(newBuff: Buff, existingBuff: Buff | undefined, comparator: (a?: number, b?: number) => number|undefined) {
-    if (!existingBuff) return newBuff
+function mergeBuff(target: Combattant, buffName: string, newBuff: Buff, comparisonMode: 'min'|'max') {
+    const existingBuff = target.finalState.buffs.get(buffName)
+
+    if (!existingBuff) {
+        target.finalState.buffs.set(buffName, newBuff)
+        return
+    }
+
+    function comparator(a: DiceExpression|undefined, b: DiceExpression|undefined) {
+        if (a === undefined) return b
+        if (b === undefined) return a
+
+        const evalA = evaluateDiceExpression(a)
+        const evalB = evaluateDiceExpression(b)
+
+        const min = (evalA < evalB) ? a : b
+        const max = (evalA < evalB) ? b : a
+
+        return (comparisonMode === 'min') ? min : max
+    }
+
+    function numberComparator(a: number|undefined, b: number|undefined) {
+        if (a === undefined) return b
+        if (b === undefined) return a
+
+        return (comparisonMode === 'min') ? Math.min(a,b) : Math.max(a,b)
+    }
 
     const result: Buff = {
         duration: newBuff.duration,
+        
         ac: comparator(newBuff.ac, existingBuff.ac),
         damage: comparator(newBuff.damage, existingBuff.damage),
         toHit: comparator(newBuff.toHit, existingBuff.toHit),
-        damageMultiplier: comparator(newBuff.damageMultiplier, existingBuff.damageMultiplier),
-        damageTakenMultiplier: comparator(newBuff.damageTakenMultiplier, existingBuff.damageTakenMultiplier),
+        damageMultiplier: numberComparator(newBuff.damageMultiplier, existingBuff.damageMultiplier),
+        damageTakenMultiplier: numberComparator(newBuff.damageTakenMultiplier, existingBuff.damageTakenMultiplier),
         dc: comparator(newBuff.dc, existingBuff.dc),
         save: comparator(newBuff.save, existingBuff.save),
+
+        magnitude: numberComparator(newBuff.magnitude, existingBuff.magnitude)
     }
 
-    return result
+    target.finalState.buffs.set(buffName, result)
 }
 
 function getStats(statsMap: Map<string, EncounterStats>, combattant: Combattant) {
@@ -251,32 +279,60 @@ function getStats(statsMap: Map<string, EncounterStats>, combattant: Combattant)
 }
 
 function useBuffAction(buffer: Combattant, action: BuffAction, target: Combattant, stats: Map<string, EncounterStats>) {
-    const existingBuff = target.finalState.buffs.get(action.name)
-    target.finalState.buffs.set(
-        action.name, 
-        mergeBuff(action.buff, existingBuff, 
-        (a,b) => (a===undefined) ? b : (b===undefined) ? a : Math.max(a,b)))
-
+    mergeBuff(target, action.name, action.buff, 'max')
+    
     if (buffer.id !== target.id) {
         getStats(stats, buffer).charactersBuffed++
         getStats(stats, target).buffsReceived++
     }
 }
 
-function useDebuffAction(attacker: Combattant, action: DebuffAction, target: Combattant, stats: Map<string, EncounterStats>) {
-    const saveBonus = target.creature.saveBonus + Array.from(target.finalState.buffs).map(([_, buff]) => (buff.save || 0)).reduce((a, b) => (a+b), 0)
-    const saveDC = action.saveDC + Array.from(attacker.finalState.buffs).map(([_, buff]) => (buff.dc || 0)).reduce((a, b) => (a+b), 0)
+function getBuffs(combattant: Combattant, getter: (buff: Buff) => DiceExpression|undefined, reducer: 'add'|'mult', canCrit?: boolean): number {
+    return Array.from(combattant.finalState.buffs)
+        .map(([_, buff]) => {
+            const expr = getter(buff)
+            
+            if (expr === undefined) return (reducer === 'add') ? 0 : 1
+
+            const value = evaluateDiceExpression(expr, canCrit)
+
+            const magnitude = (buff.magnitude === undefined) ? 1 : buff.magnitude
+
+            const valueWithMagnitude = (reducer === 'add') ? (value * magnitude) : (1 + (value - 1) * magnitude)
+
+            return valueWithMagnitude
+        })
+        .reduce(
+            (a,b) => (reducer === 'add') ? (a+b) : (a*b), 
+            (reducer === 'add') ? 0 : 1
+        )
+}
+
+function calculateChanceToFail(attacker: Combattant, target: Combattant, baseDC: DiceExpression) {
+    const saveBonus = target.creature.saveBonus + getBuffs(target, b => b.save, 'add')
+    const saveDC = evaluateDiceExpression(baseDC) + getBuffs(attacker, b => b.dc, 'add')
     const chanceToFail = 1 - Math.min(1, Math.max(0, (11 + saveBonus - (saveDC - 10)) / 20))
 
-    const damageMultiplier = (action.buff.damageMultiplier !== undefined) ? (1 + (action.buff.damageMultiplier - 1) * chanceToFail) : undefined
-    const damageTakenMultiplier = (action.buff.damageTakenMultiplier !== undefined) ? (1 + (action.buff.damageTakenMultiplier - 1) * chanceToFail) * chanceToFail : undefined
+    return chanceToFail
+}
 
-    const existingBuff = target.finalState.buffs.get(action.name)
-    target.finalState.buffs.set(action.name, mergeBuff(
-        {...action.buff, damageMultiplier, damageTakenMultiplier}, 
-        existingBuff,
-        (a,b) => (a===undefined) ? b : (b===undefined) ? a : Math.min(a,b)
-    ))
+function calculateHitChance(attacker: Combattant, target: Combattant, baseToHit: DiceExpression) {
+    const toHit = evaluateDiceExpression(baseToHit) + getBuffs(attacker, b => b.toHit, 'add')
+    const ac = target.creature.AC + getBuffs(target, b => b.ac, 'add')
+    const hitChance = Math.min(1, Math.max(0, (11 + toHit - (ac - 10)) / 20))
+
+    return hitChance
+}
+
+
+function useDebuffAction(attacker: Combattant, action: DebuffAction, target: Combattant, stats: Map<string, EncounterStats>) {
+    const chanceToFail = calculateChanceToFail(attacker, target, action.saveDC)
+
+    const buffClone: Buff = clone(action.buff)
+    if (buffClone.magnitude === undefined) buffClone.magnitude = 1
+    buffClone.magnitude *= chanceToFail
+
+    mergeBuff(target, action.name, buffClone, 'min')
     
     if (attacker.id !== target.id) {
         getStats(stats, attacker).charactersDebuffed++
@@ -285,16 +341,16 @@ function useDebuffAction(attacker: Combattant, action: DebuffAction, target: Com
 }
 
 function useAtkAction(attacker: Combattant, action: AtkAction, target: Combattant, stats: Map<string, EncounterStats>) {
-    const toHit  = action.toHit + Array.from(attacker.finalState.buffs).map(([_, buff]) => ((action.useSaves ? buff.dc : buff.toHit) || 0)) .reduce((a, b) => (a+b), 0)
-    const ac     = (action.useSaves ? target.creature.saveBonus : target.creature.AC) 
-        + Array.from(target.finalState.buffs).map(([_, buff]) => ((action.useSaves ? buff.save : buff.ac) || 0)).reduce((a, b) => (a+b), 0)
-    const damage = (action.dpr + Array.from(attacker.finalState.buffs).map(([_, buff]) => (buff.damage || 0)) .reduce((a, b) => (a+b), 0))
-        * Array.from(attacker.finalState.buffs).map(([_, buff]) => (buff.damageMultiplier || 1)).reduce((a, b) => (a*b), 1)
-        * Array.from(target.finalState.buffs).map(([_, buff]) => (buff.damageTakenMultiplier || 1)).reduce((a, b) => (a*b), 1);
+    const hitChance = action.useSaves ?
+        calculateChanceToFail(attacker, target, action.toHit)
+        : calculateHitChance(attacker, target, action.toHit)
 
-    const hitChance = action.useSaves ? 
-        (1 - Math.min(1, Math.max(0, (11 + ac - (toHit - 10)) / 20)))
-           : Math.min(1, Math.max(0, (11 + toHit - (ac - 10)) / 20))
+    const damage = (
+            evaluateDiceExpression(action.dpr, !action.useSaves)
+            + getBuffs(attacker, b => b.damage, 'add', !action.useSaves)
+        )
+        * getBuffs(attacker, b => b.damageMultiplier, 'mult')
+        * getBuffs(target, b => b.damageTakenMultiplier, 'mult')
 
     const actualDamage = damage * hitChance
     target.finalState.currentHP = Math.min(target.finalState.currentHP, Math.max(0, target.finalState.currentHP - actualDamage))
@@ -304,14 +360,31 @@ function useAtkAction(attacker: Combattant, action: AtkAction, target: Combattan
 
     getStats(stats, attacker).damageDealt += actualDamage
     getStats(stats, target).damageTaken += actualDamage
+
+    if (action.riderEffect) {
+        const buffMagnitude = hitChance * calculateChanceToFail(attacker, target, action.riderEffect.dc)
+
+        const buffClone = clone(action.riderEffect.buff)
+        if (buffClone.magnitude === undefined) buffClone.magnitude = 1
+        buffClone.magnitude *= buffMagnitude
+        
+        mergeBuff(target, action.name, buffClone, 'min')
+
+        if (attacker.id !== target.id) {
+            getStats(stats, attacker).charactersDebuffed++
+            getStats(stats, target).debuffsReceived++
+        }
+    }
 }
 
 function useHealAction(healer: Combattant, action: HealAction, target: Combattant, stats: Map<string, EncounterStats>) {
-    if ((target.finalState.currentHP === 0) && (action.amount > 0)) getStats(stats, target).timesUnconscious++
-    getStats(stats, healer).healGiven += action.amount
-    getStats(stats, target).healReceived += action.amount
+    const amount = evaluateDiceExpression(action.amount)
 
-    target.finalState.currentHP = Math.max(target.finalState.currentHP, Math.min(target.creature.hp, target.finalState.currentHP + action.amount)) 
+    if ((target.finalState.currentHP === 0) && (amount > 0)) getStats(stats, target).timesUnconscious++
+    getStats(stats, healer).healGiven += amount
+    getStats(stats, target).healReceived += amount
+
+    target.finalState.currentHP = Math.max(target.finalState.currentHP, Math.min(target.creature.hp, target.finalState.currentHP + amount)) 
 }
 
 // The attackers & defenders must be clones here, they will both be mutated
@@ -372,10 +445,20 @@ function runEncounter(players: {creature: Creature, state: CreatureState}[], enc
 export function runSimulation(players: Creature[], encounters: Encounter[]) {
     const results: SimulationResult = []
 
-    let playersWithState = players.flatMap(player => range(player.count).map((i) => ({
-        creature: {...player, name: (player.count > 1) ? `${player.name} ${i+1}` : player.name } as Creature,
-        state: { buffs: new Map(), currentHP: player.hp, remainingUses: getRemainingUses(player, 'long rest') } as CreatureState,
-    })))
+    let playersWithState = players.flatMap(player => range(player.count)
+        .map<{ creature:Creature, state: CreatureState }>((i) => ({
+            creature: {
+                ...player, 
+                name: (player.count > 1) ? `${player.name} ${i+1}` : player.name 
+            },
+            state: { 
+                buffs: new Map<string, Buff>(),
+                upcomingBuffs: new Map<string, Buff>(),
+                currentHP: player.hp, 
+                remainingUses: getRemainingUses(player, 'long rest'),
+            },
+        }))
+    )
 
     encounters.forEach((encounter, index) => {
         const encounterResult = runEncounter(playersWithState, encounter)
@@ -387,6 +470,7 @@ export function runSimulation(players: Creature[], encounters: Encounter[]) {
             const state: CreatureState = {
                 currentHP: nextEncounter?.shortRest ? creature.hp : finalState.currentHP,
                 buffs: new Map(),
+                upcomingBuffs: new Map(),
                 remainingUses: getRemainingUses(creature, nextEncounter?.shortRest ? 'short rest' : 'none', finalState.remainingUses),
             }
             

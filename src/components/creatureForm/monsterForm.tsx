@@ -1,10 +1,10 @@
-import { FC, useContext, useEffect, useState, } from "react"
+import { FC, } from "react"
 import { Creature, CreatureSchema } from "../../model/model"
 import styles from './monsterForm.module.scss'
 import { ChallengeRating, ChallengeRatingList, CreatureType, CreatureTypeList, numericCR } from "../../model/enums"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons"
-import { capitalize, clone, sharedStateGenerator, useCalculatedState, useValidation } from "../../model/utils"
+import { capitalize, clone, sharedStateGenerator, useCalculatedState } from "../../model/utils"
 import { Monsters } from "../../data/monsters"
 import Range from "../utils/range"
 
@@ -29,8 +29,6 @@ const MonsterForm:FC<PropType> = ({ onChange, value }) => {
     const [maxCR, setMaxCR] = useSharedState<ChallengeRating>(ChallengeRatingList[ChallengeRatingList.length - 1])
     const [name, setName] = useSharedState<string>('')
     const [sortBy, setSortBy] = useSharedState<keyof typeof Comparators>('nameAsc')
-
-    useValidation(() => !!value.cr, [value])
 
     const searchResults = useCalculatedState(() => Monsters.filter(monster => {
         if (!monster.name.toLocaleLowerCase().includes(name.toLocaleLowerCase())) return false

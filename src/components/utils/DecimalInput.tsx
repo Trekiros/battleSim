@@ -1,5 +1,4 @@
 import { FC, useContext, useEffect, useState } from "react"
-import { useValidation } from "../../model/utils"
 
 type PropType = {
     value: number|undefined,
@@ -17,8 +16,6 @@ const DecimalInput:FC<PropType> = ({ value, onChange, min, max, step, className,
 
     const valueNum = +valueString // Can be NaN
     const isNumeric = !isNaN(valueNum)
-
-    useValidation(() => isNumeric, [valueString])
 
     useEffect(() => {
         if (isNumeric) onChange(valueNum)

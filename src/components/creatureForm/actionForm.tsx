@@ -1,12 +1,13 @@
 import { FC, useState } from "react"
-import { Action, AllyTarget, AtkAction, Buff, BuffAction, DebuffAction, EnemyTarget, HealAction } from "../../model/model"
+import { Action, AllyTarget, AtkAction, Buff, BuffAction, DebuffAction, DiceExpression, EnemyTarget, HealAction } from "../../model/model"
 import styles from './actionForm.module.scss'
-import { clone, useValidation } from "../../model/utils"
+import { clone } from "../../model/utils"
 import { ActionType, BuffDuration, Condition, Frequency } from "../../model/enums"
 import Select from "../utils/select"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
 import DecimalInput from "../utils/DecimalInput"
+import DiceExpressionInput from "../utils/diceExpressionInput"
 
 type PropType = {
     value: Action,
@@ -97,7 +98,6 @@ const AtkOptions: Options<boolean> = [
 
 const BuffForm:FC<{value: Buff, onUpdate: (newValue: Buff) => void}> = ({ value, onUpdate }) => {
     const [modifiers, setModifiers] = useState<(keyof Omit<Buff, 'duration'>)[]>(Object.keys(value).filter(key => (key !== 'duration')) as any)
-    useValidation(() => (Object.keys(value).length > 1), [value])
 
     function setModifier(index: number, newValue: keyof Omit<Buff, 'duration'> | null) {
         const oldModifier = modifiers[index]
@@ -119,6 +119,12 @@ const BuffForm:FC<{value: Buff, onUpdate: (newValue: Buff) => void}> = ({ value,
         onUpdate(buffClone)
     }
 
+    function updateDiceExpression(modifier: string, newValue: DiceExpression) {
+        const buffClone = clone(value);
+        (buffClone as any)[modifier] = newValue
+        onUpdate(buffClone)
+    }
+
     function addModifier() {
         const newModifier = BuffStatOptions.find(({value}) => !modifiers.includes(value))
         if (!newModifier) return;
@@ -135,10 +141,17 @@ const BuffForm:FC<{value: Buff, onUpdate: (newValue: Buff) => void}> = ({ value,
                         onChange={newValue => setModifier(index, newValue)} 
                         options={BuffStatOptions.filter(option => (modifier === option.value) || !modifiers.includes(option.value))}
                     />
-                    <DecimalInput 
-                        value={value[modifier]} 
-                        onChange={v => updateValue(modifier, v || 0)}
-                    />
+                    { ((modifier === 'damageMultiplier') || (modifier === 'damageTakenMultiplier')) ? (
+                        <DecimalInput
+                            value={value[modifier]}
+                            onChange={v => updateValue(modifier, v || 0)}
+                        />
+                    ) : (
+                        <DiceExpressionInput 
+                            value={value[modifier]} 
+                            onChange={v => updateDiceExpression(modifier, v || 0)}
+                        />
+                    )}
                     <button onClick={() => setModifier(index, null)}>
                         <FontAwesomeIcon icon={faTrash} />
                     </button>
@@ -162,6 +175,14 @@ const ActionForm:FC<PropType> = ({ value, onChange, onDelete }) => {
         const valueClone = clone(value)
         callback(valueClone)
         onChange(valueClone)
+    }
+
+    function updateRiderEffect(callback: (riderEffect: { dc: number, buff: Buff }) => void) {
+        update((actionClone) => {
+            const atkAction = (actionClone as AtkAction)
+            atkAction.riderEffect ||= { dc: 0, buff: { duration: '1 round' } }
+            callback(atkAction.riderEffect)
+        })
     }
 
     function updateType(type: ActionType) {
@@ -207,17 +228,35 @@ const ActionForm:FC<PropType> = ({ value, onChange, onDelete }) => {
             { (value.type === "atk") ? (
                 <>
                     <Select value={!!value.useSaves} options={AtkOptions} onChange={useSaves => update(v => { (v as AtkAction).useSaves = useSaves })} />
-                    <DecimalInput value={value.toHit} onChange={toHit => update(v => { (v as AtkAction).toHit = toHit || 0 })} />
+                    <DiceExpressionInput value={value.toHit} onChange={toHit => update(v => { (v as AtkAction).toHit = toHit || 0 })} />
                     Damage: 
-                    <DecimalInput value={value.dpr} onChange={dpr => update(v => { (v as AtkAction).dpr = dpr || 0 })} />
+                    <DiceExpressionInput value={value.dpr} onChange={dpr => update(v => { (v as AtkAction).dpr = dpr || 0 })} />
                     Target:
                     <Select value={value.target} options={EnemyTargetOptions} onChange={target => update(v => { v.target = target })} />
+                    On Hit Effect:
+                    <Select 
+                        value={value.riderEffect !== undefined} 
+                        options={[{ value: true, label: 'Yes'},{ value: false, label: 'No'}]}
+                        onChange={b => { 
+                            if(b) update(v => { (v as AtkAction).riderEffect ||= {dc: 0, buff: {duration: "1 round"}} }) 
+                            else update(v => { delete (v as AtkAction).riderEffect })
+                        }}/>
+
+                    { (!!value.riderEffect) ? (
+                        <>
+                            Save DC:
+                            <DecimalInput value={value.riderEffect.dc} onChange={dc => updateRiderEffect(e => { e.dc = dc || 0 })} />
+                            Duration:
+                            <Select value={value.riderEffect.buff.duration} options={BuffDurationOptions} onChange={duration => updateRiderEffect(e => { e.buff.duration = duration })} />
+                            <BuffForm value={value.riderEffect.buff} onUpdate={newValue => updateRiderEffect(e => { e.buff = newValue })} />
+                        </>
+                    ) : null }
                 </>
             ) : null }
             { (value.type === "heal") ? (
                 <>
                     Heal amount:
-                    <DecimalInput value={value.amount} onChange={heal => update(v => { (v as HealAction).amount = heal || 0 })} />
+                    <DiceExpressionInput value={value.amount} onChange={heal => update(v => { (v as HealAction).amount = heal || 0 })} />
                     Target:
                     <Select value={value.target} options={AllyTargetOptions} onChange={target => update(v => { v.target = target })} />
                 </>

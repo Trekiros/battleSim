@@ -3,7 +3,7 @@ import { Action, Creature } from "../../model/model"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlus, faSave } from "@fortawesome/free-solid-svg-icons"
 import styles from './customForm.module.scss'
-import { clone, useValidation } from "../../model/utils"
+import { clone } from "../../model/utils"
 import ActionForm from "./actionForm"
 import DecimalInput from "../utils/DecimalInput"
 import { v4 as uuid } from 'uuid'
@@ -14,14 +14,6 @@ type PropType = {
 }
 
 const CustomForm:FC<PropType> = ({ value, onChange }) => {
-    useValidation(() => (
-               !!value.name
-            && !!value.AC
-            && !!value.hp
-            && !!value.actions.length
-            && !value.actions.find(action => (!action.name))
-    ), [value])
-
     function update(callback: (valueClone: Creature) => void) {
         const valueClone = clone(value)
         callback(valueClone)
@@ -90,7 +82,7 @@ const CustomForm:FC<PropType> = ({ value, onChange }) => {
             <section className="tooltipContainer">
                 <h3>Average Save</h3>
                 <DecimalInput min={0} value={value.saveBonus} onChange={save => update(v => { v.saveBonus = save || 0 })} />
-                <div className="tooltip">Average of all saves' bonuses</div>
+                <div className="tooltip">Average of all saves' bonuses. For player characters, you can use the Proficiency Bonus. For monsters, either calculate it, or just use half of the monster's CR.</div>
             </section>
             
             <h3 className={styles.actionsHeader}>

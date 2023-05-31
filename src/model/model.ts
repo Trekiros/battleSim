@@ -1,6 +1,13 @@
 import { z } from 'zod'
 import { BuffDurationSchema, ChallengeRatingSchema, ClassesSchema, ConditionSchema, CreatureTypeSchema, FrequencySchema } from './enums'
 import { ClassOptionsSchema } from './classOptions'
+import { validateDiceExpression } from './utils'
+
+export const DiceExpressionSchema = z.number().or(z.custom<string>((data) => {
+    if (typeof data !== 'string') return false
+
+    return validateDiceExpression(data)
+}))
 
 const EnemyTargetSchema = z.enum([
     'enemy with least HP',
@@ -28,31 +35,39 @@ const ActionSchemaBase = z.object({
     targets: z.number(),
 })
 
+const BuffSchema = z.object({
+    duration: BuffDurationSchema,
+
+    ac: DiceExpressionSchema.optional(),
+    toHit: DiceExpressionSchema.optional(),
+    damage: DiceExpressionSchema.optional(),
+    damageMultiplier: z.number().optional(),
+    damageTakenMultiplier: z.number().optional(),
+    dc: DiceExpressionSchema.optional(),
+    save: DiceExpressionSchema.optional(),
+
+    // Odds that the buff was applied. All of the effects are multiplied by this value. Default 1.
+    magnitude: z.number().optional(),
+})
+
 const AtkActionSchema = ActionSchemaBase.merge(z.object({
     type: z.literal('atk'),
-    dpr: z.number(),
-    toHit: z.number(),
+    dpr: DiceExpressionSchema,
+    toHit: DiceExpressionSchema,
     target: EnemyTargetSchema,
     useSaves: z.boolean().optional(),
+
+    riderEffect: z.object({
+        dc: z.number(),
+        buff: BuffSchema,
+    }).optional(),
 }))
 
 const HealActionSchema = ActionSchemaBase.merge(z.object({
     type: z.literal('heal'),
-    amount: z.number(),
+    amount: DiceExpressionSchema,
     target: AllyTargetSchema,
 }))
-
-const BuffSchema = z.object({
-    duration: BuffDurationSchema,
-
-    ac: z.number().optional(),
-    toHit: z.number().optional(),
-    damage: z.number().optional(),
-    damageMultiplier: z.number().optional(),
-    damageTakenMultiplier: z.number().optional(),
-    dc: z.number().optional(),
-    save: z.number().optional(),
-})
 
 const BuffActionSchema = ActionSchemaBase.merge(z.object({
     type: z.literal('buff'),
@@ -99,6 +114,7 @@ const CreatureStateSchema = z.object({
     currentHP: z.number(),
     buffs: z.map(z.string(), BuffSchema),
     remainingUses: z.map(z.string(), z.number()),
+    upcomingBuffs: z.map(z.string(), BuffSchema),
 })
 
 const CombattantSchema = z.object({
@@ -147,6 +163,7 @@ const EncounterResultSchema = z.object({
 })
 const SimulationResultSchema = z.array(EncounterResultSchema)
 
+export type DiceExpression = z.infer<typeof DiceExpressionSchema>
 export type Buff = z.infer<typeof BuffSchema>
 export type EnemyTarget = z.infer<typeof EnemyTargetSchema>
 export type AllyTarget = z.infer<typeof AllyTargetSchema>
