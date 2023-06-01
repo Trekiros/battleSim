@@ -1,12 +1,12 @@
 import { z } from 'zod'
 import { BuffDurationSchema, ChallengeRatingSchema, ClassesSchema, ConditionSchema, CreatureTypeSchema, FrequencySchema } from './enums'
 import { ClassOptionsSchema } from './classOptions'
-import { validateDiceExpression } from './utils'
+import { validateDiceFormula } from './dice'
 
-export const DiceExpressionSchema = z.number().or(z.custom<string>((data) => {
+export const DiceFormulaSchema = z.number().or(z.custom<string>((data) => {
     if (typeof data !== 'string') return false
 
-    return validateDiceExpression(data)
+    return validateDiceFormula(data)
 }))
 
 const EnemyTargetSchema = z.enum([
@@ -38,13 +38,13 @@ const ActionSchemaBase = z.object({
 const BuffSchema = z.object({
     duration: BuffDurationSchema,
 
-    ac: DiceExpressionSchema.optional(),
-    toHit: DiceExpressionSchema.optional(),
-    damage: DiceExpressionSchema.optional(),
+    ac: DiceFormulaSchema.optional(),
+    toHit: DiceFormulaSchema.optional(),
+    damage: DiceFormulaSchema.optional(),
     damageMultiplier: z.number().optional(),
     damageTakenMultiplier: z.number().optional(),
-    dc: DiceExpressionSchema.optional(),
-    save: DiceExpressionSchema.optional(),
+    dc: DiceFormulaSchema.optional(),
+    save: DiceFormulaSchema.optional(),
 
     // Odds that the buff was applied. All of the effects are multiplied by this value. Default 1.
     magnitude: z.number().optional(),
@@ -52,8 +52,8 @@ const BuffSchema = z.object({
 
 const AtkActionSchema = ActionSchemaBase.merge(z.object({
     type: z.literal('atk'),
-    dpr: DiceExpressionSchema,
-    toHit: DiceExpressionSchema,
+    dpr: DiceFormulaSchema,
+    toHit: DiceFormulaSchema,
     target: EnemyTargetSchema,
     useSaves: z.boolean().optional(),
 
@@ -65,7 +65,7 @@ const AtkActionSchema = ActionSchemaBase.merge(z.object({
 
 const HealActionSchema = ActionSchemaBase.merge(z.object({
     type: z.literal('heal'),
-    amount: DiceExpressionSchema,
+    amount: DiceFormulaSchema,
     target: AllyTargetSchema,
 }))
 
@@ -163,7 +163,7 @@ const EncounterResultSchema = z.object({
 })
 const SimulationResultSchema = z.array(EncounterResultSchema)
 
-export type DiceExpression = z.infer<typeof DiceExpressionSchema>
+export type DiceFormula = z.infer<typeof DiceFormulaSchema>
 export type Buff = z.infer<typeof BuffSchema>
 export type EnemyTarget = z.infer<typeof EnemyTargetSchema>
 export type AllyTarget = z.infer<typeof AllyTargetSchema>

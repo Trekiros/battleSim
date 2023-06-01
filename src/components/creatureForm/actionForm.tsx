@@ -1,5 +1,5 @@
 import { FC, useState } from "react"
-import { Action, AllyTarget, AtkAction, Buff, BuffAction, DebuffAction, DiceExpression, EnemyTarget, HealAction } from "../../model/model"
+import { Action, AllyTarget, AtkAction, Buff, BuffAction, DebuffAction, DiceFormula, EnemyTarget, HealAction } from "../../model/model"
 import styles from './actionForm.module.scss'
 import { clone } from "../../model/utils"
 import { ActionType, BuffDuration, Condition, Frequency } from "../../model/enums"
@@ -7,7 +7,7 @@ import Select from "../utils/select"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
 import DecimalInput from "../utils/DecimalInput"
-import DiceExpressionInput from "../utils/diceExpressionInput"
+import DiceFormulaInput from "../utils/diceFormulaInput"
 
 type PropType = {
     value: Action,
@@ -119,7 +119,7 @@ const BuffForm:FC<{value: Buff, onUpdate: (newValue: Buff) => void}> = ({ value,
         onUpdate(buffClone)
     }
 
-    function updateDiceExpression(modifier: string, newValue: DiceExpression) {
+    function updateDiceFormula(modifier: string, newValue: DiceFormula) {
         const buffClone = clone(value);
         (buffClone as any)[modifier] = newValue
         onUpdate(buffClone)
@@ -147,9 +147,9 @@ const BuffForm:FC<{value: Buff, onUpdate: (newValue: Buff) => void}> = ({ value,
                             onChange={v => updateValue(modifier, v || 0)}
                         />
                     ) : (
-                        <DiceExpressionInput 
+                        <DiceFormulaInput 
                             value={value[modifier]} 
-                            onChange={v => updateDiceExpression(modifier, v || 0)}
+                            onChange={v => updateDiceFormula(modifier, v || 0)}
                         />
                     )}
                     <button onClick={() => setModifier(index, null)}>
@@ -228,9 +228,9 @@ const ActionForm:FC<PropType> = ({ value, onChange, onDelete }) => {
             { (value.type === "atk") ? (
                 <>
                     <Select value={!!value.useSaves} options={AtkOptions} onChange={useSaves => update(v => { (v as AtkAction).useSaves = useSaves })} />
-                    <DiceExpressionInput value={value.toHit} onChange={toHit => update(v => { (v as AtkAction).toHit = toHit || 0 })} />
+                    <DiceFormulaInput value={value.toHit} onChange={toHit => update(v => { (v as AtkAction).toHit = toHit || 0 })} />
                     Damage: 
-                    <DiceExpressionInput value={value.dpr} onChange={dpr => update(v => { (v as AtkAction).dpr = dpr || 0 })} />
+                    <DiceFormulaInput value={value.dpr} onChange={dpr => update(v => { (v as AtkAction).dpr = dpr || 0 })} />
                     Target:
                     <Select value={value.target} options={EnemyTargetOptions} onChange={target => update(v => { v.target = target })} />
                     On Hit Effect:
@@ -256,7 +256,7 @@ const ActionForm:FC<PropType> = ({ value, onChange, onDelete }) => {
             { (value.type === "heal") ? (
                 <>
                     Heal amount:
-                    <DiceExpressionInput value={value.amount} onChange={heal => update(v => { (v as HealAction).amount = heal || 0 })} />
+                    <DiceFormulaInput value={value.amount} onChange={heal => update(v => { (v as HealAction).amount = heal || 0 })} />
                     Target:
                     <Select value={value.target} options={AllyTargetOptions} onChange={target => update(v => { v.target = target })} />
                 </>

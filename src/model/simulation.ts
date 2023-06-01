@@ -1,11 +1,12 @@
+import { evaluateDiceFormula } from "./dice"
 import { ActionType } from "./enums"
-import { Action, AtkAction, Buff, BuffAction, Combattant, Creature, CreatureState, DebuffAction, DiceExpression, Encounter, EncounterResult, EncounterStats, HealAction, Round, SimulationResult, Team } from "./model"
-import { clone, evaluateDiceExpression, range } from "./utils"
+import { Action, AtkAction, Buff, BuffAction, Combattant, Creature, CreatureState, DebuffAction, DiceFormula, Encounter, EncounterResult, EncounterStats, HealAction, Round, SimulationResult } from "./model"
+import { clone, range } from "./utils"
 import { v4 as uuid } from 'uuid'
 
-function evalOptionalDiceExpression(expr: DiceExpression|undefined, canCrit?: boolean): number|undefined {
+function evalOptionalDiceFormula(expr: DiceFormula|undefined, canCrit?: boolean): number|undefined {
     if (expr === undefined) return undefined
-    return evaluateDiceExpression(expr, canCrit)
+    return evaluateDiceFormula(expr, canCrit)
 }
 
 function getRemainingUses(creature: Creature, rest: 'none'|'short rest'|'long rest', oldValue?: Map<string, number>) {
@@ -140,7 +141,7 @@ function getNextTarget(combattant: Combattant, action: Action, allies: Combattan
             return getActions(combattant, allies, false, stats)
             .map(action => {
                 if (action.type !== "atk") return 0
-                return (evaluateDiceExpression(action.dpr) + dmgBonus) * action.targets * dmgMult
+                return (evaluateDiceFormula(action.dpr) + dmgBonus) * action.targets * dmgMult
             })
             .reduce((dpr1, dpr2) => (dpr1 + dpr2), 0)
         }
@@ -223,12 +224,12 @@ function mergeBuff(target: Combattant, buffName: string, newBuff: Buff, comparis
         return
     }
 
-    function comparator(a: DiceExpression|undefined, b: DiceExpression|undefined) {
+    function comparator(a: DiceFormula|undefined, b: DiceFormula|undefined) {
         if (a === undefined) return b
         if (b === undefined) return a
 
-        const evalA = evaluateDiceExpression(a)
-        const evalB = evaluateDiceExpression(b)
+        const evalA = evaluateDiceFormula(a)
+        const evalB = evaluateDiceFormula(b)
 
         const min = (evalA < evalB) ? a : b
         const max = (evalA < evalB) ? b : a
@@ -287,14 +288,14 @@ function useBuffAction(buffer: Combattant, action: BuffAction, target: Combattan
     }
 }
 
-function getBuffs(combattant: Combattant, getter: (buff: Buff) => DiceExpression|undefined, reducer: 'add'|'mult', canCrit?: boolean): number {
+function getBuffs(combattant: Combattant, getter: (buff: Buff) => DiceFormula|undefined, reducer: 'add'|'mult', canCrit?: boolean): number {
     return Array.from(combattant.finalState.buffs)
         .map(([_, buff]) => {
             const expr = getter(buff)
             
             if (expr === undefined) return (reducer === 'add') ? 0 : 1
 
-            const value = evaluateDiceExpression(expr, canCrit)
+            const value = evaluateDiceFormula(expr, canCrit)
 
             const magnitude = (buff.magnitude === undefined) ? 1 : buff.magnitude
 
@@ -308,16 +309,16 @@ function getBuffs(combattant: Combattant, getter: (buff: Buff) => DiceExpression
         )
 }
 
-function calculateChanceToFail(attacker: Combattant, target: Combattant, baseDC: DiceExpression) {
+function calculateChanceToFail(attacker: Combattant, target: Combattant, baseDC: DiceFormula) {
     const saveBonus = target.creature.saveBonus + getBuffs(target, b => b.save, 'add')
-    const saveDC = evaluateDiceExpression(baseDC) + getBuffs(attacker, b => b.dc, 'add')
+    const saveDC = evaluateDiceFormula(baseDC) + getBuffs(attacker, b => b.dc, 'add')
     const chanceToFail = 1 - Math.min(1, Math.max(0, (11 + saveBonus - (saveDC - 10)) / 20))
 
     return chanceToFail
 }
 
-function calculateHitChance(attacker: Combattant, target: Combattant, baseToHit: DiceExpression) {
-    const toHit = evaluateDiceExpression(baseToHit) + getBuffs(attacker, b => b.toHit, 'add')
+function calculateHitChance(attacker: Combattant, target: Combattant, baseToHit: DiceFormula) {
+    const toHit = evaluateDiceFormula(baseToHit) + getBuffs(attacker, b => b.toHit, 'add')
     const ac = target.creature.AC + getBuffs(target, b => b.ac, 'add')
     const hitChance = Math.min(1, Math.max(0, (11 + toHit - (ac - 10)) / 20))
 
@@ -346,7 +347,7 @@ function useAtkAction(attacker: Combattant, action: AtkAction, target: Combattan
         : calculateHitChance(attacker, target, action.toHit)
 
     const damage = (
-            evaluateDiceExpression(action.dpr, !action.useSaves)
+            evaluateDiceFormula(action.dpr, !action.useSaves)
             + getBuffs(attacker, b => b.damage, 'add', !action.useSaves)
         )
         * getBuffs(attacker, b => b.damageMultiplier, 'mult')
@@ -378,7 +379,7 @@ function useAtkAction(attacker: Combattant, action: AtkAction, target: Combattan
 }
 
 function useHealAction(healer: Combattant, action: HealAction, target: Combattant, stats: Map<string, EncounterStats>) {
-    const amount = evaluateDiceExpression(action.amount)
+    const amount = evaluateDiceFormula(action.amount)
 
     if ((target.finalState.currentHP === 0) && (amount > 0)) getStats(stats, target).timesUnconscious++
     getStats(stats, healer).healGiven += amount

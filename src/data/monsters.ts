@@ -6504,22 +6504,15 @@ export const Monsters: Creature[] = [
               "dpr": 65,
               "toHit": 8,
               "target": "enemy with most HP",
-              "targets": 1
-          },
-          {
-              "id": "5a564dda-333b-4a3e-a5c7-b1306411e017",
-              "name": "Temporal Strike Debuff",
-              "actionSlot": 4,
-              "condition": "is available",
-              "freq": "1/fight",
               "targets": 1,
-              "type": "debuff",
-              "target": "enemy with least HP",
-              "saveDC": 16,
-              "buff": {
-                  "duration": "1 round",
-                  "damageMultiplier": 0,
-                  "damageTakenMultiplier": 0
+              
+              riderEffect: {
+                  dc: 16,
+                  buff: {
+                      duration: '1 round',
+                      damageMultiplier: 0,
+                      damageTakenMultiplier: 0,
+                  }
               }
           }
       ],
@@ -8329,9 +8322,18 @@ export const Monsters: Creature[] = [
               "freq": "at will",
               "condition": "default",
               "dpr": 61.5,
-              "toHit": 13,
+              "toHit": 17,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+
+              riderEffect: {
+                dc: 100,
+                buff: {
+                    duration: '1 round',
+                    ac: -4.5,
+                    toHit: -4.5,
+                },
+              },
           },
           {
               "id": "44c69e98-4923-42b5-9628-744231ce137e",
@@ -10197,12 +10199,22 @@ export const Monsters: Creature[] = [
               "name": "Tentacle Slam",
               "type": "atk",
               "actionSlot": 0,
-              "freq": "at will",
-              "condition": "default",
+              "freq": "1/fight",
+              "condition": "is under half HP",
               "dpr": 10,
-              "toHit": 4,
+              "toHit": 14,
+              "useSaves": true,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+
+              riderEffect: {
+                dc: 100,
+                buff: {
+                    duration: '1 round',
+                    damageMultiplier: 0,
+                    ac: -4.5,
+                }
+              }
           },
           {
               "id": "6a806acd-3907-48d8-9f84-a15f44becbe9",
@@ -10459,7 +10471,15 @@ export const Monsters: Creature[] = [
               "dpr": 120.5,
               "toHit": 14,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+
+              riderEffect: {
+                dc: 21,
+                buff: {
+                    duration: '1 round',
+                    toHit: -4.5,
+                }
+              }
           }
       ],
       "count": 1,
@@ -10804,7 +10824,16 @@ export const Monsters: Creature[] = [
               "dpr": 102,
               "toHit": 14,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+
+              riderEffect: {
+                dc: 19,
+                buff: {
+                    duration: 'entire encounter',
+                    toHit: -4.5,
+                    ac: -4.5,
+                }
+              }
           }
       ],
       "count": 1,
@@ -10934,7 +10963,15 @@ export const Monsters: Creature[] = [
               "dpr": 10.5,
               "toHit": 4,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+
+              riderEffect: {
+                dc: 10,
+                buff: {
+                    duration: '1 round',
+                    toHit: -4.5,
+                }
+              }
           }
       ],
       "count": 1,
@@ -11116,7 +11153,16 @@ export const Monsters: Creature[] = [
               "dpr": 50.5,
               "toHit": 11,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1, 
+              
+              riderEffect: {
+                dc: 100,
+                buff: {
+                    duration: '1 round',
+                    toHit: -4.5,
+                    ac: -4.5,
+                }
+              }
           },
           {
               "id": "2e584aa5-aeca-4f21-98b6-2c137f3a5199",
@@ -11480,7 +11526,16 @@ export const Monsters: Creature[] = [
               "dpr": 45.5,
               "toHit": 7,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+              
+              riderEffect: {
+                dc: 100,
+                buff: {
+                    duration: '1 round',
+                    toHit: -4.5,
+                    ac: -4.5
+                }
+              }
           }
       ],
       "count": 1,
@@ -15692,7 +15747,16 @@ export const Monsters: Creature[] = [
               "dpr": 26,
               "toHit": 8,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+
+              riderEffect: {
+                dc: 100,
+                buff: {
+                    duration: '1 round',
+                    toHit: -4.5,
+                    ac: -4.5
+                }
+              }
           }
       ],
       "count": 1,
@@ -16123,7 +16187,15 @@ export const Monsters: Creature[] = [
               "dpr": 16,
               "toHit": 4,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+
+              riderEffect: {
+                dc: 13,
+                buff: {
+                    duration: 'entire encounter',
+                    toHit: -4.5,
+                }
+              }
           },
           {
               "id": "42a192dd-8889-4427-9c4c-4fd2dca447cf",
@@ -16177,18 +16249,39 @@ export const Monsters: Creature[] = [
       "hp": 120,
       "AC": 16,
       "actions": [
-          {
-              "id": "c703c377-b24a-4da5-8e12-c476453d79b2",
-              "name": "Bite + Claw",
-              "type": "atk",
-              "actionSlot": 0,
-              "freq": "at will",
-              "condition": "default",
-              "dpr": 42,
-              "toHit": 7,
-              "target": "enemy with most HP",
-              "targets": 1
-          }
+        {
+            "id": "c703c377-b24a-4da5-8e12-c476453d79b2",
+            "name": "Bite + Tongue",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "1/fight",
+            "condition": "is available",
+            "dpr": 33,
+            "toHit": 7,
+            "target": "enemy with most HP",
+            "targets": 1,
+
+            riderEffect: {
+                dc: 100,
+                buff: {
+                    duration: '1 round',
+                    ac: -4.5,
+                    toHit: -4.5,
+                }
+            }
+        },
+        {
+            "id": "c703c377-b24a-4da5-8e12-c476453d79b2",
+            "name": "Bite + Claw",
+            "type": "atk",
+            "actionSlot": 0,
+            "freq": "at will",
+            "condition": "default",
+            "dpr": 42,
+            "toHit": 7,
+            "target": "enemy with most HP",
+            "targets": 1
+        }
       ],
       "count": 1,
       "saveBonus": 4
@@ -16742,7 +16835,17 @@ export const Monsters: Creature[] = [
               "dpr": 28,
               "toHit": 5,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+
+              
+                riderEffect: {
+                    dc: 16,
+                    buff: {
+                        duration: '1 round',
+                        ac: -4.5,
+                        toHit: -4.5,
+                    }
+                }
           }
       ],
       "count": 1,
@@ -17417,7 +17520,15 @@ export const Monsters: Creature[] = [
               "dpr": 60,
               "toHit": 10,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+              
+            riderEffect: {
+                dc: 19,
+                buff: {
+                    duration: '1 round',
+                    toHit: -4.5,
+                }
+            }
           },
           {
               "id": "f6ed6b0d-61e8-4f37-abcb-9924830d170d",
@@ -17429,7 +17540,15 @@ export const Monsters: Creature[] = [
               "dpr": 90,
               "toHit": 10,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+              
+              riderEffect: {
+                  dc: 19,
+                  buff: {
+                      duration: '1 round',
+                      toHit: -4.5,
+                  }
+              }
           },
           {
               "id": "f9bad053-1d17-4016-8dec-7de4a5d2338c",
@@ -18399,7 +18518,16 @@ export const Monsters: Creature[] = [
               "dpr": 72,
               "toHit": 10,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+              
+              riderEffect: {
+                  dc: 19,
+                  buff: {
+                      duration: '1 round',
+                      toHit: -4.5,
+                      ac: -4.5
+                  }
+              }
           }
       ],
       "count": 1,
@@ -18568,7 +18696,15 @@ export const Monsters: Creature[] = [
               "dpr": 77,
               "toHit": 16,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+              
+            riderEffect: {
+                dc: 21,
+                buff: {
+                    duration: '1 round',
+                    toHit: -4.5,
+                }
+            }
           },
           {
               "id": "faa5fdd1-fb2a-4ceb-96c5-258c7df04fd1",
@@ -18580,7 +18716,15 @@ export const Monsters: Creature[] = [
               "type": "atk",
               "dpr": 27,
               "toHit": 16,
-              "target": "enemy with least HP"
+              "target": "enemy with least HP",
+              
+              riderEffect: {
+                  dc: 21,
+                  buff: {
+                      duration: '1 round',
+                      toHit: -4.5,
+                  }
+              }
           }
       ],
       "count": 1,
@@ -19046,7 +19190,15 @@ export const Monsters: Creature[] = [
               "dpr": 56,
               "toHit": 8,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+              
+            riderEffect: {
+                dc: 16,
+                buff: {
+                    duration: '1 round',
+                    toHit: -4.5,
+                }
+            }
           }
       ],
       "count": 1,
@@ -19408,7 +19560,15 @@ export const Monsters: Creature[] = [
               "dpr": 76,
               "toHit": 15,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+              
+            riderEffect: {
+                dc: 22,
+                buff: {
+                    duration: 'entire encounter',
+                    toHit: -4.5,
+                }
+            }
           },
           {
               "id": "c2b9af0e-d5d4-4963-b3de-c94068d4877c",
@@ -20627,7 +20787,15 @@ export const Monsters: Creature[] = [
               "dpr": 36.5,
               "toHit": 5,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+              
+            riderEffect: {
+                dc: 12,
+                buff: {
+                    duration: '1 round',
+                    toHit: -4.5,
+                }
+            }
           }
       ],
       "count": 1,
@@ -20653,7 +20821,15 @@ export const Monsters: Creature[] = [
               "dpr": 7,
               "toHit": 3,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+              
+            riderEffect: {
+                dc: 10,
+                buff: {
+                    duration: '1 round',
+                    toHit: -4.5,
+                }
+            }
           }
       ],
       "count": 1,
@@ -20705,7 +20881,16 @@ export const Monsters: Creature[] = [
               "dpr": 53.5,
               "toHit": 13,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+              
+              riderEffect: {
+                  dc: 18,
+                  buff: {
+                      duration: '1 round',
+                      toHit: -4.5,
+                      ac: -4.5
+                  }
+              }
           },
           {
               "id": "fde3b855-4012-442c-b4dc-b6c752832e2f",
@@ -21152,7 +21337,15 @@ export const Monsters: Creature[] = [
               "dpr": 33,
               "toHit": 10,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+              
+              riderEffect: {
+                  dc: 17,
+                  buff: {
+                      duration: '1 round',
+                      toHit: -4.5,
+                  }
+              }
           },
           {
               "id": "7904e53e-f136-4872-a108-f1770b2cc2c6",
@@ -21520,28 +21713,24 @@ export const Monsters: Creature[] = [
       "actions": [
           {
               "id": "67763ad0-8f73-4772-b880-137985854acf",
-              "name": "Unarmed Strike",
+              "name": "Unarmed Strike x2 + Poison Quills",
               "type": "atk",
               "actionSlot": 0,
               "freq": "at will",
               "condition": "default",
-              "dpr": 4.5,
+              "dpr": 12.5,
               "toHit": 4,
               "target": "enemy with most HP",
-              "targets": 1
+              "targets": 1,
+              
+              riderEffect: {
+                  dc: 12,
+                  buff: {
+                      duration: '1 round',
+                      toHit: -4.5,
+                  }
+              }
           },
-          {
-              "id": "1b31f149-cd05-467f-809d-3aa1525614f5",
-              "name": "Piscine Anatomy",
-              "type": "atk",
-              "actionSlot": 0,
-              "freq": "at will",
-              "condition": "default",
-              "dpr": 13.5,
-              "toHit": 4,
-              "target": "enemy with most HP",
-              "targets": 1
-          }
       ],
       "count": 1,
       "saveBonus": 0.5
@@ -22179,7 +22368,15 @@ export const Monsters: Creature[] = [
             "dpr": 57,
             "toHit": 11,
             "target": "enemy with most HP",
-            "targets": 1
+            "targets": 1,
+              
+            riderEffect: {
+                dc: 19,
+                buff: {
+                    duration: '1 round',
+                    damageMultiplier: 0,
+                }
+            }
         },
         {
             "id": "3beda408-af25-4f08-a711-d400e4234f67",

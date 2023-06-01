@@ -1,40 +1,9 @@
 import { DependencyList, FC, ReactNode, createContext, useContext, useEffect, useState } from "react"
 import { semiPersistentContext } from "../context/simulationContext"
-import { v4 as uuid } from 'uuid'
-import { DiceRoller } from "dice-roller-parser"
 
 export function clone<T>(obj: T): T {
     return structuredClone(obj)
 }
-
-const belowAverageRoller = new DiceRoller(() => 0.499, 100)
-const averageRoller = new DiceRoller(() => 0.5, 100)
-const minRoller = new DiceRoller(() => 0, 100)
-const maxRoller = new DiceRoller(() => 0.999, 100)
-export function validateDiceExpression(expr: number|string) {
-    if (typeof expr === 'number') return true
-
-    try {
-        const roll = averageRoller.roll(expr)
-        return true
-    } catch (e) {
-        return false
-    }
-}
-
-export function evaluateDiceExpression(expr: number|string, canCrit?: boolean): number {
-    if (typeof expr === 'number') return expr
-
-    if (!validateDiceExpression(expr)) throw 'invalid dice expression'
-
-    const average = (averageRoller.rollValue(expr) + belowAverageRoller.rollValue(expr)) / 2
-
-    const crit = (!canCrit) ? 0
-        : (maxRoller.rollValue(expr) - minRoller.rollValue(expr))/2/20
-
-    return average + crit
-}
-
 
 export function useStoredState<T>(key: string, defaultValue: T, parser: (str: string) => T|null) {
     const [state, setState] = useState(defaultValue)

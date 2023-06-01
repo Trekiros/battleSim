@@ -1,22 +1,22 @@
 import { FC, useEffect, useState } from "react"
-import { DiceExpression } from "../../model/model"
-import styles from './diceExpressionInput.module.scss'
-import { evaluateDiceExpression, validateDiceExpression } from "../../model/utils"
+import { DiceFormula } from "../../model/model"
+import styles from './diceFormulaInput.module.scss'
+import { evaluateDiceFormula, validateDiceFormula } from "../../model/dice"
 
 type PropType = {
-    value: DiceExpression|undefined,
-    onChange: (newValue: DiceExpression|undefined) => void,
+    value: DiceFormula|undefined,
+    onChange: (newValue: DiceFormula|undefined) => void,
     className?: string,
     placeholder?: string,
     disabled?: boolean,
 }
 
-const DiceExpressionInput:FC<PropType> = ({ value, onChange, className, placeholder, disabled }) => {
+const DiceFormulaInput:FC<PropType> = ({ value, onChange, className, placeholder, disabled }) => {
     const [valueString, setValueString] = useState((value === undefined) ? '' : String(value))
     const [isValid, setIsValid] = useState(false)
 
     useEffect(() => {
-        setIsValid(validateDiceExpression(valueString))
+        setIsValid(validateDiceFormula(valueString))
         onChange(valueString)
     }, [valueString])
     
@@ -32,13 +32,13 @@ const DiceExpressionInput:FC<PropType> = ({ value, onChange, className, placehol
                 className={`${className} ${isValid ? styles.isValid : styles.invalid}`}
                 placeholder={placeholder}
             />
-            { validateDiceExpression(valueString) && (String(evaluateDiceExpression(valueString)) !== valueString) ? (
+            { validateDiceFormula(valueString) && (String(evaluateDiceFormula(valueString)) !== valueString) ? (
                 <div className="tooltip">
-                    Average: <b>{evaluateDiceExpression(valueString)}</b>
+                    Average: <b>{Math.trunc(100*evaluateDiceFormula(valueString))/100}</b>
                 </div>
             ) : null }
         </span>
     )
 }
 
-export default DiceExpressionInput
+export default DiceFormulaInput
