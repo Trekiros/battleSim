@@ -89,7 +89,9 @@ fileNames.flatMap(fileName => {
                 const lrFreqRegex = /(\((\d+)\/Day\))/g
                 const actionName = action.name.replace(lrFreqRegex, '').replace(srFreqRegex, '').trim()
 
-                if ((actionDamage > 0) && (maxDC > 0) && (maxToHit > 0)) {
+                const half = action.entries.flatMap(entry => matchEntry(entry, /half/g))
+
+                if ((actionDamage > 0) && (maxDC > 0) && (half.length)) {
                     console.log(`{monster: "${monster.name}", action: "${actionName}", dc: ${maxDC} },`)
                 }
             }

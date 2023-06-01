@@ -231,6 +231,17 @@ const ActionForm:FC<PropType> = ({ value, onChange, onDelete }) => {
                     <DiceFormulaInput value={value.toHit} onChange={toHit => update(v => { (v as AtkAction).toHit = toHit || 0 })} />
                     Damage: 
                     <DiceFormulaInput value={value.dpr} onChange={dpr => update(v => { (v as AtkAction).dpr = dpr || 0 })} />
+                    
+                    { !!value.useSaves ? (
+                        <>
+                            Save for half?
+                            <Select 
+                                value={!!value.halfOnSave}
+                                options={[ { value: true, label: 'Yes' }, { value: false, label: 'No' } ]}
+                                onChange={halfOnSave => update(v => { (v as AtkAction).halfOnSave = halfOnSave })} />
+                        </>
+                    ) : null }
+                    
                     Target:
                     <Select value={value.target} options={EnemyTargetOptions} onChange={target => update(v => { v.target = target })} />
                     On Hit Effect:

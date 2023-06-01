@@ -353,7 +353,12 @@ function useAtkAction(attacker: Combattant, action: AtkAction, target: Combattan
         * getBuffs(attacker, b => b.damageMultiplier, 'mult')
         * getBuffs(target, b => b.damageTakenMultiplier, 'mult')
 
-    const actualDamage = damage * hitChance
+    let actualDamage = damage * hitChance
+
+    if (action.useSaves && action.halfOnSave) {
+        actualDamage = damage * hitChance + (damage/2) * (1 - hitChance)
+    }
+
     target.finalState.currentHP = Math.min(target.finalState.currentHP, Math.max(0, target.finalState.currentHP - actualDamage))
 
     Array.from(attacker.finalState.buffs).forEach(([name, buff]) => { if (buff.duration === 'until next attack made') attacker.finalState.buffs.delete(name) })
