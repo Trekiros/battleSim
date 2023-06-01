@@ -67,6 +67,7 @@ const AtkActionSchema = ActionSchemaBase.merge(z.object({
 const HealActionSchema = ActionSchemaBase.merge(z.object({
     type: z.literal('heal'),
     amount: DiceFormulaSchema,
+    tempHP: z.boolean().optional(),
     target: AllyTargetSchema,
 }))
 
@@ -113,6 +114,7 @@ const TeamSchema = z.array(CreatureSchema)
 
 const CreatureStateSchema = z.object({
     currentHP: z.number(),
+    tempHP: z.number().optional(),
     buffs: z.map(z.string(), BuffSchema),
     remainingUses: z.map(z.string(), z.number()),
     upcomingBuffs: z.map(z.string(), BuffSchema),

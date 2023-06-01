@@ -80,6 +80,7 @@ function getActions(combattant: Combattant, allies: Combattant[], handleHeals: b
     }
 
     function matchCondition(action: Action) {
+        if (action.condition === 'has no THP') return ((combattant.initialState.tempHP === undefined) || (combattant.initialState.tempHP === 0))
         if (action.condition === 'is under half HP') return (combattant.finalState.currentHP * 2 < combattant.creature.hp)
         if (action.condition === 'ally at 0 HP') return (!!allies.find(ally => (ally.finalState.currentHP === 0)))
         
@@ -117,6 +118,13 @@ function getActions(combattant: Combattant, allies: Combattant[], handleHeals: b
 
             let targetCount = action.targets
             const targettableAllies = new Set(allies)
+
+            if (action.tempHP) {
+                targettableAllies.forEach(ally => {
+                    if (ally.initialState.currentHP === 0) targettableAllies.delete(ally)
+                })
+            }
+
             while ((targettableAllies.size > 0) && (targetCount > 0)) {
                 targetCount--
                 const target = getNextTarget(combattant, action, Array.from(targettableAllies), [], stats)
@@ -165,8 +173,8 @@ function getNextTarget(combattant: Combattant, action: Action, allies: Combattan
     if (action.target === "ally with the highest DPR") return getHighestDPR(allies)
     if (action.target === "enemy with highest AC") return enemies.reduce((a1, a2) => (a1.creature.AC > a2.creature.AC) ? a1 : a2)
     if (action.target === "enemy with lowest AC") return enemies.reduce((a1, a2) => (a1.creature.AC < a2.creature.AC) ? a1 : a2)
-    if (action.target === "enemy with most HP") return enemies.reduce((a1, a2) => (a1.finalState.currentHP > a2.finalState.currentHP) ? a1 : a2)
-    if (action.target === "enemy with least HP") return enemies.reduce((a1, a2) => (a1.finalState.currentHP < a2.finalState.currentHP) ? a1 : a2)
+    if (action.target === "enemy with most HP") return enemies.reduce((a1, a2) => (a1.finalState.currentHP + (a1.finalState.tempHP || 0) > a2.finalState.currentHP + (a2.finalState.tempHP || 0)) ? a1 : a2)
+    if (action.target === "enemy with least HP") return enemies.reduce((a1, a2) => (a1.finalState.currentHP + (a1.finalState.tempHP || 0) < a2.finalState.currentHP + (a2.finalState.tempHP || 0)) ? a1 : a2)
     /* if (action.target === "enemy with highest DPR") */ return getHighestDPR(enemies)
 }
 
@@ -354,12 +362,17 @@ function useAtkAction(attacker: Combattant, action: AtkAction, target: Combattan
         * getBuffs(target, b => b.damageTakenMultiplier, 'mult')
 
     let actualDamage = damage * hitChance
-
     if (action.useSaves && action.halfOnSave) {
         actualDamage = damage * hitChance + (damage/2) * (1 - hitChance)
     }
 
-    target.finalState.currentHP = Math.min(target.finalState.currentHP, Math.max(0, target.finalState.currentHP - actualDamage))
+    let remainingDamage = actualDamage
+    if (target.finalState.tempHP) {
+        target.finalState.tempHP = Math.min(target.finalState.tempHP, Math.max(0, target.finalState.tempHP - remainingDamage))
+        remainingDamage = Math.max(0, remainingDamage - target.finalState.tempHP)
+    }
+
+    target.finalState.currentHP = Math.min(target.finalState.currentHP, Math.max(0, target.finalState.currentHP - remainingDamage))
 
     Array.from(attacker.finalState.buffs).forEach(([name, buff]) => { if (buff.duration === 'until next attack made') attacker.finalState.buffs.delete(name) })
     Array.from(target.finalState.buffs).forEach(([name, buff]) => { if (buff.duration === 'until next attack taken') target.finalState.buffs.delete(name) })
@@ -386,11 +399,15 @@ function useAtkAction(attacker: Combattant, action: AtkAction, target: Combattan
 function useHealAction(healer: Combattant, action: HealAction, target: Combattant, stats: Map<string, EncounterStats>) {
     const amount = evaluateDiceFormula(action.amount)
 
-    if ((target.finalState.currentHP === 0) && (amount > 0)) getStats(stats, target).timesUnconscious++
+    if (action.tempHP) {
+        target.finalState.tempHP = Math.max(0, target.finalState.tempHP || 0, amount)
+    } else {
+        if ((target.finalState.currentHP === 0) && (amount > 0)) getStats(stats, target).timesUnconscious++
+        target.finalState.currentHP = Math.max(target.finalState.currentHP, Math.min(target.creature.hp, target.finalState.currentHP + amount)) 
+    }
+
     getStats(stats, healer).healGiven += amount
     getStats(stats, target).healReceived += amount
-
-    target.finalState.currentHP = Math.max(target.finalState.currentHP, Math.min(target.creature.hp, target.finalState.currentHP + amount)) 
 }
 
 // The attackers & defenders must be clones here, they will both be mutated

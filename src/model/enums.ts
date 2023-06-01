@@ -4,7 +4,7 @@ export const FrequencyList = ['at will', '1/fight', '1/day'] as const
 export const FrequencySchema = z.enum(FrequencyList)
 export type Frequency = z.infer<typeof FrequencySchema>
 
-export const ConditionList = ['default', 'ally at 0 HP', 'is available', 'is under half HP'] as const
+export const ConditionList = ['default', 'ally at 0 HP', 'is available', 'is under half HP', 'has no THP'] as const
 export const ConditionSchema = z.enum(ConditionList)
 export type Condition = z.infer<typeof ConditionSchema>
 

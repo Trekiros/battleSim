@@ -86,7 +86,7 @@ function keepHighestLowest(diceCount: number, diceSize: number, keepCount: numbe
     const results = new Map<number, number>()
     const possibleRolls = BigInt(diceSize) ** BigInt(diceCount)
     
-    // If the possible rolls would be too computationally intensive, we cap it at 1 million, and approximate the result instead.
+    // If the possible rolls would be too computationally intensive, we cap it, and approximate the result instead.
     const maxRolls = 100_000
     if (possibleRolls * BigInt(diceCount) > BigInt(maxRolls)) {
         const iterations = maxRolls / diceCount

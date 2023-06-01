@@ -28,6 +28,7 @@ const ConditionOptions: Options<Condition> = [
     { value:'ally at 0 HP', label: 'There is an ally at 0 HP' },
     { value:'is available', label: 'A use of this action is available' },
     { value:'is under half HP', label: 'This creature is under half its maximum HP' },
+    { value:'has no THP', label: 'This creature has no temporary HP' },
 ]
 
 const TypeOptions: Options<ActionType> = [
@@ -266,7 +267,10 @@ const ActionForm:FC<PropType> = ({ value, onChange, onDelete }) => {
             ) : null }
             { (value.type === "heal") ? (
                 <>
-                    Heal amount:
+                    <Select
+                        value={!!value.tempHP}
+                        options={[ {value: true, label: 'Temp HP:'}, {value: false, label: 'Heal Amount:'} ]}
+                        onChange={tempHP => update(v => { (v as HealAction).tempHP = tempHP })}/>
                     <DiceFormulaInput value={value.amount} onChange={heal => update(v => { (v as HealAction).amount = heal || 0 })} />
                     Target:
                     <Select value={value.target} options={AllyTargetOptions} onChange={target => update(v => { v.target = target })} />

@@ -1,5 +1,5 @@
 import ClassOptions from '../model/classOptions'
-import { Action, AtkAction, Creature, DiceFormula } from "../model/model"
+import { Action, AtkAction, Creature, DiceFormula, HealAction } from "../model/model"
 import {z} from 'zod'
 import { getMonster } from './monsters'
 import { v4 as uuid } from 'uuid'
@@ -76,8 +76,9 @@ function artificer(level: number, options: z.infer<typeof ClassOptions.artificer
                 freq: 'at will',
                 condition: 'default',
                 targets: 2,
-                target: 'ally with the most HP',
+                target: 'ally with the least HP',
                 amount: `1d8+${INT}`,
+                tempHP: true,
             }],
         }),
     }
@@ -411,7 +412,6 @@ function druid(level: number, options: z.infer<typeof ClassOptions.druid>): Crea
         6: getMonster('Giant Constrictor Snake')!,
         9: getMonster('Giant Scorpion')!,
         10: getMonster('Fire Elemental')!,
-        17: getMonster('Planetar')!,
     })
 
     return {
@@ -419,24 +419,53 @@ function druid(level: number, options: z.infer<typeof ClassOptions.druid>): Crea
         name: name('Druid', level),
         AC: wildshape.AC,
         saveBonus: PB,
-        hp: hp(level, 8, CON) + wildshape.hp,
+        hp: hp(level, 8, CON),
         count: 1,
         mode: 'player',
-        actions: scaleArray(level, {
+        actions: scaleArray<Action>(level, {
             1: [
                 ...wildshape.actions,
                 {
                     id: uuid(),
-                    name: `${scale(level, {1: 'Wild Shape', 17: 'Shapechange'})}: ${wildshape.name}`,
+                    name: `Wild Shape: ${wildshape.name}`,
                     actionSlot: BONUS_ACTION,
                     type: 'heal',
                     target: 'self',
                     targets: 1,
-                    condition: 'is available',
-                    freq: '1/fight',
+                    condition: 'has no THP',
+                    freq: scale(level, {1: '1/fight', 20: 'at will'}),
                     amount: wildshape.hp,
-                }
+                    tempHP: true,
+                },
             ],
+            18: [
+                {
+                    id: uuid(),
+                    name: 'Heal',
+                    actionSlot: ACTION,
+                    type: 'heal',
+                    target: 'ally with the least HP',
+                    targets: 1,
+                    condition: 'ally at 0 HP',
+                    freq: '1/fight',
+                    amount: 70,
+                },
+                {
+                    id: uuid(),
+                    name: 'Guardian of Nature',
+                    actionSlot: BONUS_ACTION,
+                    type: 'buff',
+                    target: 'self',
+                    targets: 1,
+                    condition: 'default',
+                    freq: '1/fight',
+                    buff: {
+                        duration: 'entire encounter',
+                        toHit: 4.5,
+                        damage: '2d6',
+                    },
+                }
+            ]
         })
     }
 }

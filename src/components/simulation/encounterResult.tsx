@@ -30,10 +30,21 @@ const TeamResults:FC<TeamPropType> = ({ round, team, stats }) => {
                     <div className={styles.lifebarBackground}>
                         <div 
                             className={styles.lifebarForeground} 
-                            style={{ width: `${100*combattant.initialState.currentHP/combattant.creature.hp}%` }}
-                        />
+                            style={{ 
+                                width: `${100*combattant.initialState.currentHP/(combattant.creature.hp + (combattant.initialState.tempHP || 0))}%` 
+                            }}
+                            />
+                        { combattant.initialState.tempHP ? (
+                            <div 
+                            className={styles.lifebarTHP}
+                            style={{
+                                    width: `${100*combattant.initialState.tempHP/(combattant.creature.hp + combattant.initialState.tempHP)}%`,
+                                }}
+                            />
+                        ) : null }
                         <div className={styles.lifebarLabel}>
                             {Math.round(combattant.initialState.currentHP)}/{combattant.creature.hp}
+                            { combattant.initialState.tempHP ? `+${Math.round(combattant.initialState.tempHP)}` : null }
                         </div>
                     </div>
                     <div className={styles.creatureName}>
