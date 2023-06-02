@@ -3,6 +3,7 @@ import React from 'react'
 import RGPD from '../components/utils/rgpd'
 import Logo from '../components/utils/logo'
 import Simulation from '../components/simulation/simulation'
+import Footer from '../components/utils/footer'
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
         <Simulation />
         <RGPD />
         <Logo />
+        <Footer />
       </main>
     </>
   )

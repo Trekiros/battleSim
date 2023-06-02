@@ -1,0 +1,24 @@
+.footer {
+    width: 100%;
+    margin-top: 5em;
+    padding: 2em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    
+    .legal {
+        color: #888;
+        font-size: 0.7em;
+        max-width: 50%;
+    }
+
+    .socials {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1em;
+
+        img { width: 48px }
+    }
+}
