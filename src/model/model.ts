@@ -54,6 +54,7 @@ const AtkActionSchema = ActionSchemaBase.merge(z.object({
     target: EnemyTargetSchema,
     useSaves: z.boolean().optional(),
     halfOnSave: z.boolean().optional(),
+    hits: z.number().min(1).optional(),
 
     riderEffect: z.object({
         dc: z.number(),

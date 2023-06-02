@@ -19,6 +19,13 @@
         align-items: center;
         gap: 1em;
 
-        img { width: 48px }
+        img { width: 36px }
+        a:first-child img { width: 48px }
+    }
+
+    @media (width < 600px) {
+        flex-direction: column;
+
+        > .legal { max-width: unset; padding-bottom: 1em }
     }
 }

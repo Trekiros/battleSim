@@ -4390,7 +4390,7 @@ export const Monsters: Creature[] = [
             {
                 "id": "9f27dc44-7df6-4110-bc92-95d42463220b",
                 "name": "Parry",
-                "actionSlot": 0,
+                "actionSlot": 4,
                 "condition": "default",
                 "freq": "at will",
                 "targets": 1,

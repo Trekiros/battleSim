@@ -290,7 +290,17 @@ const ActionForm:FC<PropType> = ({ value, onChange, onDelete }) => {
                                 options={[ { value: true, label: 'Yes' }, { value: false, label: 'No' } ]}
                                 onChange={halfOnSave => update(v => { (v as AtkAction).halfOnSave = halfOnSave })} />
                         </>
-                    ) : null }
+                    ) : (
+                        <>
+                            Hits:
+                            <input
+                                type="number"
+                                value={value.hits || 1}
+                                min={1}
+                                step={1}
+                                onChange={e => update(v => { (v as AtkAction).hits = Number(e.target.value) })}/>
+                        </>
+                    ) }
                     
                     Target:
                     <Select value={value.target} options={EnemyTargetOptions} onChange={target => update(v => { v.target = target })} />
