@@ -1,3 +1,5 @@
+@import '/styles/mixins';
+
 .monsterForm {
     section {
         margin: 1em 0;
@@ -12,6 +14,7 @@
     h3 { user-select: none; white-space: nowrap; margin: 0.5em 0 }
 
     .creatureTypes {
+        @include scrollable;
         overflow: hidden;
         border-radius: 8px;
         display: grid;
@@ -21,10 +24,6 @@
         @media (width < calc(800px + 6em)) { grid-template-columns: repeat(4, 1fr) }
         @media (width < calc(400px + 6em)) { grid-template-columns: 1fr 1fr; height: 100px; overflow-y: scroll }
         @media (width < calc(200px + 6em)) { grid-template-columns: 1fr }
-
-        &::-webkit-scrollbar { width: 12px; }
-        &::-webkit-scrollbar-track { background: #fff1 }
-        &::-webkit-scrollbar-thumb { background: #888 }
 
         button {
             padding: 8px;
@@ -69,12 +68,8 @@
         .result {
             height: 40vh;
             min-height: 200px;
-            overflow-y: auto;
             overflow-x: hidden;
-            
-            &::-webkit-scrollbar { width: 12px; }
-            &::-webkit-scrollbar-track { background: #fff1 }
-            &::-webkit-scrollbar-thumb { background: #888 }
+            @include scrollable;
 
             .placeholder { width: 100%; padding: 2em; text-align: center; color: #aaa; user-select: none; }
 

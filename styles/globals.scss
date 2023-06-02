@@ -1,4 +1,7 @@
+@import '/styles/mixins';
+
 // General style & layout
+html { @include scrollable }
 html, body, #__next, main {min-height: 100vh; background: #433; color: #eee; margin: 0; padding:0;}
 main {
     display: flex;

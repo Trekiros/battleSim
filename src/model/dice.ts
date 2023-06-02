@@ -1,4 +1,4 @@
-import { AnyRoll, DiceGroupMathOperation, DiceRoll, DiceRoller, FullRoll, GroupedRoll, InlineExpression, MathExpression, MathOperation, NumberType, RollExpression, RollExpressionType, RollOrExpression, RootType } from "dice-roller-parser"
+import { AnyRoll, DiceRoller, FullRoll, GroupedRoll, InlineExpression, MathExpression, MathOperation, NumberType, RollExpression, RollExpressionType, RollOrExpression, RootType } from "dice-roller-parser"
 import { range } from "./utils"
 
 const roller = new DiceRoller()
@@ -13,6 +13,7 @@ export function validateDiceFormula(expr: number|string) {
     }
 }
 
+// TODO: handle canCrit
 export function evaluateDiceFormula(expr: number|string, canCrit?: boolean): number {
     if (typeof expr === 'number') return expr
     if (!isNaN(+expr)) return Number(expr)
@@ -22,30 +23,21 @@ export function evaluateDiceFormula(expr: number|string, canCrit?: boolean): num
     const roll = roller.parse(expr)
 
     return evaluateUnknown(roll)
-
-    // const minRoller = rollers.at(0)!
-    // const maxRoller = rollers.at(-1)!
-
-    // const crit = (!canCrit) ? 0
-    //     : (maxRoller.rollValue(expr) - minRoller.rollValue(expr))/2/20
-
-    // return average // + crit
-    return 0
 }
 
 function evaluateUnknown(roll: RootType|AnyRoll|RollExpression|RollOrExpression): number {
     switch (roll.type) {
-        case "number": return evaluateNumber(roll as NumberType)
-        case "die": return evaluateDie(roll as FullRoll)
-        case "group": return evaluateGroup(roll as GroupedRoll)
-        case "expression": return evaluateMathExpr(roll as MathExpression)
-        case "diceExpression": return evaluateDiceExpression(roll as RollExpressionType)
-        case "inline": return evaluateInline(roll as InlineExpression)
+        case "number":          return evaluateNumber(roll as NumberType)
+        case "die":             return evaluateDie(roll as FullRoll)
+        case "group":           return evaluateGroup(roll as GroupedRoll)
+        case "expression":      return evaluateMathExpr(roll as MathExpression)
+        case "diceExpression":  return evaluateDiceExpression(roll as RollExpressionType)
+        case "inline":          return evaluateInline(roll as InlineExpression)
 
+        // TODO: handle other types of rolls, if there's demand for it
         default: return 0
     }
 }
-
 
 function evaluateNumber(roll: NumberType): number {
     return roll.value
@@ -61,6 +53,7 @@ function evaluateDie(roll: FullRoll) {
 
     let result = count * (die + 1) / 2
     
+    // TODO: handle multiple mods simultaneously instead of replacing the result
     for (let mod of roll.mods || []) {
         if (mod.type === 'explode') {
             result *= die / (die - 1)
@@ -149,7 +142,7 @@ function evaluateDiceExpression(expr: RollExpressionType): number {
         })
         .reduce((a,b) => a+b)
     
-        return head + tails
+    return head + tails
 }
 
 function evaluateInline(expr: InlineExpression): number {

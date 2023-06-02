@@ -1,5 +1,7 @@
 import {z} from 'zod'
 
+// TODO: add more options
+
 export const ArtificerOptions = z.object({
 
 })

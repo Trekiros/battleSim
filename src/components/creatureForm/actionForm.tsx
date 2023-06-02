@@ -1,8 +1,8 @@
 import { FC, useState } from "react"
-import { Action, AllyTarget, AtkAction, Buff, BuffAction, DebuffAction, DiceFormula, EnemyTarget, HealAction } from "../../model/model"
+import { Action, AllyTarget, AtkAction, Buff, BuffAction, DebuffAction, DiceFormula, EnemyTarget, Frequency, HealAction } from "../../model/model"
 import styles from './actionForm.module.scss'
 import { clone } from "../../model/utils"
-import { ActionType, BuffDuration, Condition, Frequency } from "../../model/enums"
+import { ActionType, BuffDuration, Condition } from "../../model/enums"
 import Select from "../utils/select"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
@@ -17,10 +17,16 @@ type PropType = {
 
 type Options<T> = { value: T, label: string}[]
 
+const srFreq: Frequency = { reset: "sr", uses: 1 }
+const lrFreq: Frequency = { reset: "lr", uses: 1 }
+const rechargeFreq: Frequency = { reset: "recharge", cooldownRounds: 2 }
 const FreqOptions: Options<Frequency> = [
     { value: 'at will', label: 'At will' },
     { value: '1/fight', label: '1/short rest' },
+    { value:  srFreq, label: 'X/short rest' },
     { value: '1/day', label: '1/day' },
+    { value:  lrFreq, label: 'X/long rest' },
+    { value:  rechargeFreq, label: 'Every X rounds' },
 ]
 
 const ConditionOptions: Options<Condition> = [
@@ -29,6 +35,7 @@ const ConditionOptions: Options<Condition> = [
     { value:'is available', label: 'A use of this action is available' },
     { value:'is under half HP', label: 'This creature is under half its maximum HP' },
     { value:'has no THP', label: 'This creature has no temporary HP' },
+    { value:'not used yet', label: 'This action has not been used yet this encounter' },
 ]
 
 const TypeOptions: Options<ActionType> = [
@@ -221,7 +228,49 @@ const ActionForm:FC<PropType> = ({ value, onChange, onDelete }) => {
             />
             <Select value={value.actionSlot} options={ActionOptions} onChange={actionSlot => update(v => { v.actionSlot = actionSlot })} />
             <Select value={value.type} options={TypeOptions} onChange={updateType} />
-            <Select value={value.freq} options={FreqOptions} onChange={freq => update(v => { v.freq = freq })} />
+            <Select 
+                value={
+                    typeof value.freq === 'string' ? value.freq
+                  : value.freq.reset === 'sr' ? srFreq
+                  : value.freq.reset === 'lr' ? lrFreq
+                  : value.freq.reset === 'recharge' ? rechargeFreq
+                  : 'at will'
+                }
+                options={FreqOptions}
+                onChange={freq => update(v => {
+                    if (freq === v.freq) return
+                    if (typeof freq === 'string') { v.freq = freq; return }
+                    if (typeof v.freq === 'string') { v.freq = clone(freq); return }
+                    if (v.freq.reset !== freq.reset) { v.freq = clone(freq); return }
+                    // Same frequency => do nothing
+                })} />
+
+            { typeof value.freq !== 'string' ? (
+                value.freq.reset === 'recharge' ? (
+                    <>
+                        Cooldown in rounds:
+                        <input 
+                            type='number'
+                            min={2}
+                            step={1}
+                            className={value.freq.cooldownRounds < 2 ? styles.invalid : ''}
+                            value={value.freq.cooldownRounds}
+                            onChange={e => update(v => { (v.freq as any).cooldownRounds = Number(e.target.value || 0) })}/>
+                    </>
+                ) : (
+                    <>
+                        Uses:
+                        <input 
+                            type='number'
+                            min={1}
+                            step={1}
+                            className={value.freq.uses < 1 ? styles.invalid : ''}
+                            value={value.freq.uses}
+                            onChange={e => update(v => { (v.freq as any).uses = Number(e.target.value || 0) })}/>
+                    </>
+                )
+            ) : null }
+            
             <Select value={value.targets} options={TargetCountOptions} onChange={targets => update(v => { v.targets = targets })} />
             Use this action if:
             <Select value={value.condition} options={ConditionOptions} onChange={condition => update(v => { v.condition = condition })} />

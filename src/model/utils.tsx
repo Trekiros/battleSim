@@ -1,10 +1,11 @@
 import { DependencyList, FC, ReactNode, createContext, useContext, useEffect, useState } from "react"
-import { semiPersistentContext } from "../context/simulationContext"
+import { semiPersistentContext } from "./simulationContext"
 
 export function clone<T>(obj: T): T {
     return structuredClone(obj)
 }
 
+// A wrapper for useState which automatically backs up the state into the localStorage if the user has agreed to it
 export function useStoredState<T>(key: string, defaultValue: T, parser: (str: string) => T|null) {
     const [state, setState] = useState(defaultValue)
     
@@ -36,9 +37,8 @@ export function useStoredState<T>(key: string, defaultValue: T, parser: (str: st
 }
 
 // The state will be shared between identical components, even if the component is unmounted
-// Useful for example to save search params in a modal, and re-load those same search params later, 
-// without having to save them in local storage, or in a parent component.
-// Do not overuse, because the performances aren't great. 
+// Useful for example to save search params in a modal, and re-load those same search params later, without having to save them in local storage, or in a parent component.
+// Do not overuse, because the performances aren't great.
 export function sharedStateGenerator(componentName: string) {
     const {state, setState} = useContext(semiPersistentContext)
     let key = 0
@@ -72,10 +72,12 @@ export function useCalculatedState<T>(generator: () => T, dependencies: Dependen
     return state
 }
 
+// Returns an array of numbers from 0 to n
 export function range(n: number) {
     return Array.from(Array(n).keys())
 }
 
+// Capitalizes The First Letter Of Every Word
 export function capitalize(str: string) {
     const words = str.split(' ')
     return words.map(word => {
@@ -85,6 +87,7 @@ export function capitalize(str: string) {
     }).join(' ')
 }
 
+// Sort by multiple criteria, e.g. first sort by challenge rating, then by name
 export function multiSort<T>(arr: T[], ...criteria: (keyof T)[]) {
     return arr.sort((a, b) => {
         for (let i = 0 ; i < criteria.length; i++) {
@@ -97,11 +100,9 @@ export function multiSort<T>(arr: T[], ...criteria: (keyof T)[]) {
     })
 }
 
-
+// Can be useful for debug purposes
 let inDevEnvironment = false;
-
 if (process && process.env.NODE_ENV === 'development') {
   inDevEnvironment = true;
 }
-
 export {inDevEnvironment};

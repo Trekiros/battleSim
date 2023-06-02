@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { BuffDurationSchema, ChallengeRatingSchema, ClassesSchema, ConditionSchema, CreatureTypeSchema, FrequencySchema } from './enums'
+import { AllyTargetSchema, BuffDurationSchema, ChallengeRatingSchema, ClassesSchema, ConditionSchema, CreatureTypeSchema, EnemyTargetSchema } from './enums'
 import { ClassOptionsSchema } from './classOptions'
 import { validateDiceFormula } from './dice'
 
@@ -9,31 +9,18 @@ export const DiceFormulaSchema = z.number().or(z.custom<string>((data) => {
     return validateDiceFormula(data)
 }))
 
-const EnemyTargetSchema = z.enum([
-    'enemy with least HP',
-    'enemy with most HP',
-    'enemy with highest DPR',
-    'enemy with lowest AC',
-    'enemy with highest AC',
-])
-
-const AllyTargetSchema = z.enum([
-    'ally with the least HP',
-    'ally with the most HP',
-    'ally with the highest DPR',
-    'ally with the lowest AC',
-    'ally with the highest AC',
-    'self',
-])
-
-const ActionSchemaBase = z.object({
-    id: z.string(),
-    name: z.string(),
-    actionSlot: z.number(), // Can only take 1 action for each action slot per turn, e.g. action slot 0 is all actions, and action slot 1 is all bonus actions
-    freq: FrequencySchema,
-    condition: ConditionSchema,
-    targets: z.number(),
-})
+export const FrequencyList = ['at will', '1/fight', '1/day'] as const
+export const FrequencySchema = z.enum(FrequencyList).or(z.discriminatedUnion('reset', [
+    z.object({
+        reset: z.literal('recharge'),
+        cooldownRounds: z.number().min(2),
+    }),
+    z.object({
+        reset: z.enum(['sr', 'lr']),
+        uses: z.number().min(1)
+    })
+]))
+export type Frequency = z.infer<typeof FrequencySchema>;
 
 const BuffSchema = z.object({
     duration: BuffDurationSchema,
@@ -48,6 +35,16 @@ const BuffSchema = z.object({
 
     // Odds that the buff was applied. All of the effects are multiplied by this value. Default 1.
     magnitude: z.number().optional(),
+})
+
+// Not to be used directly. See ActionSchema
+const ActionSchemaBase = z.object({
+    id: z.string(),
+    name: z.string(),
+    actionSlot: z.number(), // Can only take 1 action for each action slot per turn, e.g. action slot 0 is all actions, and action slot 1 is all bonus actions
+    freq: FrequencySchema,
+    condition: ConditionSchema,
+    targets: z.number(),
 })
 
 const AtkActionSchema = ActionSchemaBase.merge(z.object({
@@ -88,25 +85,32 @@ const DebuffActionSchema = ActionSchemaBase.merge(z.object({
 
 const ActionSchema = z.discriminatedUnion('type', [HealActionSchema, AtkActionSchema, BuffActionSchema, DebuffActionSchema])
 
+// Creature is the definition of the creature. It's what the user inputs.
+// Combattant (see below) is the representation of a creature during the simulation. 
+// A new combattant is created for each instance of the creature, and for each round of combat.
 export const CreatureSchema = z.object({
     id: z.string(),
 
-    mode: z.enum(['player', 'monster', 'custom']),
+    mode: z.enum(['player', 'monster', 'custom']), // This determines which UI is opened when the user clicks on "modify creature"
+    
+    // Properties for monsters. Not used by the simulator, but by the monster search UI.
     type: CreatureTypeSchema.optional(),
     cr: ChallengeRatingSchema.optional(),
     src: z.string().optional(),
+    
+    // Properties for player characters. Not used by the simulator, but used by the PC template UI.
     class: z.object({
         type: ClassesSchema,
         level: z.number(),
         options: ClassOptionsSchema,
     }).optional(),
 
+    // Properties of the creature, which are used by the simulator
     name: z.string(),
     count: z.number(),
     hp: z.number(),
     AC: z.number(),
-    saveBonus: z.number(),
-
+    saveBonus: z.number(), // Average save bonus. Using this to simplify the input, even if it makes the result slightly less accurate.
     actions: z.array(ActionSchema),
 })
 
@@ -118,6 +122,7 @@ const CreatureStateSchema = z.object({
     buffs: z.map(z.string(), BuffSchema),
     remainingUses: z.map(z.string(), z.number()),
     upcomingBuffs: z.map(z.string(), BuffSchema),
+    usedActions: z.set(z.string()),
 })
 
 const CombattantSchema = z.object({
@@ -126,6 +131,7 @@ const CombattantSchema = z.object({
     initialState: CreatureStateSchema,
     finalState: CreatureStateSchema,
     
+    // Actions taken by the creature on that round. Initially empty, will be filled by the simulator
     actions: z.array(z.object({
         action: ActionSchema,
         targets: z.array(z.string()),

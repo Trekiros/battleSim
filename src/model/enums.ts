@@ -1,10 +1,27 @@
 import { z } from 'zod'
 
-export const FrequencyList = ['at will', '1/fight', '1/day'] as const
-export const FrequencySchema = z.enum(FrequencyList)
-export type Frequency = z.infer<typeof FrequencySchema>
+export const EnemyTargetList = [
+    'enemy with least HP',
+    'enemy with most HP',
+    'enemy with highest DPR',
+    'enemy with lowest AC',
+    'enemy with highest AC',
+] as const
+export const EnemyTargetSchema = z.enum(EnemyTargetList)
+export type EnemyTarget = z.infer<typeof EnemyTargetSchema>
 
-export const ConditionList = ['default', 'ally at 0 HP', 'is available', 'is under half HP', 'has no THP'] as const
+export const AllyTargetList = [
+    'ally with the least HP',
+    'ally with the most HP',
+    'ally with the highest DPR',
+    'ally with the lowest AC',
+    'ally with the highest AC',
+    'self',
+] as const
+export const AllyTargetSchema = z.enum(AllyTargetList)
+export type AllyTarget = z.infer<typeof AllyTargetSchema>
+
+export const ConditionList = ['default', 'ally at 0 HP', 'is available', 'is under half HP', 'has no THP', 'not used yet'] as const
 export const ConditionSchema = z.enum(ConditionList)
 export type Condition = z.infer<typeof ConditionSchema>
 

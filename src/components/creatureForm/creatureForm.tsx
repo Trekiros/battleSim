@@ -1,4 +1,4 @@
-import { FC, useContext, useEffect, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import { Creature, CreatureSchema } from "../../model/model"
 import styles from './creatureForm.module.scss'
 import { clone } from "../../model/utils"

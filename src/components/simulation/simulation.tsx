@@ -8,7 +8,7 @@ import EncounterForm from "./encounterForm"
 import EncounterResult from "./encounterResult"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFolder, faPlus, faSave, faTrash } from "@fortawesome/free-solid-svg-icons"
-import { semiPersistentContext } from "../../context/simulationContext"
+import { semiPersistentContext } from "../../model/simulationContext"
 import AdventuringDayForm from "./adventuringDayForm"
 
 type PropType = {

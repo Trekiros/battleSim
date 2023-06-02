@@ -85,14 +85,17 @@ fileNames.flatMap(fileName => {
                     maxDC = Math.max(maxDC, Number(match[1]))
                 })
 
+                const rechargeRegex = /({@recharge})|({@recharge \d+(-\d+)?})/g
+                const isRecharge = !![...(action.name.matchAll(rechargeRegex) || [])].length
+
                 const srFreqRegex = /({@recharge})|({@recharge \d+(-\d+)?})|(\(Recharges after a Short or Long Rest\))/g
                 const lrFreqRegex = /(\((\d+)\/Day\))/g
                 const actionName = action.name.replace(lrFreqRegex, '').replace(srFreqRegex, '').trim()
 
                 const half = action.entries.flatMap(entry => matchEntry(entry, /half/g))
 
-                if ((actionDamage > 0) && (maxDC > 0) && (half.length)) {
-                    console.log(`{monster: "${monster.name}", action: "${actionName}", dc: ${maxDC} },`)
+                if ((actionDamage > 0) && isRecharge) {
+                    console.log(`{ monster: "${monster.name}", action: "${action.name}" },`)
                 }
             }
         })

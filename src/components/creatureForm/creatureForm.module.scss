@@ -1,3 +1,5 @@
+@import '/styles/mixins';
+
 .overlay {
     position: fixed;
     z-index: 1;
@@ -9,22 +11,10 @@
     background: #fff3;
     display: flex;
 
+    @include scrollable;
     overflow-x: hidden;
-    overflow-y: auto;
-    &::-webkit-scrollbar { width: 12px; }
-    &::-webkit-scrollbar-track { background: #fff1 }
-    &::-webkit-scrollbar-thumb { background: #888 }
 
-    animation-name: fadeIn;
-    animation-duration: 0.3s;
-    animation-timing-function: ease;
-    animation-fill-mode: forwards;
-    animation-iteration-count: 1;
-
-    @keyframes fadeIn {
-        0%   { opacity: 0 }
-        100% { opacity: 1 }
-    }
+    @include fadeIn;
 
     .modal {
         margin: auto 0;

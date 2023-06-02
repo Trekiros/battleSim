@@ -25,7 +25,7 @@ const RGPD: FC<PropType> = () => {
         setVisible(false)
     }
 
-    return (
+    return !visible ? null : (
         <div className={`${styles.rgpd} ${(visible) ? styles.visible : ''}`}>
             Do you want to use the local storage of your web browser to save your encounters, for the next time you use this website?
             <div className={styles.buttons}>
