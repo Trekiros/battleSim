@@ -52,12 +52,12 @@ const AtkActionSchema = ActionSchemaBase.merge(z.object({
     dpr: DiceFormulaSchema,
     toHit: DiceFormulaSchema,
     target: EnemyTargetSchema,
-    useSaves: z.boolean().optional(),
-    halfOnSave: z.boolean().optional(),
-    hits: z.number().min(1).optional(),
+    useSaves: z.boolean().optional(), // If false or undefined, action.targets becomes the number of hits, and the action can now target the same creature multiple times
+    halfOnSave: z.boolean().optional(), // Only useful if useSaves == true
 
+    // TODO: add other types of rider effects, like extra damage if the target fails a save, for example
     riderEffect: z.object({
-        dc: z.number(),
+        dc: z.number(), // TODO: make it so if the dc is undefined, the rider effect applies without a save
         buff: BuffSchema,
     }).optional(),
 }))
@@ -135,7 +135,7 @@ const CombattantSchema = z.object({
     // Actions taken by the creature on that round. Initially empty, will be filled by the simulator
     actions: z.array(z.object({
         action: ActionSchema,
-        targets: z.array(z.string()),
+        targets: z.map(z.string(), z.number()),
     })),
 })
 

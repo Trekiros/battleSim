@@ -110,16 +110,16 @@ function barbarian(level: number, options: z.infer<typeof ClassOptions.barbarian
                 name: `Greatsword${level >= 5 ? ' x2' : ''}`,
                 actionSlot: ACTION,
                 type: 'atk',
-                targets: 1,
+                targets: scale(level, {1: 1, 5: 2}),
                 condition: 'default',
                 freq: 'at will',
                 target: 'enemy with least HP',
                 toHit: `${PB}[PB] + ${STR}[STR]` 
                     + (options.weaponBonus ? ` + ${options.weaponBonus}[WEAPON]` : '')
                     + (options.gwm ? ` - 5[GWM]` : ''),
-                dpr: multiattack(level, `2d6 + ${STR}[STR] + ${RAGE}[RAGE]`
+                dpr: `2d6 + ${STR}[STR] + ${RAGE}[RAGE]`
                     + (options.weaponBonus ? ` + ${options.weaponBonus}[WEAPON]` : '')
-                    + (options.gwm ? ` + 10[GWM]` : '')),
+                    + (options.gwm ? ` + 10[GWM]` : ''),
             },
             {
                 id: uuid(),
@@ -483,11 +483,6 @@ function fighter(level: number, options: z.infer<typeof ClassOptions.fighter>): 
         + (options.gwm ? ` - 5[GWM]` : '')
 
     const attacks = scale(level, {1: 1, 5: 2, 11: 3, 20: 4})
-    const extraAttacks = (diceFormula: string) => {
-        if (attacks === 1) return diceFormula
-
-        return `(${diceFormula}) * ${attacks}`
-    }
 
     const action: Action = {
         id: uuid(),
@@ -497,11 +492,11 @@ function fighter(level: number, options: z.infer<typeof ClassOptions.fighter>): 
         freq: 'at will',
         condition: 'default',
         target: 'enemy with least HP',
-        targets: 1,
+        targets: attacks,
         toHit: toHit,
-        dpr: extraAttacks(`2d6 + ${STR}[STR]`
+        dpr: `2d6 + ${STR}[STR]`
             + (options.weaponBonus ? ` + ${options.weaponBonus}[WEAPON]` : '')
-            + (options.gwm ? ' + 10[GWM]' : ''))
+            + (options.gwm ? ' + 10[GWM]' : '')
     }
 
     return {
@@ -536,7 +531,7 @@ function fighter(level: number, options: z.infer<typeof ClassOptions.fighter>): 
                     condition: 'is available',
                     type: 'atk',
                     target: 'enemy with least HP',
-                    targets: 1,
+                    targets: attacks,
                     toHit: toHit,
                     dpr: action.dpr,
                 }
@@ -550,7 +545,7 @@ function fighter(level: number, options: z.infer<typeof ClassOptions.fighter>): 
                     condition: 'is available',
                     type: 'atk',
                     target: 'enemy with least HP',
-                    targets: 1,
+                    targets: attacks,
                     toHit: toHit,
                     dpr: action.dpr,
                 }
@@ -587,10 +582,10 @@ function monk(level: number, options: z.infer<typeof ClassOptions.monk>): Creatu
                     type: 'atk',
                     freq: 'at will',
                     condition: 'default',
-                    targets: 1,
+                    targets: scale(level, {1: 1, 5: 2}),
                     target: 'enemy with highest DPR',
                     toHit: toHit,
-                    dpr: multiattack(level, `1d10 + ${DEX}`),
+                    dpr: `1d10 + ${DEX}`,
 
                     riderEffect: (level < 5) ? undefined : {
                         dc: DC,
@@ -608,10 +603,10 @@ function monk(level: number, options: z.infer<typeof ClassOptions.monk>): Creatu
                     type: 'atk',
                     freq: 'at will',
                     condition: 'default',
-                    targets: 1,
+                    targets: scale(level, {1: 1, 3: 2}),
                     target: 'enemy with highest DPR',
                     toHit: toHit,
-                    dpr: multiattack(level + 2, `${martialArtsDie} + ${DEX}`),
+                    dpr: `${martialArtsDie} + ${DEX}`,
 
                     riderEffect: (level < 9) ? undefined : {
                         dc: DC,
@@ -654,14 +649,14 @@ function paladin(level: number, options: z.infer<typeof ClassOptions.paladin>): 
                     type: 'atk',
                     freq: 'at will',
                     condition: 'default',
-                    targets: 1,
+                    targets: scale(level, {1: 1, 5: 2}),
                     target: 'enemy with least HP',
                     toHit: toHit,
-                    dpr: multiattack(level, `1d8 + ${STR}[STR]`
+                    dpr: `1d8 + ${STR}[STR]`
                         + (level > 1 ? ' + 2[Fighting Style]' : '')
                         + (options.weaponBonus ? ` + ${options.weaponBonus}` : '')
                         + (options.gwm ? ' + 10[GWM]' : '')
-                        + (level >= 10 ? ' + 1d8[IDS]' : '')),
+                        + (level >= 10 ? ' + 1d8[IDS]' : ''),
                 },
                 {
                     id: uuid(),
@@ -722,13 +717,6 @@ function ranger(level: number, options: z.infer<typeof ClassOptions.ranger>): Cr
         + (options.weaponBonus ? ` + ${options.weaponBonus}[WEAPON]` : '')
         + (options.ss ? ` - 5[SS]` : '')
     
-    const extraAttack = (expr: string) => {
-        if (level < 4) return expr
-
-        const attacks = scale(level, { 1: 1, 4: 2, 5: 3 })
-        return `(${expr}) * ${attacks}`
-    }
-
     return {
         id: uuid(),
         name: name('Ranger', level),
@@ -751,14 +739,13 @@ function ranger(level: number, options: z.infer<typeof ClassOptions.ranger>): Cr
                     type: 'atk',
                     freq: 'at will',
                     condition: 'default',
-                    targets: 1,
+                    targets: scale(level, {1: 1, 4: 2, 5: 3}),
                     target: 'enemy with least HP',
                     toHit: toHit,
-                    dpr: extraAttack(`1d6 + ${DEX}[DEX]`
+                    dpr: `1d6 + ${DEX}[DEX]`
                         + (level > 1 ? ' + 1d6[HM]' : '')
                         + (options.weaponBonus ? ` + ${options.weaponBonus}[WEAPON]` : '')
-                        + (options.ss ? ' + 10[SS]' : '')
-                    ),
+                        + (options.ss ? ' + 10[SS]' : ''),
                 },
             ],
         }),
@@ -788,21 +775,49 @@ function rogue(level: number, options: z.infer<typeof ClassOptions.rogue>): Crea
                 {
                     id: uuid(),
                     name: scale(level, { 
-                        1: "Hand Crossbow + Sneak Attack", 
-                        4: "Hand Crossbow + Crossbow Expert + Sneak Attack" 
+                        1: "Hand Crossbow", 
+                        4: "Hand Crossbow + Crossbow Expert" 
                     }),
                     actionSlot: ACTION,
                     type: 'atk',
                     freq: 'at will',
                     condition: 'default',
-                    targets: 1,
+                    targets: scale(level, {1: 1, 4: 2}),
                     target: 'enemy with least HP',
                     toHit: toHit,
-                    dpr: multiattack(level + 1,
-                        `1d6 + ${DEX}[DEX]`
+                    dpr: `1d6 + ${DEX}[DEX]`
                         + (options.weaponBonus ? ` + ${options.weaponBonus}[WEAPON]` : '')
-                        + (options.ss ? ' + 10[SS]' : '')
-                    ) + ` + ${sneakAttack}[SA]`,
+                        + (options.ss ? ' + 10[SS]' : ''),
+                },
+                {
+                    id: uuid(),
+                    name: 'Sneak Attack',
+                    actionSlot: PASSIVE,
+                    type: 'buff',
+                    freq: 'at will',
+                    condition: 'default',
+                    targets: 1,
+                    target: 'self',
+                    buff: {
+                        duration: 'until next attack made',
+                        damage: sneakAttack
+                    }
+                },
+            ],
+            2: [
+                {
+                    id: uuid(),
+                    name: 'Cunning Action: Hide',
+                    actionSlot: BONUS_ACTION,
+                    type: 'buff',
+                    freq: 'at will',
+                    condition: 'default',
+                    targets: 1,
+                    target: 'self',
+                    buff: {
+                        duration: 'until next attack made',
+                        toHit: 4.5,
+                    },
                 },
             ],
             5: [
@@ -902,12 +917,6 @@ function warlock(level: number, options: z.infer<typeof ClassOptions.warlock>): 
     const DC = 8 + PB + CHA
     const toHit = PB + CHA
 
-    const beams = (expr: string) => {
-        if (level < 5) return expr
-
-        return `(${expr}) * ${cantrip(level)}`
-    }
-
     return {
         id: uuid(),
         name: name('Warlock', level),
@@ -925,13 +934,11 @@ function warlock(level: number, options: z.infer<typeof ClassOptions.warlock>): 
                     type: 'atk',
                     freq: 'at will',
                     condition: 'default',
-                    targets: 1,
+                    targets: cantrip(level),
                     target: 'enemy with least HP',
                     toHit: toHit,
-                    dpr: beams(
-                        `1d10 + 1d6[HEX]`
-                        + (level > 1 ? ` + ${CHA}[AB]` : '')
-                    ),
+                    dpr: `1d10 + 1d6[HEX]`
+                        + (level > 1 ? ` + ${CHA}[AB]` : ''),
                 },
             ],
             5: [
@@ -941,7 +948,7 @@ function warlock(level: number, options: z.infer<typeof ClassOptions.warlock>): 
                     actionSlot: ACTION,
                     type: 'debuff',
                     freq: { reset: 'sr', uses: scale(level, {1: 1, 5: 2, 11: 3, 17: 4})},
-                    condition: 'is available',
+                    condition: 'not used yet',
                     targets: 2,
                     target: 'enemy with highest DPR',
                     saveDC: DC,

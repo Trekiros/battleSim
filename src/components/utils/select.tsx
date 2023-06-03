@@ -13,6 +13,7 @@ const SelectStyles: ClassNamesConfig = {
     input: () => styles.input,
     singleValue: () => styles.singleValue,
     menu: () => styles.menu,
+    menuList: () => styles.menuList,
     option: ({ isSelected, isFocused }) => isSelected ? styles.isSelected : isFocused ? styles.isFocused : '',
     dropdownIndicator: () => styles.indicator,
 }

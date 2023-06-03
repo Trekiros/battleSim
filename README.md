@@ -37,9 +37,25 @@ It might change in the future, but for now, the reason this approach was chosen 
 ## Contributing
 To contribute, fork this repository and make pull requests.
 
+This project's main goals are to:
+* Streamline the process of inputting an encounter as much as possible without sacrificing the output's accuracy
+* Give the user a clear understanding of what's happening, so they can decide whether or not the encounter is right for their table
+
+Contributions that are likely to get accepted:
+* Templates for multi-classed characters
+* Streamlining of the UI (e.g. scanning a PC/monster on dndbeyond from just its URL, and making an educated guess about its gameplan)
+* Improving the result's clarity (e.g. "luck sliders" to see multiple scenarios and quickly see how swingy an encounter is)
+* Tightening the simulation algorithm to make it more accurate (e.g. making sure the order of the creatures does not matter)
+
+Contribution checklist:
+* Make sure the project compiles with `npm run build`
+* Make sure the contents `src/data` are updated to reflect your changes
+* Make sure your changes are backwards-compatible with the save files a user might already have in their local storage
+
 Common reasons why a pull request might be denied:
+* It makes the UI too tedious to use.
+* It makes the result too confusing to read.
 * It adds too much data to the monsters, and risks breaking the terms of the WotC Fan Content Policy
-* It changes the model in a way that backwards compatibility is not assured to the users who have already saved some adventuring days in their localStorage
 
 ## Licence
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.

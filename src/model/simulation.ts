@@ -133,7 +133,7 @@ function getActions(combattant: Combattant, allies: Combattant[], handleHeals: b
 
             const combattantAction: Combattant['actions'][0] = {
                 action,
-                targets: [],
+                targets: new Map(),
             }
             combattant.actions.push(combattantAction)
 
@@ -154,7 +154,7 @@ function getActions(combattant: Combattant, allies: Combattant[], handleHeals: b
                 if (!target) break;
 
                 targettableAllies.delete(target)
-                combattantAction.targets.push(target.id)
+                combattantAction.targets.set(target.id, 1)
                 useHealAction(combattant, action, target, stats)
             }
         })
@@ -210,7 +210,7 @@ function generateActions(allies: Combattant[], enemies: Combattant[], stats: Map
         ally.actions.push(...getActions(ally, allies, true, stats)
             .map(action => ({
                 action: action, 
-                targets: [],
+                targets: new Map(),
             })))
 
         // Save uses for limited-use actions
@@ -231,22 +231,38 @@ function handleActions(allies: Combattant[], enemies: Combattant[], actionTypes:
     allies.forEach(combattant => {
         combattant.actions.filter(({ action }) => (actionTypes.includes(action.type)))
             .forEach((turn) => {
+                const isAttack = (turn.action.type === 'atk') && !turn.action.useSaves
+                
+                let lastTarget: Combattant|undefined = undefined
                 let targetsCount = turn.action.targets
                 let targettableAllies = new Set(allies)
                 let targettableEnemies = new Set(enemies.filter(enemy => (enemy.finalState.currentHP > 0)))
                 while ((targetsCount > 0) && (targettableAllies.size > 0) && (targettableEnemies.size > 0)) {
                     targetsCount--
                     
-                    const target = getNextTarget(combattant, turn.action, Array.from(targettableAllies), Array.from(targettableEnemies), stats)
+                    // If it's an attack, continue attacking the same target until it's dead
+                    const target: Combattant|undefined = (isAttack && lastTarget) || 
+                        getNextTarget(combattant, turn.action, Array.from(targettableAllies), Array.from(targettableEnemies), stats)
+                    
                     if (target) {
-                        targettableAllies.delete(target)
-                        targettableEnemies.delete(target)
-                        turn.targets.push(target.id)
+                        lastTarget = target
+                        turn.targets.set(target.id, 1 + (turn.targets.get(target.id) || 0))
 
                         if (turn.action.type === "buff") useBuffAction(combattant, turn.action, target, stats)
                         if (turn.action.type === "debuff") useDebuffAction(combattant, turn.action, target, stats)
                         //if (turn.action.type === "heal") useHealAction(turn.action, target) // Already handled before, in generateActions
                         if (turn.action.type === "atk") useAtkAction(combattant, turn.action, target, stats)
+                        
+                        let removeTarget = true
+                        if ((turn.action.type === 'atk') && !turn.action.useSaves) {
+                            removeTarget = (target.finalState.currentHP === 0)
+                        }
+                        if (removeTarget) {
+                            targettableAllies.delete(target)
+                            targettableEnemies.delete(target)
+                            lastTarget = undefined
+                        }
+                        
                     }
                 }
             })

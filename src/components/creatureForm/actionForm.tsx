@@ -65,6 +65,19 @@ const TargetCountOptions: Options<number> = [
     { value: 100, label: 'Target everything' },
 ]
 
+const HitCountOptions: Options<number> = [
+    { value: 1, label: '1 hit' },
+    { value: 2, label: '2 hits' },
+    { value: 3, label: '3 hits' },
+    { value: 4, label: '4 hits' },
+    { value: 5, label: '5 hits' },
+    { value: 6, label: '6 hits' },
+    { value: 7, label: '7 hits' },
+    { value: 8, label: '8 hits' },
+    { value: 9, label: '9 hits' },
+    { value: 10, label: '10 hits' },
+]
+
 const EnemyTargetOptions: Options<EnemyTarget> = [
     { value: 'enemy with least HP', label: 'Enemy with least HP' },
     { value: 'enemy with most HP', label: 'Enemy with most HP' },
@@ -271,13 +284,24 @@ const ActionForm:FC<PropType> = ({ value, onChange, onDelete }) => {
                 )
             ) : null }
             
-            <Select value={value.targets} options={TargetCountOptions} onChange={targets => update(v => { v.targets = targets })} />
+            { ((value.type === 'atk') && (!value.useSaves)) ? (
+                <Select value={value.targets} options={HitCountOptions} onChange={targets => update(v => v.targets = targets)} />
+            ) : (
+                <Select value={value.targets} options={TargetCountOptions} onChange={targets => update(v => { v.targets = targets })} />
+            ) }
             Use this action if:
             <Select value={value.condition} options={ConditionOptions} onChange={condition => update(v => { v.condition = condition })} />
 
             { (value.type === "atk") ? (
                 <>
-                    <Select value={!!value.useSaves} options={AtkOptions} onChange={useSaves => update(v => { (v as AtkAction).useSaves = useSaves })} />
+                    <Select 
+                        value={!!value.useSaves} 
+                        options={AtkOptions} 
+                        onChange={useSaves => update(v => {
+                            const atk = (v as AtkAction);
+                            if (atk.useSaves !== useSaves) atk.targets = 1
+                            atk.useSaves = useSaves 
+                        })} />
                     <DiceFormulaInput value={value.toHit} onChange={toHit => update(v => { (v as AtkAction).toHit = toHit || 0 })} />
                     Damage: 
                     <DiceFormulaInput value={value.dpr} onChange={dpr => update(v => { (v as AtkAction).dpr = dpr || 0 })} />
@@ -290,17 +314,7 @@ const ActionForm:FC<PropType> = ({ value, onChange, onDelete }) => {
                                 options={[ { value: true, label: 'Yes' }, { value: false, label: 'No' } ]}
                                 onChange={halfOnSave => update(v => { (v as AtkAction).halfOnSave = halfOnSave })} />
                         </>
-                    ) : (
-                        <>
-                            Hits:
-                            <input
-                                type="number"
-                                value={value.hits || 1}
-                                min={1}
-                                step={1}
-                                onChange={e => update(v => { (v as AtkAction).hits = Number(e.target.value) })}/>
-                        </>
-                    ) }
+                    ) : null }
                     
                     Target:
                     <Select value={value.target} options={EnemyTargetOptions} onChange={target => update(v => { v.target = target })} />

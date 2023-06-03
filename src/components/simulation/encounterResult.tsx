@@ -12,13 +12,23 @@ type TeamPropType = {
 }
 
 const TeamResults:FC<TeamPropType> = ({ round, team, stats }) => {
-    function getTarget(combattantAction: { action: Action, targets: string[] }) {
+    function getTarget(combattantAction: { action: Action, targets: Map<string, number> }) {
         if (combattantAction.action.target === 'self') return 'itself'
 
         const allCombattants = [...round.team1, ...round.team2].map(combattant => combattant)
-        const targetNames = combattantAction.targets.map(targetId => allCombattants.find(combattant => (combattant.id === targetId)))
+        const targetNames = Array.from(combattantAction.targets.entries()).map(([targetId, count]) => {
+            const targetCombattant = allCombattants.find(combattant => (combattant.id === targetId))
+            if (!targetCombattant) {
+                return null
+            }
+
+            const creatureName = targetCombattant.creature.name
+
+            if (count === 1) return creatureName
+
+            return creatureName + ' x' + count
+        })
             .filter(nullable => !!nullable)
-            .map(combattant => combattant!.creature.name)
 
         return targetNames.join(' and ')
     }
@@ -73,7 +83,7 @@ const TeamResults:FC<TeamPropType> = ({ round, team, stats }) => {
                                     )
                                 })() : (() => {
                                     const li = combattant.actions.flatMap(actionSlot => actionSlot)
-                                    .filter(({ targets }) => !!targets.length)
+                                    .filter(({ targets }) => !!targets.size)
                                     .map((action, index) => (
                                         <li key={index}>
                                             <b>{action.action.name}</b> on {getTarget(action)}
