@@ -17,6 +17,9 @@ const Footer:FC<{}> = ({}) => {
                 <a href="https://twitter.com/trekiros" target="_blank">
                     <img src="/socials/twitter.svg" alt="Twitter" />
                 </a>
+                <a href="https://github.com/Trekiros/battleSim" target="_blank">
+                    <img src="/socials/github.svg" alt="Github" />
+                </a>
             </span>
         </div>
     )
