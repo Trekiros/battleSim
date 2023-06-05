@@ -300,7 +300,7 @@ function cleric(level: number, options: z.infer<typeof ClassOptions.cleric>): Cr
                     type: 'buff',
                     targets: 3,
                     freq: { reset: 'lr', uses: scale(level, {1: 1, 3: 2, 5: 3, 7: 4, 9: 5, 11: 6, 13: 7, 15: 8, 17: 9})},
-                    condition: 'is available',
+                    condition: 'not used yet',
                     target: 'ally with the highest DPR',
                     buff: {
                         duration: 'entire encounter',
@@ -338,7 +338,7 @@ function cleric(level: number, options: z.infer<typeof ClassOptions.cleric>): Cr
                 {
                     id: uuid(),
                     name: 'Spirit Guardians',
-                    actionSlot: PASSIVE,
+                    actionSlot: ACTION,
                     type: 'atk',
                     targets: 2,
                     freq: 'at will',

@@ -1,0 +1,18 @@
+.loadCreature {
+    margin: auto 2em;
+
+    .creature {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        button {
+            background: none;
+            padding: 0;
+        }
+    }
+
+    > button {
+        width: 100%;
+    }
+}

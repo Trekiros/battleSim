@@ -2,11 +2,10 @@ import { FC, } from "react"
 import { Creature, CreatureSchema } from "../../model/model"
 import styles from './monsterForm.module.scss'
 import { ChallengeRating, ChallengeRatingList, CreatureType, CreatureTypeList, numericCR } from "../../model/enums"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons"
 import { capitalize, clone, sharedStateGenerator, useCalculatedState } from "../../model/utils"
 import { Monsters } from "../../data/monsters"
 import Range from "../utils/range"
+import SortTable from "../utils/sortTable"
 
 type PropType = {
     value: Creature,
@@ -15,20 +14,12 @@ type PropType = {
 
 const defaultTypeFilter: {[type in CreatureType]: boolean} = Object.fromEntries(CreatureTypeList.map(t => [t, true])) as any
 
-const Comparators = {
-    nameAsc: (a: Creature, b: Creature) => a.name.localeCompare(b.name),
-    nameDesc: (a: Creature, b: Creature) => -a.name.localeCompare(b.name),
-    crAsc: (a: Creature, b: Creature) => (numericCR(a.cr!) - numericCR(b.cr!)),
-    crDesc: (a: Creature, b: Creature) => (numericCR(b.cr!) - numericCR(a.cr!)),
-} as const
-
 const MonsterForm:FC<PropType> = ({ onChange, value }) => {
     const useSharedState = sharedStateGenerator('monsterForm')
     const [creatureType, setCreatureType] = useSharedState(defaultTypeFilter)
     const [minCR, setMinCR] = useSharedState<ChallengeRating>(ChallengeRatingList[0])
     const [maxCR, setMaxCR] = useSharedState<ChallengeRating>(ChallengeRatingList[ChallengeRatingList.length - 1])
     const [name, setName] = useSharedState<string>('')
-    const [sortBy, setSortBy] = useSharedState<keyof typeof Comparators>('nameAsc')
 
     const searchResults = useCalculatedState(() => Monsters.filter(monster => {
         if (!monster.name.toLocaleLowerCase().includes(name.toLocaleLowerCase())) return false
@@ -39,7 +30,7 @@ const MonsterForm:FC<PropType> = ({ onChange, value }) => {
         if (!creatureType[monster.type]) return false
 
         return true
-    }).sort(Comparators[sortBy]), [creatureType, minCR, maxCR, name, sortBy])
+    }), [creatureType, minCR, maxCR, name])
     
     function toggleCreatureType(type: CreatureType) {
         const newValue = clone(creatureType)
@@ -99,38 +90,22 @@ const MonsterForm:FC<PropType> = ({ onChange, value }) => {
                 />
             </section>
 
-            <div className={styles.searchResults}>
-                <div className={styles.header}>
-                    <div onClick={() => setSortBy((sortBy === 'nameAsc') ? 'nameDesc' : 'nameAsc' )}>
-                        Name
-                        { (sortBy !== 'nameAsc') ? null : <FontAwesomeIcon icon={faChevronUp} /> }
-                        { (sortBy !== 'nameDesc') ? null : <FontAwesomeIcon icon={faChevronDown} /> }
-                    </div>                    
-                    <div onClick={() => setSortBy((sortBy === 'crAsc') ? 'crDesc' : 'crAsc' )}>
-                        CR
-                        { (sortBy !== 'crAsc') ? null : <FontAwesomeIcon icon={faChevronUp} /> }
-                        { (sortBy !== 'crDesc') ? null : <FontAwesomeIcon icon={faChevronDown} /> }
-                    </div>
-                </div>
-                <div className={styles.result}>
-                    { searchResults.length === 0 ? (
-                        <div className={styles.placeholder}>
-                            No results
+            <SortTable
+                value={value}
+                list={searchResults}
+                comparators={{
+                    Name: (a: Creature, b: Creature) => a.name.localeCompare(b.name),
+                    CR: (a: Creature, b: Creature) => (numericCR(a.cr!) - numericCR(b.cr!)),
+                }}
+                onChange={selectMonster}>
+                    { monster => (
+                        <div className={styles.monster}>
+                            <span className={styles.name}>{monster.name}</span>
+                            <span className={styles.stats}>{monster.type}, {monster.src}</span>
+                            <span className={styles.stats}>CR {monster.cr}</span>
                         </div>
-                    ) : (
-                        searchResults.map(monster => (
-                            <button
-                                key={monster.id}
-                                onClick={() => selectMonster(monster)}
-                                className={`${styles.monster} ${value?.id === monster.id ? styles.active : ''}`}>
-                                    <span className={styles.name}>{monster.name}</span>
-                                    <span className={styles.stats}>{monster.type}, {monster.src}</span>
-                                    <span className={styles.stats}>CR {monster.cr}</span>
-                            </button>
-                        ))
                     )}
-                </div>
-            </div>
+            </SortTable>
         </div>
     )
 }

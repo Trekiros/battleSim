@@ -21,7 +21,15 @@ export const AllyTargetList = [
 export const AllyTargetSchema = z.enum(AllyTargetList)
 export type AllyTarget = z.infer<typeof AllyTargetSchema>
 
-export const ConditionList = ['default', 'ally at 0 HP', 'is available', 'is under half HP', 'has no THP', 'not used yet'] as const
+export const ConditionList = [
+    'default', 
+    'ally at 0 HP', 
+    'ally under half HP',
+    'is available', 
+    'is under half HP', 
+    'has no THP', 
+    'not used yet'
+] as const
 export const ConditionSchema = z.enum(ConditionList)
 export type Condition = z.infer<typeof ConditionSchema>
 

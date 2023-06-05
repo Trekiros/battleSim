@@ -4,9 +4,11 @@ import styles from './adventuringDayForm.module.scss'
 import { sharedStateGenerator, useCalculatedState } from "../../model/utils"
 import {z} from 'zod'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faChevronDown, faChevronUp, faFolder, faSave, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faDownload, faFolder, faSave, faTrash, faUpload } from "@fortawesome/free-solid-svg-icons"
 import { PlayerTemplates } from "../../data/data"
 import { getMonster } from "../../data/monsters"
+import SortTable from "../utils/sortTable"
+import Modal from "../utils/modal"
 
 type PropType = {
     players: Creature[],
@@ -20,12 +22,16 @@ function carefulSave(key: string, value: string) {
     localStorage.setItem(key, value)
 }
 
-const SaveFileSchema = z.array(z.object({
+const SaveFileSchema = z.object({
     updated: z.number(),
     name: z.string(),
     players: z.array(CreatureSchema),
     encounters: z.array(EncounterSchema),
-}))
+})
+type SaveFile = z.infer<typeof SaveFileSchema>
+
+const SaveCollectionSchema = z.array(SaveFileSchema)
+type SaveCollection = z.infer<typeof SaveCollectionSchema>
 
 const ExampleAdventuringDay: SaveFile = {
     updated: Date.now(),
@@ -46,14 +52,14 @@ const ExampleAdventuringDay: SaveFile = {
     ]
 }
 
-function loadSaves(): z.infer<typeof SaveFileSchema> {
+function loadSaves(): SaveCollection {
     if (typeof localStorage === undefined) return []
 
     const json = localStorage.getItem('saveFiles')
     if (!json) return [ExampleAdventuringDay]
     
     const obj = JSON.parse(json)
-    const parsed = SaveFileSchema.safeParse(obj)
+    const parsed = SaveCollectionSchema.safeParse(obj)
 
     if (parsed.success) {
         return parsed.data
@@ -67,25 +73,14 @@ function currentSaveName(): string {
     return localStorage.getItem('saveName') || ''
 }
 
-type SaveFile = (z.infer<typeof SaveFileSchema>)[0]
-const Comparators = {
-    nameAsc: (a: SaveFile, b: SaveFile) => a.name.localeCompare(b.name),
-    nameDesc: (a: SaveFile, b: SaveFile) => -a.name.localeCompare(b.name),
-    dateAsc: (a: SaveFile, b: SaveFile) => a.updated - b.updated,
-    dateDesc: (a: SaveFile, b: SaveFile) => b.updated - a.updated,
-} as const
-
 const AdventuringDayForm:FC<PropType> = ({ players, encounters, onCancel, onLoad }) => {
     const useSharedContext = sharedStateGenerator('adventuringDayForm')
     const [name, setName] = useSharedContext(currentSaveName())
-    const [sortBy, setSortBy] = useSharedContext<keyof typeof Comparators>('dateDesc')
     const [deleted, setDeleted] = useState(0)
+    const [error, setError] = useState<string|null>(null)
     
     const isValid = useCalculatedState(() => !!name, [name])
-    const searchResults = useCalculatedState(() => {
-        const saveFiles = loadSaves()
-        return saveFiles.sort((a, b) => Comparators[sortBy](a,b))
-    }, [name, sortBy, deleted])
+    const searchResults = useCalculatedState(loadSaves, [name, deleted])
 
     function save() {
         if (!isValid) return
@@ -134,74 +129,141 @@ const AdventuringDayForm:FC<PropType> = ({ players, encounters, onCancel, onLoad
         localStorage.removeItem('saveName')
     }
 
+    async function onDownload() {
+        const newSaveFile: SaveFile = {
+            updated: Date.now(),
+            name,
+            players,
+            encounters,
+        }
+
+        const file = new Blob([JSON.stringify(newSaveFile)], {type: 'json'})
+        const a = document.createElement("a")
+        const url = URL.createObjectURL(file)
+        a.href = url
+        a.download = `${newSaveFile.name}.json`
+        document.body.appendChild(a)
+        a.click()
+        setTimeout(() => {
+            document.body.removeChild(a)
+            window.URL.revokeObjectURL(url)  
+        }, 0)
+    }
+
+    async function onUpload(files: FileList | null) {
+        if (!onLoad) return
+        if (!files || !files.length) { setError('No files uploaded'); return }
+
+        const file = files[0]
+        if (!file) { setError('No file uploaded'); return }
+
+        const json = await file.text()
+        if (!json) return
+
+        let obj
+        try { obj = JSON.parse(json) } 
+        catch (e) { setError('File is not valid JSON');  return }
+        
+        const parsed = SaveFileSchema.safeParse(obj)
+        if (!parsed.success) { setError('Invalid schema'); return }
+
+        const newSave: SaveFile = parsed.data
+
+        const saveFiles = loadSaves()
+        
+        const existingIndex = saveFiles.findIndex(save => (save.name === newSave.name))
+        if (existingIndex !== -1) saveFiles[existingIndex] = newSave
+        else saveFiles.push(newSave)
+
+        carefulSave('saveFiles', JSON.stringify(saveFiles))
+        carefulSave('saveName', newSave.name)
+        onLoad(newSave.players, newSave.encounters)
+    }
+
+    function getSaveByName(saveName: string) {
+        return searchResults.find(save => (save.name === saveName))!
+    }
+
     return (
-        <div className={styles.overlay} onMouseDown={onCancel}>
-            <div className={styles.modal} onMouseDown={e => e.stopPropagation()}>
-                { onLoad ? null : (
-                    <section>
-                        <h3>Save File Name:</h3>
-                        <input type="text" value={name} onChange={e => setName(e.target.value)} />
-                    </section>
-                )}
+        <Modal onCancel={onCancel} className={styles.adventuringDay}>
+            { onLoad ? null : (
+                <section>
+                    <h3>Save File Name:</h3>
+                    <input type="text" value={name} onChange={e => setName(e.target.value)} />
+                </section>
+            )}
 
-                <div className={styles.searchResults}>
-                    <div className={styles.header}>
-                        <div onClick={() => setSortBy((sortBy === 'nameAsc') ? 'nameDesc' : 'nameAsc' )}>
-                            Name
-                            { (sortBy !== 'nameAsc') ? null : <FontAwesomeIcon icon={faChevronUp} /> }
-                            { (sortBy !== 'nameDesc') ? null : <FontAwesomeIcon icon={faChevronDown} /> }
-                        </div>                    
-                        <div onClick={() => setSortBy((sortBy === 'dateAsc') ? 'dateDesc' : 'dateAsc' )}>
-                            Last Update
-                            { (sortBy !== 'dateAsc') ? null : <FontAwesomeIcon icon={faChevronUp} /> }
-                            { (sortBy !== 'dateDesc') ? null : <FontAwesomeIcon icon={faChevronDown} /> }
-                        </div>
-                    </div>
-                    <div className={styles.result}>
-                        { searchResults.length === 0 ? (
-                            <div className={styles.placeholder}>
-                                No save files
+            <SortTable
+                value={name}
+                list={searchResults.map(save => save.name)}
+                comparators={{
+                    Name: (a, b) => a.localeCompare(b),
+                    'Last Update': (a, b) => getSaveByName(a).updated - getSaveByName(b).updated,
+                }}
+                onChange={setName}>
+                    { saveName => {
+                        const save = getSaveByName(saveName)
+                        return (
+                            <div className={styles.save}>
+                                <span className={styles.fileName}>{save.name}</span>
+                                <span className={styles.fileDate}>{new Date(save.updated).toLocaleDateString()}</span>
+                                <button onClick={() => deleteSave(save.name)}><FontAwesomeIcon icon={faTrash} /></button>
                             </div>
-                        ) : (
-                            searchResults.map(save => (
-                                <div 
-                                    key={save.name} 
-                                    className={`${styles.save} ${name === save.name ? styles.active : ''}`} 
-                                    onClick={() => setName(save.name)}>
-                                        <span className={styles.fileName}>
-                                            {save.name}
-                                        </span>
-                                        <span className={styles.fileDate}>
-                                            {new Date(save.updated).toLocaleDateString()}
-                                        </span>
-                                        <button onClick={() => deleteSave(save.name)}>
-                                            <FontAwesomeIcon icon={faTrash} />
-                                        </button>
-                                </div>
-                            ))
-                        )}
-                    </div>
-                </div>
+                        )
+                    }}
+            </SortTable>
 
-                <div className={styles.buttons}>
-                    { onLoad ? (
+            <div className={styles.buttons}>
+                { onLoad ? (
+                    <>
                         <button
                             disabled={!isValid}
                             onClick={load}>
                             <FontAwesomeIcon icon={faFolder} />
                             Load {name ? `"${name}"` : ''}
                         </button>
-                    ) : (
+                        
+                        <label htmlFor="file" className="tooltipContainer">
+                            <FontAwesomeIcon icon={faUpload} />
+                            Upload save file
+
+                            <div className="tooltip">
+                                Loads an adventuring day from a file you upload.
+                            </div>
+                        </label>
+                        <input 
+                            type="file" 
+                            id="file" 
+                            accept="application/json" 
+                            style={{display: "none"}} 
+                            onChange={(e) => onUpload(e.target.files)} />
+                    </>
+                ) : (
+                    <>
                         <button
                             disabled={!isValid}
                             onClick={save}>
                             <FontAwesomeIcon icon={faSave} />
                             Save {name ? `"${name}"` : ''}
                         </button>
-                    )}
-                </div>
+                        <button className="tooltipContainer" onClick={onDownload}>
+                            <FontAwesomeIcon icon={faDownload} />
+                            Download save file
+
+                            <div className="tooltip">
+                                Save the current encounter as a file so you can load it later
+                            </div>
+                        </button>
+                    </>
+                )}
             </div>
-        </div>
+
+            { (error !== null) ? (
+                <div className={styles.error}>
+                    {error}
+                </div>
+            ) : null}
+        </Modal>
     )
 }
 

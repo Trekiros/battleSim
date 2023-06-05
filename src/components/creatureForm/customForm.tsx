@@ -1,12 +1,13 @@
-import { FC } from "react"
+import { FC, useState } from "react"
 import { Action, Creature } from "../../model/model"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPlus, faSave } from "@fortawesome/free-solid-svg-icons"
+import { faFolder, faPlus, faSave } from "@fortawesome/free-solid-svg-icons"
 import styles from './customForm.module.scss'
 import { clone } from "../../model/utils"
 import ActionForm from "./actionForm"
 import DecimalInput from "../utils/DecimalInput"
 import { v4 as uuid } from 'uuid'
+import LoadCreatureForm, { saveCreature } from "./loadCreatureForm"
 
 type PropType = {
     value: Creature,
@@ -14,6 +15,8 @@ type PropType = {
 }
 
 const CustomForm:FC<PropType> = ({ value, onChange }) => {
+    const [isLoading, setIsLoading] = useState(false)
+
     function update(callback: (valueClone: Creature) => void) {
         const valueClone = clone(value)
         callback(valueClone)
@@ -43,15 +46,7 @@ const CustomForm:FC<PropType> = ({ value, onChange }) => {
         update(v => { v.actions.splice(index, 1) })
     }
 
-    const canSaveTemplate = !!localStorage && !!localStorage.getItem('useLocalStorage') && !!value.type
-
-    function saveTemplate() {
-        if (!canSaveTemplate) return
-
-        const templates = JSON.parse(localStorage.getItem('monsterTemplates') || "{}")
-        templates[value.id] = value
-        localStorage.setItem('monsterTemplates', JSON.stringify(templates))
-    }
+    const canSaveTemplate = !!localStorage && !!localStorage.getItem('useLocalStorage')
 
     return (
         <div className={styles.customForm}>
@@ -60,14 +55,16 @@ const CustomForm:FC<PropType> = ({ value, onChange }) => {
                 <div className={styles.nameContainer}>
                     <input type='text' value={value.name} onChange={e => update(v => { v.name = e.target.value })} />
                     { canSaveTemplate ? (
-                        <button onClick={saveTemplate} className="tooltipContainer">
-                            <FontAwesomeIcon icon={faSave} />
-                            <span className={styles.btnText}>Save</span>
-
-                            <div className="tooltip">
-                                This will save the {value.name} to your bestiary, so when you select it, it will use the current stats instead of the default ones.
-                            </div>
-                        </button>
+                        <>
+                            <button onClick={() => saveCreature(value)}>
+                                <FontAwesomeIcon icon={faSave} />
+                                <span className={styles.btnText}>Save</span>
+                            </button>
+                            <button onClick={() => setIsLoading(true)}>
+                                <FontAwesomeIcon icon={faFolder} />
+                                <span className={styles.btnText}>Load</span>
+                            </button>
+                        </>
                     ) : null }
                 </div>
             </section>
@@ -103,6 +100,12 @@ const CustomForm:FC<PropType> = ({ value, onChange }) => {
                     />
                 ))}
             </div>
+
+            { isLoading ? (
+                <LoadCreatureForm 
+                    onLoad={(creature) => { onChange(creature); setIsLoading(false) }} 
+                    onCancel={() => setIsLoading(false)} />
+            ) : null}
         </div>
     )
 }

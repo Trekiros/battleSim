@@ -1,0 +1,41 @@
+@import '/styles/mixins';
+
+.searchResults {
+    border-radius: 8px;
+    outline: 4px solid #fff1;
+
+    .header {
+        width: 100%;
+        background-color: #fff1;
+        border-radius: 8px 8px 0 0;
+        padding: 0.5em 1em;
+        display: flex;
+        flex-direction: row;
+
+        >div {
+            flex: 1 1 0;
+            padding: 0.5em;
+
+            svg { width: 1em; margin-left: 1em }
+        }
+    }
+
+    .result {
+        height: 40vh;
+        min-height: 200px;
+        overflow-x: hidden;
+        @include scrollable;
+
+        .placeholder { width: 100%; padding: 2em; text-align: center; color: #aaa; user-select: none; }
+
+        .elem {
+            width: 100%;
+            text-align: left;
+            margin: 0;
+            border-radius: 0;
+            background: transparent;
+            &:hover { background: #fff1 }
+            &.active { background: #fff3 }
+        }
+    }
+}

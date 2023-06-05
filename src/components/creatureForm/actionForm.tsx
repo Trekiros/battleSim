@@ -32,6 +32,7 @@ const FreqOptions: Options<Frequency> = [
 const ConditionOptions: Options<Condition> = [
     { value:'default', label: 'Default' },
     { value:'ally at 0 HP', label: 'There is an ally at 0 HP' },
+    { value:'ally under half HP', label: 'An ally has less than half their maximum HP' },
     { value:'is available', label: 'A use of this action is available' },
     { value:'is under half HP', label: 'This creature is under half its maximum HP' },
     { value:'has no THP', label: 'This creature has no temporary HP' },

@@ -22,3 +22,33 @@
         100% { opacity: 1 }
     }
 }
+
+// Macro for buttons & other clickable elements
+@mixin clickable {
+    text-align: center;
+    border-radius: 8px;
+    border: none;
+    color: #eee;
+    padding: 1em 2em;
+    margin: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+
+    background-color: #fff1;
+    transition: background-color 0.3s;
+    
+    &:hover:not(.disabled) { background-color: #fff3 }
+
+    &:disabled {
+        background: transparent;
+        color: #aaa;
+        cursor: initial;
+        pointer-events: none;
+    }
+
+    svg {
+        margin: 0 1em;
+        width: 1em;
+    }
+}
