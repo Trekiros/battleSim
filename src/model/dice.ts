@@ -6,7 +6,7 @@ export function validateDiceFormula(expr: number|string) {
     if (typeof expr === 'number' || !isNaN(+expr)) return true
 
     try {
-        const roll = roller.roll(expr)
+        const roll = roller.roll(expr.trim())
         return true
     } catch (e) {
         return false
@@ -20,7 +20,7 @@ export function evaluateDiceFormula(expr: number|string, canCrit?: boolean): num
 
     if (!validateDiceFormula(expr)) throw 'invalid dice expression'
 
-    const roll = roller.parse(expr)
+    const roll = roller.parse(expr.trim())
 
     return evaluateUnknown(roll)
 }
