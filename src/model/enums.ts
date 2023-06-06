@@ -21,7 +21,7 @@ export const AllyTargetList = [
 export const AllyTargetSchema = z.enum(AllyTargetList)
 export type AllyTarget = z.infer<typeof AllyTargetSchema>
 
-export const ConditionList = [
+export const ActionConditionList = [
     'default', 
     'ally at 0 HP', 
     'ally under half HP',
@@ -30,8 +30,36 @@ export const ConditionList = [
     'has no THP', 
     'not used yet'
 ] as const
-export const ConditionSchema = z.enum(ConditionList)
-export type Condition = z.infer<typeof ConditionSchema>
+export const ActionConditionSchema = z.enum(ActionConditionList)
+export type ActionCondition = z.infer<typeof ActionConditionSchema>
+
+export const CreatureConditionList = [
+    'Blinded',
+    //'Charmed',
+    //'Deafened',
+    'Frightened',
+    // 'Grapple',
+    'Incapacitated',
+    'Invisible',
+    'Paralyzed',
+    'Petrified',
+    'Poisoned',
+    'Restrained',
+    'Stunned',
+    'Unconscious',
+    'Exhausted',
+
+    'Attacks with Advantage',
+    'Attacks with Disadvantage',
+    'Is attacked with Advantage',
+    'Is attacked with Disadvantage',
+    'Attacks and is attacked with Advantage',
+    'Attacks and saves with Disadvantage',
+    'Saves with Advantage',
+    'Save with Disadvantage',
+] as const
+export const CreatureConditionSchema = z.enum(CreatureConditionList)
+export type CreatureCondition = z.infer<typeof CreatureConditionSchema>
 
 export const ActionTypeList = ['atk', 'heal', 'buff', 'debuff'] as const
 export const ActionTypeSchema = z.enum(ActionTypeList)

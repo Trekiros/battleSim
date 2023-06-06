@@ -152,8 +152,8 @@ export const Monsters: Creature[] = [
                 "target": "ally with the highest DPR",
                 "buff": {
                     "duration": "entire encounter",
-                    "toHit": 2.5,
-                    "save": 2.5
+                    "toHit": '1d4',
+                    "save": '1d4'
                 }
             },
             {
@@ -2222,8 +2222,7 @@ export const Monsters: Creature[] = [
                 "target": "self",
                 "buff": {
                     "duration": "1 round",
-                    "toHit": 4,
-                    "ac": -4
+                    condition: 'Attacks and is attacked with Advantage',
                 }
             }
         ],
@@ -2436,8 +2435,7 @@ export const Monsters: Creature[] = [
                 "target": "self",
                 "buff": {
                     "duration": "1 round",
-                    "toHit": 4,
-                    "ac": -4
+                    condition: 'Attacks and is attacked with Advantage',
                 }
             }
         ],
@@ -2705,7 +2703,7 @@ export const Monsters: Creature[] = [
                     "dc": 14,
                     "buff": {
                         "duration": "entire encounter",
-                        "toHit": -4.5
+                        condition: 'Poisoned',
                     }
                 }
             }
@@ -3167,8 +3165,7 @@ export const Monsters: Creature[] = [
                     "dc": 100,
                     "buff": {
                         "duration": "1 round",
-                        "ac": -4.5,
-                        "toHit": -4.5
+                        condition: 'Restrained',
                     }
                 }
             },
@@ -3187,8 +3184,7 @@ export const Monsters: Creature[] = [
                     "dc": 100,
                     "buff": {
                         "duration": "1 round",
-                        "ac": -4.5,
-                        "toHit": -4.5
+                        condition: 'Restrained',
                     }
                 }
             },
@@ -3207,8 +3203,7 @@ export const Monsters: Creature[] = [
                     "dc": 100,
                     "buff": {
                         "duration": "1 round",
-                        "ac": -4.5,
-                        "toHit": -4.5
+                        condition: 'Restrained',
                     }
                 }
             },
@@ -3227,8 +3222,7 @@ export const Monsters: Creature[] = [
                     "dc": 100,
                     "buff": {
                         "duration": "1 round",
-                        "ac": -4.5,
-                        "toHit": -4.5
+                        condition: 'Restrained',
                     }
                 }
             }
@@ -4084,8 +4078,7 @@ export const Monsters: Creature[] = [
                 "saveDC": 15,
                 "buff": {
                     "duration": "entire encounter",
-                    "toHit": -4,
-                    "save": -4
+                    condition: 'Attacks and saves with Disadvantage'
                 }
             }
         ],
@@ -4540,8 +4533,7 @@ export const Monsters: Creature[] = [
                 "saveDC": 12,
                 "buff": {
                     "duration": "1 round",
-                    "toHit": -4,
-                    "ac": -4
+                    condition: 'Restrained',
                 }
             }
         ],
@@ -4582,8 +4574,7 @@ export const Monsters: Creature[] = [
                 "saveDC": 14,
                 "buff": {
                     "duration": "1 round",
-                    "toHit": -4,
-                    "ac": -4
+                    condition: 'Restrained',
                 }
             }
         ],
@@ -4935,7 +4926,7 @@ export const Monsters: Creature[] = [
                     "dc": 11,
                     "buff": {
                         "duration": "1 round",
-                        "toHit": -4.5
+                        condition: 'Poisoned',
                     }
                 }
             }
@@ -6261,8 +6252,7 @@ export const Monsters: Creature[] = [
                     "dc": 11,
                     "buff": {
                         "duration": "1 round",
-                        "toHit": -4.5,
-                        "ac": -4.5
+                        condition: 'Restrained',
                     }
                 }
             }
@@ -6567,7 +6557,7 @@ export const Monsters: Creature[] = [
                     "dc": 16,
                     "buff": {
                         "duration": "1 round",
-                        "damageMultiplier": 0,
+                        condition: 'Incapacitated',
                         "damageTakenMultiplier": 0
                     }
                 }
@@ -7670,8 +7660,8 @@ export const Monsters: Creature[] = [
                 "target": "ally with the highest DPR",
                 "buff": {
                     "duration": "entire encounter",
-                    "toHit": 2.5,
-                    "save": 2.5
+                    "toHit": '1d4',
+                    "save": '1d4'
                 }
             },
             {
@@ -8086,8 +8076,7 @@ export const Monsters: Creature[] = [
                 "saveDC": 12,
                 "buff": {
                     "duration": "1 round",
-                    "damageMultiplier": 0,
-                    "ac": -4
+                    condition: 'Stunned',
                 }
             }
         ],
@@ -8308,8 +8297,8 @@ export const Monsters: Creature[] = [
                 "target": "ally with the least HP",
                 "buff": {
                     "duration": "1 round",
-                    "toHit": 2.5,
-                    "save": 2.5
+                    "toHit": '1d4',
+                    "save": '1d4'
                 }
             },
             {
@@ -8393,8 +8382,7 @@ export const Monsters: Creature[] = [
                     "dc": 100,
                     "buff": {
                         "duration": "1 round",
-                        "ac": -4.5,
-                        "toHit": -4.5
+                        condition: 'Restrained',
                     }
                 }
             },
@@ -8413,8 +8401,7 @@ export const Monsters: Creature[] = [
                     "dc": 100,
                     "buff": {
                         "duration": "1 round",
-                        "ac": -4.5,
-                        "toHit": -4.5
+                        condition: 'Restrained',
                     }
                 }
             }
@@ -10200,7 +10187,7 @@ export const Monsters: Creature[] = [
                 "target": "ally with the least HP",
                 "buff": {
                     "duration": "1 round",
-                    "toHit": 4
+                    condition: "Attacks with Advantage",
                 }
             },
             {
@@ -10283,8 +10270,7 @@ export const Monsters: Creature[] = [
                     "dc": 100,
                     "buff": {
                         "duration": "1 round",
-                        "damageMultiplier": 0,
-                        "ac": -4.5
+                        condition: 'Stunned'
                     }
                 }
             },
@@ -10548,7 +10534,7 @@ export const Monsters: Creature[] = [
                     "dc": 21,
                     "buff": {
                         "duration": "1 round",
-                        "toHit": -4.5
+                        condition: 'Poisoned',
                     }
                 }
             }
@@ -10793,7 +10779,7 @@ export const Monsters: Creature[] = [
                 "target": "ally with the highest DPR",
                 "buff": {
                     "duration": "until next attack made",
-                    "toHit": 4
+                    condition: 'Attacks with Advantage'
                 }
             },
             {
@@ -10900,8 +10886,7 @@ export const Monsters: Creature[] = [
                     "dc": 19,
                     "buff": {
                         "duration": "entire encounter",
-                        "toHit": -4.5,
-                        "ac": -4.5
+                        condition: 'Restrained',
                     }
                 }
             }
@@ -11038,7 +11023,7 @@ export const Monsters: Creature[] = [
                     "dc": 10,
                     "buff": {
                         "duration": "1 round",
-                        "toHit": -4.5
+                        condition: 'Poisoned',
                     }
                 }
             }
@@ -11228,8 +11213,7 @@ export const Monsters: Creature[] = [
                     "dc": 100,
                     "buff": {
                         "duration": "1 round",
-                        "toHit": -4.5,
-                        "ac": -4.5
+                        condition: 'Restrained',
                     }
                 }
             },
@@ -11502,7 +11486,7 @@ export const Monsters: Creature[] = [
                 "target": "self",
                 "buff": {
                     "duration": "1 round",
-                    "toHit": 4
+                    condition: 'Attacks with Advantage',
                 }
             }
         ],
@@ -11542,7 +11526,7 @@ export const Monsters: Creature[] = [
                 "target": "self",
                 "buff": {
                     "duration": "1 round",
-                    "toHit": 4
+                    condition: 'Attacks with Advantage',
                 }
             }
         ],
@@ -11600,8 +11584,7 @@ export const Monsters: Creature[] = [
                     "dc": 100,
                     "buff": {
                         "duration": "1 round",
-                        "toHit": -4.5,
-                        "ac": -4.5
+                        condition: 'Restrained',
                     }
                 }
             }
@@ -13189,8 +13172,7 @@ export const Monsters: Creature[] = [
                 "saveDC": 17,
                 "buff": {
                     "duration": "1 round",
-                    "damageMultiplier": 0,
-                    "ac": -4
+                    condition: 'Stunned',
                 }
             }
         ],
@@ -13547,8 +13529,7 @@ export const Monsters: Creature[] = [
                 "saveDC": 14,
                 "buff": {
                     "duration": "1 round",
-                    "damageMultiplier": 0,
-                    "ac": -4
+                    condition: 'Stunned',
                 }
             }
         ],
@@ -15156,7 +15137,7 @@ export const Monsters: Creature[] = [
                 "saveDC": 15,
                 "buff": {
                     "duration": "entire encounter",
-                    "toHit": -2.5
+                    "toHit": '-1d4'
                 }
             }
         ],
@@ -15201,8 +15182,7 @@ export const Monsters: Creature[] = [
                     dc: 13,
                     buff: {
                         duration: '1 round',
-                        damageMultiplier: 0,
-                        ac: -4.5,
+                        condition: 'Stunned',
                     }
                 }
             }
@@ -15248,8 +15228,7 @@ export const Monsters: Creature[] = [
                     dc: 10,
                     buff: {
                         duration: '1 round',
-                        damageMultiplier: 0,
-                        ac: -4.5,
+                        condition: 'Stunned',
                     }
                 }
             }
@@ -15347,8 +15326,7 @@ export const Monsters: Creature[] = [
                     dc: 100,
                     buff: {
                         duration: '1 round',
-                        toHit: -4.5,
-                        ac: -4.5,
+                        condition: 'Blinded',
                     }
                 }
             },
@@ -15368,8 +15346,7 @@ export const Monsters: Creature[] = [
                     dc: 100,
                     buff: {
                         duration: '1 round',
-                        damageMultiplier: 0,
-                        ac: -4.5,
+                        condition: 'Stunned',
                     }
                 }
             }
@@ -15802,8 +15779,7 @@ export const Monsters: Creature[] = [
                 "target": "self",
                 "buff": {
                     "duration": "1 round",
-                    "ac": 4,
-                    "toHit": 4
+                    condition: 'Invisible',
                 }
             }
         ],
@@ -15873,8 +15849,7 @@ export const Monsters: Creature[] = [
                     "dc": 100,
                     "buff": {
                         "duration": "1 round",
-                        "toHit": -4.5,
-                        "ac": -4.5
+                        condition: 'Restrained',
                     }
                 }
             }
@@ -15968,8 +15943,7 @@ export const Monsters: Creature[] = [
                 "saveDC": 12,
                 "buff": {
                     "duration": "1 round",
-                    "toHit": -4,
-                    "save": -4
+                    condition: 'Attacks and saves with Disadvantage',
                 }
             }
         ],
@@ -16193,8 +16167,7 @@ export const Monsters: Creature[] = [
                 "saveDC": 100,
                 "buff": {
                     "duration": "1 round",
-                    "toHit": -4,
-                    "ac": -4
+                    condition: 'Blinded',
                 }
             }
         ],
@@ -16315,7 +16288,7 @@ export const Monsters: Creature[] = [
                     "dc": 13,
                     "buff": {
                         "duration": "entire encounter",
-                        "toHit": -4.5
+                        condition: 'Poisoned',
                     }
                 }
             },
@@ -16386,8 +16359,7 @@ export const Monsters: Creature[] = [
                     "dc": 100,
                     "buff": {
                         "duration": "1 round",
-                        "ac": -4.5,
-                        "toHit": -4.5
+                        condition: 'Restrained',
                     }
                 }
             },
@@ -16965,8 +16937,7 @@ export const Monsters: Creature[] = [
                     "dc": 16,
                     "buff": {
                         "duration": "1 round",
-                        "ac": -4.5,
-                        "toHit": -4.5
+                        condition: 'Restrained',
                     }
                 }
             }
@@ -17378,8 +17349,7 @@ export const Monsters: Creature[] = [
                     dc: 100,
                     buff: {
                         duration: '1 round',
-                        damageMultiplier: 0,
-                        ac: -4.5,
+                        condition: 'Stunned',
                     }
                 }
             }
@@ -17564,7 +17534,7 @@ export const Monsters: Creature[] = [
                 "target": "ally with the least HP",
                 "buff": {
                     "duration": "1 round",
-                    "ac": 4.5
+                    condition: 'Is attacked with Disadvantage',
                 }
             },
             {
@@ -17662,7 +17632,7 @@ export const Monsters: Creature[] = [
                     "dc": 19,
                     "buff": {
                         "duration": "1 round",
-                        "toHit": -4.5
+                        condition: 'Frightened',
                     }
                 }
             },
@@ -17681,7 +17651,7 @@ export const Monsters: Creature[] = [
                     "dc": 19,
                     "buff": {
                         "duration": "1 round",
-                        "toHit": -4.5
+                        condition: 'Frightened',
                     }
                 }
             },
@@ -17696,7 +17666,7 @@ export const Monsters: Creature[] = [
                 "target": "ally with the least HP",
                 "buff": {
                     "duration": "until next attack made",
-                    "toHit": 4
+                    condition: 'Attacks with Advantage',
                 }
             }
         ],
@@ -17997,7 +17967,7 @@ export const Monsters: Creature[] = [
                 "target": "ally with the least HP",
                 "buff": {
                     "duration": "until next attack made",
-                    "toHit": 3.5
+                    "toHit": '1d6'
                 }
             }
         ],
@@ -18580,9 +18550,7 @@ export const Monsters: Creature[] = [
                     dc: 16,
                     buff: {
                         duration: '1 round',
-                        damageMultiplier: 0,
-                        damageTakenMultiplier: 2,
-                        ac: -4.5,
+                        condition: 'Paralyzed',
                     }
                 }
             }
@@ -18666,8 +18634,7 @@ export const Monsters: Creature[] = [
                     "dc": 19,
                     "buff": {
                         "duration": "1 round",
-                        "toHit": -4.5,
-                        "ac": -4.5
+                        condition: 'Restrained',
                     }
                 }
             }
@@ -18845,7 +18812,7 @@ export const Monsters: Creature[] = [
                     "dc": 21,
                     "buff": {
                         "duration": "1 round",
-                        "toHit": -4.5
+                        condition: 'Poisoned',
                     }
                 }
             },
@@ -18864,7 +18831,7 @@ export const Monsters: Creature[] = [
                     "dc": 21,
                     "buff": {
                         "duration": "1 round",
-                        "toHit": -4.5
+                        condition: 'Poisoned',
                     }
                 }
             }
@@ -19339,7 +19306,7 @@ export const Monsters: Creature[] = [
                     "dc": 16,
                     "buff": {
                         "duration": "1 round",
-                        "toHit": -4.5
+                        condition: 'Poisoned',
                     }
                 }
             }
@@ -19631,7 +19598,7 @@ export const Monsters: Creature[] = [
                     dc: 100,
                     buff: {
                         duration: '1 round',
-                        damageMultiplier: 0,
+                        condition: 'Incapacitated',
                     }
                 }
             }
@@ -19684,7 +19651,7 @@ export const Monsters: Creature[] = [
                 "target": "self",
                 "buff": {
                     "duration": "1 round",
-                    "toHit": 4
+                    condition: 'Attacks with Advantage',
                 }
             }
         ],
@@ -19716,7 +19683,7 @@ export const Monsters: Creature[] = [
                     "dc": 22,
                     "buff": {
                         "duration": "entire encounter",
-                        "toHit": -4.5
+                        condition: 'Poisoned',
                     }
                 }
             },
@@ -20376,8 +20343,7 @@ export const Monsters: Creature[] = [
                     dc: 100,
                     buff: {
                         duration: '1 round',
-                        damageMultiplier: 0,
-                        ac: -4.5,
+                        condition: 'Stunned',
                     },
                 },
             }
@@ -20869,9 +20835,7 @@ export const Monsters: Creature[] = [
                 "saveDC": 20,
                 "buff": {
                     "duration": "1 round",
-                    "ac": -4,
-                    "damageMultiplier": 0,
-                    "damageTakenMultiplier": 2
+                    condition: 'Paralyzed',
                 }
             }
         ],
@@ -20955,7 +20919,7 @@ export const Monsters: Creature[] = [
                     "dc": 12,
                     "buff": {
                         "duration": "1 round",
-                        "toHit": -4.5
+                        condition: 'Poisoned',
                     }
                 }
             }
@@ -20988,7 +20952,7 @@ export const Monsters: Creature[] = [
                     "dc": 10,
                     "buff": {
                         "duration": "1 round",
-                        "toHit": -4.5
+                        condition: 'Poisoned',
                     }
                 }
             }
@@ -21047,8 +21011,7 @@ export const Monsters: Creature[] = [
                     "dc": 18,
                     "buff": {
                         "duration": "1 round",
-                        "toHit": -4.5,
-                        "ac": -4.5
+                        condition: 'Restrained',
                     }
                 }
             },
@@ -21397,8 +21360,7 @@ export const Monsters: Creature[] = [
                 "target": "self",
                 "buff": {
                     "duration": "1 round",
-                    "ac": 4.5,
-                    "toHit": 4.5
+                    condition: 'Invisible',
                 }
             },
             {
@@ -21503,7 +21465,7 @@ export const Monsters: Creature[] = [
                     "dc": 17,
                     "buff": {
                         "duration": "1 round",
-                        "toHit": -4.5
+                        condition: 'Poisoned',
                     }
                 }
             },
@@ -21518,8 +21480,7 @@ export const Monsters: Creature[] = [
                 "target": "self",
                 "buff": {
                     "duration": "1 round",
-                    "ac": 4,
-                    "toHit": 4
+                    condition: 'Invisible',
                 }
             }
         ],
@@ -21675,7 +21636,7 @@ export const Monsters: Creature[] = [
                 "target": "ally with the highest DPR",
                 "buff": {
                     "duration": "1 round",
-                    "toHit": 4
+                    condition: 'Attacks with Advantage',
                 }
             }
         ],
@@ -21886,7 +21847,7 @@ export const Monsters: Creature[] = [
                     "dc": 12,
                     "buff": {
                         "duration": "1 round",
-                        "toHit": -4.5
+                        condition: 'Poisoned',
                     }
                 }
             }
@@ -22393,7 +22354,7 @@ export const Monsters: Creature[] = [
                     dc: 10,
                     buff: {
                         duration: '1 round',
-                        ac: -4.5,
+                        condition: 'Is attacked with Advantage',
                     }
                 }
             }
@@ -22541,7 +22502,7 @@ export const Monsters: Creature[] = [
                     "dc": 19,
                     "buff": {
                         "duration": "1 round",
-                        "damageMultiplier": 0
+                        condition: 'Incapacitated',
                     }
                 }
             },
@@ -23849,8 +23810,7 @@ export const Monsters: Creature[] = [
                 "target": "self",
                 "buff": {
                     "duration": "1 round",
-                    "ac": -4,
-                    "toHit": 4
+                    condition: 'Attacks and is attacked with Advantage',
                 }
             }
         ],

@@ -1,7 +1,8 @@
 import { z } from 'zod'
-import { AllyTargetSchema, BuffDurationSchema, ChallengeRatingSchema, ClassesSchema, ConditionSchema, CreatureTypeSchema, EnemyTargetSchema } from './enums'
+import { AllyTargetSchema, BuffDurationSchema, ChallengeRatingSchema, ClassesSchema, ActionConditionSchema, CreatureTypeSchema, EnemyTargetSchema, CreatureConditionSchema } from './enums'
 import { ClassOptionsSchema } from './classOptions'
 import { validateDiceFormula } from './dice'
+import { ActionTemplates } from '../data/actions'
 
 export const DiceFormulaSchema = z.number().or(z.custom<string>((data) => {
     if (typeof data !== 'string') return false
@@ -32,6 +33,7 @@ const BuffSchema = z.object({
     damageTakenMultiplier: z.number().optional(),
     dc: DiceFormulaSchema.optional(),
     save: DiceFormulaSchema.optional(),
+    condition: CreatureConditionSchema.optional(),
 
     // Odds that the buff was applied. All of the effects are multiplied by this value. Default 1.
     magnitude: z.number().optional(),
@@ -43,7 +45,7 @@ const ActionSchemaBase = z.object({
     name: z.string(),
     actionSlot: z.number(), // Can only take 1 action for each action slot per turn, e.g. action slot 0 is all actions, and action slot 1 is all bonus actions
     freq: FrequencySchema,
-    condition: ConditionSchema,
+    condition: ActionConditionSchema,
     targets: z.number(),
 })
 
@@ -84,7 +86,28 @@ const DebuffActionSchema = ActionSchemaBase.merge(z.object({
     buff: BuffSchema,
 }))
 
-const ActionSchema = z.discriminatedUnion('type', [HealActionSchema, AtkActionSchema, BuffActionSchema, DebuffActionSchema])
+const TemplateActionSchema = z.object({
+    type: z.literal('template'),
+    id: z.string(),
+    freq: FrequencySchema,
+    condition: ActionConditionSchema,
+    target: AllyTargetSchema.or(EnemyTargetSchema),
+
+    templateName: z.custom<string>(data => {
+        if (typeof data !== 'string') return false
+    
+        // ActionTemplate needs to be cast as any to avoid circular type definition
+        return ((ActionTemplates as any)[data] !== undefined)
+    }),
+})
+
+const ActionSchema = z.discriminatedUnion('type', [
+    HealActionSchema, 
+    AtkActionSchema, 
+    BuffActionSchema, 
+    DebuffActionSchema, 
+    //TemplateActionSchema
+])
 
 // Creature is the definition of the creature. It's what the user inputs.
 // Combattant (see below) is the representation of a creature during the simulation. 

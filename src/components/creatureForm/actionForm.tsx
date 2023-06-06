@@ -2,7 +2,7 @@ import { FC, useState } from "react"
 import { Action, AllyTarget, AtkAction, Buff, BuffAction, DebuffAction, DiceFormula, EnemyTarget, Frequency, HealAction } from "../../model/model"
 import styles from './actionForm.module.scss'
 import { clone } from "../../model/utils"
-import { ActionType, BuffDuration, Condition } from "../../model/enums"
+import { ActionType, BuffDuration, ActionCondition, CreatureConditionList, CreatureCondition } from "../../model/enums"
 import Select from "../utils/select"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
@@ -29,7 +29,7 @@ const FreqOptions: Options<Frequency> = [
     { value:  rechargeFreq, label: 'Every X rounds' },
 ]
 
-const ConditionOptions: Options<Condition> = [
+const ConditionOptions: Options<ActionCondition> = [
     { value:'default', label: 'Default' },
     { value:'ally at 0 HP', label: 'There is an ally at 0 HP' },
     { value:'ally under half HP', label: 'An ally has less than half their maximum HP' },
@@ -104,6 +104,7 @@ const BuffDurationOptions: Options<BuffDuration> = [
 ]
 
 const BuffStatOptions: Options<keyof Omit<Buff, 'duration'>> = [
+    { value: 'condition', label: 'Condition' },
     { value: 'ac', label: 'Armor Class' },
     { value: 'save', label: 'Bonus to Saves' },
     { value: 'toHit', label: 'Bonus to hit' },
@@ -121,6 +122,7 @@ const AtkOptions: Options<boolean> = [
 const BuffForm:FC<{value: Buff, onUpdate: (newValue: Buff) => void}> = ({ value, onUpdate }) => {
     const [modifiers, setModifiers] = useState<(keyof Omit<Buff, 'duration'>)[]>(Object.keys(value).filter(key => (key !== 'duration')) as any)
 
+
     function setModifier(index: number, newValue: keyof Omit<Buff, 'duration'> | null) {
         const oldModifier = modifiers[index]
         if (oldModifier === newValue) return
@@ -135,7 +137,7 @@ const BuffForm:FC<{value: Buff, onUpdate: (newValue: Buff) => void}> = ({ value,
         setModifiers(modifiersClone)
     }
 
-    function updateValue(modifier: keyof Omit<Buff, 'duration'>, newValue: number) {
+    function updateValue(modifier: keyof Omit<Buff, 'duration'|'condition'>, newValue: number) {
         const buffClone = clone(value)
         buffClone[modifier] = newValue
         onUpdate(buffClone)
@@ -147,6 +149,12 @@ const BuffForm:FC<{value: Buff, onUpdate: (newValue: Buff) => void}> = ({ value,
         onUpdate(buffClone)
     }
 
+    function updateCondition(newValue: CreatureCondition|undefined) {
+        const buffClone = clone(value)
+        buffClone.condition = newValue
+        onUpdate(buffClone)
+    }
+
     function addModifier() {
         const newModifier = BuffStatOptions.find(({value}) => !modifiers.includes(value))
         if (!newModifier) return;
@@ -155,7 +163,7 @@ const BuffForm:FC<{value: Buff, onUpdate: (newValue: Buff) => void}> = ({ value,
 
     return (
         <>
-            Effects: 
+            Effects:
             {modifiers.map((modifier, index) => (
                 <div key={modifier} className={styles.modifier}>
                     <Select 
@@ -167,6 +175,12 @@ const BuffForm:FC<{value: Buff, onUpdate: (newValue: Buff) => void}> = ({ value,
                         <DecimalInput
                             value={value[modifier]}
                             onChange={v => updateValue(modifier, v || 0)}
+                        />
+                    ) : (modifier === 'condition') ? (
+                        <Select
+                            value={value.condition}
+                            options={CreatureConditionList.map(condition => ({ value: condition, label: condition }))}
+                            onChange={(newCondition) => updateCondition(newCondition)}
                         />
                     ) : (
                         <DiceFormulaInput 

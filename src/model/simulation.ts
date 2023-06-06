@@ -1,5 +1,5 @@
 import { evaluateDiceFormula } from "./dice"
-import { ActionType } from "./enums"
+import { ActionType, CreatureCondition, CreatureConditionList } from "./enums"
 import { Action, AtkAction, Buff, BuffAction, Combattant, Creature, CreatureState, DebuffAction, DiceFormula, Encounter, EncounterResult, EncounterStats, HealAction, Round, SimulationResult } from "./model"
 import { clone, range } from "./utils"
 import { v4 as uuid } from 'uuid'
@@ -50,6 +50,7 @@ export function creatureToCombattant(creature: Creature) {
 function iterateCombattant(combattant: Combattant) {
     const newInitialState: CreatureState = clone(combattant.finalState)
     newInitialState.buffs = new Map()
+    newInitialState.upcomingBuffs = new Map()
     
     // Handle buffs
     combattant.finalState.buffs.forEach((buff, name) => {
@@ -105,7 +106,7 @@ function getActions(combattant: Combattant, allies: Combattant[], handleHeals: b
         if (action.condition === 'is under half HP') return (combattant.finalState.currentHP * 2 < combattant.creature.hp)
         if (action.condition === 'ally at 0 HP') return (!!allies.find(ally => (ally.finalState.currentHP === 0)))
         if (action.condition === 'ally under half HP') return !!allies.find(ally => ((ally.initialState.currentHP > 0) && (ally.finalState.currentHP <= ally.creature.hp / 2)))
-        
+
         // Default or "is use available"
         return true
     }
@@ -274,9 +275,7 @@ function handleActions(allies: Combattant[], enemies: Combattant[], actionTypes:
     })
 }
 
-// In 5e, only the stronger buff is applies
-// This figures out which buff is the strongest, and applies that one.
-function mergeBuff(target: Combattant, buffName: string, newBuff: Buff, comparisonMode: 'min'|'max') {
+function applyBuff(target: Combattant, buffName: string, newBuff: Buff, comparisonMode: 'min'|'max') {
     const existingBuff = target.finalState.buffs.get(buffName)
 
     if (!existingBuff) {
@@ -284,6 +283,13 @@ function mergeBuff(target: Combattant, buffName: string, newBuff: Buff, comparis
         return
     }
 
+    const result = mergeBuff(existingBuff, newBuff, comparisonMode)
+    target.finalState.buffs.set(buffName, result)
+}
+
+// In 5e, only the stronger buff is applies
+// This figures out which buff is the strongest, and applies that one.
+function mergeBuff(buff1: Buff, buff2: Buff, comparisonMode: 'min'|'max'): Buff {
     function comparator(a: DiceFormula|undefined, b: DiceFormula|undefined) {
         if (a === undefined) return b
         if (b === undefined) return a
@@ -305,20 +311,23 @@ function mergeBuff(target: Combattant, buffName: string, newBuff: Buff, comparis
     }
 
     const result: Buff = {
-        duration: newBuff.duration,
+        duration: buff1.duration,
         
-        ac: comparator(newBuff.ac, existingBuff.ac),
-        damage: comparator(newBuff.damage, existingBuff.damage),
-        toHit: comparator(newBuff.toHit, existingBuff.toHit),
-        damageMultiplier: numberComparator(newBuff.damageMultiplier, existingBuff.damageMultiplier),
-        damageTakenMultiplier: numberComparator(newBuff.damageTakenMultiplier, existingBuff.damageTakenMultiplier),
-        dc: comparator(newBuff.dc, existingBuff.dc),
-        save: comparator(newBuff.save, existingBuff.save),
+        ac: comparator(buff1.ac, buff2.ac),
+        damage: comparator(buff1.damage, buff2.damage),
+        toHit: comparator(buff1.toHit, buff2.toHit),
+        damageMultiplier: numberComparator(buff1.damageMultiplier, buff2.damageMultiplier),
+        damageTakenMultiplier: numberComparator(buff1.damageTakenMultiplier, buff2.damageTakenMultiplier),
+        dc: comparator(buff1.dc, buff2.dc),
+        save: comparator(buff1.save, buff2.save),
+        condition: buff1.condition || buff2.condition,
 
-        magnitude: numberComparator(newBuff.magnitude, existingBuff.magnitude)
+        magnitude: atLeastOneChance([
+            buff1.magnitude !== undefined ? buff1.magnitude : 1,
+            buff2.magnitude !== undefined ? buff2.magnitude : 1,
+        ]),
     }
-
-    target.finalState.buffs.set(buffName, result)
+    return result
 }
 
 function getStats(statsMap: Map<string, EncounterStats>, combattant: Combattant) {
@@ -340,7 +349,10 @@ function getStats(statsMap: Map<string, EncounterStats>, combattant: Combattant)
 }
 
 function useBuffAction(buffer: Combattant, action: BuffAction, target: Combattant, stats: Map<string, EncounterStats>) {
-    mergeBuff(target, action.name, action.buff, 'max')
+    const attackerConditions = getConditions(buffer)
+    const chanceToBeIncapacitated = atLeastOneConditionChance(attackerConditions, ['Incapacitated', 'Paralyzed', 'Petrified', 'Stunned', 'Unconscious'])
+    
+    applyBuff(target, action.id, {...action.buff, magnitude: 1 - chanceToBeIncapacitated }, 'max')
     
     if (buffer.id !== target.id) {
         getStats(stats, buffer).charactersBuffed++
@@ -373,9 +385,47 @@ function getBuffs(combattant: Combattant, getter: (buff: Buff) => DiceFormula|un
         )
 }
 
+// Returns the list of conditions affecting the creature, and the chance of those conditions being present
+function getConditions(combattant: Combattant) {
+    const result = new Map<CreatureCondition, number>()
+
+    CreatureConditionList.forEach(condition => result.set(condition, 0))
+
+    combattant.finalState.buffs.forEach((buff) => {
+        if (!buff.condition) return
+
+        const existingBuffChance = result.get(buff.condition) || 0
+        const magnitude = buff.magnitude === undefined ? 1 : buff.magnitude
+        const newBuffChance = existingBuffChance + (1 - existingBuffChance) * magnitude
+        result.set(buff.condition, newBuffChance)
+    })
+
+    return result
+}
+
+// Returns the chance that at least one of the events happens, given the probabilities of these events
+function atLeastOneChance(probabilities: number[]) {
+    let noneHappening = 1
+    probabilities.forEach(probability => {
+        noneHappening *= 1 - probability
+    })
+    return 1 - noneHappening
+}
+
+function atLeastOneConditionChance(conditionsMap: Map<CreatureCondition, number>, conditions: CreatureCondition[]) {
+    return atLeastOneChance(conditions.map(condition => conditionsMap.get(condition)!))
+}
+
 // Chance to fail against a saving throw
 function calculateChanceToFail(attacker: Combattant, target: Combattant, baseDC: DiceFormula) {
+    const targetConditions = getConditions(target)
+    
+    const chanceForAdvantage = atLeastOneConditionChance(targetConditions, ['Saves with Advantage'])
+    const chanceForDisadvantage = atLeastOneConditionChance(targetConditions, ['Save with Disadvantage', 'Attacks and saves with Disadvantage'])
+
     const saveBonus = target.creature.saveBonus + getBuffs(target, b => b.save, 'add')
+        + 4.5 * chanceForAdvantage
+        - 4.5 * chanceForDisadvantage
     const saveDC = evaluateDiceFormula(baseDC) + getBuffs(attacker, b => b.dc, 'add')
     const chanceToFail = 1 - Math.min(1, Math.max(0, (11 + saveBonus - (saveDC - 10)) / 20))
 
@@ -384,7 +434,20 @@ function calculateChanceToFail(attacker: Combattant, target: Combattant, baseDC:
 
 // Chance to hit with an attack
 function calculateHitChance(attacker: Combattant, target: Combattant, baseToHit: DiceFormula) {
-    const toHit = evaluateDiceFormula(baseToHit) + getBuffs(attacker, b => b.toHit, 'add')
+    const attackerConditions = getConditions(attacker)
+    const targetConditions = getConditions(target)
+
+    const chanceForAdvantage = atLeastOneChance([
+        atLeastOneConditionChance(targetConditions, ['Blinded', 'Paralyzed', 'Restrained', 'Stunned', 'Unconscious', 'Petrified', 'Is attacked with Advantage', 'Attacks and is attacked with Advantage']),
+        atLeastOneConditionChance(attackerConditions, ['Invisible', 'Attacks with Advantage', 'Attacks and is attacked with Advantage'])
+    ])
+
+    const chanceForDisadvantage = atLeastOneChance([
+        atLeastOneConditionChance(targetConditions, ['Invisible', 'Is attacked with Disadvantage']),
+        atLeastOneConditionChance(attackerConditions, ['Blinded', 'Frightened', 'Poisoned', 'Restrained', 'Attacks with Disadvantage', 'Attacks and saves with Disadvantage'])
+    ])
+
+    const toHit = evaluateDiceFormula(baseToHit) + getBuffs(attacker, b => b.toHit, 'add') + 4.5 * chanceForAdvantage - 4.5 * chanceForDisadvantage
     const ac = target.creature.AC + getBuffs(target, b => b.ac, 'add')
     const hitChance = Math.min(1, Math.max(0, (11 + toHit - (ac - 10)) / 20))
 
@@ -393,13 +456,16 @@ function calculateHitChance(attacker: Combattant, target: Combattant, baseToHit:
 
 
 function useDebuffAction(attacker: Combattant, action: DebuffAction, target: Combattant, stats: Map<string, EncounterStats>) {
-    const chanceToFail = calculateChanceToFail(attacker, target, action.saveDC)
+    const attackerConditions = getConditions(attacker)
+    const chanceToBeIncapacitated = atLeastOneConditionChance(attackerConditions, ['Incapacitated', 'Paralyzed', 'Petrified', 'Stunned', 'Unconscious'])
+    
+    const chanceToFail = (1 - chanceToBeIncapacitated) * calculateChanceToFail(attacker, target, action.saveDC)
 
     const buffClone: Buff = clone(action.buff)
     if (buffClone.magnitude === undefined) buffClone.magnitude = 1
     buffClone.magnitude *= chanceToFail
 
-    mergeBuff(target, action.name, buffClone, 'min')
+    applyBuff(target, action.id, buffClone, 'min')
     
     if (attacker.id !== target.id) {
         getStats(stats, attacker).charactersDebuffed++
@@ -408,16 +474,21 @@ function useDebuffAction(attacker: Combattant, action: DebuffAction, target: Com
 }
 
 function useAtkAction(attacker: Combattant, action: AtkAction, target: Combattant, stats: Map<string, EncounterStats>) {
-    const hitChance = action.useSaves ?
+    const attackerConditions = getConditions(attacker)
+    const chanceToBeIncapacitated = atLeastOneConditionChance(attackerConditions, ['Incapacitated', 'Paralyzed', 'Petrified', 'Stunned', 'Unconscious'])
+    
+    const hitChance = (1 - chanceToBeIncapacitated) * (action.useSaves ?
         calculateChanceToFail(attacker, target, action.toHit)
-        : calculateHitChance(attacker, target, action.toHit)
-
+        : calculateHitChance(attacker, target, action.toHit))
+        
+    const targetConditions = getConditions(target)
     const damage = (
             evaluateDiceFormula(action.dpr, !action.useSaves)
-            + getBuffs(attacker, b => b.damage, 'add', !action.useSaves)
+            + getBuffs(attacker, b => b.damage, 'add', /* can crit: */ !action.useSaves)
         )
         * getBuffs(attacker, b => b.damageMultiplier, 'mult')
         * getBuffs(target, b => b.damageTakenMultiplier, 'mult')
+        * (1 + targetConditions.get('Paralyzed')!)
 
     let actualDamage = damage * hitChance
     if (action.useSaves && action.halfOnSave) {
@@ -443,11 +514,16 @@ function useAtkAction(attacker: Combattant, action: AtkAction, target: Combattan
     if (action.riderEffect) {
         const buffMagnitude = hitChance * calculateChanceToFail(attacker, target, action.riderEffect.dc)
 
-        const buffClone = clone(action.riderEffect.buff)
+        let buffClone = clone(action.riderEffect.buff)
         if (buffClone.magnitude === undefined) buffClone.magnitude = 1
         buffClone.magnitude *= buffMagnitude
         
-        mergeBuff(target, action.name, buffClone, 'min')
+        const existingBuff = target.finalState.upcomingBuffs.get(action.id)
+        if (existingBuff) {
+            buffClone = mergeBuff(existingBuff, buffClone, 'min')
+        }
+
+        target.finalState.upcomingBuffs.set(action.id, buffClone)
 
         if (attacker.id !== target.id) {
             getStats(stats, attacker).charactersDebuffed++
@@ -457,7 +533,10 @@ function useAtkAction(attacker: Combattant, action: AtkAction, target: Combattan
 }
 
 function useHealAction(healer: Combattant, action: HealAction, target: Combattant, stats: Map<string, EncounterStats>) {
-    const amount = evaluateDiceFormula(action.amount)
+    const attackerConditions = getConditions(healer)
+    const chanceToBeIncapacitated = atLeastOneConditionChance(attackerConditions, ['Incapacitated', 'Paralyzed', 'Petrified', 'Stunned', 'Unconscious'])
+    
+    const amount = (1 - chanceToBeIncapacitated) * evaluateDiceFormula(action.amount)
 
     if (action.tempHP) {
         target.finalState.tempHP = Math.max(0, target.finalState.tempHP || 0, amount)

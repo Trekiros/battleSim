@@ -24,7 +24,7 @@ function artificer(level: number, options: z.infer<typeof ClassOptions.artificer
         name: name('Artificer', level),
         AC: AC,
         saveBonus: scale(level, {1: PB, 20: PB + 6}),
-        hp: hp(level, 12, CON),
+        hp: hp(level, 8, CON),
         count: 1,
         mode: 'player',
         actions: scaleArray<Action>(level, {
@@ -150,8 +150,7 @@ function barbarian(level: number, options: z.infer<typeof ClassOptions.barbarian
             target: 'self',
             buff: {
                 duration: '1 round',
-                ac: -ADVANTAGE,
-                toHit: ADVANTAGE,
+                condition: 'Attacks and is attacked with Advantage',
             }
         })
     }
@@ -194,7 +193,7 @@ function bard(level: number, options: z.infer<typeof ClassOptions.bard>): Creatu
                         dc: 100,
                         buff: {
                             duration: 'until next attack made',
-                            toHit: DISADVANTAGE,
+                            condition: 'Attacks with Disadvantage',
                         },
                     }
                 },
@@ -253,7 +252,7 @@ function bard(level: number, options: z.infer<typeof ClassOptions.bard>): Creatu
                     saveDC: DC,
                     buff: {
                         duration: '1 round',
-                        damageMultiplier: 0,
+                        condition: 'Incapacitated',
                     },
                 },
             ]
@@ -464,7 +463,7 @@ function druid(level: number, options: z.infer<typeof ClassOptions.druid>): Crea
                     freq: '1/fight',
                     buff: {
                         duration: 'entire encounter',
-                        toHit: 4.5,
+                        condition: 'Attacks with Advantage',
                         damage: '2d6',
                     },
                 }
@@ -591,8 +590,7 @@ function monk(level: number, options: z.infer<typeof ClassOptions.monk>): Creatu
                         dc: DC,
                         buff: {
                             duration: '1 round',
-                            damageMultiplier: 0,
-                            ac: -ADVANTAGE,
+                            condition: 'Stunned',
                         },
                     },
                 },
@@ -612,8 +610,7 @@ function monk(level: number, options: z.infer<typeof ClassOptions.monk>): Creatu
                         dc: DC,
                         buff: {
                             duration: '1 round',
-                            damageMultiplier: 0,
-                            ac: -ADVANTAGE,
+                            condition: 'Stunned',
                         },
                     },
                 },
@@ -816,7 +813,7 @@ function rogue(level: number, options: z.infer<typeof ClassOptions.rogue>): Crea
                     target: 'self',
                     buff: {
                         duration: 'until next attack made',
-                        toHit: 4.5,
+                        condition: 'Attacks with Advantage',
                     },
                 },
             ],
@@ -954,7 +951,7 @@ function warlock(level: number, options: z.infer<typeof ClassOptions.warlock>): 
                     saveDC: DC,
                     buff: {
                         duration: '1 round',
-                        damageMultiplier: 0,
+                        condition: 'Incapacitated',
                     },
                 },
             ],
@@ -1037,7 +1034,7 @@ function wizard(level: number, options: z.infer<typeof ClassOptions.wizard>): Cr
                     saveDC: DC,
                     buff: {
                         duration: '1 round',
-                        damageMultiplier: 0,
+                        condition: 'Incapacitated',
                     },
                 },
             ],
