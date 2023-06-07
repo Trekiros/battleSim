@@ -2,7 +2,7 @@ import { FC, useState } from "react"
 import { Action, AllyTarget, AtkAction, Buff, BuffAction, DebuffAction, DiceFormula, EnemyTarget, Frequency, HealAction } from "../../model/model"
 import styles from './actionForm.module.scss'
 import { clone } from "../../model/utils"
-import { ActionType, BuffDuration, ActionCondition, CreatureConditionList, CreatureCondition } from "../../model/enums"
+import { ActionType, BuffDuration, ActionCondition, CreatureConditionList, CreatureCondition, ActionSlots } from "../../model/enums"
 import Select from "../utils/select"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
@@ -46,15 +46,7 @@ const TypeOptions: Options<ActionType> = [
     { value: 'debuff', label: 'Debuff' },
 ]
 
-const ActionOptions: Options<number> = [
-    { value: 0, label: 'Action' },
-    { value: 1, label: 'Bonus Action' },
-    { value: 2, label: 'Legendary Action' },
-    { value: 3, label: 'Lair Action' },
-    { value: 4, label: 'Other 1' },
-    { value: 5, label: 'Other 2' },
-    { value: 6, label: 'Other 3' },
-]
+const ActionOptions: Options<number> = Object.entries(ActionSlots).map(([label, value]) => ({label, value}))
 
 const TargetCountOptions: Options<number> = [
     { value: 1, label: 'Single target' },

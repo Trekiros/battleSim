@@ -3,6 +3,7 @@ import { Action, AtkAction, Creature, DiceFormula, HealAction } from "../model/m
 import {z} from 'zod'
 import { getMonster } from './monsters'
 import { v4 as uuid } from 'uuid'
+import { ActionSlots } from '../model/enums'
 
 // TODO: 
 // 1) Add more options to the templates
@@ -32,7 +33,7 @@ function artificer(level: number, options: z.infer<typeof ClassOptions.artificer
                 {
                     id: uuid(),
                     name: 'Firebolt',
-                    actionSlot: ACTION,
+                    actionSlot: ActionSlots.Action,
                     type: 'atk',
                     freq: 'at will',
                     targets: 1,
@@ -44,7 +45,7 @@ function artificer(level: number, options: z.infer<typeof ClassOptions.artificer
                 {
                     id: uuid(),
                     name: 'Shield',
-                    actionSlot: REACTION,
+                    actionSlot: ActionSlots.Reaction,
                     type: 'buff',
                     freq: { reset: 'lr', uses: scale(level, {1: 1, 3: 2, 5: 3, 7: 4, 9: 5, 11: 6, 13: 7, 15: 8, 17: 9})},
                     condition: 'is under half HP',
@@ -59,7 +60,7 @@ function artificer(level: number, options: z.infer<typeof ClassOptions.artificer
             2: [{
                 id: uuid(),
                 name: 'Artificer Infusions',
-                actionSlot: PASSIVE,
+                actionSlot: ActionSlots['Before the Encounter Starts'],
                 type: 'buff',
                 freq: '1/fight',
                 condition: 'is available',
@@ -74,7 +75,7 @@ function artificer(level: number, options: z.infer<typeof ClassOptions.artificer
             3: [{
                 id: uuid(),
                 name: 'Shield Turret',
-                actionSlot: BONUS_ACTION,
+                actionSlot: ActionSlots['Bonus Action'],
                 type: 'heal',
                 freq: 'at will',
                 condition: 'default',
@@ -104,54 +105,86 @@ function barbarian(level: number, options: z.infer<typeof ClassOptions.barbarian
         hp: hp(level, 12, CON),
         count: 1,
         mode: 'player',
-        actions: [
-            {
-                id: uuid(),
-                name: `Greatsword${level >= 5 ? ' x2' : ''}`,
-                actionSlot: ACTION,
-                type: 'atk',
-                targets: scale(level, {1: 1, 5: 2}),
-                condition: 'default',
-                freq: 'at will',
-                target: 'enemy with least HP',
-                toHit: `${PB}[PB] + ${STR}[STR]` 
-                    + (options.weaponBonus ? ` + ${options.weaponBonus}[WEAPON]` : '')
-                    + (options.gwm ? ` - 5[GWM]` : ''),
-                dpr: `2d6 + ${STR}[STR] + ${RAGE}[RAGE]`
-                    + (options.weaponBonus ? ` + ${options.weaponBonus}[WEAPON]` : '')
-                    + (options.gwm ? ` + 10[GWM]` : ''),
-            },
-            {
-                id: uuid(),
-                name: 'Rage',
-                actionSlot: BONUS_ACTION,
-                type: 'buff',
-                targets: 1,
-                target: 'self',
-                freq: { reset: 'lr', uses: scale(level, {1: 2, 3: 3, 6: 4, 12: 5, 17: 6}) },
-                condition: 'is available',
-                buff: {
-                    duration: 'entire encounter',
-                    damageTakenMultiplier: 0.5,
+        actions: scaleArray<Action>(level, {
+            1: [
+                {
+                    id: uuid(),
+                    name: 'Rage',
+                    actionSlot: BONUS_ACTION,
+                    type: 'buff',
+                    targets: 1,
+                    target: 'self',
+                    freq: { reset: 'lr', uses: scale(level, {1: 2, 3: 3, 6: 4, 12: 5, 17: 6}) },
+                    condition: 'not used yet',
+                    buff: {
+                        duration: 'entire encounter',
+                        damageTakenMultiplier: 0.5,
+                    },
                 },
-            },
-        ],
-    }
-
-    if (level >= 2) {
-        result.actions.push({
-            id: uuid(),
-            name: 'Reckless Attack',
-            actionSlot: PASSIVE,
-            type: 'buff',
-            targets: 1,
-            condition: 'default',
-            freq: 'at will',
-            target: 'self',
-            buff: {
-                duration: '1 round',
-                condition: 'Attacks and is attacked with Advantage',
-            }
+                {
+                    id: uuid(),
+                    name: `Greatsword${level >= 5 ? ' x2' : ''}`,
+                    actionSlot: ActionSlots.Action,
+                    type: 'atk',
+                    targets: scale(level, {1: 1, 5: 2}),
+                    condition: 'default',
+                    freq: 'at will',
+                    target: 'enemy with least HP',
+                    toHit: `${PB}[PB] + ${STR}[STR]` 
+                        + (options.weaponBonus ? ` + ${options.weaponBonus}[WEAPON]` : '')
+                        + (options.gwm ? ` - 5[GWM]` : ''),
+                    dpr: `2d6 + ${STR}[STR] + ${RAGE}[RAGE]`
+                        + (options.weaponBonus ? ` + ${options.weaponBonus}[WEAPON]` : '')
+                        + (options.gwm ? ` + 10[GWM]` : ''),
+                },
+                ...(options.gwm ? [
+                    {
+                        id: uuid(),
+                        name: 'GWM Extra Attack',
+                        actionSlot: ActionSlots['When reducing an enemy to 0 HP'],
+                        type: 'atk',
+                        targets: 1,
+                        condition: 'default',
+                        freq: 'at will',
+                        target: 'enemy with least HP',
+                        toHit: `${PB}[PB] + ${STR}[STR]` 
+                            + (options.weaponBonus ? ` + ${options.weaponBonus}[WEAPON]` : '')
+                            + (options.gwm ? ` - 5[GWM]` : ''),
+                        dpr: `2d6 + ${STR}[STR] + ${RAGE}[RAGE]`
+                            + (options.weaponBonus ? ` + ${options.weaponBonus}[WEAPON]` : '')
+                            + (options.gwm ? ` + 10[GWM]` : ''),
+                    } as Action
+                ] : []),
+            ], 
+            2: [
+                {
+                    id: uuid(),
+                    name: 'Reckless Attack',
+                    actionSlot: PASSIVE,
+                    type: 'buff',
+                    targets: 1,
+                    condition: 'default',
+                    freq: 'at will',
+                    target: 'self',
+                    buff: {
+                        duration: '1 round',
+                        condition: 'Attacks and is attacked with Advantage',
+                    }
+                },
+            ],
+            11: [
+                {
+                    id: uuid(),
+                    name: 'Relentless Rage',
+                    actionSlot: ActionSlots['When Reduced to 0 HP'],
+                    type: 'heal',
+                    targets: 1,
+                    target: 'self',
+                    freq: { reset: 'sr', uses: scale(level, { 1: 3, 20: 4 }) },
+                    condition: 'is available',
+                    amount: '1',
+                },
+            ],
         })
     }
 
@@ -223,7 +256,7 @@ function bard(level: number, options: z.infer<typeof ClassOptions.bard>): Creatu
                     freq: (level < 5) ? '1/fight' : 'at will',
                     target: 'ally with the highest DPR',
                     buff: {
-                        duration: '1 round',
+                        duration: 'until next attack made',
                         toHit: BARDIC_INSPI,
                     },
                 },
@@ -282,7 +315,7 @@ function cleric(level: number, options: z.infer<typeof ClassOptions.cleric>): Cr
                 {
                     id: uuid(),
                     name: 'Sacred Flame',
-                    actionSlot: ACTION,
+                    actionSlot: ActionSlots.Action,
                     type: 'atk',
                     targets: 1,
                     freq: 'at will',
@@ -295,7 +328,7 @@ function cleric(level: number, options: z.infer<typeof ClassOptions.cleric>): Cr
                 {
                     id: uuid(),
                     name: 'Bless',
-                    actionSlot: ACTION,
+                    actionSlot: ActionSlots['Before the Encounter Starts'],
                     type: 'buff',
                     targets: 3,
                     freq: { reset: 'lr', uses: scale(level, {1: 1, 3: 2, 5: 3, 7: 4, 9: 5, 11: 6, 13: 7, 15: 8, 17: 9})},
@@ -310,7 +343,7 @@ function cleric(level: number, options: z.infer<typeof ClassOptions.cleric>): Cr
                 {
                     id: uuid(),
                     name: scale(level, { 1: 'Cure Wounds', 11: 'Heal' }),
-                    actionSlot: ACTION,
+                    actionSlot: ActionSlots.Action,
                     type: 'heal',
                     targets: 1,
                     freq: { reset: 'lr', uses: scale(level, {1: 1, 3: 2, 5: 3, 7: 4, 9: 5, 11: 1, 13: 2, 15: 3})},
@@ -323,7 +356,7 @@ function cleric(level: number, options: z.infer<typeof ClassOptions.cleric>): Cr
                 {
                     id: uuid(),
                     name: 'Spiritual Weapon',
-                    actionSlot: BONUS_ACTION,
+                    actionSlot: ActionSlots['Bonus Action'],
                     type: 'atk',
                     targets: 1,
                     freq: 'at will',
@@ -337,7 +370,7 @@ function cleric(level: number, options: z.infer<typeof ClassOptions.cleric>): Cr
                 {
                     id: uuid(),
                     name: 'Spirit Guardians',
-                    actionSlot: ACTION,
+                    actionSlot: ActionSlots.Action,
                     type: 'atk',
                     targets: 2,
                     freq: 'at will',
@@ -351,7 +384,7 @@ function cleric(level: number, options: z.infer<typeof ClassOptions.cleric>): Cr
                 {
                     id: uuid(),
                     name: scale(level, {1: 'Mass Healing Word', 9: 'Mass Cure Wounds', 17: 'Mass Heal' }),
-                    actionSlot: ACTION,
+                    actionSlot: ActionSlots.Action,
                     type: 'heal',
                     targets: 6,
                     freq: { reset: 'lr', uses: scale(level, {1: 1, 5: 1, 9: 2, 13: 3, 17: 4})},
@@ -385,7 +418,7 @@ function druid(level: number, options: z.infer<typeof ClassOptions.druid>): Crea
                 {
                     id: uuid(),
                     name: 'Shillelagh',
-                    actionSlot: ACTION,
+                    actionSlot: ActionSlots.Action,
                     type: 'atk',
                     condition: 'default',
                     freq: 'at will',
@@ -397,7 +430,7 @@ function druid(level: number, options: z.infer<typeof ClassOptions.druid>): Crea
                 {
                     id: uuid(),
                     name: 'Cure Wounds',
-                    actionSlot: ACTION,
+                    actionSlot: ActionSlots.Action,
                     type: 'heal',
                     targets: 1,
                     freq: '1/day',
@@ -430,7 +463,7 @@ function druid(level: number, options: z.infer<typeof ClassOptions.druid>): Crea
                 {
                     id: uuid(),
                     name: `Wild Shape: ${wildshape.name}`,
-                    actionSlot: BONUS_ACTION,
+                    actionSlot: ActionSlots['Bonus Action'],
                     type: 'heal',
                     target: 'self',
                     targets: 1,
@@ -444,7 +477,7 @@ function druid(level: number, options: z.infer<typeof ClassOptions.druid>): Crea
                 {
                     id: uuid(),
                     name: 'Heal',
-                    actionSlot: ACTION,
+                    actionSlot: ActionSlots.Action,
                     type: 'heal',
                     target: 'ally with the least HP',
                     targets: 1,
@@ -455,7 +488,7 @@ function druid(level: number, options: z.infer<typeof ClassOptions.druid>): Crea
                 {
                     id: uuid(),
                     name: 'Guardian of Nature',
-                    actionSlot: BONUS_ACTION,
+                    actionSlot: ActionSlots['Bonus Action'],
                     type: 'buff',
                     target: 'self',
                     targets: 1,
@@ -486,7 +519,7 @@ function fighter(level: number, options: z.infer<typeof ClassOptions.fighter>): 
     const action: Action = {
         id: uuid(),
         name: `Greatsword${attacks > 1 ? ' x' + attacks : ''}`,
-        actionSlot: ACTION,
+        actionSlot: ActionSlots.Action,
         type: 'atk',
         freq: 'at will',
         condition: 'default',
@@ -512,7 +545,7 @@ function fighter(level: number, options: z.infer<typeof ClassOptions.fighter>): 
                 {
                     id: uuid(),
                     name: 'Second Wind',
-                    actionSlot: BONUS_ACTION,
+                    actionSlot: ActionSlots['Bonus Action'],
                     type: 'heal',
                     target: 'self',
                     freq: '1/fight',
@@ -525,7 +558,7 @@ function fighter(level: number, options: z.infer<typeof ClassOptions.fighter>): 
                 {
                     id: uuid(),
                     name: `Action Surge: ${action.name}`,
-                    actionSlot: 4,
+                    actionSlot: ActionSlots['Other 1'],
                     freq: '1/fight',
                     condition: 'is available',
                     type: 'atk',
@@ -539,7 +572,7 @@ function fighter(level: number, options: z.infer<typeof ClassOptions.fighter>): 
                 {
                     id: uuid(),
                     name: `Action Surge: ${action.name}`,
-                    actionSlot: 5,
+                    actionSlot: ActionSlots['Other 2'],
                     freq: '1/fight',
                     condition: 'is available',
                     type: 'atk',
@@ -577,7 +610,7 @@ function monk(level: number, options: z.infer<typeof ClassOptions.monk>): Creatu
                 {
                     id: uuid(),
                     name: scale(level, {1: 'Quarterstaff', 5: 'Quarterstaff x2 + Stunning Strike'}),
-                    actionSlot: ACTION,
+                    actionSlot: ActionSlots.Action,
                     type: 'atk',
                     freq: 'at will',
                     condition: 'default',
@@ -597,7 +630,7 @@ function monk(level: number, options: z.infer<typeof ClassOptions.monk>): Creatu
                 {
                     id: uuid(),
                     name: scale(level, {1: 'Unarmed Strike', 3: 'Flurry of Blows', 9: 'Flurry of Blows + Stunning Strike'}),
-                    actionSlot: BONUS_ACTION,
+                    actionSlot: ActionSlots['Bonus Action'],
                     type: 'atk',
                     freq: 'at will',
                     condition: 'default',
@@ -642,7 +675,7 @@ function paladin(level: number, options: z.infer<typeof ClassOptions.paladin>): 
                 {
                     id: uuid(),
                     name: scale(level, {1: 'Longsword', 5: 'Longsword x2'}),
-                    actionSlot: ACTION,
+                    actionSlot: ActionSlots.Action,
                     type: 'atk',
                     freq: 'at will',
                     condition: 'default',
@@ -658,7 +691,7 @@ function paladin(level: number, options: z.infer<typeof ClassOptions.paladin>): 
                 {
                     id: uuid(),
                     name: 'Lay on Hands',
-                    actionSlot: ACTION,
+                    actionSlot: ActionSlots.Action,
                     type: 'heal',
                     freq: '1/day',
                     condition: 'ally at 0 HP',
@@ -671,7 +704,7 @@ function paladin(level: number, options: z.infer<typeof ClassOptions.paladin>): 
                 {
                     id: uuid(),
                     name: 'Divine Smite',
-                    actionSlot: 4,
+                    actionSlot: ActionSlots['Other 1'],
                     type: 'buff',
                     freq: scale(level, {1: "1/day", 5: { reset: 'lr', uses: Math.floor(level/2)}}),
                     condition: scale(level, {1: "is available", 11: 'default'}),
@@ -687,7 +720,7 @@ function paladin(level: number, options: z.infer<typeof ClassOptions.paladin>): 
                 {
                     id: uuid(),
                     name: 'Aura of Protection',
-                    actionSlot: 5,
+                    actionSlot: ActionSlots['Other 2'],
                     type: 'buff',
                     freq: 'at will',
                     condition: 'default',
@@ -732,7 +765,7 @@ function ranger(level: number, options: z.infer<typeof ClassOptions.ranger>): Cr
                         4: "Hand Crossbow + Crossbow Expert + Hunter's Mark", 
                         5: "Hand Crossbow x2 + Crossbow Expert + Hunter's Mark" 
                     }),
-                    actionSlot: ACTION,
+                    actionSlot: ActionSlots.Action,
                     type: 'atk',
                     freq: 'at will',
                     condition: 'default',
@@ -775,7 +808,7 @@ function rogue(level: number, options: z.infer<typeof ClassOptions.rogue>): Crea
                         1: "Hand Crossbow", 
                         4: "Hand Crossbow + Crossbow Expert" 
                     }),
-                    actionSlot: ACTION,
+                    actionSlot: ActionSlots.Action,
                     type: 'atk',
                     freq: 'at will',
                     condition: 'default',
@@ -789,7 +822,7 @@ function rogue(level: number, options: z.infer<typeof ClassOptions.rogue>): Crea
                 {
                     id: uuid(),
                     name: 'Sneak Attack',
-                    actionSlot: PASSIVE,
+                    actionSlot: ActionSlots['Other 1'],
                     type: 'buff',
                     freq: 'at will',
                     condition: 'default',
@@ -805,7 +838,7 @@ function rogue(level: number, options: z.infer<typeof ClassOptions.rogue>): Crea
                 {
                     id: uuid(),
                     name: 'Cunning Action: Hide',
-                    actionSlot: BONUS_ACTION,
+                    actionSlot: ActionSlots['Bonus Action'],
                     type: 'buff',
                     freq: 'at will',
                     condition: 'default',
@@ -821,7 +854,7 @@ function rogue(level: number, options: z.infer<typeof ClassOptions.rogue>): Crea
                 {
                     id: uuid(),
                     name: 'Uncanny Dodge',
-                    actionSlot: REACTION,
+                    actionSlot: ActionSlots['Other 2'],
                     type: 'buff',
                     target: 'self',
                     targets: 1,
@@ -859,7 +892,7 @@ function sorcerer(level: number, options: z.infer<typeof ClassOptions.sorcerer>)
                 {
                     id: uuid(),
                     name: 'Fire Bolt',
-                    actionSlot: ACTION,
+                    actionSlot: ActionSlots.Action,
                     type: 'atk',
                     freq: 'at will',
                     condition: 'default',
@@ -873,7 +906,7 @@ function sorcerer(level: number, options: z.infer<typeof ClassOptions.sorcerer>)
                 {
                     id: uuid(),
                     name: 'Quickened Mirror Image',
-                    actionSlot: BONUS_ACTION,
+                    actionSlot: ActionSlots['Bonus Action'],
                     type: 'buff',
                     freq: { reset: 'lr', uses: scale(level, {1: 1, 5: 2, 9: 3, 13: 4, 17: 5})},
                     condition: 'is available',
@@ -889,7 +922,7 @@ function sorcerer(level: number, options: z.infer<typeof ClassOptions.sorcerer>)
                 {
                     id: uuid(),
                     name: 'Quickened Fireball',
-                    actionSlot: BONUS_ACTION,
+                    actionSlot: ActionSlots['Bonus Action'],
                     type: 'atk',
                     freq: { reset: 'lr', uses: scale(level, {1: 2, 5: 2, 6: 3, 9: 4, 12: 5, 15: 6, 18: 7})},
                     condition: 'is available',
@@ -927,7 +960,7 @@ function warlock(level: number, options: z.infer<typeof ClassOptions.warlock>): 
                 {
                     id: uuid(),
                     name: 'Eldritch Blast + Hex',
-                    actionSlot: ACTION,
+                    actionSlot: ActionSlots.Action,
                     type: 'atk',
                     freq: 'at will',
                     condition: 'default',
@@ -942,7 +975,7 @@ function warlock(level: number, options: z.infer<typeof ClassOptions.warlock>): 
                 {
                     id: uuid(),
                     name: 'Hypnotic Pattern',
-                    actionSlot: ACTION,
+                    actionSlot: ActionSlots.Action,
                     type: 'debuff',
                     freq: { reset: 'sr', uses: scale(level, {1: 1, 5: 2, 11: 3, 17: 4})},
                     condition: 'not used yet',
@@ -982,7 +1015,7 @@ function wizard(level: number, options: z.infer<typeof ClassOptions.wizard>): Cr
                     {
                         id: uuid(),
                         name: 'Fire Bolt',
-                        actionSlot: ACTION,
+                        actionSlot: ActionSlots.Action,
                         type: 'atk',
                         freq: 'at will',
                         condition: 'default',
@@ -995,7 +1028,7 @@ function wizard(level: number, options: z.infer<typeof ClassOptions.wizard>): Cr
                 {
                     id: uuid(),
                     name: 'Shield',
-                    actionSlot: REACTION,
+                    actionSlot: ActionSlots['Other 1'],
                     type: 'buff',
                     freq: { reset: 'lr', uses: Math.ceil(level/2)},
                     condition: scale(level, {1: 'is under half HP', 8: 'default'}),
@@ -1011,7 +1044,7 @@ function wizard(level: number, options: z.infer<typeof ClassOptions.wizard>): Cr
                 {
                     id: uuid(),
                     name: 'Fireball',
-                    actionSlot: ACTION,
+                    actionSlot: ActionSlots.Action,
                     type: 'atk',
                     freq: { reset: 'lr', uses: Math.ceil(level/3)},
                     condition: 'is available',
@@ -1025,7 +1058,7 @@ function wizard(level: number, options: z.infer<typeof ClassOptions.wizard>): Cr
                 {
                     id: uuid(),
                     name: 'Hypnotic Pattern',
-                    actionSlot: ACTION,
+                    actionSlot: ActionSlots.Action,
                     type: 'debuff',
                     freq: { reset: 'lr', uses: Math.ceil(level/3)},
                     condition: 'is available',
@@ -1042,7 +1075,7 @@ function wizard(level: number, options: z.infer<typeof ClassOptions.wizard>): Cr
                 {
                     id: uuid(),
                     name: 'Draconic transformation',
-                    actionSlot: BONUS_ACTION,
+                    actionSlot: ActionSlots['Bonus Action'],
                     type: 'atk',
                     freq: 'at will',
                     condition: 'default',
@@ -1058,7 +1091,7 @@ function wizard(level: number, options: z.infer<typeof ClassOptions.wizard>): Cr
                 {
                     id: uuid(),
                     name: 'Meteor Swarm',
-                    actionSlot: ACTION,
+                    actionSlot: ActionSlots.Action,
                     type: 'atk',
                     freq: '1/day',
                     condition: 'is available',

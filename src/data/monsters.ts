@@ -1,3 +1,4 @@
+import { ActionSlots } from "../model/enums"
 import { Creature } from "../model/model"
 
 // TODO: find a way to put this in a JSON file, to make TypeScript faster
@@ -2054,7 +2055,22 @@ export const Monsters: Creature[] = [
                 "type": "atk",
                 "dpr": 10,
                 "toHit": 20,
+                useSaves: true,
                 "target": "enemy with most HP"
+            },
+            {
+                "id": "52c68468-47a5-4583-9a3f-2bfe8b2d1e61",
+                actionSlot: -1,
+                name: 'Death Throes',
+                freq: '1/fight',
+                condition: 'default',
+                targets: 2,
+                type: 'atk',
+                dpr: 70,
+                toHit: 20,
+                useSaves: true,
+                halfOnSave: true,
+                target: 'enemy with most HP',
             }
         ],
         "count": 1,
@@ -4666,7 +4682,22 @@ export const Monsters: Creature[] = [
                 "toHit": 4,
                 "target": "enemy with most HP",
                 "targets": 1
-            }
+            },
+            {
+                "id": "e76db1b2-52c9-417d-be35-53e9f1c7e32f",
+                "name": "Death Burst",
+                "type": "debuff",
+                "actionSlot": -1,
+                "freq": "at will",
+                "condition": "default",
+                "target": "enemy with most HP",
+                "targets": 2,
+                saveDC: 10,
+                buff: {
+                    duration: '1 round',
+                    condition: 'Blinded',
+                },
+            },
         ],
         "count": 1,
         "saveBonus": 0.25
@@ -5449,7 +5480,47 @@ export const Monsters: Creature[] = [
         "cr": "1/2",
         "hp": 1,
         "AC": 5,
-        "actions": [],
+        "actions": [
+            {
+                "id": "e76db1b2-52c9-417d-be35-53e9f1c7e32f",
+                "name": "Touch",
+                "type": "atk",
+                "actionSlot": 0,
+                "freq": "at will",
+                "condition": "default",
+                "target": "enemy with most HP",
+                "targets": 1,
+                toHit: 0,
+                dpr: 1,
+                riderEffect:{
+                    dc: 10,
+                    buff: {
+                        duration: 'entire encounter',
+                        condition: 'Poisoned',
+                    }
+                }
+            },
+            {
+                "id": "e76db1b2-52c9-417d-be35-53e9f1c7e327",
+                "name": "Death Burst",
+                "type": "atk",
+                "actionSlot": -1,
+                "freq": "at will",
+                "condition": "default",
+                "target": "enemy with most HP",
+                "targets": 2,
+                toHit: 15,
+                useSaves: true,
+                dpr: 10,
+                riderEffect:{
+                    dc: 100,
+                    buff: {
+                        duration: 'entire encounter',
+                        condition: 'Poisoned',
+                    }
+                }
+            },
+        ],
         "count": 1,
         "saveBonus": 0.25
     },
@@ -7960,7 +8031,21 @@ export const Monsters: Creature[] = [
                 "targets": 2,
                 "useSaves": true,
                 "halfOnSave": true
-            }
+            },
+            {
+                "id": "e76db1b2-52c9-417d-be35-53e9f1c7e32f",
+                "name": "Death Burst",
+                "type": "atk",
+                "actionSlot": -1,
+                "freq": "at will",
+                "condition": "default",
+                "target": "enemy with most HP",
+                "targets": 2,
+                toHit: 10,
+                useSaves: true,
+                halfOnSave: true,
+                dpr: 4,
+            },
         ],
         "count": 1,
         "saveBonus": 0.25
@@ -8965,7 +9050,21 @@ export const Monsters: Creature[] = [
                 "targets": 2,
                 "useSaves": true,
                 "halfOnSave": true
-            }
+            },
+            {
+                "id": "e76db1b2-52c9-417d-be35-53e9f1c7e32f",
+                "name": "Death Burst",
+                "type": "atk",
+                "actionSlot": -1,
+                "freq": "at will",
+                "condition": "default",
+                "target": "enemy with most HP",
+                "targets": 2,
+                toHit: 11,
+                useSaves: true,
+                halfOnSave: true,
+                dpr: 7,
+            },
         ],
         "count": 1,
         "saveBonus": 0.25
@@ -8991,7 +9090,21 @@ export const Monsters: Creature[] = [
                 "toHit": 4,
                 "target": "enemy with most HP",
                 "targets": 1
-            }
+            },
+            {
+                "id": "e76db1b2-52c9-417d-be35-53e9f1c7e327",
+                "name": "Death Burst",
+                "type": "atk",
+                "actionSlot": -1,
+                "freq": "at will",
+                "condition": "default",
+                "target": "enemy with most HP",
+                "targets": 2,
+                toHit: 11,
+                useSaves: true,
+                halfOnSave: true,
+                dpr: 7
+            },
         ],
         "count": 1,
         "saveBonus": 0.25
@@ -9545,7 +9658,22 @@ export const Monsters: Creature[] = [
                 "toHit": 3,
                 "target": "enemy with most HP",
                 "targets": 1
-            }
+            },
+            {
+                "id": "e76db1b2-52c9-417d-be35-53e9f1c7e32f",
+                "name": "Death Burst",
+                "type": "debuff",
+                "actionSlot": -1,
+                "freq": "at will",
+                "condition": "default",
+                "target": "enemy with most HP",
+                "targets": 2,
+                saveDC: 10,
+                buff: {
+                    duration: '1 round',
+                    condition: 'Restrained',
+                },
+            },
         ],
         "count": 1,
         "saveBonus": 0.125
@@ -12309,7 +12437,21 @@ export const Monsters: Creature[] = [
                 "target": "enemy with most HP",
                 "targets": 2,
                 "useSaves": true
-            }
+            },
+            {
+                "id": "e76db1b2-52c9-417d-be35-53e9f1c7e32f",
+                "name": "Death Burst",
+                "type": "atk",
+                "actionSlot": -1,
+                "freq": "at will",
+                "condition": "default",
+                "target": "enemy with most HP",
+                "targets": 2,
+                toHit: 10,
+                useSaves: true,
+                halfOnSave: true,
+                dpr: 4,
+            },
         ],
         "count": 1,
         "saveBonus": 0.125

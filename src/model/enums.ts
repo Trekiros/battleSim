@@ -1,5 +1,21 @@
 import { z } from 'zod'
 
+export const ActionSlots = {
+    // Positive numbers indicate regular actions taken on the creature's turn
+    'Action': 0,
+    'Bonus Action': 1,
+    'Reaction': 4,
+    'Legendary Action': 2,
+    'Lair Action': 3,
+    'Other 1': 5,
+    'Other 2': 6,
+
+    // Negative numbers indicate special triggers that are not affected by the 1 per turn per action slot clause
+    'When Reduced to 0 HP': -1,
+    'When reducing an enemy to 0 HP': -2,
+    'Before the Encounter Starts': -3,
+} as const
+
 export const EnemyTargetList = [
     'enemy with least HP',
     'enemy with most HP',

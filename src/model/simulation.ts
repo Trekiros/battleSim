@@ -1,5 +1,5 @@
 import { evaluateDiceFormula } from "./dice"
-import { ActionType, CreatureCondition, CreatureConditionList } from "./enums"
+import { ActionSlots, ActionType, CreatureCondition, CreatureConditionList } from "./enums"
 import { Action, AtkAction, Buff, BuffAction, Combattant, Creature, CreatureState, DebuffAction, DiceFormula, Encounter, EncounterResult, EncounterStats, HealAction, Round, SimulationResult } from "./model"
 import { clone, range } from "./utils"
 import { v4 as uuid } from 'uuid'
@@ -71,7 +71,6 @@ function iterateCombattant(combattant: Combattant) {
         remainingUses = Math.min(1, remainingUses + increment)
         newInitialState.remainingUses.set(action.id, remainingUses)
     })
-    
 
     const result: Combattant = {
         id: combattant.id,
@@ -84,38 +83,47 @@ function iterateCombattant(combattant: Combattant) {
     return result
 }
 
+// Checks for remaining uses
+function isUsable(combattant: Combattant, action: Action) {
+    // Can only trigger 'on kill' effects once per turn
+    if (action.actionSlot === ActionSlots["When reducing an enemy to 0 HP"]) {
+        if (combattant.actions.find(actionTaken => actionTaken.action.id === action.id)) return false
+    }
+
+    if (action.freq === 'at will') return true
+    
+    const remainingUsesMap = combattant.finalState.remainingUses
+
+    const remainingUses = remainingUsesMap.get(action.id)
+
+    return (remainingUses !== undefined) && (remainingUses >= 1)
+}
+
+// Checks action.condition
+function matchCondition(combattant: Combattant, action: Action, allies: Combattant[]) {
+    if (action.condition === 'not used yet') return !combattant.initialState.usedActions.has(action.id)
+    if (action.condition === 'has no THP') return ((combattant.initialState.tempHP === undefined) || (combattant.initialState.tempHP === 0))
+    if (action.condition === 'is under half HP') return (combattant.finalState.currentHP * 2 < combattant.creature.hp)
+    if (action.condition === 'ally at 0 HP') return (!!allies.find(ally => (ally.finalState.currentHP === 0)))
+    if (action.condition === 'ally under half HP') return !!allies.find(ally => ((ally.initialState.currentHP > 0) && (ally.finalState.currentHP <= ally.creature.hp / 2)))
+
+    // Default or "is use available"
+    return true
+}
+
 // Determines which actions a creature will use. Does not actually perform the actions.
 // The exception is heals, to avoid situations where multiple healers all heal the same creature despite having the "ally at 0 hp" condition
 function getActions(combattant: Combattant, allies: Combattant[], handleHeals: boolean, stats: Map<string, EncounterStats>): Action[] {
     const actionSlots = new Set()
-    combattant.creature.actions.forEach(action => actionSlots.add(action.actionSlot))
-
-    function isUsable(action: Action) {
-        if (action.freq === 'at will') return true
-        
-        const remainingUsesMap = combattant.finalState.remainingUses
-
-        const remainingUses = remainingUsesMap.get(action.id)
-
-        return (remainingUses !== undefined) && (remainingUses >= 1)
-    }
-
-    function matchCondition(action: Action) {
-        if (action.condition === 'not used yet') return !combattant.initialState.usedActions.has(action.id)
-        if (action.condition === 'has no THP') return ((combattant.initialState.tempHP === undefined) || (combattant.initialState.tempHP === 0))
-        if (action.condition === 'is under half HP') return (combattant.finalState.currentHP * 2 < combattant.creature.hp)
-        if (action.condition === 'ally at 0 HP') return (!!allies.find(ally => (ally.finalState.currentHP === 0)))
-        if (action.condition === 'ally under half HP') return !!allies.find(ally => ((ally.initialState.currentHP > 0) && (ally.finalState.currentHP <= ally.creature.hp / 2)))
-
-        // Default or "is use available"
-        return true
-    }
+    combattant.creature.actions
+        .filter(action => (action.actionSlot >= 0))
+        .forEach(action => actionSlots.add(action.actionSlot))
 
     const result = Array.from(actionSlots).flatMap(actionSlot => {
         const actions = combattant.creature.actions
             .filter((action: Action) => (action.actionSlot === actionSlot))
-            .filter(isUsable)
-            .filter(matchCondition)
+            .filter(action => isUsable(combattant, action))
+            .filter(action => matchCondition(combattant, action, allies))
             .sort((action1: Action, action2: Action) => {
                 if (action1.condition !== "default") return -1
                 if (action2.condition !== "default") return 1
@@ -231,47 +239,89 @@ function generateActions(allies: Combattant[], enemies: Combattant[], stats: Map
     })
 }
 
+// The callback will be called for each valid target, sequentially
+function getTargets(combattant: Combattant, action: Action, allies: Combattant[], enemies: Combattant[], stats: Map<string, EncounterStats>, callback: (target: Combattant) => void) {
+    const isAttack = (action.type === 'atk') && !action.useSaves
+                
+    let lastTarget: Combattant|undefined = undefined
+    let targetsCount = action.targets
+    let targettableAllies = new Set(allies)
+    let targettableEnemies = new Set(enemies.filter(enemy => (enemy.finalState.currentHP > 0)))
+    while ((targetsCount > 0) && (targettableAllies.size > 0) && (targettableEnemies.size > 0)) {
+        targetsCount--
+        
+        // If it's an attack, continue attacking the same target until it's dead
+        const target: Combattant|undefined = (isAttack && lastTarget) || 
+            getNextTarget(combattant, action, Array.from(targettableAllies), Array.from(targettableEnemies), stats)
+        
+        if (target) {
+            lastTarget = target
+
+            callback(target)
+            
+            let removeTarget = true
+            if ((action.type === 'atk') && !action.useSaves) {
+                removeTarget = (target.finalState.currentHP === 0)
+            }
+            if (removeTarget) {
+                targettableAllies.delete(target)
+                targettableEnemies.delete(target)
+                lastTarget = undefined
+            }
+        }
+    }
+}
+
 // Executes the actions saved in combattant.actions by the generateActions() function
 // Executes only the selected action type, so the different action types can be executed in the right order
 function handleActions(allies: Combattant[], enemies: Combattant[], actionTypes: ActionType[], stats: Map<string, EncounterStats>) {
     allies.forEach(combattant => {
-        combattant.actions.filter(({ action }) => (actionTypes.includes(action.type)))
+        combattant.actions
+            .filter(({ action }) => (action.actionSlot >= 0))
+            .filter(({ action }) => (actionTypes.includes(action.type)))
             .forEach((turn) => {
-                const isAttack = (turn.action.type === 'atk') && !turn.action.useSaves
-                
-                let lastTarget: Combattant|undefined = undefined
-                let targetsCount = turn.action.targets
-                let targettableAllies = new Set(allies)
-                let targettableEnemies = new Set(enemies.filter(enemy => (enemy.finalState.currentHP > 0)))
-                while ((targetsCount > 0) && (targettableAllies.size > 0) && (targettableEnemies.size > 0)) {
-                    targetsCount--
-                    
-                    // If it's an attack, continue attacking the same target until it's dead
-                    const target: Combattant|undefined = (isAttack && lastTarget) || 
-                        getNextTarget(combattant, turn.action, Array.from(targettableAllies), Array.from(targettableEnemies), stats)
-                    
-                    if (target) {
-                        lastTarget = target
-                        turn.targets.set(target.id, 1 + (turn.targets.get(target.id) || 0))
+                getTargets(combattant, turn.action, allies, enemies, stats, (target) => {
+                    turn.targets.set(target.id, 1 + (turn.targets.get(target.id) || 0))
 
-                        if (turn.action.type === "buff") useBuffAction(combattant, turn.action, target, stats)
-                        if (turn.action.type === "debuff") useDebuffAction(combattant, turn.action, target, stats)
-                        //if (turn.action.type === "heal") useHealAction(turn.action, target) // Already handled before, in generateActions
-                        if (turn.action.type === "atk") useAtkAction(combattant, turn.action, target, stats)
-                        
-                        let removeTarget = true
-                        if ((turn.action.type === 'atk') && !turn.action.useSaves) {
-                            removeTarget = (target.finalState.currentHP === 0)
-                        }
-                        if (removeTarget) {
-                            targettableAllies.delete(target)
-                            targettableEnemies.delete(target)
-                            lastTarget = undefined
-                        }
-                        
-                    }
-                }
+                    if (turn.action.type === "buff") useBuffAction(combattant, turn.action, target, stats)
+                    if (turn.action.type === "debuff") useDebuffAction(combattant, turn.action, target, stats)
+                    //if (turn.action.type === "heal") useHealAction(turn.action, target) // Already handled before, in generateActions
+                    if (turn.action.type === "atk") useAtkAction(combattant, turn.action, target, allies, enemies, stats)
+                })
             })
+    })
+}
+
+// This is called when an action with a negative/special action slot is triggered
+function triggerAction(combattant: Combattant, actionSlot: keyof typeof ActionSlots, allies: Combattant[], enemies: Combattant[], stats: Map<string, EncounterStats>) {
+    combattant.creature.actions.forEach(action => {
+        if (action.actionSlot !== ActionSlots[actionSlot]) return
+        if (!isUsable(combattant, action)) return
+        if (!matchCondition(combattant, action, allies)) return
+
+        const targets: Map<string, number> = new Map()
+        combattant.actions.push({ action: action, targets: targets })
+
+        getTargets(combattant, action, allies, enemies, stats, (target) => {
+            targets.set(target.id, 1 + (targets.get(target.id) || 0))
+
+            const ignoreIncapacitated = true
+            switch (action.type) {
+                case "buff": return useBuffAction(combattant, action, target, stats, ignoreIncapacitated)
+                case "debuff": return useDebuffAction(combattant, action, target, stats, ignoreIncapacitated)
+                case "heal": return useHealAction(combattant, action, target, stats, ignoreIncapacitated)
+                case "atk": return useAtkAction(combattant, action, target, allies, enemies, stats, ignoreIncapacitated)
+            }
+        })
+        
+        // Save uses for limited-use actions
+        if (action.freq != 'at will') {
+            let remainingUses = combattant.finalState.remainingUses.get(action.id) || 0
+            remainingUses = Math.max(0, remainingUses - 1)
+            combattant.finalState.remainingUses.set(action.id, remainingUses)
+
+            combattant.finalState.usedActions.add(action.id)
+        }
     })
 }
 
@@ -348,9 +398,9 @@ function getStats(statsMap: Map<string, EncounterStats>, combattant: Combattant)
     return statsMap.get(id)!
 }
 
-function useBuffAction(buffer: Combattant, action: BuffAction, target: Combattant, stats: Map<string, EncounterStats>) {
+function useBuffAction(buffer: Combattant, action: BuffAction, target: Combattant, stats: Map<string, EncounterStats>, ignoreIncapacitated?: boolean) {
     const attackerConditions = getConditions(buffer)
-    const chanceToBeIncapacitated = atLeastOneConditionChance(attackerConditions, ['Incapacitated', 'Paralyzed', 'Petrified', 'Stunned', 'Unconscious'])
+    const chanceToBeIncapacitated = ignoreIncapacitated ? 0 : atLeastOneConditionChance(attackerConditions, ['Incapacitated', 'Paralyzed', 'Petrified', 'Stunned', 'Unconscious'])
     
     applyBuff(target, action.id, {...action.buff, magnitude: 1 - chanceToBeIncapacitated }, 'max')
     
@@ -455,9 +505,9 @@ function calculateHitChance(attacker: Combattant, target: Combattant, baseToHit:
 }
 
 
-function useDebuffAction(attacker: Combattant, action: DebuffAction, target: Combattant, stats: Map<string, EncounterStats>) {
+function useDebuffAction(attacker: Combattant, action: DebuffAction, target: Combattant, stats: Map<string, EncounterStats>, ignoreIncapacitated?: boolean) {
     const attackerConditions = getConditions(attacker)
-    const chanceToBeIncapacitated = atLeastOneConditionChance(attackerConditions, ['Incapacitated', 'Paralyzed', 'Petrified', 'Stunned', 'Unconscious'])
+    const chanceToBeIncapacitated = ignoreIncapacitated ? 0 : atLeastOneConditionChance(attackerConditions, ['Incapacitated', 'Paralyzed', 'Petrified', 'Stunned', 'Unconscious'])
     
     const chanceToFail = (1 - chanceToBeIncapacitated) * calculateChanceToFail(attacker, target, action.saveDC)
 
@@ -473,9 +523,9 @@ function useDebuffAction(attacker: Combattant, action: DebuffAction, target: Com
     }
 }
 
-function useAtkAction(attacker: Combattant, action: AtkAction, target: Combattant, stats: Map<string, EncounterStats>) {
+function useAtkAction(attacker: Combattant, action: AtkAction, target: Combattant, allies: Combattant[], enemies: Combattant[], stats: Map<string, EncounterStats>, ignoreIncapacitated?: boolean) {
     const attackerConditions = getConditions(attacker)
-    const chanceToBeIncapacitated = atLeastOneConditionChance(attackerConditions, ['Incapacitated', 'Paralyzed', 'Petrified', 'Stunned', 'Unconscious'])
+    const chanceToBeIncapacitated = ignoreIncapacitated ? 0 : atLeastOneConditionChance(attackerConditions, ['Incapacitated', 'Paralyzed', 'Petrified', 'Stunned', 'Unconscious'])
     
     const hitChance = (1 - chanceToBeIncapacitated) * (action.useSaves ?
         calculateChanceToFail(attacker, target, action.toHit)
@@ -530,11 +580,16 @@ function useAtkAction(attacker: Combattant, action: AtkAction, target: Combattan
             getStats(stats, target).debuffsReceived++
         }
     }
+    
+    if (target.finalState.currentHP === 0) {
+        triggerAction(attacker, 'When reducing an enemy to 0 HP', allies, enemies, stats)
+        triggerAction(target, 'When Reduced to 0 HP', enemies, allies, stats)
+    }
 }
 
-function useHealAction(healer: Combattant, action: HealAction, target: Combattant, stats: Map<string, EncounterStats>) {
+function useHealAction(healer: Combattant, action: HealAction, target: Combattant, stats: Map<string, EncounterStats>, ignoreIncapacitated?: boolean) {
     const attackerConditions = getConditions(healer)
-    const chanceToBeIncapacitated = atLeastOneConditionChance(attackerConditions, ['Incapacitated', 'Paralyzed', 'Petrified', 'Stunned', 'Unconscious'])
+    const chanceToBeIncapacitated = ignoreIncapacitated ? 0 : atLeastOneConditionChance(attackerConditions, ['Incapacitated', 'Paralyzed', 'Petrified', 'Stunned', 'Unconscious'])
     
     const amount = (1 - chanceToBeIncapacitated) * evaluateDiceFormula(action.amount)
 
@@ -550,14 +605,20 @@ function useHealAction(healer: Combattant, action: HealAction, target: Combattan
 }
 
 // The attackers & defenders must be clones here, they will both be mutated
-function runRound(team1: Combattant[], team1Surprised: boolean|undefined, team2: Combattant[], team2Surprised: boolean|undefined, stats: Map<string, EncounterStats>): Round {
+function runRound(team1: Combattant[], team2: Combattant[], stats: Map<string, EncounterStats>, firstRound?: { team1Surprised: boolean, team2Surprised: boolean }): Round {
     const round: Round = {
         team1: team1.map(iterateCombattant),
         team2: team2.map(iterateCombattant),
     }
 
-    if (!team1Surprised) generateActions(round.team1, round.team2, stats)
-    if (!team2Surprised) generateActions(round.team2, round.team1, stats)
+    if (firstRound) {
+        round.team1.forEach(combattant => triggerAction(combattant, 'Before the Encounter Starts', round.team1, round.team2, stats))
+        round.team2.forEach(combattant => triggerAction(combattant, 'Before the Encounter Starts', round.team2, round.team1, stats))    
+    }
+
+    if (!firstRound?.team1Surprised) generateActions(round.team1, round.team2, stats)
+    if (!firstRound?.team2Surprised) generateActions(round.team2, round.team1, stats)
+
 
     // Heals are resolved as soon as the actions are declared, to avoid situations where multiple creatures needlessly waste actions healing the same target
     // Then buffs/debuffs are resolved, so they can affect the attacks performed on that same round
@@ -585,19 +646,20 @@ function runEncounter(players: {creature: Creature, state: CreatureState}[], enc
         return combattant
     }))
     
-    let playersSurprised = encounter.playersSurprised
-    let monstersSurprised = encounter.monstersSurprised
+    let firstRound: { team1Surprised: boolean, team2Surprised: boolean }|undefined = {
+        team1Surprised: !!encounter.playersSurprised,
+        team2Surprised: !!encounter.monstersSurprised,
+    }
     const rounds: Round[] = []
     const stats = new Map<string, EncounterStats>()
 
     const hasLivingCombattant = (team: Combattant[]) => !!team.find(combattant => (combattant.finalState.currentHP > 0))
 
     do {
-        const round = runRound(team1, playersSurprised, team2, monstersSurprised, stats)
+        const round = runRound(team1, team2, stats, firstRound)
         rounds.push(round)
-        playersSurprised = false
-        monstersSurprised = false
-        
+
+        firstRound = undefined
         team1 = round.team1
         team2 = round.team2
     } while (hasLivingCombattant(team1) && hasLivingCombattant(team2) && (rounds.length < 20))
