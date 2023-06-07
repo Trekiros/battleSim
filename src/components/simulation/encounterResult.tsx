@@ -1,7 +1,6 @@
 import { FC } from "react"
-import { Combattant, EncounterResult, EncounterStats } from "../../model/model"
+import { Combattant, EncounterResult, EncounterStats, FinalAction } from "../../model/model"
 import styles from './encounterResult.module.scss'
-import { Action } from "../../model/model"
 import { Round } from "../../model/model"
 import { clone } from "../../model/utils"
 
@@ -12,7 +11,7 @@ type TeamPropType = {
 }
 
 const TeamResults:FC<TeamPropType> = ({ round, team, stats }) => {
-    function getTarget(combattantAction: { action: Action, targets: Map<string, number> }) {
+    function getTarget(combattantAction: { action: FinalAction, targets: Map<string, number> }) {
         if (combattantAction.action.target === 'self') return 'itself'
 
         const allCombattants = [...round.team1, ...round.team2].map(combattant => combattant)
@@ -82,7 +81,7 @@ const TeamResults:FC<TeamPropType> = ({ round, team, stats }) => {
                                         </>
                                     )
                                 })() : (() => {
-                                    const li = combattant.actions.flatMap(actionSlot => actionSlot)
+                                    const li = combattant.actions
                                     .filter(({ targets }) => !!targets.size)
                                     .map((action, index) => (
                                         <li key={index}>

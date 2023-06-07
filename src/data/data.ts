@@ -44,17 +44,10 @@ function artificer(level: number, options: z.infer<typeof ClassOptions.artificer
                 },
                 {
                     id: uuid(),
-                    name: 'Shield',
-                    actionSlot: ActionSlots.Reaction,
-                    type: 'buff',
+                    type: 'template',
                     freq: { reset: 'lr', uses: scale(level, {1: 1, 3: 2, 5: 3, 7: 4, 9: 5, 11: 6, 13: 7, 15: 8, 17: 9})},
                     condition: 'is under half HP',
-                    targets: 1,
-                    target: 'self',
-                    buff: {
-                        duration: '1 round',
-                        ac: 5,
-                    },
+                    templateOptions: { templateName: 'Shield' },
                 },
             ],
             2: [{
@@ -232,19 +225,10 @@ function bard(level: number, options: z.infer<typeof ClassOptions.bard>): Creatu
                 },
                 {
                     id: uuid(),
-                    name: 'Bane',
-                    actionSlot: ACTION,
-                    type: 'debuff',
-                    targets: 3,
+                    type: 'template',
                     condition: 'is available',
                     freq: { reset: 'lr', uses: scale(level, {1: 1, 3: 2, 5: 3, 7: 4, 9: 5, 11: 6, 13: 7, 15: 8, 17: 9})},
-                    target: 'enemy with highest DPR',
-                    saveDC: DC,
-                    buff: {
-                        duration: 'entire encounter',
-                        toHit: '-1d4',
-                        save: '-1d4',
-                    },
+                    templateOptions: { templateName: 'Bane', saveDC: DC, target: 'enemy with highest DPR' },
                 },
                 {
                     id: uuid(),
@@ -275,18 +259,10 @@ function bard(level: number, options: z.infer<typeof ClassOptions.bard>): Creatu
             5: [
                 {
                     id: uuid(),
-                    name: 'Hypnotic Pattern',
-                    actionSlot: ACTION,
-                    type: 'debuff',
+                    type: 'template',
                     freq: { reset: 'lr', uses: scale(level, {1: 1, 5: 1, 9: 2, 13: 3, 17: 4})},
                     condition: 'is available',
-                    targets: 2,
-                    target: 'enemy with highest DPR',
-                    saveDC: DC,
-                    buff: {
-                        duration: '1 round',
-                        condition: 'Incapacitated',
-                    },
+                    templateOptions: { templateName: 'Hypnotic Pattern', saveDC: DC, target: 'enemy with highest DPR' }
                 },
             ]
         }),
@@ -327,18 +303,10 @@ function cleric(level: number, options: z.infer<typeof ClassOptions.cleric>): Cr
                 },
                 {
                     id: uuid(),
-                    name: 'Bless',
-                    actionSlot: ActionSlots['Before the Encounter Starts'],
-                    type: 'buff',
-                    targets: 3,
+                    type: 'template',
                     freq: { reset: 'lr', uses: scale(level, {1: 1, 3: 2, 5: 3, 7: 4, 9: 5, 11: 6, 13: 7, 15: 8, 17: 9})},
                     condition: 'not used yet',
-                    target: 'ally with the highest DPR',
-                    buff: {
-                        duration: 'entire encounter',
-                        save: '1d4',
-                        toHit: '1d4',
-                    }
+                    templateOptions: { templateName: 'Bless', target: 'ally with the highest DPR' },
                 },
                 {
                     id: uuid(),
@@ -476,14 +444,10 @@ function druid(level: number, options: z.infer<typeof ClassOptions.druid>): Crea
             18: [
                 {
                     id: uuid(),
-                    name: 'Heal',
-                    actionSlot: ActionSlots.Action,
-                    type: 'heal',
-                    target: 'ally with the least HP',
-                    targets: 1,
+                    type: 'template',
                     condition: 'ally at 0 HP',
                     freq: '1/fight',
-                    amount: 70,
+                    templateOptions: { templateName: 'Heal', target: 'ally with the least HP' },
                 },
                 {
                     id: uuid(),
@@ -974,18 +938,10 @@ function warlock(level: number, options: z.infer<typeof ClassOptions.warlock>): 
             5: [
                 {
                     id: uuid(),
-                    name: 'Hypnotic Pattern',
-                    actionSlot: ActionSlots.Action,
-                    type: 'debuff',
+                    type: 'template',
                     freq: { reset: 'sr', uses: scale(level, {1: 1, 5: 2, 11: 3, 17: 4})},
                     condition: 'not used yet',
-                    targets: 2,
-                    target: 'enemy with highest DPR',
-                    saveDC: DC,
-                    buff: {
-                        duration: '1 round',
-                        condition: 'Incapacitated',
-                    },
+                    templateOptions: { templateName: 'Hypnotic Pattern', saveDC: DC, target: 'enemy with highest DPR' },
                 },
             ],
         }),
@@ -1027,48 +983,26 @@ function wizard(level: number, options: z.infer<typeof ClassOptions.wizard>): Cr
                 ]),
                 {
                     id: uuid(),
-                    name: 'Shield',
-                    actionSlot: ActionSlots['Other 1'],
-                    type: 'buff',
+                    type: 'template',
                     freq: { reset: 'lr', uses: Math.ceil(level/2)},
                     condition: scale(level, {1: 'is under half HP', 8: 'default'}),
-                    targets: 1,
-                    target: 'self',
-                    buff: {
-                        duration: '1 round',
-                        ac: 5,
-                    },
+                    templateOptions: { templateName: 'Shield' },
                 },
             ],
             5: [
                 {
                     id: uuid(),
-                    name: 'Fireball',
-                    actionSlot: ActionSlots.Action,
-                    type: 'atk',
+                    type: 'template',
                     freq: { reset: 'lr', uses: Math.ceil(level/3)},
                     condition: 'is available',
-                    targets: 2,
-                    target: 'enemy with least HP',
-                    useSaves: true,
-                    halfOnSave: true,
-                    toHit: DC,
-                    dpr: '8d6',
+                    templateOptions: { templateName: 'Fireball', toHit: DC, target: 'enemy with least HP' },
                 },
                 {
                     id: uuid(),
-                    name: 'Hypnotic Pattern',
-                    actionSlot: ActionSlots.Action,
-                    type: 'debuff',
+                    type: 'template',
                     freq: { reset: 'lr', uses: Math.ceil(level/3)},
-                    condition: 'is available',
-                    targets: 2,
-                    target: 'enemy with highest DPR',
-                    saveDC: DC,
-                    buff: {
-                        duration: '1 round',
-                        condition: 'Incapacitated',
-                    },
+                    condition: 'not used yet',
+                    templateOptions: { templateName: 'Hypnotic Pattern', saveDC: DC, target: 'enemy with highest DPR' },
                 },
             ],
             13: [
@@ -1090,17 +1024,10 @@ function wizard(level: number, options: z.infer<typeof ClassOptions.wizard>): Cr
             17: [
                 {
                     id: uuid(),
-                    name: 'Meteor Swarm',
-                    actionSlot: ActionSlots.Action,
-                    type: 'atk',
+                    type: 'template',
                     freq: '1/day',
                     condition: 'is available',
-                    targets: 3,
-                    target: 'enemy with least HP',
-                    useSaves: true,
-                    halfOnSave: true,
-                    toHit: DC,
-                    dpr: '40d6',
+                    templateOptions: { templateName: 'Meteor Swarm', toHit: DC, target: 'enemy with least HP' },
                 },
             ]
         }),

@@ -1,6 +1,7 @@
+import { ActionTemplates, getFinalAction } from "../data/actions"
 import { evaluateDiceFormula } from "./dice"
 import { ActionSlots, ActionType, CreatureCondition, CreatureConditionList } from "./enums"
-import { Action, AtkAction, Buff, BuffAction, Combattant, Creature, CreatureState, DebuffAction, DiceFormula, Encounter, EncounterResult, EncounterStats, HealAction, Round, SimulationResult } from "./model"
+import { Action, AtkAction, Buff, BuffAction, Combattant, Creature, CreatureState, DebuffAction, DiceFormula, Encounter, EncounterResult, EncounterStats, FinalAction, HealAction, Round, SimulationResult } from "./model"
 import { clone, range } from "./utils"
 import { v4 as uuid } from 'uuid'
 
@@ -84,7 +85,7 @@ function iterateCombattant(combattant: Combattant) {
 }
 
 // Checks for remaining uses
-function isUsable(combattant: Combattant, action: Action) {
+function isUsable(combattant: Combattant, action: FinalAction) {
     // Can only trigger 'on kill' effects once per turn
     if (action.actionSlot === ActionSlots["When reducing an enemy to 0 HP"]) {
         if (combattant.actions.find(actionTaken => actionTaken.action.id === action.id)) return false
@@ -113,18 +114,20 @@ function matchCondition(combattant: Combattant, action: Action, allies: Combatta
 
 // Determines which actions a creature will use. Does not actually perform the actions.
 // The exception is heals, to avoid situations where multiple healers all heal the same creature despite having the "ally at 0 hp" condition
-function getActions(combattant: Combattant, allies: Combattant[], handleHeals: boolean, stats: Map<string, EncounterStats>): Action[] {
+function getActions(combattant: Combattant, allies: Combattant[], handleHeals: boolean, stats: Map<string, EncounterStats>): FinalAction[] {
     const actionSlots = new Set()
     combattant.creature.actions
+        .map(getFinalAction)
         .filter(action => (action.actionSlot >= 0))
         .forEach(action => actionSlots.add(action.actionSlot))
 
     const result = Array.from(actionSlots).flatMap(actionSlot => {
         const actions = combattant.creature.actions
-            .filter((action: Action) => (action.actionSlot === actionSlot))
+            .map(getFinalAction)
+            .filter(action => (action.actionSlot === actionSlot))
             .filter(action => isUsable(combattant, action))
             .filter(action => matchCondition(combattant, action, allies))
-            .sort((action1: Action, action2: Action) => {
+            .sort((action1, action2) => {
                 if (action1.condition !== "default") return -1
                 if (action2.condition !== "default") return 1
                 if (action1.freq !== "at will") return -1
@@ -177,7 +180,7 @@ function getActions(combattant: Combattant, allies: Combattant[], handleHeals: b
 }
 
 // Actions can target multiple creatures. This finds the next valid target for that action.
-function getNextTarget(combattant: Combattant, action: Action, allies: Combattant[], enemies: Combattant[], stats: Map<string, EncounterStats>): Combattant|undefined {
+function getNextTarget(combattant: Combattant, action: FinalAction, allies: Combattant[], enemies: Combattant[], stats: Map<string, EncounterStats>): Combattant|undefined {
     const getHighestDPR = (group: Combattant[]) => {
         const getDPR = (combattant: Combattant) => {
             const dmgBonus = getBuffs(combattant, b => b.damage, 'add')
@@ -240,7 +243,7 @@ function generateActions(allies: Combattant[], enemies: Combattant[], stats: Map
 }
 
 // The callback will be called for each valid target, sequentially
-function getTargets(combattant: Combattant, action: Action, allies: Combattant[], enemies: Combattant[], stats: Map<string, EncounterStats>, callback: (target: Combattant) => void) {
+function getTargets(combattant: Combattant, action: FinalAction, allies: Combattant[], enemies: Combattant[], stats: Map<string, EncounterStats>, callback: (target: Combattant) => void) {
     const isAttack = (action.type === 'atk') && !action.useSaves
                 
     let lastTarget: Combattant|undefined = undefined
@@ -294,35 +297,37 @@ function handleActions(allies: Combattant[], enemies: Combattant[], actionTypes:
 
 // This is called when an action with a negative/special action slot is triggered
 function triggerAction(combattant: Combattant, actionSlot: keyof typeof ActionSlots, allies: Combattant[], enemies: Combattant[], stats: Map<string, EncounterStats>) {
-    combattant.creature.actions.forEach(action => {
-        if (action.actionSlot !== ActionSlots[actionSlot]) return
-        if (!isUsable(combattant, action)) return
-        if (!matchCondition(combattant, action, allies)) return
+    combattant.creature.actions
+        .map(getFinalAction)
+        .forEach(action => {
+            if (action.actionSlot !== ActionSlots[actionSlot]) return
+            if (!isUsable(combattant, action)) return
+            if (!matchCondition(combattant, action, allies)) return
 
-        const targets: Map<string, number> = new Map()
-        combattant.actions.push({ action: action, targets: targets })
+            const targets: Map<string, number> = new Map()
+            combattant.actions.push({ action: action, targets: targets })
 
-        getTargets(combattant, action, allies, enemies, stats, (target) => {
-            targets.set(target.id, 1 + (targets.get(target.id) || 0))
+            getTargets(combattant, action, allies, enemies, stats, (target) => {
+                targets.set(target.id, 1 + (targets.get(target.id) || 0))
 
-            const ignoreIncapacitated = true
-            switch (action.type) {
-                case "buff": return useBuffAction(combattant, action, target, stats, ignoreIncapacitated)
-                case "debuff": return useDebuffAction(combattant, action, target, stats, ignoreIncapacitated)
-                case "heal": return useHealAction(combattant, action, target, stats, ignoreIncapacitated)
-                case "atk": return useAtkAction(combattant, action, target, allies, enemies, stats, ignoreIncapacitated)
+                const ignoreIncapacitated = true
+                switch (action.type) {
+                    case "buff": return useBuffAction(combattant, action, target, stats, ignoreIncapacitated)
+                    case "debuff": return useDebuffAction(combattant, action, target, stats, ignoreIncapacitated)
+                    case "heal": return useHealAction(combattant, action, target, stats, ignoreIncapacitated)
+                    case "atk": return useAtkAction(combattant, action, target, allies, enemies, stats, ignoreIncapacitated)
+                }
+            })
+            
+            // Save uses for limited-use actions
+            if (action.freq != 'at will') {
+                let remainingUses = combattant.finalState.remainingUses.get(action.id) || 0
+                remainingUses = Math.max(0, remainingUses - 1)
+                combattant.finalState.remainingUses.set(action.id, remainingUses)
+
+                combattant.finalState.usedActions.add(action.id)
             }
         })
-        
-        // Save uses for limited-use actions
-        if (action.freq != 'at will') {
-            let remainingUses = combattant.finalState.remainingUses.get(action.id) || 0
-            remainingUses = Math.max(0, remainingUses - 1)
-            combattant.finalState.remainingUses.set(action.id, remainingUses)
-
-            combattant.finalState.usedActions.add(action.id)
-        }
-    })
 }
 
 function applyBuff(target: Combattant, buffName: string, newBuff: Buff, comparisonMode: 'min'|'max') {
