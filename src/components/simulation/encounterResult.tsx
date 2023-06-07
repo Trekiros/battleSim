@@ -90,8 +90,20 @@ const TeamResults:FC<TeamPropType> = ({ round, team, stats }) => {
                                         </li>
                                     ))
 
-                                    if (!li.length) return <>No action</>
-                                    return li
+                                    const bi = Array.from(combattant.finalState.buffs)
+                                        .map((buff, name) => (
+                                            <li key={name}>
+                                                    <b>{buff[1].displayName}</b> on self
+                                            </li>
+                                    ))
+
+                                    return (
+                                        <>
+                                            {li.length ? li : null}
+                                            {bi.length ? "----" : null}
+                                            {bi.length ? bi : null}
+                                        </>
+                                    )
                                 })()}
                             </ul>
                         </div>

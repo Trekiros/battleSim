@@ -24,6 +24,7 @@ export const FrequencySchema = z.enum(FrequencyList).or(z.discriminatedUnion('re
 export type Frequency = z.infer<typeof FrequencySchema>;
 
 const BuffSchema = z.object({
+    displayName: z.string().optional(),
     duration: BuffDurationSchema,
 
     ac: DiceFormulaSchema.optional(),
