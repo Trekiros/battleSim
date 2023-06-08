@@ -331,13 +331,12 @@ function triggerAction(combattant: Combattant, actionSlot: keyof typeof ActionSl
 }
 
 function applyBuff(target: Combattant, buffName: string, newBuff: Buff, comparisonMode: 'min' | 'max') {
-    var existingBuff = target.finalState.buffs.get(buffName)
+    const existingBuff = target.finalState.buffs.get(buffName)
 
     if (!existingBuff) {
         target.finalState.buffs.set(buffName, newBuff)
         return
     }
-    
     const result = mergeBuff(existingBuff, newBuff, comparisonMode)
     target.finalState.buffs.set(buffName, result)
 }
