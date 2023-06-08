@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { Combattant, EncounterResult, EncounterStats, FinalAction } from "../../model/model"
+import { Combattant, EncounterResult, EncounterStats, FinalAction, Buff } from "../../model/model"
 import styles from './encounterResult.module.scss'
 import { Round } from "../../model/model"
 import { clone } from "../../model/utils"
@@ -30,6 +30,24 @@ const TeamResults:FC<TeamPropType> = ({ round, team, stats }) => {
             .filter(nullable => !!nullable)
 
         return targetNames.join(' and ')
+    }
+
+    function getNumberWithSign(n: string | number) {
+        return (n<0 ? ' ' : ' +') + n
+    }
+
+    function getBuffEffect(buff: Buff) {
+        const buffEffects = []
+
+        if (buff.ac != undefined) buffEffects.push(getNumberWithSign(buff.ac) + ' AC')
+        if (buff.condition != undefined) buffEffects.push(' ' + buff.condition)
+        if (buff.damageMultiplier != undefined) buffEffects.push(' x' + buff.damageMultiplier + ' damage')
+        if (buff.damageTakenMultiplier != undefined) buffEffects.push( ' x' + buff.damageTakenMultiplier + ' damage taken')
+        if (buff.toHit != undefined) buffEffects.push(getNumberWithSign(buff.toHit) + ' to hit')
+        if (buff.save != undefined) buffEffects.push(getNumberWithSign(buff.save) + ' to save')
+        if (buff.damage != undefined) buffEffects.push(getNumberWithSign(buff.damage) + ' extra damage')
+
+        return buffEffects.join(', ')
     }
 
     return (
@@ -89,10 +107,11 @@ const TeamResults:FC<TeamPropType> = ({ round, team, stats }) => {
                                         </li>
                                     ))
 
+                                    //todo effects that disappear in the same round are not shown, which can be misleading
                                     const bi = Array.from(combattant.finalState.buffs)
                                         .map((buff, name) => (
                                             <li key={name}>
-                                                    <b>{buff[1].displayName}</b>
+                                                <b>{buff[1].displayName}</b>{getBuffEffect(buff[1])}
                                             </li>
                                     ))
 
