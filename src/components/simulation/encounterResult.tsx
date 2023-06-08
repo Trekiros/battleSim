@@ -92,14 +92,14 @@ const TeamResults:FC<TeamPropType> = ({ round, team, stats }) => {
                                     const bi = Array.from(combattant.finalState.buffs)
                                         .map((buff, name) => (
                                             <li key={name}>
-                                                    <b>{buff[1].displayName}</b> on self
+                                                    <b>{buff[1].displayName}</b>
                                             </li>
                                     ))
 
                                     return (
                                         <>
                                             {li.length ? li : null}
-                                            {bi.length ? "----" : null}
+                                            {bi.length ? <><br /><u>Active Buffs</u></> : null}
                                             {bi.length ? bi : null}
                                         </>
                                     )
