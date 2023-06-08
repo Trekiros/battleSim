@@ -1,5 +1,5 @@
 import { FC, useState } from "react"
-import { Action, AllyTarget, AtkAction, Buff, BuffAction, DebuffAction, DiceFormula, EnemyTarget, Frequency, HealAction } from "../../model/model"
+import { Action, AllyTarget, AtkAction, Buff, BuffAction, DebuffAction, DiceFormula, EnemyTarget, FinalAction, Frequency, HealAction, TemplateAction } from "../../model/model"
 import styles from './actionForm.module.scss'
 import { clone } from "../../model/utils"
 import { ActionType, BuffDuration, ActionCondition, CreatureConditionList, CreatureCondition, ActionSlots } from "../../model/enums"
@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
 import DecimalInput from "../utils/DecimalInput"
 import DiceFormulaInput from "../utils/diceFormulaInput"
+import { ActionTemplates, getFinalAction } from "../../data/actions"
 
 type PropType = {
     value: Action,
@@ -40,6 +41,7 @@ const ConditionOptions: Options<ActionCondition> = [
 ]
 
 const TypeOptions: Options<ActionType> = [
+    { value: 'template', label: 'Common Spell' },
     { value: 'atk', label: 'Attack' },
     { value: 'heal', label: 'Heal' },
     { value: 'buff', label: 'Buff' },
@@ -198,11 +200,39 @@ const BuffForm:FC<{value: Buff, onUpdate: (newValue: Buff) => void}> = ({ value,
 }
 
 const ActionForm:FC<PropType> = ({ value, onChange, onDelete }) => {
-
     function update(callback: (valueClone: Action) => void) {
+        const valueClone = clone(value)
+        callback(value)
+        onChange(value)
+    }
+
+    function updateFinalAction(callback: (valueClone: FinalAction) => void) {
+        if (value.type === 'template') return
+
         const valueClone = clone(value)
         callback(valueClone)
         onChange(valueClone)
+    }
+
+    function updateTemplateAction(callback: (valueClone: TemplateAction) => void) {
+        if (value.type !== 'template') return
+
+        const valueClone = clone(value)
+        callback(valueClone)
+        onChange(valueClone)
+    }
+
+    function updateFrequency(freq: Frequency) {
+        const v = clone(value)
+        
+        v.freq = (freq === v.freq) ? v.freq
+            : (typeof freq === 'string') ? freq
+            : (typeof v.freq === 'string') ? clone(freq)
+            : (v.freq.reset !== freq.reset) ? clone(freq)
+            : v.freq
+
+        onChange(v)
+        console.log(v)
     }
 
     function updateRiderEffect(callback: (riderEffect: { dc: number, buff: Buff }) => void) {
@@ -216,21 +246,51 @@ const ActionForm:FC<PropType> = ({ value, onChange, onDelete }) => {
     function updateType(type: ActionType) {
         if (type === value.type) return
 
+        const finalAction = getFinalAction(value)
+
         const common = {
             id: value.id,
-            name: value.name,
-            actionSlot: value.actionSlot,
-            condition: value.condition,
-            freq: value.freq,
-            targets: value.targets,
+            name: finalAction.name,
+            actionSlot: finalAction.actionSlot,
+            condition: finalAction.condition,
+            freq: finalAction.freq,
+            targets: finalAction.targets,
+        }
+
+        const templateAction: TemplateAction = {
+            id: value.id,
+            type: 'template',
+            condition: finalAction.condition,
+            freq: finalAction.freq,
+            templateOptions: { templateName: 'Fireball', saveDC: 10, toHit: 10, target: 'enemy with least HP' },
         }
 
         switch (type) {
-            case "atk": { onChange({...common, type, target: "enemy with most HP", dpr: 0, toHit: 0 }); return }
-            case "heal": { onChange({...common, type, amount: 0, target: "ally with the least HP" }); return }
-            case "buff": { onChange({...common, type, target: "ally with the highest DPR", buff: { duration: '1 round' } }); return }
-            case "debuff": { onChange({...common, type, target: "enemy with highest DPR", saveDC: 10, buff: { duration: '1 round' } }); return }
+            case "template": return onChange(templateAction)
+            case "atk": return onChange({...common, type, target: "enemy with most HP", dpr: 0, toHit: 0 })
+            case "heal": return onChange({...common, type, amount: 0, target: "ally with the least HP" })
+            case "buff": return onChange({...common, type, target: "ally with the highest DPR", buff: { duration: '1 round' } })
+            case "debuff": return onChange({...common, type, target: "enemy with highest DPR", saveDC: 10, buff: { duration: '1 round' } })
         }
+    }
+
+    function onTemplateChange(templateName: keyof typeof ActionTemplates) {
+        if (value.type !== 'template') return
+
+        const template = ActionTemplates[templateName]
+        const enemyTarget: EnemyTarget = 'enemy with least HP'
+        const allyTarget: AllyTarget = 'ally with the least HP'
+        const defaultTarget: EnemyTarget|AllyTarget = ((template.type === 'atk') || (template.type === 'debuff')) ? enemyTarget : allyTarget
+
+        onChange({
+            ...value,
+            templateOptions: {
+                templateName,
+                toHit: value.templateOptions.toHit || 0,
+                saveDC: value.templateOptions.saveDC || 0,
+                target: value.templateOptions.target || defaultTarget,
+            },
+        })
     }
 
     return (
@@ -239,15 +299,28 @@ const ActionForm:FC<PropType> = ({ value, onChange, onDelete }) => {
                 <FontAwesomeIcon icon={faTrash} />
             </button>
 
-            <input 
-                type='text' 
-                value={value.name} 
-                onChange={(e) => update(v => { v.name = e.target.value.length < 100 ? e.target.value : v.name })} 
-                placeholder="Action name..." 
-                style={{ minWidth: `${value.name.length}ch` }}
-            />
-            <Select value={value.actionSlot} options={ActionOptions} onChange={actionSlot => update(v => { v.actionSlot = actionSlot })} />
+            { value.type !== 'template' ? (
+                <>
+                    <input 
+                        type='text' 
+                        value={value.name} 
+                        onChange={(e) => updateFinalAction(v => { v.name = e.target.value.length < 100 ? e.target.value : v.name })} 
+                        placeholder="Action name..." 
+                        style={{ minWidth: `${value.name.length}ch` }}
+                    />
+                    <Select value={value.actionSlot} options={ActionOptions} onChange={actionSlot => updateFinalAction(v => { v.actionSlot = actionSlot })} />
+                </>
+            ) : null }
+
             <Select value={value.type} options={TypeOptions} onChange={updateType} />
+
+            { value.type === 'template' ? (
+                <Select
+                    value={value.templateOptions.templateName}
+                    options={Object.keys(ActionTemplates).map(key => ({ value: key as keyof typeof ActionTemplates, label: key }))}
+                    onChange={onTemplateChange}/>
+            ) : null }
+
             <Select 
                 value={
                     typeof value.freq === 'string' ? value.freq
@@ -257,13 +330,7 @@ const ActionForm:FC<PropType> = ({ value, onChange, onDelete }) => {
                   : 'at will'
                 }
                 options={FreqOptions}
-                onChange={freq => update(v => {
-                    if (freq === v.freq) return
-                    if (typeof freq === 'string') { v.freq = freq; return }
-                    if (typeof v.freq === 'string') { v.freq = clone(freq); return }
-                    if (v.freq.reset !== freq.reset) { v.freq = clone(freq); return }
-                    // Same frequency => do nothing
-                })} />
+                onChange={freq => updateFrequency(freq)} />
 
             { typeof value.freq !== 'string' ? (
                 value.freq.reset === 'recharge' ? (
@@ -292,10 +359,10 @@ const ActionForm:FC<PropType> = ({ value, onChange, onDelete }) => {
             ) : null }
             
             { ((value.type === 'atk') && (!value.useSaves)) ? (
-                <Select value={value.targets} options={HitCountOptions} onChange={targets => update(v => v.targets = targets)} />
-            ) : (
-                <Select value={value.targets} options={TargetCountOptions} onChange={targets => update(v => { v.targets = targets })} />
-            ) }
+                <Select value={value.targets} options={HitCountOptions} onChange={targets => updateFinalAction(v => v.targets = targets)} />
+            ) : (value.type !== 'template') ? (
+                <Select value={value.targets} options={TargetCountOptions} onChange={targets => updateFinalAction(v => { v.targets = targets })} />
+            ) : null }
             Use this action if:
             <Select value={value.condition} options={ConditionOptions} onChange={condition => update(v => { v.condition = condition })} />
 
@@ -324,7 +391,7 @@ const ActionForm:FC<PropType> = ({ value, onChange, onDelete }) => {
                     ) : null }
                     
                     Target:
-                    <Select value={value.target} options={EnemyTargetOptions} onChange={target => update(v => { v.target = target })} />
+                    <Select value={value.target} options={EnemyTargetOptions} onChange={target => updateFinalAction(v => { v.target = target })} />
                     On Hit Effect:
                     <Select 
                         value={value.riderEffect !== undefined} 
@@ -353,13 +420,13 @@ const ActionForm:FC<PropType> = ({ value, onChange, onDelete }) => {
                         onChange={tempHP => update(v => { (v as HealAction).tempHP = tempHP })}/>
                     <DiceFormulaInput value={value.amount} onChange={heal => update(v => { (v as HealAction).amount = heal || 0 })} />
                     Target:
-                    <Select value={value.target} options={AllyTargetOptions} onChange={target => update(v => { v.target = target })} />
+                    <Select value={value.target} options={AllyTargetOptions} onChange={target => updateFinalAction(v => { v.target = target })} />
                 </>
             ) : null }
             { (value.type === "buff") ? (
                 <>
                     Target:
-                    <Select value={value.target} options={AllyTargetOptions} onChange={target => update(v => { v.target = target })} />
+                    <Select value={value.target} options={AllyTargetOptions} onChange={target => updateFinalAction(v => { v.target = target })} />
                     Duration:
                     <Select value={value.buff.duration} options={BuffDurationOptions} onChange={duration => update(v => { (v as BuffAction).buff.duration = duration })} />
                     <BuffForm value={value.buff} onUpdate={newValue => update(v => { (v as BuffAction).buff = newValue })} />
@@ -368,7 +435,7 @@ const ActionForm:FC<PropType> = ({ value, onChange, onDelete }) => {
             { (value.type === "debuff") ? (
                 <>
                     Target:
-                    <Select value={value.target} options={EnemyTargetOptions} onChange={target => update(v => { v.target = target })} />
+                    <Select value={value.target} options={EnemyTargetOptions} onChange={target => updateFinalAction(v => { v.target = target })} />
                     Duration:
                     <Select value={value.buff.duration} options={BuffDurationOptions} onChange={duration => update(v => { (v as DebuffAction).buff.duration = duration })} />
                     Save DC:
@@ -376,6 +443,45 @@ const ActionForm:FC<PropType> = ({ value, onChange, onDelete }) => {
                     <BuffForm value={value.buff} onUpdate={newValue => update(v => { (v as DebuffAction).buff = newValue })} />
                 </>
             ) : null }
+            { (value.type === "template") ? (() => {
+                const template = ActionTemplates[value.templateOptions.templateName]
+
+                const targetForm = template.target ? null : (
+                    <>
+                        Target:
+                        <Select 
+                            value={value.templateOptions.target} 
+                            options={((template.type === 'atk') || (template.type === 'debuff')) ? EnemyTargetOptions : AllyTargetOptions}
+                            onChange={target => updateTemplateAction(v => { v.templateOptions.target = target })}/>
+                    </>
+                )
+
+                if (template.type === 'atk') return (
+                    <>
+                        { template.useSaves ? 'Save DC:' : 'To hit:' }
+                        <DiceFormulaInput value={value.templateOptions.toHit} onChange={toHit => updateTemplateAction(v => { v.templateOptions.toHit = toHit || 0 })} />
+                        { template.riderEffect ? (
+                            <>
+                                Save DC for the additional effects:
+                                <input type='number' value={value.templateOptions.saveDC} onChange={e => updateTemplateAction(v => { v.templateOptions.saveDC = Number(e.target.value) })} />
+                            </>
+                        ) : null}
+                        {targetForm}
+                    </>
+                )
+                if (template.type === 'debuff') return (
+                    <>
+                        Save DC:
+                        <input 
+                            type='number' 
+                            value={value.templateOptions.saveDC} 
+                            onChange={e => updateTemplateAction(v => { v.templateOptions.saveDC = Number(e.target.value) })} />
+                        {targetForm}
+                    </>
+                )
+
+                return targetForm
+            })() : null }
         </div>
     )
 }

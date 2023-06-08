@@ -144,18 +144,10 @@ export const Monsters: Creature[] = [
             },
             {
                 "id": "f5e9b5f8-72f2-403e-9e58-2de262beb3b5",
-                "name": "Bless",
-                "actionSlot": 4,
                 "condition": "default",
                 "freq": "at will",
-                "targets": 2,
-                "type": "buff",
-                "target": "ally with the highest DPR",
-                "buff": {
-                    "duration": "entire encounter",
-                    "toHit": '1d4',
-                    "save": '1d4'
-                }
+                "type": "template",
+                templateOptions: { templateName: 'Bless', target: "ally with the highest DPR" },
             },
             {
                 "id": "b92c0727-7b4d-41cd-b31e-3d1a02d5221e",
@@ -1799,17 +1791,12 @@ export const Monsters: Creature[] = [
                 "target": "enemy with most HP"
             },
             {
-                "id": "ef23df09-abd1-49e1-8b47-b60f01fb4e46",
-                "actionSlot": 0,
-                "name": "Fireball",
-                "freq": "at will",
-                "condition": "default",
-                "targets": 2,
-                "type": "atk",
-                "dpr": 28,
-                "toHit": 7,
-                "target": "enemy with most HP"
-            }
+                id: "79e62dc7-fae0-402a-953a-ffb1c32b8bc8",
+                type: 'template',
+                freq: "at will",
+                condition: 'default',
+                templateOptions: { templateName: 'Fireball', toHit: 17, target: 'enemy with most HP' },
+            },
         ],
         "count": 1,
         "saveBonus": 6
@@ -1825,18 +1812,11 @@ export const Monsters: Creature[] = [
         "AC": 15,
         "actions": [
             {
-                "id": "53f6d9e8-5455-4fd3-8797-c92007ec8d1f",
-                "name": "Shield",
-                "actionSlot": 4,
+                "id": "14270ca3-d687-4c55-9d85-b56407df47f5",
                 "condition": "default",
                 "freq": "at will",
-                "targets": 1,
-                "type": "buff",
-                "target": "self",
-                "buff": {
-                    "duration": "1 round",
-                    "ac": 5
-                }
+                "type": "template",
+                templateOptions: { templateName: 'Shield'}
             },
             {
                 "id": "8569a346-91f0-482e-9c65-11d0d5c370fb",
@@ -2413,7 +2393,18 @@ export const Monsters: Creature[] = [
                 "targets": 1,
                 "useSaves": true,
                 "halfOnSave": true
-            }
+            },
+            {
+                "id": "e76db1b2-52c9-417d-be35-53e9f1c7e327",
+                "name": "Undead Fortitude",
+                "type": "heal",
+                "actionSlot": -1,
+                "freq": "1/fight",
+                "condition": "is available",
+                "target": "self",
+                "targets": 1,
+                amount: 1,
+            },
         ],
         "count": 1,
         "saveBonus": 2.5
@@ -4450,17 +4441,10 @@ export const Monsters: Creature[] = [
         "actions": [
             {
                 "id": "14270ca3-d687-4c55-9d85-b56407df47f5",
-                "name": "Shield",
-                "actionSlot": 1,
                 "condition": "default",
                 "freq": "at will",
-                "targets": 1,
-                "type": "buff",
-                "target": "self",
-                "buff": {
-                    "duration": "1 round",
-                    "ac": 5
-                }
+                "type": "template",
+                templateOptions: { templateName: 'Shield'}
             },
             {
                 "id": "2252b308-67f8-4132-b0b6-759f7c647da9",
@@ -5195,31 +5179,19 @@ export const Monsters: Creature[] = [
                 "targets": 1
             },
             {
-                "id": "79e62dc7-fae0-402a-953a-ffb1c32b8bc8",
-                "actionSlot": 0,
-                "name": "Fireball",
-                "freq": "1/day",
-                "condition": "default",
-                "targets": 2,
-                "type": "atk",
-                "dpr": 28,
-                "toHit": 3,
-                "target": "enemy with least HP"
+                id: "79e62dc7-fae0-402a-953a-ffb1c32b8bc8",
+                type: 'template',
+                freq: "1/day",
+                condition: 'default',
+                templateOptions: { templateName: 'Fireball', toHit: 13, target: 'enemy with most HP' },
             },
             {
-                "id": "8cb3eeb3-9c51-4794-87b5-d7539f1775ac",
-                "name": "Shield",
-                "actionSlot": 4,
+                "id": "14270ca3-d687-4c55-9d85-b56407df47f5",
                 "condition": "default",
                 "freq": "at will",
-                "targets": 1,
-                "type": "buff",
-                "target": "self",
-                "buff": {
-                    "duration": "1 round",
-                    "ac": 5
-                }
-            }
+                "type": "template",
+                templateOptions: { templateName: 'Shield'}
+            },
         ],
         "count": 1,
         "saveBonus": 2
@@ -7320,18 +7292,11 @@ export const Monsters: Creature[] = [
         "AC": 17,
         "actions": [
             {
-                "id": "3ab6238c-c2c4-4e4e-b6a2-25cb678df655",
-                "name": "Shield",
-                "actionSlot": 4,
+                "id": "14270ca3-d687-4c55-9d85-b56407df47f5",
                 "condition": "default",
                 "freq": "at will",
-                "targets": 1,
-                "type": "buff",
-                "target": "self",
-                "buff": {
-                    "duration": "1 round",
-                    "ac": 5
-                }
+                "type": "template",
+                templateOptions: { templateName: 'Shield'}
             },
             {
                 "id": "5429bfa1-8a03-4263-b337-d02d5720a505",
@@ -8707,18 +8672,11 @@ export const Monsters: Creature[] = [
         "AC": 17,
         "actions": [
             {
-                "id": "ed9e4d93-f1b8-43e2-8cd8-6c7463ace5c3",
-                "name": "Shield",
-                "actionSlot": 4,
+                "id": "14270ca3-d687-4c55-9d85-b56407df47f5",
                 "condition": "default",
                 "freq": "at will",
-                "targets": 1,
-                "type": "buff",
-                "target": "self",
-                "buff": {
-                    "duration": "1 round",
-                    "ac": 5
-                }
+                "type": "template",
+                templateOptions: { templateName: 'Shield'}
             },
             {
                 "id": "b7e3494f-fabb-450d-9d10-7a4ff366f489",
@@ -8974,18 +8932,11 @@ export const Monsters: Creature[] = [
         "AC": 15,
         "actions": [
             {
-                "id": "9eb3d86f-b192-48cd-ae53-8b0ae5bbb932",
-                "name": "Shield",
-                "actionSlot": 4,
+                "id": "14270ca3-d687-4c55-9d85-b56407df47f5",
                 "condition": "default",
                 "freq": "at will",
-                "targets": 1,
-                "type": "buff",
-                "target": "self",
-                "buff": {
-                    "duration": "1 round",
-                    "ac": 5
-                }
+                "type": "template",
+                templateOptions: { templateName: 'Shield'}
             },
             {
                 "id": "c0349e26-649b-4aeb-b128-5d970ca7a9c0",
@@ -9000,17 +8951,12 @@ export const Monsters: Creature[] = [
                 "target": "enemy with most HP"
             },
             {
-                "id": "555c6ec5-8787-4339-a718-958927e4d31d",
-                "actionSlot": 0,
-                "name": "Fireball",
-                "freq": "at will",
-                "condition": "default",
-                "targets": 2,
-                "type": "atk",
-                "dpr": 27,
-                "toHit": 5,
-                "target": "enemy with least HP"
-            }
+                id: "79e62dc7-fae0-402a-953a-ffb1c32b8bc8",
+                type: 'template',
+                freq: "at will",
+                condition: 'default',
+                templateOptions: { templateName: 'Fireball', toHit: 15, target: 'enemy with most HP' },
+            },
         ],
         "count": 1,
         "saveBonus": 3
@@ -9506,19 +9452,12 @@ export const Monsters: Creature[] = [
                 "target": "enemy with most HP"
             },
             {
-                "id": "0b1731a8-3a28-42eb-857f-3f018e9570a4",
-                "name": "Shield",
-                "actionSlot": 1,
+                "id": "14270ca3-d687-4c55-9d85-b56407df47f5",
                 "condition": "default",
                 "freq": "at will",
-                "targets": 1,
-                "type": "buff",
-                "target": "self",
-                "buff": {
-                    "duration": "1 round",
-                    "ac": 5
-                }
-            }
+                "type": "template",
+                templateOptions: { templateName: 'Shield'}
+            },
         ],
         "count": 1,
         "saveBonus": 4
@@ -10187,7 +10126,18 @@ export const Monsters: Creature[] = [
                 "toHit": 6,
                 "target": "enemy with most HP",
                 "targets": 1
-            }
+            },
+            {
+                "id": "e76db1b2-52c9-417d-be35-53e9f1c7e327",
+                "name": "Undead Fortitude",
+                "type": "heal",
+                "actionSlot": -1,
+                "freq": "1/fight",
+                "condition": "is available",
+                "target": "self",
+                "targets": 1,
+                amount: 1,
+            },
         ],
         "count": 1,
         "saveBonus": 1
@@ -15149,7 +15099,18 @@ export const Monsters: Creature[] = [
                 "toHit": 3,
                 "target": "enemy with most HP",
                 "targets": 1
-            }
+            },
+            {
+                "id": "e76db1b2-52c9-417d-be35-53e9f1c7e327",
+                "name": "Undead Fortitude",
+                "type": "heal",
+                "actionSlot": -1,
+                "freq": "1/fight",
+                "condition": "is available",
+                "target": "self",
+                "targets": 1,
+                amount: 1,
+            },
         ],
         "count": 1,
         "saveBonus": 0.125
@@ -19660,17 +19621,12 @@ export const Monsters: Creature[] = [
         "AC": 13,
         "actions": [
             {
-                "id": "9eb376ba-f09f-4ce4-98de-3ff1fb8e16d4",
-                "name": "Lightning Bolt or Fireball",
-                "type": "atk",
-                "actionSlot": 0,
-                "freq": "at will",
-                "condition": "default",
-                "dpr": 28,
-                "toHit": 3,
-                "target": "enemy with most HP",
-                "targets": 2
-            }
+                id: "79e62dc7-fae0-402a-953a-ffb1c32b8bc8",
+                type: 'template',
+                freq: "at will",
+                condition: 'default',
+                templateOptions: { templateName: 'Fireball', toHit: 13, target: 'enemy with most HP' },
+            },
         ],
         "count": 1,
         "saveBonus": 2
@@ -21624,7 +21580,21 @@ export const Monsters: Creature[] = [
                     "duration": "1 round",
                     condition: 'Invisible',
                 }
-            }
+            },
+            {
+                "id": "e76db1b2-52c9-417d-be35-53e9f1c7e327",
+                "name": "Explosive Retribution",
+                "type": "atk",
+                "actionSlot": -1,
+                "freq": "at will",
+                "condition": "default",
+                "target": "enemy with most HP",
+                "targets": 2,
+                toHit: 17,
+                useSaves: true,
+                halfOnSave: true,
+                dpr: 18
+            },
         ],
         "count": 1,
         "saveBonus": 5

@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { AllyTargetSchema, BuffDurationSchema, ChallengeRatingSchema, ClassesSchema, ActionConditionSchema, CreatureTypeSchema, EnemyTargetSchema, CreatureConditionSchema } from './enums'
+import { AllyTargetSchema, BuffDurationSchema, ChallengeRatingSchema, ClassesSchema, ActionConditionSchema, CreatureTypeSchema, EnemyTargetSchema, CreatureConditionSchema, EnemyTargetList, AllyTargetList } from './enums'
 import { ClassOptionsSchema } from './classOptions'
 import { validateDiceFormula } from './dice'
 import { ActionTemplates } from '../data/actions'
@@ -87,27 +87,59 @@ const DebuffActionSchema = ActionSchemaBase.merge(z.object({
     buff: BuffSchema,
 }))
 
+type ActionTemplateName = keyof typeof ActionTemplates
+
 const TemplateActionSchema = z.object({
     type: z.literal('template'),
     id: z.string(),
     freq: FrequencySchema,
     condition: ActionConditionSchema,
-    target: AllyTargetSchema.or(EnemyTargetSchema),
-
-    templateName: z.custom<string>(data => {
-        if (typeof data !== 'string') return false
     
-        // ActionTemplate needs to be cast as any to avoid circular type definition
-        return ((ActionTemplates as any)[data] !== undefined)
+    templateOptions: z.object({
+        target: AllyTargetSchema.or(EnemyTargetSchema).optional(),
+        templateName: z.custom<ActionTemplateName>(data => (typeof data === 'string')),
+        toHit: DiceFormulaSchema.optional(),
+        saveDC: z.number().optional(),
+    }).refine(data => {
+        const template = ActionTemplates[data.templateName]
+        if (!template) return false
+
+        // Attacks and debuffs need extra info
+        if (template.type === 'atk') {
+            if (data.toHit === undefined) return false
+            if (template.riderEffect && (data.saveDC === undefined)) return false
+        }
+    
+        if ((template.type === 'debuff') && (data.saveDC === undefined)) return false
+
+        // Check that this has right kind of target
+        if (!template.target) {
+            if ((template.type === 'atk') || (template.type === 'debuff')) {
+                if (!EnemyTargetList.includes(data.target as any)) return false
+            }
+            else if ((template.type === 'buff') || (template.type === 'heal')) {
+                if (!AllyTargetList.includes(data.target as any)) return false
+            }
+        }
+
+        return true
     }),
 })
+
+// Like a regular Action, but without the possibility of it being a TemplateAction
+export const FinalActionSchema = z.discriminatedUnion('type', [
+    HealActionSchema, 
+    AtkActionSchema, 
+    BuffActionSchema, 
+    DebuffActionSchema, 
+])
 
 const ActionSchema = z.discriminatedUnion('type', [
     HealActionSchema, 
     AtkActionSchema, 
     BuffActionSchema, 
     DebuffActionSchema, 
-    //TemplateActionSchema
+    TemplateActionSchema,
 ])
 
 // Creature is the definition of the creature. It's what the user inputs.
@@ -158,7 +190,7 @@ const CombattantSchema = z.object({
     
     // Actions taken by the creature on that round. Initially empty, will be filled by the simulator
     actions: z.array(z.object({
-        action: ActionSchema,
+        action: FinalActionSchema,
         targets: z.map(z.string(), z.number()),
     })),
 })
@@ -205,7 +237,9 @@ export type AtkAction = z.infer<typeof AtkActionSchema>
 export type HealAction = z.infer<typeof HealActionSchema>
 export type BuffAction = z.infer<typeof BuffActionSchema>
 export type DebuffAction = z.infer<typeof DebuffActionSchema>
+export type TemplateAction = z.infer<typeof TemplateActionSchema>
 export type Action = z.infer<typeof ActionSchema>
+export type FinalAction = z.infer<typeof FinalActionSchema>
 export type Creature = z.infer<typeof CreatureSchema>
 export type Team = z.infer<typeof TeamSchema>
 export type CreatureState = z.infer<typeof CreatureStateSchema>
