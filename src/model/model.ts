@@ -101,32 +101,26 @@ const TemplateActionSchema = z.object({
         saveDC: z.number().optional(),
     }).refine(data => {
         const template = ActionTemplates[data.templateName]
-        console.log('test valentin', 1)
         if (!template) return false
-        console.log('test valentin', 2)
 
         // Attacks and debuffs need extra info
         if (template.type === 'atk') {
-            console.log('test valentin', 3)
             if (data.toHit === undefined) return false
-            console.log('test valentin', 4)
             if (template.riderEffect && (data.saveDC === undefined)) return false
-            console.log('test valentin', 5)
         }
     
         if ((template.type === 'debuff') && (data.saveDC === undefined)) return false
-        console.log('test valentin', 6)
 
         // Check that this has right kind of target
-        if ((template.type === 'atk') || (template.type === 'debuff')) {
-            console.log('test valentin', 7)
-            if (!EnemyTargetList.includes(data.target as any)) return false
+        if (!template.target) {
+            if ((template.type === 'atk') || (template.type === 'debuff')) {
+                if (!EnemyTargetList.includes(data.target as any)) return false
+            }
+            else if ((template.type === 'buff') || (template.type === 'heal')) {
+                if (!AllyTargetList.includes(data.target as any)) return false
+            }
         }
-        else if ((template.type === 'buff') || (template.type === 'heal')) {
-            console.log('test valentin', 8)
-            if (AllyTargetList.includes(data.target as any)) return false
-        }
-        console.log('test valentin', 9)
+
         return true
     }),
 })
