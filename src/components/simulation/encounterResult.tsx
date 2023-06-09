@@ -32,16 +32,20 @@ const TeamResults:FC<TeamPropType> = ({ round, team, stats }) => {
         return targetNames.join(' and ')
     }
 
+    function getNumberWithSign(n: string | number) {
+        return (n<0 ? ' ' : ' +') + n
+    }
+
     function getBuffEffect(buff: Buff) {
         const buffEffects: string[] = []
 
-        if (buff.ac != undefined) buffEffects.push(' ' +String(buff.ac) + ' AC')
+        if (buff.ac != undefined) buffEffects.push(getNumberWithSign(buff.ac) + ' AC')
         if (buff.condition != undefined) buffEffects.push(' ' + buff.condition)
         if (buff.damageMultiplier != undefined) buffEffects.push(' x' + buff.damageMultiplier + ' damage')
         if (buff.damageTakenMultiplier != undefined) buffEffects.push( ' x' + buff.damageTakenMultiplier + ' damage taken')
-        if (buff.toHit != undefined) buffEffects.push(' ' +String(buff.toHit) + ' to hit')
-        if (buff.save != undefined) buffEffects.push(' ' +String(buff.save) + ' to save')
-        if (buff.damage != undefined) buffEffects.push(' '+String(buff.damage) + ' extra damage')
+        if (buff.toHit != undefined) buffEffects.push(getNumberWithSign(buff.toHit) + ' to hit')
+        if (buff.save != undefined) buffEffects.push(getNumberWithSign(buff.save) + ' to save')
+        if (buff.damage != undefined) buffEffects.push(getNumberWithSign(buff.damage) + ' extra damage')
 
         return buffEffects.join(', ')
     }
@@ -111,12 +115,14 @@ const TeamResults:FC<TeamPropType> = ({ round, team, stats }) => {
                                                 <li key={buffId}>
                                                     <b>{buff[1].displayName}</b>{getBuffEffect(buff[1])}
                                                 </li> :
-                                                <><b>{buff[1].displayName}</b>{buffId < buffCount-1 ? ',' : null} </>
+                                                <>
+                                                    <b>{buff[1].displayName}</b>{buffId < buffCount - 1 ? ',' : null}
+                                                </>
                                     ))
 
                                     return (
                                         <>
-                                            {li.length ? li : null}
+                                            {li.length ? li : <b>No Actions</b>}
                                             {bi.length ? <>
                                                 <br /><u>Active Buffs</u><br />
                                                 {bi}
