@@ -6784,7 +6784,21 @@ export const Monsters: Creature[] = [
                 "toHit": 4,
                 "target": "enemy with most HP",
                 "targets": 1
-            }
+            },
+            {
+                "id": "59296459-64f6-44d1-9ba4-294637971b8f",
+                "name": "Hide",
+                "type": "buff",
+                "actionSlot": 1,
+                "freq": "at will",
+                "condition": "not used yet",
+                "targets": 1,
+                target: 'self',
+                buff: {
+                    duration: '1 round',
+                    condition: 'Invisible',
+                }
+            },
         ],
         "count": 1,
         "saveBonus": 0.125
@@ -6822,7 +6836,21 @@ export const Monsters: Creature[] = [
                 "toHit": 4,
                 "target": "enemy with most HP",
                 "targets": 2
-            }
+            },
+            {
+                "id": "59296459-64f6-44d1-9ba4-294637971b8f",
+                "name": "Hide",
+                "type": "buff",
+                "actionSlot": 1,
+                "freq": "at will",
+                "condition": "not used yet",
+                "targets": 1,
+                target: 'self',
+                buff: {
+                    duration: '1 round',
+                    condition: 'Invisible',
+                }
+            },
         ],
         "count": 1,
         "saveBonus": 0.5
@@ -11870,7 +11898,21 @@ export const Monsters: Creature[] = [
                 "toHit": 4,
                 "target": "enemy with most HP",
                 "targets": 1
-            }
+            },
+            {
+                "id": "59296459-64f6-44d1-9ba4-294637971b8f",
+                "name": "Shadow Stealth",
+                "type": "buff",
+                "actionSlot": 1,
+                "freq": "at will",
+                "condition": "default",
+                "targets": 1,
+                target: 'self',
+                buff: {
+                    duration: '1 round',
+                    condition: 'Invisible',
+                }
+            },
         ],
         "count": 1,
         "saveBonus": 0.25
@@ -11896,7 +11938,21 @@ export const Monsters: Creature[] = [
                 "toHit": 5,
                 "target": "enemy with most HP",
                 "targets": 1
-            }
+            },
+            {
+                "id": "59296459-64f6-44d1-9ba4-294637971b8f",
+                "name": "Shadow Stealth",
+                "type": "buff",
+                "actionSlot": 1,
+                "freq": "at will",
+                "condition": "default",
+                "targets": 1,
+                target: 'self',
+                buff: {
+                    duration: '1 round',
+                    condition: 'Invisible',
+                }
+            },
         ],
         "count": 1,
         "saveBonus": 2
@@ -12348,7 +12404,21 @@ export const Monsters: Creature[] = [
                 "toHit": 4,
                 "target": "enemy with most HP",
                 "targets": 1
-            }
+            },
+            {
+                "id": "59296459-64f6-44d1-9ba4-294637971b8f",
+                "name": "Cunning Action",
+                "type": "buff",
+                "actionSlot": 1,
+                "freq": "at will",
+                "condition": "is under half HP",
+                "targets": 1,
+                target: 'self',
+                buff: {
+                    duration: '1 round',
+                    condition: 'Invisible',
+                }
+            },
         ],
         "count": 1,
         "saveBonus": 0.5
@@ -14765,7 +14835,21 @@ export const Monsters: Creature[] = [
                 "toHit": 11,
                 "target": "enemy with most HP",
                 "targets": 1
-            }
+            },
+            {
+                "id": "59296459-64f6-44d1-9ba4-294637971b8f",
+                "name": "Hide",
+                "type": "buff",
+                "actionSlot": 1,
+                "freq": "at will",
+                "condition": "default",
+                "targets": 1,
+                target: 'self',
+                buff: {
+                    duration: '1 round',
+                    condition: 'Invisible',
+                }
+            },
         ],
         "count": 1,
         "saveBonus": 6.5
@@ -15954,8 +16038,22 @@ export const Monsters: Creature[] = [
                         "duration": "1 round",
                         condition: 'Restrained',
                     }
+                },
+            },
+            {
+                "id": "59296459-64f6-44d1-9ba4-294637971b8f",
+                "name": "Shadow Stealth",
+                "type": "buff",
+                "actionSlot": 1,
+                "freq": "at will",
+                "condition": "not used yet",
+                "targets": 1,
+                target: 'self',
+                buff: {
+                    duration: '1 round',
+                    condition: 'Invisible',
                 }
-            }
+            },
         ],
         "count": 1,
         "saveBonus": 2.5
@@ -16165,7 +16263,21 @@ export const Monsters: Creature[] = [
                 "toHit": 6,
                 "target": "enemy with most HP",
                 "targets": 1
-            }
+            },
+            {
+                "id": "59296459-64f6-44d1-9ba4-294637971b8f",
+                "name": "Shadow Stealth",
+                "type": "buff",
+                "actionSlot": 1,
+                "freq": "at will",
+                "condition": "not used yet",
+                "targets": 1,
+                target: 'self',
+                buff: {
+                    duration: '1 round',
+                    condition: 'Invisible',
+                }
+            },
         ],
         "count": 1,
         "saveBonus": 3.5
@@ -16323,7 +16435,21 @@ export const Monsters: Creature[] = [
                 "dpr": 31,
                 "toHit": 8,
                 "target": "enemy with most HP"
-            }
+            },
+            {
+                "id": "59296459-64f6-44d1-9ba4-294637971b8f",
+                "name": "Shadow Stealth",
+                "type": "buff",
+                "actionSlot": 1,
+                "freq": "at will",
+                "condition": "default",
+                "targets": 1,
+                target: 'self',
+                buff: {
+                    duration: '1 round',
+                    condition: 'Invisible',
+                }
+            },
         ],
         "count": 1,
         "saveBonus": 6
@@ -20484,7 +20610,21 @@ export const Monsters: Creature[] = [
                     "duration": "until next attack taken",
                     "damageTakenMultiplier": 0.5
                 }
-            }
+            },
+            {
+                "id": "59296459-64f6-44d1-9ba4-294637971b8f",
+                "name": "Cunning Action",
+                "type": "buff",
+                "actionSlot": 1,
+                "freq": "at will",
+                "condition": "default",
+                "targets": 1,
+                target: 'self',
+                buff: {
+                    duration: '1 round',
+                    condition: 'Invisible',
+                }
+            },
         ],
         "count": 1,
         "saveBonus": 2.5
@@ -20587,7 +20727,21 @@ export const Monsters: Creature[] = [
                 "toHit": 5,
                 "target": "enemy with most HP",
                 "targets": 1
-            }
+            },
+            {
+                "id": "59296459-64f6-44d1-9ba4-294637971b8f",
+                "name": "Shadow Stealth",
+                "type": "buff",
+                "actionSlot": 1,
+                "freq": "at will",
+                "condition": "is under half HP",
+                "targets": 1,
+                target: 'self',
+                buff: {
+                    duration: '1 round',
+                    condition: 'Invisible',
+                }
+            },
         ],
         "count": 1,
         "saveBonus": 0.5
@@ -21228,7 +21382,21 @@ export const Monsters: Creature[] = [
                 "target": "enemy with most HP",
                 "targets": 1,
                 "useSaves": true
-            }
+            },
+            {
+                "id": "59296459-64f6-44d1-9ba4-294637971b8f",
+                "name": "Nimble Escape",
+                "type": "buff",
+                "actionSlot": 1,
+                "freq": "at will",
+                "condition": "not used yet",
+                "targets": 1,
+                target: 'self',
+                buff: {
+                    duration: '1 round',
+                    condition: 'Invisible',
+                }
+            },
         ],
         "count": 1,
         "saveBonus": 0.5
@@ -22334,7 +22502,21 @@ export const Monsters: Creature[] = [
                 "targets": 1,
                 "useSaves": true,
                 "halfOnSave": true
-            }
+            },
+            {
+                "id": "59296459-64f6-44d1-9ba4-294637971b8f",
+                "name": "Watery Stealth",
+                "type": "buff",
+                "actionSlot": 1,
+                "freq": "at will",
+                "condition": "default",
+                "targets": 1,
+                target: 'self',
+                buff: {
+                    duration: '1 round',
+                    condition: 'Invisible',
+                }
+            },
         ],
         "count": 1,
         "saveBonus": 1.5
@@ -22584,7 +22766,21 @@ export const Monsters: Creature[] = [
                 "dpr": 15.5,
                 "toHit": 7,
                 "target": "enemy with least HP"
-            }
+            },
+            {
+                "id": "59296459-64f6-44d1-9ba4-294637971b8f",
+                "name": "Shadow Stealth",
+                "type": "buff",
+                "actionSlot": 1,
+                "freq": "at will",
+                "condition": "not used yet",
+                "targets": 1,
+                target: 'self',
+                buff: {
+                    duration: '1 round',
+                    condition: 'Invisible',
+                }
+            },
         ],
         "count": 1,
         "saveBonus": 2.5
