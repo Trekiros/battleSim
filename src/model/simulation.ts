@@ -366,6 +366,7 @@ function mergeBuff(buff1: Buff, buff2: Buff, comparisonMode: 'min'|'max'): Buff 
 
     const result: Buff = {
         duration: buff1.duration,
+        displayName: buff1.displayName,
         
         ac: comparator(buff1.ac, buff2.ac),
         damage: comparator(buff1.damage, buff2.damage),
