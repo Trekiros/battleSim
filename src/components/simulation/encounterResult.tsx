@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { Combattant, EncounterResult, EncounterStats, FinalAction, Buff } from "../../model/model"
+import { Combattant, EncounterResult, EncounterStats, FinalAction, Buff, DiceFormula } from "../../model/model"
 import styles from './encounterResult.module.scss'
 import { Round } from "../../model/model"
 import { clone } from "../../model/utils"
@@ -32,7 +32,7 @@ const TeamResults:FC<TeamPropType> = ({ round, team, stats }) => {
         return targetNames.join(' and ')
     }
 
-    function getNumberWithSign(n: string | number) {
+    function getNumberWithSign(n: DiceFormula) {
         return (n<0 ? ' ' : ' +') + n
     }
 
