@@ -116,7 +116,7 @@ const TeamResults:FC<TeamPropType> = ({ round, team, stats }) => {
                                                     <b>{buff[1].displayName}</b>{getBuffEffect(buff[1])}
                                                 </li> :
                                                 <>
-                                                    <b>{buff[1].displayName}</b>{buffId < buffCount - 1 ? ',' : null}
+                                                    <b>{buff[1].displayName}</b>{(buffId < buffCount - 1) ? ',' : null}&nbsp;
                                                 </>
                                     ))
 
