@@ -34,8 +34,8 @@ const TeamResults:FC<TeamPropType> = ({ round, team, stats }) => {
 
     function getNumberWithSign(n: DiceFormula) {
         let result = String(n)
-        if (!result.startsWith(' -')) result = ' +' + result
-        return result
+        if (!result.startsWith('-')) result = '+' + result
+        return ' ' + result
     }
 
     function getBuffEffect(buff: Buff) {
