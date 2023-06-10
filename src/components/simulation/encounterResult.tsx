@@ -112,13 +112,13 @@ const TeamResults:FC<TeamPropType> = ({ round, team, stats }) => {
                                     //todo effects that disappear in the same round are not shown, which can be misleading
                                     const buffCount = combattant.finalState.buffs.size
                                     const bi = Array.from(combattant.finalState.buffs)
-                                        .map((buff, buffId) => (
+                                        .map(([buffId, buff], index) => (
                                             (buffCount <= 3) ?
                                                 <li key={buffId}>
-                                                    <b>{buff[1].displayName}</b>{getBuffEffect(buff[1])}
+                                                    <b>{buff.displayName}</b>{getBuffEffect(buff)}
                                                 </li> :
                                                 <>
-                                                    <b>{buff[1].displayName}</b>{(buffId < buffCount - 1) ? ',' : null}&nbsp;
+                                                    <b>{buff.displayName}</b>{(index < buffCount - 1) ? ', ' : null}
                                                 </>
                                     ))
 
