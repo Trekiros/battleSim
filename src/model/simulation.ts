@@ -645,7 +645,7 @@ function runEncounter(players: {creature: Creature, state: CreatureState}[], enc
         initialState: clone(state),
         finalState: clone(state),
     }))
-    let team2: Combattant[] = encounter.monsters.flatMap(monster => range(monster.count).map((i) => {
+    let team2: Combattant[] = encounter.monsters.flatMap(monster => range(Math.round(monster.count)).map((i) => {
         const combattant = creatureToCombattant(monster)
         combattant.creature.name = (monster.count > 1) ? `${monster.name} ${i+1}` : monster.name
         return combattant
@@ -675,7 +675,7 @@ function runEncounter(players: {creature: Creature, state: CreatureState}[], enc
 export function runSimulation(players: Creature[], encounters: Encounter[]) {
     const results: SimulationResult = []
 
-    let playersWithState = players.flatMap(player => range(player.count)
+    let playersWithState = players.flatMap(player => range(Math.round(player.count))
         .map<{ creature:Creature, state: CreatureState }>((i) => ({
             creature: {
                 ...player, 
