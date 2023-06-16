@@ -11576,7 +11576,7 @@ export const Monsters: Creature[] = [
                 "actionSlot": 0,
                 "freq": "at will",
                 "condition": "default",
-                "dpr": 17,
+                "dpr": 8,
                 "toHit": 3,
                 "target": "enemy with most HP",
                 "targets": 1
@@ -12803,7 +12803,7 @@ export const Monsters: Creature[] = [
                 "actionSlot": 0,
                 "freq": "at will",
                 "condition": "default",
-                "dpr": 21,
+                "dpr": 14,
                 "toHit": 5,
                 "target": "enemy with most HP",
                 "targets": 1
