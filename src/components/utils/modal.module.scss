@@ -5,7 +5,7 @@
     z-index: 1;
     width: 100%;
     height: 100%;
-    padding: 2em;
+    padding: 4em 2em;
     top: 0;
     left: 0;
     background: #fff3;
@@ -16,6 +16,19 @@
 
     @include fadeIn;
 
+    .closeBtn {
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: black;
+        margin: 0;
+        background: none!important;
+        transition: color 0.3s, scale 0.3s;
+        padding: 0.5em;
+        font-size: 1.5em;
+
+        &:hover { color: #333; scale: 1.5 }
+    }
 }
 
 .modal {

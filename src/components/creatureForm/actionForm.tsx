@@ -133,7 +133,7 @@ const BuffForm:FC<{value: Buff, onUpdate: (newValue: Buff) => void}> = ({ value,
         setModifiers(modifiersClone)
     }
 
-    function updateValue(modifier: keyof Omit<Buff, 'duration'|'condition'>, newValue: number) {
+    function updateValue(modifier: keyof Omit<Buff, 'duration'|'condition'|'displayName'>, newValue: number) {
         const buffClone = clone(value)
         buffClone[modifier] = newValue
         onUpdate(buffClone)

@@ -332,14 +332,13 @@ function triggerAction(combattant: Combattant, actionSlot: keyof typeof ActionSl
         })
 }
 
-function applyBuff(target: Combattant, buffName: string, newBuff: Buff, comparisonMode: 'min'|'max') {
+function applyBuff(target: Combattant, buffName: string, newBuff: Buff, comparisonMode: 'min' | 'max') {
     const existingBuff = target.finalState.buffs.get(buffName)
 
     if (!existingBuff) {
         target.finalState.buffs.set(buffName, newBuff)
         return
     }
-
     const result = mergeBuff(existingBuff, newBuff, comparisonMode)
     target.finalState.buffs.set(buffName, result)
 }
@@ -369,6 +368,7 @@ function mergeBuff(buff1: Buff, buff2: Buff, comparisonMode: 'min'|'max'): Buff 
 
     const result: Buff = {
         duration: buff1.duration,
+        displayName: buff1.displayName,
         
         ac: comparator(buff1.ac, buff2.ac),
         damage: comparator(buff1.damage, buff2.damage),
@@ -408,8 +408,7 @@ function getStats(statsMap: Map<string, EncounterStats>, combattant: Combattant)
 function useBuffAction(buffer: Combattant, action: BuffAction, target: Combattant, stats: Map<string, EncounterStats>, ignoreIncapacitated?: boolean) {
     const attackerConditions = getConditions(buffer)
     const chanceToBeIncapacitated = ignoreIncapacitated ? 0 : atLeastOneConditionChance(attackerConditions, ['Incapacitated', 'Paralyzed', 'Petrified', 'Stunned', 'Unconscious'])
-    
-    applyBuff(target, action.id, {...action.buff, magnitude: 1 - chanceToBeIncapacitated }, 'max')
+    applyBuff(target, action.id, { ...action.buff, magnitude: 1 - chanceToBeIncapacitated, displayName: action.name }, 'max')
     
     if (buffer.id !== target.id) {
         getStats(stats, buffer).charactersBuffed++
@@ -647,7 +646,7 @@ function runEncounter(players: {creature: Creature, state: CreatureState}[], enc
         initialState: clone(state),
         finalState: clone(state),
     }))
-    let team2: Combattant[] = encounter.monsters.flatMap(monster => range(monster.count).map((i) => {
+    let team2: Combattant[] = encounter.monsters.flatMap(monster => range(Math.round(monster.count)).map((i) => {
         const combattant = creatureToCombattant(monster)
         combattant.creature.name = (monster.count > 1) ? `${monster.name} ${i+1}` : monster.name
         return combattant
@@ -677,7 +676,7 @@ function runEncounter(players: {creature: Creature, state: CreatureState}[], enc
 export function runSimulation(players: Creature[], encounters: Encounter[]) {
     const results: SimulationResult = []
 
-    let playersWithState = players.flatMap(player => range(player.count)
+    let playersWithState = players.flatMap(player => range(Math.round(player.count))
         .map<{ creature:Creature, state: CreatureState }>((i) => ({
             creature: {
                 ...player, 

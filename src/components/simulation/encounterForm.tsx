@@ -69,7 +69,7 @@ const EncounterForm:FC<PropType> = ({ mode, encounter, onUpdate, onDelete, child
                                     type='number' 
                                     min={1} max={20} step={1} 
                                     value={creature.count} 
-                                    onChange={e => updateCreature(index, {...creature, count: Math.max(0, Math.min(20, Number(e.target.value)))})}
+                                    onChange={e => updateCreature(index, {...creature, count: Math.max(0, Math.min(20, Math.round(Number(e.target.value))))})}
                                 />
                                 <button  onClick={() => setUpdating(index)}>
                                     <FontAwesomeIcon icon={faPen} />

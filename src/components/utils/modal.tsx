@@ -1,5 +1,7 @@
 import { FC, ReactNode } from "react"
 import styles from './modal.module.scss'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faClose } from "@fortawesome/free-solid-svg-icons"
 
 type PropType = {
     className?: string,
@@ -9,9 +11,14 @@ type PropType = {
 
 const Modal:FC<PropType> = ({ onCancel, children, className }) => {
     return (
-        <div className={styles.overlay} onMouseDown={onCancel}>
-            <div className={`${styles.modal} ${className}`} onMouseDown={e => e.stopPropagation()}>
+        <div className={styles.overlay}>
+            <button className={styles.closeBtn} onClick={onCancel}>
+                <FontAwesomeIcon icon={faClose} />
+            </button>
+            
+            <div className={`${styles.modal} ${className}`}>
                 {children}
+
             </div>
         </div>
     )
