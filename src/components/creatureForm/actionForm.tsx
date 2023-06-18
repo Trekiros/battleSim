@@ -38,6 +38,8 @@ const ConditionOptions: Options<ActionCondition> = [
     { value:'is under half HP', label: 'This creature is under half its maximum HP' },
     { value:'has no THP', label: 'This creature has no temporary HP' },
     { value:'not used yet', label: 'This action has not been used yet this encounter' },
+    { value:'single enemy', label: 'Number of enemies = 1' },
+    { value:'enemy count over 2', label: 'Number of enemies > 2' },
 ]
 
 const TypeOptions: Options<ActionType> = [

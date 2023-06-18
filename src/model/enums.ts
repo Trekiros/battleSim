@@ -44,7 +44,9 @@ export const ActionConditionList = [
     'is available', 
     'is under half HP', 
     'has no THP', 
-    'not used yet'
+    'not used yet',
+    'single enemy',
+    'enemy count over 2'
 ] as const
 export const ActionConditionSchema = z.enum(ActionConditionList)
 export type ActionCondition = z.infer<typeof ActionConditionSchema>
