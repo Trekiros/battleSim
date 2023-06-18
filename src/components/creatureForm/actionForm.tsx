@@ -79,6 +79,7 @@ const EnemyTargetOptions: Options<EnemyTarget> = [
     { value: 'enemy with highest DPR', label: 'Enemy with highest DPR' },
     { value: 'enemy with lowest AC', label: 'Enemy with lowest AC' },
     { value: 'enemy with highest AC', label: 'Enemy with highest AC' },
+    { value: 'random enemy', label: 'Random enemy' },
 ]
 
 const AllyTargetOptions: Options<AllyTarget> = [
@@ -88,6 +89,7 @@ const AllyTargetOptions: Options<AllyTarget> = [
     { value: 'ally with the highest DPR', label: 'Ally with the highest DPR' },
     { value: 'ally with the lowest AC', label: 'Ally with the lowest AC' },
     { value: 'ally with the highest AC', label: 'Ally with the highest AC' },
+    { value: 'random ally', label: 'Random ally' },
 ]
 
 const BuffDurationOptions: Options<BuffDuration> = [

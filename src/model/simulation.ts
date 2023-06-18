@@ -211,10 +211,12 @@ function getNextTarget(combattant: Combattant, action: FinalAction, allies: Comb
     if (action.target === "ally with the most HP") return allies.reduce((a1, a2) => (a1.finalState.currentHP > a2.finalState.currentHP) ? a1 : a2)
     if (action.target === "ally with the least HP") return allies.reduce((a1, a2) => (a1.finalState.currentHP < a2.finalState.currentHP) ? a1 : a2)
     if (action.target === "ally with the highest DPR") return getHighestDPR(allies)
+    if (action.target === "random ally") return allies[Math.floor(Math.random() * allies.length)];
     if (action.target === "enemy with highest AC") return enemies.reduce((a1, a2) => (a1.creature.AC > a2.creature.AC) ? a1 : a2)
     if (action.target === "enemy with lowest AC") return enemies.reduce((a1, a2) => (a1.creature.AC < a2.creature.AC) ? a1 : a2)
     if (action.target === "enemy with most HP") return enemies.reduce((a1, a2) => (a1.finalState.currentHP + (a1.finalState.tempHP || 0) > a2.finalState.currentHP + (a2.finalState.tempHP || 0)) ? a1 : a2)
     if (action.target === "enemy with least HP") return enemies.reduce((a1, a2) => (a1.finalState.currentHP + (a1.finalState.tempHP || 0) < a2.finalState.currentHP + (a2.finalState.tempHP || 0)) ? a1 : a2)
+    if (action.target === "random enemy") return enemies[Math.floor(Math.random() * enemies.length)];
     /* if (action.target === "enemy with highest DPR") */ return getHighestDPR(enemies)
 }
 
