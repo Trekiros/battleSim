@@ -3154,7 +3154,7 @@ export const Monsters: Creature[] = [
         "type": "fiend",
         "src": "MM p.72",
         "cr": "8",
-        "hp": 850,
+        "hp": 85,
         "AC": 16,
         "actions": [
             {
