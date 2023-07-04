@@ -518,6 +518,7 @@ function useDebuffAction(attacker: Combattant, action: DebuffAction, target: Com
     const buffClone: Buff = clone(action.buff)
     if (buffClone.magnitude === undefined) buffClone.magnitude = 1
     buffClone.magnitude *= chanceToFail
+    buffClone.displayName = action.name;
 
     applyBuff(target, action.id, buffClone, 'min')
     
