@@ -48,6 +48,7 @@ const TeamResults:FC<TeamPropType> = ({ round, team, stats }) => {
         if (buff.toHit != undefined) buffEffects.push(getNumberWithSign(buff.toHit) + ' to hit')
         if (buff.save != undefined) buffEffects.push(getNumberWithSign(buff.save) + ' to save')
         if (buff.damage != undefined) buffEffects.push(getNumberWithSign(buff.damage) + ' extra damage')
+        if (buff.damageReduction != undefined) buffEffects.push(getNumberWithSign(buff.damageReduction) + ' reduced damage')
 
         return buffEffects.join(', ')
     }

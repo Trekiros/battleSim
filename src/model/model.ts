@@ -30,6 +30,7 @@ const BuffSchema = z.object({
     ac: DiceFormulaSchema.optional(),
     toHit: DiceFormulaSchema.optional(),
     damage: DiceFormulaSchema.optional(),
+    damageReduction: DiceFormulaSchema.optional(),
     damageMultiplier: z.number().optional(),
     damageTakenMultiplier: z.number().optional(),
     dc: DiceFormulaSchema.optional(),

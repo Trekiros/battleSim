@@ -370,6 +370,7 @@ function mergeBuff(buff1: Buff, buff2: Buff, comparisonMode: 'min'|'max'): Buff 
         
         ac: comparator(buff1.ac, buff2.ac),
         damage: comparator(buff1.damage, buff2.damage),
+        damageReduction: comparator(buff1.damageReduction, buff2.damageReduction),
         toHit: comparator(buff1.toHit, buff2.toHit),
         damageMultiplier: numberComparator(buff1.damageMultiplier, buff2.damageMultiplier),
         damageTakenMultiplier: numberComparator(buff1.damageTakenMultiplier, buff2.damageTakenMultiplier),
@@ -536,14 +537,15 @@ function useAtkAction(attacker: Combattant, action: AtkAction, target: Combattan
         : calculateHitChance(attacker, target, action.toHit))
         
     const targetConditions = getConditions(target)
-    const damage = (
+    const damage = Math.max((
             evaluateDiceFormula(action.dpr, !action.useSaves)
             + getBuffs(attacker, b => b.damage, 'add', /* can crit: */ !action.useSaves)
-        )
+            - getBuffs(target, b => b.damageReduction, 'add', /* can not crit: */ false)
+        ), 0)
         * getBuffs(attacker, b => b.damageMultiplier, 'mult')
         * getBuffs(target, b => b.damageTakenMultiplier, 'mult')
         * (1 + targetConditions.get('Paralyzed')!)
-
+        
     let actualDamage = damage * hitChance
     if (action.useSaves && action.halfOnSave) {
         actualDamage = damage * hitChance + (damage/2) * (1 - hitChance)
