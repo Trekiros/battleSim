@@ -80,7 +80,7 @@ const TeamResults:FC<TeamPropType> = ({ round, team, stats }) => {
                         {combattant.creature.name}
                     </div>
 
-                    { (!stats && (combattant.actions.length === 0)) ? null : (
+                    { (!stats && (combattant.actions.length === 0) && (combattant.finalState.buffs.size)) ? null : (
                         <div className="tooltip">
                             <ul>
                                 { stats ? (() => {
