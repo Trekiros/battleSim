@@ -202,8 +202,13 @@ function getNextTarget(combattant: Combattant, action: FinalAction, allies: Comb
         })
     }
 
+    let filteredEnemies = enemies
+    if (action.type === "debuff") {
+        filteredEnemies = enemies.filter(a1 => !a1.finalState.buffs.get(action.id))
+    }
+
     if (action.target.startsWith('ally') && (allies.length === 0)) return undefined
-    if (action.target.startsWith('enemy') && (enemies.length === 0)) return undefined
+    if (action.target.startsWith('enemy') && (filteredEnemies.length === 0)) return undefined
 
     if (action.target === 'self') return combattant
     if (action.target === "ally with the highest AC") return allies.reduce((a1, a2) => (a1.creature.AC > a2.creature.AC) ? a1 : a2)
@@ -211,11 +216,11 @@ function getNextTarget(combattant: Combattant, action: FinalAction, allies: Comb
     if (action.target === "ally with the most HP") return allies.reduce((a1, a2) => (a1.finalState.currentHP > a2.finalState.currentHP) ? a1 : a2)
     if (action.target === "ally with the least HP") return allies.reduce((a1, a2) => (a1.finalState.currentHP < a2.finalState.currentHP) ? a1 : a2)
     if (action.target === "ally with the highest DPR") return getHighestDPR(allies)
-    if (action.target === "enemy with highest AC") return enemies.reduce((a1, a2) => (a1.creature.AC > a2.creature.AC) ? a1 : a2)
-    if (action.target === "enemy with lowest AC") return enemies.reduce((a1, a2) => (a1.creature.AC < a2.creature.AC) ? a1 : a2)
-    if (action.target === "enemy with most HP") return enemies.reduce((a1, a2) => (a1.finalState.currentHP + (a1.finalState.tempHP || 0) > a2.finalState.currentHP + (a2.finalState.tempHP || 0)) ? a1 : a2)
-    if (action.target === "enemy with least HP") return enemies.reduce((a1, a2) => (a1.finalState.currentHP + (a1.finalState.tempHP || 0) < a2.finalState.currentHP + (a2.finalState.tempHP || 0)) ? a1 : a2)
-    /* if (action.target === "enemy with highest DPR") */ return getHighestDPR(enemies)
+    if (action.target === "enemy with highest AC") return filteredEnemies.reduce((a1, a2) => (a1.creature.AC > a2.creature.AC) ? a1 : a2)
+    if (action.target === "enemy with lowest AC") return filteredEnemies.reduce((a1, a2) => (a1.creature.AC < a2.creature.AC) ? a1 : a2)
+    if (action.target === "enemy with most HP") return filteredEnemies.reduce((a1, a2) => (a1.finalState.currentHP + (a1.finalState.tempHP || 0) > a2.finalState.currentHP + (a2.finalState.tempHP || 0)) ? a1 : a2)
+    if (action.target === "enemy with least HP") return filteredEnemies.reduce((a1, a2) => (a1.finalState.currentHP + (a1.finalState.tempHP || 0) < a2.finalState.currentHP + (a2.finalState.tempHP || 0)) ? a1 : a2)
+    /* if (action.target === "enemy with highest DPR") */ return getHighestDPR(filteredEnemies)
 }
 
 // Calculates which actions each creature is going to take, and saves them in combattant.actions
@@ -370,6 +375,7 @@ function mergeBuff(buff1: Buff, buff2: Buff, comparisonMode: 'min'|'max'): Buff 
         
         ac: comparator(buff1.ac, buff2.ac),
         damage: comparator(buff1.damage, buff2.damage),
+        damageReduction: comparator(buff1.damageReduction, buff2.damageReduction),
         toHit: comparator(buff1.toHit, buff2.toHit),
         damageMultiplier: numberComparator(buff1.damageMultiplier, buff2.damageMultiplier),
         damageTakenMultiplier: numberComparator(buff1.damageTakenMultiplier, buff2.damageTakenMultiplier),
@@ -518,6 +524,7 @@ function useDebuffAction(attacker: Combattant, action: DebuffAction, target: Com
     const buffClone: Buff = clone(action.buff)
     if (buffClone.magnitude === undefined) buffClone.magnitude = 1
     buffClone.magnitude *= chanceToFail
+    buffClone.displayName = action.name;
 
     applyBuff(target, action.id, buffClone, 'min')
     
@@ -536,14 +543,15 @@ function useAtkAction(attacker: Combattant, action: AtkAction, target: Combattan
         : calculateHitChance(attacker, target, action.toHit))
         
     const targetConditions = getConditions(target)
-    const damage = (
+    const damage = Math.max((
             evaluateDiceFormula(action.dpr, !action.useSaves)
             + getBuffs(attacker, b => b.damage, 'add', /* can crit: */ !action.useSaves)
-        )
+            - getBuffs(target, b => b.damageReduction, 'add', /* can not crit: */ false)
+        ), 0)
         * getBuffs(attacker, b => b.damageMultiplier, 'mult')
         * getBuffs(target, b => b.damageTakenMultiplier, 'mult')
         * (1 + targetConditions.get('Paralyzed')!)
-
+        
     let actualDamage = damage * hitChance
     if (action.useSaves && action.halfOnSave) {
         actualDamage = damage * hitChance + (damage/2) * (1 - hitChance)
