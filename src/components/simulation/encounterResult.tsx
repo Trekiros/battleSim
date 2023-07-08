@@ -126,7 +126,7 @@ const TeamResults:FC<TeamPropType> = ({ round, team, stats }) => {
                                         <>
                                             {li.length ? li : <b>No Actions</b>}
                                             {bi.length ? <>
-                                                <br /><u>Active Buffs</u><br />
+                                                <br /><u>Active Effects</u><br />
                                                 {bi}
                                             </> : null}
                                         </>
