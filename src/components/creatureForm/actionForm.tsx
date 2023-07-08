@@ -104,6 +104,7 @@ const BuffStatOptions: Options<keyof Omit<Buff, 'duration'>> = [
     { value: 'toHit', label: 'Bonus to hit' },
     { value: 'dc', label: 'Save DC Bonus' },
     { value: 'damage', label: 'Extra Damage' },
+    { value: 'damageReduction', label: 'Damage Reduction' },
     { value: 'damageMultiplier', label: 'Damage Multiplier' },
     { value: 'damageTakenMultiplier', label: 'Damage Taken Multiplier' },
 ]
