@@ -31,6 +31,10 @@
                     border-radius: 8px;
                     overflow: hidden;
                     background: #a55;
+                    
+                    &.highlighted {
+                        outline: 4px solid #f88;
+                    }
     
                     .lifebarForeground, .lifebarTHP {
                         position: absolute;

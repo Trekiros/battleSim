@@ -1,4 +1,4 @@
-import { FC } from "react"
+import { FC, useState } from "react"
 import { Combattant, EncounterResult, EncounterStats, FinalAction, Buff, DiceFormula } from "../../model/model"
 import styles from './encounterResult.module.scss'
 import { Round } from "../../model/model"
@@ -8,9 +8,11 @@ type TeamPropType = {
     round: Round,
     team: Combattant[],
     stats?: Map<string, EncounterStats>,
+    highlightedIds?: string[],
+    onHighlight?: (targetIds: string[]) => void,
 }
 
-const TeamResults:FC<TeamPropType> = ({ round, team, stats }) => {
+const TeamResults:FC<TeamPropType> = ({ round, team, stats, highlightedIds, onHighlight }) => {
     function getTarget(combattantAction: { action: FinalAction, targets: Map<string, number> }) {
         if (combattantAction.action.target === 'self') return 'itself'
 
@@ -56,8 +58,12 @@ const TeamResults:FC<TeamPropType> = ({ round, team, stats }) => {
     return (
         <div className={styles.team}>
             { team.map(combattant => (
-                <div key={combattant.id} className={`${styles.lifebar} tooltipContainer`}>
-                    <div className={styles.lifebarBackground}>
+                <div 
+                    key={combattant.id} 
+                    onMouseEnter={() => onHighlight?.(combattant.actions.flatMap(action => Array.from(action.targets.keys())))}
+                    onMouseLeave={() => onHighlight?.([])}
+                    className={`${styles.lifebar} tooltipContainer`}>
+                    <div className={`${styles.lifebarBackground} ${highlightedIds?.includes(combattant.id) ? styles.highlighted : ''}`}>
                         <div 
                             className={styles.lifebarForeground} 
                             style={{ 
@@ -105,7 +111,10 @@ const TeamResults:FC<TeamPropType> = ({ round, team, stats }) => {
                                     const li = combattant.actions
                                     .filter(({ targets }) => !!targets.size)
                                     .map((action, index) => (
-                                        <li key={index}>
+                                        <li 
+                                            key={index}
+                                            onMouseEnter={() => onHighlight?.(Array.from(action.targets.keys()))}
+                                            onMouseLeave={() => onHighlight?.(combattant.actions.flatMap(a => Array.from(a.targets.keys())))}>
                                             <b>{action.action.name}</b> on {getTarget(action)}
                                         </li>
                                     ))
@@ -147,9 +156,11 @@ type PropType = {
 }
 
 const EncounterResult:FC<PropType> = ({ value }) => {
-    const lastRound = clone(value.rounds[value.rounds.length - 1]);
+    const lastRound = clone(value.rounds[value.rounds.length - 1])
+    const [highlightedIds, setHighlightedIds] = useState<string[]>([])
+    const [highlightedRound, setHighlightedRound] = useState(0)
     
-    ([...lastRound.team1, ...lastRound.team2]).forEach(combattant => {
+    ;([...lastRound.team1, ...lastRound.team2]).forEach(combattant => {
         combattant.initialState = combattant.finalState
         combattant.actions = []
     })
@@ -163,9 +174,17 @@ const EncounterResult:FC<PropType> = ({ value }) => {
                             <h3>Round {roundIndex + 1}</h3>
         
                             <div className={styles.lifebars}>
-                                <TeamResults round={round} team={round.team1} />
+                                <TeamResults
+                                    round={round} 
+                                    team={round.team1} 
+                                    highlightedIds={highlightedRound === roundIndex ? highlightedIds : undefined} 
+                                    onHighlight={targetIds => { setHighlightedIds(targetIds); setHighlightedRound(roundIndex)}} />
                                 <hr />
-                                <TeamResults round={round} team={round.team2} />
+                                <TeamResults
+                                    round={round} 
+                                    team={round.team2} 
+                                    highlightedIds={highlightedRound === roundIndex ? highlightedIds : undefined} 
+                                    onHighlight={targetIds => { setHighlightedIds(targetIds); setHighlightedRound(roundIndex)}} />
                             </div>
                         </div>
                     ))}
