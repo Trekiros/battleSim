@@ -645,18 +645,29 @@ function runRound(team1: Combattant[], team2: Combattant[], stats: Map<string, E
 }
 
 function runEncounter(players: {creature: Creature, state: CreatureState}[], encounter: Encounter): EncounterResult {
-    let team1: Combattant[] = players.map(({ creature, state }) => ({
-        id: uuid(),
-        creature: clone(creature),
-        actions: [],
-        initialState: clone(state),
-        finalState: clone(state),
-    }))
-    let team2: Combattant[] = encounter.monsters.flatMap(monster => range(Math.round(monster.count)).map((i) => {
-        const combattant = creatureToCombattant(monster)
-        combattant.creature.name = (monster.count > 1) ? `${monster.name} ${i+1}` : monster.name
-        return combattant
-    }))
+    function createPlayer(creatureWithState: { creature: Creature, state: CreatureState}): Combattant {
+        return {
+            id: uuid(),
+            creature: clone(creatureWithState.creature),
+            actions: [],
+            initialState: clone(creatureWithState.state),
+            finalState: clone(creatureWithState.state),
+        }
+    }
+    function createMonsters(monster: Creature): Combattant[] {
+        return range(Math.round(monster.count)).map((i) => {
+            const combattant = creatureToCombattant(monster)
+            combattant.creature.name = (monster.count > 1) ? `${monster.name} ${i+1}` : monster.name
+            return combattant
+        })
+    }
+
+    const maxPlayerarrival = players.map(player => player.creature.arrival || 1).reduce((a, b) => Math.max(a, b), 0)
+    const maxMonsterArrival = encounter.monsters.map(monster => monster.arrival || 1).reduce((a, b) => Math.max(a, b), 0)
+    const minimumRounds = Math.max(maxPlayerarrival, maxMonsterArrival) + 1
+
+    let team1 = players.filter(({creature}) => (creature.arrival === undefined) || (creature.arrival <= 1)).map(createPlayer)
+    let team2 = encounter.monsters.filter(creature => (creature.arrival === undefined) || (creature.arrival <= 1)).flatMap(createMonsters)
     
     let firstRound: { team1Surprised: boolean, team2Surprised: boolean }|undefined = {
         team1Surprised: !!encounter.playersSurprised,
@@ -668,13 +679,20 @@ function runEncounter(players: {creature: Creature, state: CreatureState}[], enc
     const hasLivingCombattant = (team: Combattant[]) => !!team.find(combattant => (combattant.finalState.currentHP > 0))
 
     do {
+        if (rounds.length > 1) {
+            const team1Arrivals = players.filter(({creature}) => creature.arrival === rounds.length).map(createPlayer)
+            const team2Arrivals = encounter.monsters.filter(monster => monster.arrival === rounds.length).flatMap(createMonsters)
+            if (team1Arrivals.length) team1.push(...team1Arrivals)
+            if (team2Arrivals.length) team2.push(...team2Arrivals)
+        }
+
         const round = runRound(team1, team2, stats, firstRound)
         rounds.push(round)
 
         firstRound = undefined
         team1 = round.team1
         team2 = round.team2
-    } while (hasLivingCombattant(team1) && hasLivingCombattant(team2) && (rounds.length < 20))
+    } while ((rounds.length < minimumRounds) || (hasLivingCombattant(team1) && hasLivingCombattant(team2) && (rounds.length < 20)))
 
     return { rounds, stats }
 }

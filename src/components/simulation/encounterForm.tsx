@@ -64,15 +64,26 @@ const EncounterForm:FC<PropType> = ({ mode, encounter, onUpdate, onDelete, child
                         { encounter.monsters.map((creature, index) => (
                             <div key={creature.id} className={styles.creature}>
                                 <span className={styles.name}>{creature.name}</span>
-                                <span className={styles.countLabel} >Count:</span>
-                                <input 
-                                    type='number' 
-                                    min={1} max={20} step={1} 
-                                    value={creature.count} 
-                                    onChange={e => updateCreature(index, {...creature, count: Math.max(0, Math.min(20, Math.round(Number(e.target.value))))})}
-                                />
+                                <span className={styles.inlineInput}>
+                                    <span className={styles.countLabel} >Count:</span>
+                                    <input 
+                                        type='number' 
+                                        min={1} max={20} step={1} 
+                                        value={creature.count} 
+                                        onChange={e => updateCreature(index, {...creature, count: Math.max(0, Math.min(20, Math.round(Number(e.target.value))))})}
+                                    />
+                                </span>
+                                { !children && <span className={styles.inlineInput}>
+                                    <span className={styles.countLabel}>Arrives on round:</span>
+                                    <input 
+                                        type='number'
+                                        min={1} max={19} step={1}
+                                        value={creature.arrival || 1}
+                                        onChange={e => updateCreature(index, {...creature, arrival: Math.max(0, Math.min(20, Math.round(Number(e.target.value))))})} />
+                                </span> }
                                 <button  onClick={() => setUpdating(index)}>
                                     <FontAwesomeIcon icon={faPen} />
+                                    <label>Edit</label>
                                 </button>
                             </div>
                         )) }

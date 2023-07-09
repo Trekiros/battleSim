@@ -59,11 +59,32 @@
 
             button {
                 padding: 1em;
-                margin: 0
+                margin: 0;
+
+                label { display: none }
             }
 
-            .countLabel {
-                @media (width < 450px) { display: none }
+            .inlineInput {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+            }
+
+            @media (width < 450px) {
+                flex-direction: column;
+                align-items: flex-start;
+                border-bottom: 1px solid #fff8;
+                border-radius: 0;
+
+                .name { font-weight: bold }
+
+                .inlineInput {
+                    width: 100%;
+                    justify-content: space-between;
+                }
+
+                button { width: 100% }
+                button label { display: initial }
             }
         }
     }

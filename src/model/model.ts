@@ -148,6 +148,7 @@ const ActionSchema = z.discriminatedUnion('type', [
 // A new combattant is created for each instance of the creature, and for each round of combat.
 export const CreatureSchema = z.object({
     id: z.string(),
+    arrival: z.number().optional(), // Which round is the creature added (optional, default: round 0)
 
     mode: z.enum(['player', 'monster', 'custom']), // This determines which UI is opened when the user clicks on "modify creature"
     
