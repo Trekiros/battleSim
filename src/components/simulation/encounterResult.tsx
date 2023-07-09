@@ -165,40 +165,38 @@ const EncounterResult:FC<PropType> = ({ value }) => {
         combattant.actions = []
     })
 
+    if (value.rounds.length === 1 && (!value.rounds[0].team1.length || !value.rounds[0].team2.length)) return <></>
+    
     return (
         <div className={styles.encounterResult}>
-            { (!value.rounds[0].team1.length || !value.rounds[0].team2.length) ? null : 
-                <>
-                    {value.rounds.map((round, roundIndex) => (
-                        <div key={roundIndex} className={styles.round}>
-                            <h3>Round {roundIndex + 1}</h3>
-        
-                            <div className={styles.lifebars}>
-                                <TeamResults
-                                    round={round} 
-                                    team={round.team1} 
-                                    highlightedIds={highlightedRound === roundIndex ? highlightedIds : undefined} 
-                                    onHighlight={targetIds => { setHighlightedIds(targetIds); setHighlightedRound(roundIndex)}} />
-                                <hr />
-                                <TeamResults
-                                    round={round} 
-                                    team={round.team2} 
-                                    highlightedIds={highlightedRound === roundIndex ? highlightedIds : undefined} 
-                                    onHighlight={targetIds => { setHighlightedIds(targetIds); setHighlightedRound(roundIndex)}} />
-                            </div>
-                        </div>
-                    ))}
-                    <div className={styles.round}>
-                        <h3>Result</h3>
+            {value.rounds.map((round, roundIndex) => (
+                <div key={roundIndex} className={styles.round}>
+                    <h3>Round {roundIndex + 1}</h3>
 
-                        <div className={styles.lifebars}>
-                            <TeamResults round={lastRound} team={lastRound.team1} stats={value.stats} />
-                            <hr />
-                            <TeamResults round={lastRound} team={lastRound.team2} stats={value.stats} />
-                        </div>
+                    <div className={styles.lifebars}>
+                        <TeamResults
+                            round={round} 
+                            team={round.team1} 
+                            highlightedIds={highlightedRound === roundIndex ? highlightedIds : undefined} 
+                            onHighlight={targetIds => { setHighlightedIds(targetIds); setHighlightedRound(roundIndex)}} />
+                        <hr />
+                        <TeamResults
+                            round={round} 
+                            team={round.team2} 
+                            highlightedIds={highlightedRound === roundIndex ? highlightedIds : undefined} 
+                            onHighlight={targetIds => { setHighlightedIds(targetIds); setHighlightedRound(roundIndex)}} />
                     </div>
-                </>
-            }
+                </div>
+            ))}
+            <div className={styles.round}>
+                <h3>Result</h3>
+
+                <div className={styles.lifebars}>
+                    <TeamResults round={lastRound} team={lastRound.team1} stats={value.stats} />
+                    <hr />
+                    <TeamResults round={lastRound} team={lastRound.team2} stats={value.stats} />
+                </div>
+            </div>
         </div>
     )
 }
