@@ -9,12 +9,21 @@
 
     .addCreatureBtn { margin: 0 }
 
-    .deleteEncounter {
+    .encounterActions {
         position: absolute;
         top: 1em;
         right: 0.5em;
-        background: transparent!important;
-        padding: 0;
+        display: flex;
+        gap: 4px;
+
+        button {
+            border-radius: 4px;
+            padding: 4px;
+            &:not(:hover) {background: transparent }
+        }
+        svg {
+            margin: 0;
+        }
     }
 
     .header {

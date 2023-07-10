@@ -71,6 +71,14 @@ const Simulation:FC<PropType> = ({}) => {
         setEncounters(encountersClone)
     }
 
+    function swapEncounters(index1: number, index2: number) {
+        const encountersClone = clone(encounters)
+        const tmp = encountersClone[index1]
+        encountersClone[index1] = encountersClone[index2]
+        encountersClone[index2] = tmp
+        setEncounters(encountersClone)
+    }
+
     return (
         <div className={styles.simulation}>
             <semiPersistentContext.Provider value={{state, setState}}>
@@ -124,6 +132,8 @@ const Simulation:FC<PropType> = ({}) => {
                             encounter={encounter}
                             onUpdate={(newValue) => updateEncounter(index, newValue)}
                             onDelete={(index > 0) ? () => deleteEncounter(index) : undefined}
+                            onMoveUp={(!!encounters.length && !!index) ? () => swapEncounters(index, index-1) : undefined}
+                            onMoveDown={(!!encounters.length && (index < encounters.length - 1)) ? () => swapEncounters(index, index+1) : undefined}
                         />
                         { (!simulationResults[index] ? null : (
                             <EncounterResult value={simulationResults[index]} />

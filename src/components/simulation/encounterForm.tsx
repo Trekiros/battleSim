@@ -2,7 +2,7 @@ import { FC, ReactNode, useState } from "react"
 import { Creature, Encounter } from "../../model/model"
 import styles from './encounterForm.module.scss'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPen, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faChevronDown, faChevronUp, faPen, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
 import CreatureForm from "./../creatureForm/creatureForm"
 import { clone } from "../../model/utils"
 import Checkbox from "../utils/checkbox"
@@ -13,9 +13,11 @@ type PropType = {
     onUpdate: (newValue: Encounter) => void,
     onDelete?: () => void,
     children?: ReactNode,
+    onMoveUp?: () => void,
+    onMoveDown?: () => void,
 }
 
-const EncounterForm:FC<PropType> = ({ mode, encounter, onUpdate, onDelete, children }) => {
+const EncounterForm:FC<PropType> = ({ mode, encounter, onUpdate, onDelete, children, onMoveUp, onMoveDown }) => {
     const [updating, setUpdating] = useState<number | null>(null)
     const [creating, setCreating] = useState(false)
 
@@ -49,11 +51,23 @@ const EncounterForm:FC<PropType> = ({ mode, encounter, onUpdate, onDelete, child
     return (
         <>
             <div className={styles.encounterForm}>
-                { (onDelete === undefined) ? null : (
-                    <button className={styles.deleteEncounter} onClick={onDelete}>
-                        <FontAwesomeIcon icon={faTrash} />
-                    </button>
-                )}
+                <div className={styles.encounterActions}>
+                    { !!onDelete && (
+                        <button onClick={onDelete}>
+                            <FontAwesomeIcon icon={faTrash} />
+                        </button>
+                    )}
+                    { (onMoveUp || onMoveDown) && (
+                        <button onClick={onMoveUp} disabled={!onMoveUp}>
+                            <FontAwesomeIcon icon={faChevronUp} />
+                        </button>
+                    )}
+                    { (onMoveUp || onMoveDown) && (
+                        <button onClick={onMoveDown} disabled={!onMoveDown}>
+                            <FontAwesomeIcon icon={faChevronDown} />
+                        </button>
+                    )}
+                </div>
 
                 <h2 className={`${styles.header} ${(mode === "player") ? styles.player : styles.monster}`}>
                     { (mode === 'player') ? 'Player Characters' : 'Encounter' }
