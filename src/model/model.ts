@@ -26,6 +26,7 @@ export type Frequency = z.infer<typeof FrequencySchema>;
 const BuffSchema = z.object({
     displayName: z.string().optional(),
     duration: BuffDurationSchema,
+    halfOnSave: z.boolean().optional(),
 
     ac: DiceFormulaSchema.optional(),
     toHit: DiceFormulaSchema.optional(),

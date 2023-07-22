@@ -51,7 +51,7 @@ const TeamResults:FC<TeamPropType> = ({ round, team, stats, highlightedIds, onHi
         if (buff.save != undefined) buffEffects.push(getNumberWithSign(buff.save) + ' to save')
         if (buff.damage != undefined) buffEffects.push(getNumberWithSign(buff.damage) + ' extra damage')
         if (buff.damageReduction != undefined) buffEffects.push(getNumberWithSign(buff.damageReduction) + ' reduced damage')
-        if (buff.applyDamage != undefined) buffEffects.push(' Took ' + buff.applyDamage+ ' damage')
+        if (buff.applyDamage != undefined) buffEffects.push(' Take ' + buff.applyDamage+ ' damage')
 
         return buffEffects.join(', ')
     }

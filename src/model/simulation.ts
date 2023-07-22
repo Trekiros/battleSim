@@ -572,7 +572,11 @@ function useAtkAction(attacker: Combattant, action: AtkAction, target: Combattan
         }
 
         if (buffClone.applyDamage) {
-            actualDamage += Math.max(evaluateDiceFormula(buffClone.applyDamage, false), 0) * buffMagnitude
+            let appliedDamage = Math.max(evaluateDiceFormula(buffClone.applyDamage, false), 0)
+            if (buffClone.halfOnSave)
+                appliedDamage = appliedDamage / 2
+
+            actualDamage += appliedDamage * buffMagnitude
         }
 
         target.finalState.upcomingBuffs.set(action.id, buffClone)
