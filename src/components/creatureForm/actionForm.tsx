@@ -99,6 +99,7 @@ const BuffDurationOptions: Options<BuffDuration> = [
 
 const BuffStatOptions: Options<keyof Omit<Buff, 'duration'>> = [
     { value: 'condition', label: 'Condition' },
+    { value: 'applyDamage', label: 'Take Damage' },
     { value: 'ac', label: 'Armor Class' },
     { value: 'save', label: 'Bonus to Saves' },
     { value: 'toHit', label: 'Bonus to hit' },

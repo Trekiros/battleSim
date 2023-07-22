@@ -36,6 +36,7 @@ const BuffSchema = z.object({
     dc: DiceFormulaSchema.optional(),
     save: DiceFormulaSchema.optional(),
     condition: CreatureConditionSchema.optional(),
+    applyDamage: DiceFormulaSchema.optional(),
 
     // Odds that the buff was applied. All of the effects are multiplied by this value. Default 1.
     magnitude: z.number().optional(),

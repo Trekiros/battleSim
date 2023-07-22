@@ -371,7 +371,7 @@ function mergeBuff(buff1: Buff, buff2: Buff, comparisonMode: 'min'|'max'): Buff 
 
     const result: Buff = {
         duration: buff1.duration,
-        displayName: buff1.displayName,
+        displayName: buff1.displayName !== undefined ? buff1.displayName : buff2.displayName,
         
         ac: comparator(buff1.ac, buff2.ac),
         damage: comparator(buff1.damage, buff2.damage),
@@ -382,6 +382,7 @@ function mergeBuff(buff1: Buff, buff2: Buff, comparisonMode: 'min'|'max'): Buff 
         dc: comparator(buff1.dc, buff2.dc),
         save: comparator(buff1.save, buff2.save),
         condition: buff1.condition || buff2.condition,
+        applyDamage: buff1.applyDamage || buff2.applyDamage,
 
         magnitude: atLeastOneChance([
             buff1.magnitude !== undefined ? buff1.magnitude : 1,
@@ -557,6 +558,31 @@ function useAtkAction(attacker: Combattant, action: AtkAction, target: Combattan
         actualDamage = damage * hitChance + (damage/2) * (1 - hitChance)
     }
 
+    if (action.riderEffect) {
+        const buffMagnitude = hitChance * calculateChanceToFail(attacker, target, action.riderEffect.dc)
+
+        let buffClone = clone(action.riderEffect.buff)
+        if (buffClone.magnitude === undefined) buffClone.magnitude = 1
+        buffClone.magnitude *= buffMagnitude
+        buffClone.displayName = action.name
+        
+        const existingBuff = target.finalState.upcomingBuffs.get(action.id)
+        if (existingBuff) {
+            buffClone = mergeBuff(existingBuff, buffClone, 'min')
+        }
+
+        if (buffClone.applyDamage) {
+            actualDamage += Math.max(evaluateDiceFormula(buffClone.applyDamage, false), 0) * buffMagnitude
+        }
+
+        target.finalState.upcomingBuffs.set(action.id, buffClone)
+
+        if (attacker.id !== target.id) {
+            getStats(stats, attacker).charactersDebuffed++
+            getStats(stats, target).debuffsReceived++
+        }
+    }
+
     // Apply damage to temporary hit points first
     let remainingDamage = actualDamage
     if (target.finalState.tempHP) {
@@ -572,26 +598,6 @@ function useAtkAction(attacker: Combattant, action: AtkAction, target: Combattan
 
     getStats(stats, attacker).damageDealt += actualDamage
     getStats(stats, target).damageTaken += actualDamage
-
-    if (action.riderEffect) {
-        const buffMagnitude = hitChance * calculateChanceToFail(attacker, target, action.riderEffect.dc)
-
-        let buffClone = clone(action.riderEffect.buff)
-        if (buffClone.magnitude === undefined) buffClone.magnitude = 1
-        buffClone.magnitude *= buffMagnitude
-        
-        const existingBuff = target.finalState.upcomingBuffs.get(action.id)
-        if (existingBuff) {
-            buffClone = mergeBuff(existingBuff, buffClone, 'min')
-        }
-
-        target.finalState.upcomingBuffs.set(action.id, buffClone)
-
-        if (attacker.id !== target.id) {
-            getStats(stats, attacker).charactersDebuffed++
-            getStats(stats, target).debuffsReceived++
-        }
-    }
     
     if (target.finalState.currentHP === 0) {
         triggerAction(attacker, 'When reducing an enemy to 0 HP', allies, enemies, stats)
