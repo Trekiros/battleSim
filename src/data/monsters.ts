@@ -7716,7 +7716,7 @@ export const Monsters: Creature[] = [
             {
                 "id": "ef637906-7b0c-4563-adc3-f2f057a6cf2e",
                 "name": "Leadership",
-                "actionSlot": 0,
+                "actionSlot": 1,
                 "condition": "default",
                 "freq": "at will",
                 "targets": 2,
@@ -7731,7 +7731,7 @@ export const Monsters: Creature[] = [
             {
                 "id": "0b86b24c-09fb-4d67-bcae-ffe585e9a0bc",
                 "name": "Parry",
-                "actionSlot": 0,
+                "actionSlot": 4,
                 "condition": "default",
                 "freq": "at will",
                 "targets": 1,
