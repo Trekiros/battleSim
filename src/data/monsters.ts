@@ -22070,7 +22070,7 @@ export const Monsters: Creature[] = [
         "name": "Sacred Statue",
         "type": "construct",
         "src": "MPMM p.114",
-        "cr": "—" as any,
+        "cr": "—",
         "hp": 95,
         "AC": 19,
         "actions": [
