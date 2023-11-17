@@ -26,6 +26,7 @@ export type Frequency = z.infer<typeof FrequencySchema>;
 const BuffSchema = z.object({
     displayName: z.string().optional(),
     duration: BuffDurationSchema,
+    halfOnSave: z.boolean().optional(),
 
     ac: DiceFormulaSchema.optional(),
     toHit: DiceFormulaSchema.optional(),
@@ -36,6 +37,7 @@ const BuffSchema = z.object({
     dc: DiceFormulaSchema.optional(),
     save: DiceFormulaSchema.optional(),
     condition: CreatureConditionSchema.optional(),
+    applyDamage: DiceFormulaSchema.optional(),
 
     // Odds that the buff was applied. All of the effects are multiplied by this value. Default 1.
     magnitude: z.number().optional(),

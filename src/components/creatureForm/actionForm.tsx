@@ -99,6 +99,7 @@ const BuffDurationOptions: Options<BuffDuration> = [
 
 const BuffStatOptions: Options<keyof Omit<Buff, 'duration'>> = [
     { value: 'condition', label: 'Condition' },
+    { value: 'applyDamage', label: 'Take Damage' },
     { value: 'ac', label: 'Armor Class' },
     { value: 'save', label: 'Bonus to Saves' },
     { value: 'toHit', label: 'Bonus to hit' },
@@ -150,6 +151,12 @@ const BuffForm:FC<{value: Buff, onUpdate: (newValue: Buff) => void}> = ({ value,
         onUpdate(buffClone)
     }
 
+    function updateHalfOnSave(newValue: boolean | undefined) {
+        const buffClone = clone(value)
+        buffClone.halfOnSave = newValue
+        onUpdate(buffClone)
+    }
+
     function addModifier() {
         const newModifier = BuffStatOptions.find(({value}) => !modifiers.includes(value))
         if (!newModifier) return;
@@ -177,6 +184,19 @@ const BuffForm:FC<{value: Buff, onUpdate: (newValue: Buff) => void}> = ({ value,
                             options={CreatureConditionList.map(condition => ({ value: condition, label: condition }))}
                             onChange={(newCondition) => updateCondition(newCondition)}
                         />
+                    ) : (modifier === 'applyDamage') ? (
+                        <>
+                            <DiceFormulaInput
+                                value={value[modifier]}
+                                onChange={v => updateDiceFormula(modifier, v || 0)}
+                            />
+                            Save for half?
+                            <Select
+                                value={!!value.halfOnSave}
+                                options={[{ value: true, label: 'Yes' }, { value: false, label: 'No' }]}
+                                onChange={halfOnSave => updateHalfOnSave(halfOnSave)}
+                            />
+                        </>
                     ) : (
                         <DiceFormulaInput 
                             value={value[modifier]} 
