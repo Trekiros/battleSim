@@ -13593,6 +13593,65 @@ export const Monsters: Creature[] = [
         "saveBonus": 1.5
     },
     {
+        "id": "bd61fe23-3cc4-40d5-a6ff-542df1904128",
+        "mode": "monster",
+        "name": "Gladiator",
+        "type": "humanoid",
+        "src": "MM p.346",
+        "cr": "5",
+        "hp": 112,
+        "AC": 16,
+        "actions": [
+            {
+                "id": "902aefca-ffb3-4596-97c1-b3a7eb5fe079",
+                "name": "Shield Bash",
+                "type": "atk",
+                "actionSlot": 0,
+                "freq": "at will",
+                "condition": "default",
+                "dpr": 9,
+                "toHit": 7,
+                "target": "enemy with most HP",
+                "targets": 1,
+                "riderEffect": {
+                    "buff": {
+                        "duration": '1 round',
+                        "condition": "Is attacked with Advantage",
+                    },
+                    dc: 15,
+                },
+            },
+            {
+                "id": "902aefca-ffb3-4596-97c1-b3a7eb5fe079",
+                "name": "Spear x2",
+                "type": "atk",
+                "actionSlot": 1,
+                "freq": "at will",
+                "condition": "default",
+                "dpr": 9,
+                "toHit": 7,
+                "target": "enemy with most HP",
+                "targets": 2,
+            },
+            {
+                "id": "608abe02-9602-46ec-982c-ba0355f922ce",
+                "name": "Parry",
+                "actionSlot": 4,
+                "condition": "default",
+                "freq": "at will",
+                "targets": 1,
+                "type": "buff",
+                "target": "self",
+                "buff": {
+                    "duration": "until next attack taken",
+                    "ac": 3
+                },
+            }
+        ],
+        "count": 1,
+        "saveBonus": 1.5
+    },
+    {
         "id": "7f778d0e-14ed-45cc-9ae5-8c5a21b0b885",
         "mode": "monster",
         "name": "Vine Blight",
