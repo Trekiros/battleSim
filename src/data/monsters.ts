@@ -10716,7 +10716,37 @@ export const Monsters: Creature[] = [
         "cr": "1/4",
         "hp": 1,
         "AC": 15,
-        "actions": [],
+        "actions": [
+            {
+                "id": "db1a831c-7dda-4e7b-9b5d-fb22b720a4d5",
+                "name": "Confusion",
+                "actionSlot": 0,
+                "condition": "default",
+                "freq": "1/day",
+                "targets": 1,
+                "type": "debuff",
+                "target": "enemy with highest DPR",
+                "saveDC": 12,
+                buff: {
+                    "duration": "1 round",
+                    condition: 'Incapacitated'
+                }
+            },
+            {
+                "id": "e95f6ba5-879a-444d-bb86-a75a268d49e4",
+                "name": "Superior Invisibility",
+                "type": "buff",
+                "actionSlot": 0,
+                "freq": "at will",
+                "condition": "default",
+                "targets": 1,
+                target: 'self',
+                buff: {
+                    duration: 'until next attack taken',
+                    condition: 'Invisible'
+                }
+            }
+        ],
         "count": 1,
         "saveBonus": 0.125
     },
