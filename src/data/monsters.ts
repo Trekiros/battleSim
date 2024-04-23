@@ -7480,7 +7480,20 @@ export const Monsters: Creature[] = [
         "cr": "0",
         "hp": 1,
         "AC": 13,
-        "actions": [],
+        "actions": [
+            {
+                "id": "929b7fa0-16f0-420e-bdfa-387a8fbbc7e1",
+                "name": "Talons",
+                "type": "atk",
+                "actionSlot": 0,
+                "freq": "at will",
+                "condition": "default",
+                "dpr": 1,
+                "toHit": 5,
+                "target": "enemy with most HP",
+                "targets": 1
+            }
+        ],
         "count": 1,
         "saveBonus": 0
     },
