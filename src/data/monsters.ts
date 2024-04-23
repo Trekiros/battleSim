@@ -8282,7 +8282,20 @@ export const Monsters: Creature[] = [
         "cr": "0",
         "hp": 3,
         "AC": 12,
-        "actions": [],
+        "actions": [
+            {
+                "id": "77bb60b4-34e3-408b-8d79-e0a8988313e2",
+                "name": "Bite",
+                "type": "atk",
+                "actionSlot": 0,
+                "freq": "at will",
+                "condition": "default",
+                "dpr": 1.5,
+                "toHit": 1,
+                "target": "enemy with most HP",
+                "targets": 1
+            },
+        ],
         "count": 1,
         "saveBonus": 0
     },
