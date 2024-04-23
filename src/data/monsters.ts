@@ -7781,7 +7781,27 @@ export const Monsters: Creature[] = [
         "cr": "0",
         "hp": 5,
         "AC": 13,
-        "actions": [],
+        "actions": [
+            {
+                "id": "89a49e3b-2997-4c58-bcca-05b811fb8aaf",
+                "name": "Bite",
+                "type": "atk",
+                "actionSlot": 0,
+                "freq": "at will",
+                "condition": "default",
+                "dpr": 1,
+                "toHit": 4,
+                "target": "enemy with most HP",
+                "targets": 1,
+                "riderEffect": {
+                    "dc": 10,
+                    "buff": {
+                        "duration": "entire encounter",
+                        condition: 'Poisoned',
+                    }
+                }
+            }
+        ],
         "count": 1,
         "saveBonus": 0
     },
