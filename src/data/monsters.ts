@@ -5942,7 +5942,20 @@ export const Monsters: Creature[] = [
         "cr": "0",
         "hp": 4,
         "AC": 13,
-        "actions": [],
+        "actions": [
+            {
+                "id": "74e45162-b548-48cf-aefd-fa363ae95acd",
+                "name": "Bite",
+                "type": "atk",
+                "actionSlot": 0,
+                "freq": "at will",
+                "condition": "default",
+                "dpr": 2.5,
+                "toHit": 1,
+                "target": "enemy with most HP",
+                "targets": 1
+            }
+        ],
         "count": 1,
         "saveBonus": 0
     },
@@ -7467,7 +7480,20 @@ export const Monsters: Creature[] = [
         "cr": "0",
         "hp": 1,
         "AC": 13,
-        "actions": [],
+        "actions": [
+            {
+                "id": "929b7fa0-16f0-420e-bdfa-387a8fbbc7e1",
+                "name": "Talons",
+                "type": "atk",
+                "actionSlot": 0,
+                "freq": "at will",
+                "condition": "default",
+                "dpr": 1,
+                "toHit": 5,
+                "target": "enemy with most HP",
+                "targets": 1
+            }
+        ],
         "count": 1,
         "saveBonus": 0
     },
@@ -7755,7 +7781,27 @@ export const Monsters: Creature[] = [
         "cr": "0",
         "hp": 5,
         "AC": 13,
-        "actions": [],
+        "actions": [
+            {
+                "id": "89a49e3b-2997-4c58-bcca-05b811fb8aaf",
+                "name": "Bite",
+                "type": "atk",
+                "actionSlot": 0,
+                "freq": "at will",
+                "condition": "default",
+                "dpr": 1,
+                "toHit": 4,
+                "target": "enemy with most HP",
+                "targets": 1,
+                "riderEffect": {
+                    "dc": 10,
+                    "buff": {
+                        "duration": "entire encounter",
+                        condition: 'Poisoned',
+                    }
+                }
+            }
+        ],
         "count": 1,
         "saveBonus": 0
     },
@@ -8236,7 +8282,20 @@ export const Monsters: Creature[] = [
         "cr": "0",
         "hp": 3,
         "AC": 12,
-        "actions": [],
+        "actions": [
+            {
+                "id": "77bb60b4-34e3-408b-8d79-e0a8988313e2",
+                "name": "Bite",
+                "type": "atk",
+                "actionSlot": 0,
+                "freq": "at will",
+                "condition": "default",
+                "dpr": 1.5,
+                "toHit": 1,
+                "target": "enemy with most HP",
+                "targets": 1
+            },
+        ],
         "count": 1,
         "saveBonus": 0
     },
@@ -10657,7 +10716,37 @@ export const Monsters: Creature[] = [
         "cr": "1/4",
         "hp": 1,
         "AC": 15,
-        "actions": [],
+        "actions": [
+            {
+                "id": "db1a831c-7dda-4e7b-9b5d-fb22b720a4d5",
+                "name": "Confusion",
+                "actionSlot": 0,
+                "condition": "default",
+                "freq": "1/day",
+                "targets": 1,
+                "type": "debuff",
+                "target": "enemy with highest DPR",
+                "saveDC": 12,
+                buff: {
+                    "duration": "1 round",
+                    condition: 'Incapacitated'
+                }
+            },
+            {
+                "id": "e95f6ba5-879a-444d-bb86-a75a268d49e4",
+                "name": "Superior Invisibility",
+                "type": "buff",
+                "actionSlot": 0,
+                "freq": "at will",
+                "condition": "default",
+                "targets": 1,
+                target: 'self',
+                buff: {
+                    duration: 'until next attack taken',
+                    condition: 'Invisible'
+                }
+            }
+        ],
         "count": 1,
         "saveBonus": 0.125
     },
