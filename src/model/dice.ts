@@ -1,6 +1,11 @@
 import { AnyRoll, DiceRoller, FullRoll, GroupedRoll, InlineExpression, MathExpression, MathOperation, NumberType, RollExpression, RollExpressionType, RollOrExpression, RootType } from "dice-roller-parser"
 import { range } from "./utils"
 
+/** Options applied to the root evaluation, and used if the appropriate condition is met */
+export interface EvaluationOptions {
+    doubleDice: boolean;
+}
+
 const roller = new DiceRoller()
 export function validateDiceFormula(expr: number|string) {
     if (typeof expr === 'number' || !isNaN(+expr)) return true
@@ -13,8 +18,7 @@ export function validateDiceFormula(expr: number|string) {
     }
 }
 
-// TODO: handle canCrit
-export function evaluateDiceFormula(expr: number|string, canCrit?: boolean): number {
+export function evaluateDiceFormula(expr: number|string, options: EvaluationOptions = { doubleDice: false }): number {
     if (typeof expr === 'number') return expr
     if (!isNaN(+expr)) return Number(expr)
 
@@ -22,33 +26,35 @@ export function evaluateDiceFormula(expr: number|string, canCrit?: boolean): num
 
     const roll = roller.parse(expr.trim())
 
-    return evaluateUnknown(roll)
+    return evaluateUnknown(roll, options);
 }
 
-function evaluateUnknown(roll: RootType|AnyRoll|RollExpression|RollOrExpression): number {
+function evaluateUnknown(roll: RootType|AnyRoll|RollExpression|RollOrExpression, options: EvaluationOptions): number {
     switch (roll.type) {
-        case "number":          return evaluateNumber(roll as NumberType)
-        case "die":             return evaluateDie(roll as FullRoll)
-        case "group":           return evaluateGroup(roll as GroupedRoll)
-        case "expression":      return evaluateMathExpr(roll as MathExpression)
-        case "diceExpression":  return evaluateDiceExpression(roll as RollExpressionType)
-        case "inline":          return evaluateInline(roll as InlineExpression)
+        case "number":          return evaluateNumber(roll as NumberType, options)
+        case "die":             return evaluateDie(roll as FullRoll, options)
+        case "group":           return evaluateGroup(roll as GroupedRoll, options)
+        case "expression":      return evaluateMathExpr(roll as MathExpression, options)
+        case "diceExpression":  return evaluateDiceExpression(roll as RollExpressionType, options)
+        case "inline":          return evaluateInline(roll as InlineExpression, options)
 
         // TODO: handle other types of rolls, if there's demand for it
         default: return 0
     }
 }
 
-function evaluateNumber(roll: NumberType): number {
+function evaluateNumber(roll: NumberType, options: EvaluationOptions): number {
     return roll.value
 }
 
-function evaluateDie(roll: FullRoll) {
-    const count = (roll.count.type === 'number') ? evaluateNumber(roll.count)
-        : evaluateMathExpr(roll.count)
+function evaluateDie(roll: FullRoll, options: EvaluationOptions) {
+    const countMultiplier = options.doubleDice ? 2 : 1
+    const count = countMultiplier * (
+        (roll.count.type === 'number') ? evaluateNumber(roll.count, options) : evaluateMathExpr(roll.count, options)
+    )
 
-    const die = (roll.die.type === "number") ? evaluateNumber(roll.die)
-        : (roll.die.type === 'expression') ? evaluateMathExpr(roll.die)
+    const die = (roll.die.type === "number") ? evaluateNumber(roll.die, options)
+        : (roll.die.type === 'expression') ? evaluateMathExpr(roll.die, options)
         : 0
 
     let result = count * (die + 1) / 2
@@ -58,11 +64,11 @@ function evaluateDie(roll: FullRoll) {
         if (mod.type === 'explode') {
             result *= die / (die - 1)
         } else if (mod.type === 'keep') {
-            const keep = evaluateUnknown(mod.expr)
+            const keep = evaluateUnknown(mod.expr, options)
 
             result = keepHighestLowest(count, die, keep, (mod.highlow === "l") ? 'min' : 'max')
         } else if (mod.type === 'drop') {
-            const drop = evaluateUnknown(mod.expr)
+            const drop = evaluateUnknown(mod.expr, options)
 
             result = keepHighestLowest(count, die, count - drop, (mod.highlow === "l") ? 'max' : 'min')
         }
@@ -126,17 +132,17 @@ function keepHighestLowest(diceCount: number, diceSize: number, keepCount: numbe
     return average
 }
 
-function evaluateGroup(group: GroupedRoll): number {
-    return group.rolls.map(roll => evaluateUnknown(roll))
+function evaluateGroup(group: GroupedRoll, options: EvaluationOptions): number {
+    return group.rolls.map(roll => evaluateUnknown(roll, options))
         .reduce((a,b) => (a+b))
 }
 
-function evaluateDiceExpression(expr: RollExpressionType): number {
-    const head = evaluateUnknown(expr.head)
+function evaluateDiceExpression(expr: RollExpressionType, options: EvaluationOptions): number {
+    const head = evaluateUnknown(expr.head, options)
 
     const tails = expr.ops
         .map(op => {
-            const tail = evaluateUnknown(op.tail)
+            const tail = evaluateUnknown(op.tail, options)
 
             return (op.op === '+') ? tail : -tail
         })
@@ -145,18 +151,18 @@ function evaluateDiceExpression(expr: RollExpressionType): number {
     return head + tails
 }
 
-function evaluateInline(expr: InlineExpression): number {
+function evaluateInline(expr: InlineExpression, options: EvaluationOptions): number {
     const unknown = expr.expr as RootType
-    return evaluateUnknown(unknown)
+    return evaluateUnknown(unknown, options)
 }
 
-function evaluateMathExpr(expr: MathExpression): number {
-    const head = evaluateUnknown(expr.head)
+function evaluateMathExpr(expr: MathExpression, options: EvaluationOptions): number {
+    const head = evaluateUnknown(expr.head, options)
 
     let last = head
     let sum = 0
     for (let {tail, op} of expr.ops) {
-        const tailValue = evaluateUnknown(tail)
+        const tailValue = evaluateUnknown(tail, options)
 
         if (op === "+") {
             sum += last
