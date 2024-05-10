@@ -108,7 +108,7 @@ function matchCondition(combattant: Combattant, action: Action, allies: Combatta
     if (action.condition === 'ally at 0 HP') return (!!allies.find(ally => (ally.finalState.currentHP === 0)))
     if (action.condition === 'ally under half HP') return !!allies.find(ally => ((ally.initialState.currentHP > 0) && (ally.finalState.currentHP <= ally.creature.hp / 2)))
 
-    // Default or "is use available"
+    // Default, "is use available" or "nothing else available"
     return true
 }
 
@@ -128,8 +128,10 @@ function getActions(combattant: Combattant, allies: Combattant[], handleHeals: b
             .filter(action => isUsable(combattant, action))
             .filter(action => matchCondition(combattant, action, allies))
             .sort((action1, action2) => {
-                if (action1.condition !== "default") return -1
-                if (action2.condition !== "default") return 1
+                if (action1.condition === "nothing else available") return 1
+                if (action2.condition === "nothing else available") return -1
+                if (action1.condition === "default") return 1
+                if (action2.condition === "default") return -1
                 if (action1.freq !== "at will") return -1
                 if (action2.freq !== "at will") return 1
 
