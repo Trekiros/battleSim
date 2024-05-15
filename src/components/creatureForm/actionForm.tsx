@@ -381,7 +381,7 @@ const ActionForm:FC<PropType> = ({ value, onChange, onDelete }) => {
                         })} />
                     <DiceFormulaInput value={value.toHit} onChange={toHit => update(v => { (v as AtkAction).toHit = toHit || 0 })} />
                     Damage: 
-                    <DiceFormulaInput value={value.dpr} onChange={dpr => update(v => { (v as AtkAction).dpr = dpr || 0 })} />
+                    <DiceFormulaInput value={value.dpr} onChange={dpr => update(v => { (v as AtkAction).dpr = dpr || 0 })} canCrit={!value.useSaves} />
                     
                     { !!value.useSaves ? (
                         <>
