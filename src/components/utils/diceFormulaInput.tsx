@@ -9,9 +9,10 @@ type PropType = {
     className?: string,
     placeholder?: string,
     disabled?: boolean,
+    canCrit?: boolean,
 }
 
-const DiceFormulaInput:FC<PropType> = ({ value, onChange, className, placeholder, disabled }) => {
+const DiceFormulaInput:FC<PropType> = ({ value, onChange, className, placeholder, disabled, canCrit }) => {
     const [valueString, setValueString] = useState((value === undefined) ? '' : String(value))
     const [isValid, setIsValid] = useState(false)
 
@@ -34,7 +35,11 @@ const DiceFormulaInput:FC<PropType> = ({ value, onChange, className, placeholder
             />
             { validateDiceFormula(valueString) && (String(evaluateDiceFormula(valueString)) !== valueString) ? (
                 <div className="tooltip">
-                    Average: <b>{Math.trunc(100*evaluateDiceFormula(valueString))/100}</b>
+                    Average: <b>{Math.trunc(100*evaluateDiceFormula(valueString))/100}</b> {
+                        canCrit && <>
+                            (on crit: <b>{Math.trunc(100*evaluateDiceFormula(valueString, { doubleDice: true }))/100}</b>)
+                        </>
+                    }
                 </div>
             ) : null }
         </span>

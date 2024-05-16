@@ -1,9 +1,17 @@
 import { ActionTemplates, getFinalAction } from "../data/actions"
-import { evaluateDiceFormula } from "./dice"
+import { EvaluationOptions, evaluateDiceFormula } from "./dice"
 import { ActionSlots, ActionType, CreatureCondition, CreatureConditionList } from "./enums"
 import { Action, AtkAction, Buff, BuffAction, Combattant, Creature, CreatureState, DebuffAction, DiceFormula, Encounter, EncounterResult, EncounterStats, FinalAction, HealAction, Round, SimulationResult } from "./model"
 import { clone, range } from "./utils"
 import { v4 as uuid } from 'uuid'
+
+function evaluateDamageFormula(expr: number|string, canCrit?: boolean) {
+    const standard = evaluateDiceFormula(expr, { doubleDice: false })
+    return {
+        standard,
+        critical: canCrit ? evaluateDiceFormula(expr, { doubleDice: true }) : standard,
+    }
+}
 
 // Used to update a creature's resources between encounters
 function getRemainingUses(creature: Creature, rest: 'none'|'short rest'|'long rest', oldValue?: Map<string, number>) {
@@ -101,12 +109,14 @@ function isUsable(combattant: Combattant, action: FinalAction) {
 }
 
 // Checks action.condition
-function matchCondition(combattant: Combattant, action: Action, allies: Combattant[]) {
+function matchCondition(combattant: Combattant, action: Action, allies: Combattant[], enemies: Combattant[]) {
     if (action.condition === 'not used yet') return !combattant.initialState.usedActions.has(action.id)
     if (action.condition === 'has no THP') return ((combattant.initialState.tempHP === undefined) || (combattant.initialState.tempHP === 0))
     if (action.condition === 'is under half HP') return (combattant.finalState.currentHP * 2 < combattant.creature.hp)
     if (action.condition === 'ally at 0 HP') return (!!allies.find(ally => (ally.finalState.currentHP === 0)))
     if (action.condition === 'ally under half HP') return !!allies.find(ally => ((ally.initialState.currentHP > 0) && (ally.finalState.currentHP <= ally.creature.hp / 2)))
+    if (action.condition === 'enemy count one') return (enemies.filter(enemy => enemy.initialState.currentHP > 0).length == 1)
+    if (action.condition === 'enemy count multiple') return (enemies.filter(enemy => enemy.initialState.currentHP > 0).length >= 2)
 
     // Default or "is use available"
     return true
@@ -114,7 +124,7 @@ function matchCondition(combattant: Combattant, action: Action, allies: Combatta
 
 // Determines which actions a creature will use. Does not actually perform the actions.
 // The exception is heals, to avoid situations where multiple healers all heal the same creature despite having the "ally at 0 hp" condition
-function getActions(combattant: Combattant, allies: Combattant[], handleHeals: boolean, stats: Map<string, EncounterStats>): FinalAction[] {
+function getActions(combattant: Combattant, allies: Combattant[], enemies: Combattant[], handleHeals: boolean, stats: Map<string, EncounterStats>): FinalAction[] {
     const actionSlots = new Set()
     combattant.creature.actions
         .map(getFinalAction)
@@ -126,7 +136,7 @@ function getActions(combattant: Combattant, allies: Combattant[], handleHeals: b
             .map(getFinalAction)
             .filter(action => (action.actionSlot === actionSlot))
             .filter(action => isUsable(combattant, action))
-            .filter(action => matchCondition(combattant, action, allies))
+            .filter(action => matchCondition(combattant, action, allies, enemies))
             .sort((action1, action2) => {
                 if (action1.condition !== "default") return -1
                 if (action2.condition !== "default") return 1
@@ -186,7 +196,7 @@ function getNextTarget(combattant: Combattant, action: FinalAction, allies: Comb
             const dmgBonus = getBuffs(combattant, b => b.damage, 'add')
             const dmgMult = getBuffs(combattant, b => b.damageMultiplier, 'mult')
             
-            return getActions(combattant, allies, false, stats)
+            return getActions(combattant, allies, enemies, false, stats)
             .map(action => {
                 if (action.type !== "atk") return 0
                 return (evaluateDiceFormula(action.dpr) + dmgBonus) * action.targets * dmgMult
@@ -229,7 +239,7 @@ function generateActions(allies: Combattant[], enemies: Combattant[], stats: Map
     allies.forEach(ally => {
         if (ally.initialState.currentHP <= 0) return
 
-        ally.actions.push(...getActions(ally, allies, true, stats)
+        ally.actions.push(...getActions(ally, allies, enemies, true, stats)
             .map(action => ({
                 action: action, 
                 targets: new Map(),
@@ -307,7 +317,7 @@ function triggerAction(combattant: Combattant, actionSlot: keyof typeof ActionSl
         .forEach(action => {
             if (action.actionSlot !== ActionSlots[actionSlot]) return
             if (!isUsable(combattant, action)) return
-            if (!matchCondition(combattant, action, allies)) return
+            if (!matchCondition(combattant, action, allies, enemies)) return
 
             const targets: Map<string, number> = new Map()
             combattant.actions.push({ action: action, targets: targets })
@@ -423,14 +433,14 @@ function useBuffAction(buffer: Combattant, action: BuffAction, target: Combattan
 
 // Sums up all of the buffs on a given combattant, taking into account the buff's magnitude
 // e.g. getBuffs(combattant, b => b.ac, 'add') will return the total of all of the buffs which alter a creature's AC
-function getBuffs(combattant: Combattant, getter: (buff: Buff) => DiceFormula|undefined, reducer: 'add'|'mult', canCrit?: boolean): number {
+function getBuffs(combattant: Combattant, getter: (buff: Buff) => DiceFormula|undefined, reducer: 'add'|'mult', options?: EvaluationOptions): number {
     return Array.from(combattant.finalState.buffs)
         .map(([_, buff]) => {
             const expr = getter(buff)
             
             if (expr === undefined) return (reducer === 'add') ? 0 : 1
 
-            const value = evaluateDiceFormula(expr, canCrit)
+            const value = evaluateDiceFormula(expr, options)
 
             const magnitude = (buff.magnitude === undefined) ? 1 : buff.magnitude
 
@@ -542,20 +552,30 @@ function useAtkAction(attacker: Combattant, action: AtkAction, target: Combattan
     const hitChance = (1 - chanceToBeIncapacitated) * (action.useSaves ?
         calculateChanceToFail(attacker, target, action.toHit)
         : calculateHitChance(attacker, target, action.toHit))
-        
+
     const targetConditions = getConditions(target)
-    const damage = Math.max((
-            evaluateDiceFormula(action.dpr, !action.useSaves)
-            + getBuffs(attacker, b => b.damage, 'add', /* can crit: */ !action.useSaves)
-            - getBuffs(target, b => b.damageReduction, 'add', /* can not crit: */ false)
-        ), 0)
+
+    const damageMultiplier = 1
         * getBuffs(attacker, b => b.damageMultiplier, 'mult')
         * getBuffs(target, b => b.damageTakenMultiplier, 'mult')
         * (1 + targetConditions.get('Paralyzed')!)
-        
-    let actualDamage = damage * hitChance
+
+    const standardDamage = damageMultiplier * Math.max((
+        evaluateDiceFormula(action.dpr, { doubleDice: false })
+        + getBuffs(attacker, b => b.damage, 'add', { doubleDice: false })
+        - getBuffs(target, b => b.damageReduction, 'add', { doubleDice: false })
+    ), 0)
+    const criticalDamage = damageMultiplier * Math.max((
+        evaluateDiceFormula(action.dpr, { doubleDice: !action.useSaves })
+        + getBuffs(attacker, b => b.damage, 'add', { doubleDice: !action.useSaves })
+        - getBuffs(target, b => b.damageReduction, 'add', { doubleDice: false }) // negative cannot crit
+    ), 0)
+
+    /** TODO: update critChance when implementing features such as crit at 19 */
+    const critChance = 0.05;
+    let actualDamage = standardDamage * (hitChance - critChance) + criticalDamage * critChance
     if (action.useSaves && action.halfOnSave) {
-        actualDamage = damage * hitChance + (damage/2) * (1 - hitChance)
+        actualDamage = standardDamage * hitChance + (standardDamage/2) * (1 - hitChance)
     }
 
     if (action.riderEffect) {

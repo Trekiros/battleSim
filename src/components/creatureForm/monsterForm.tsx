@@ -18,7 +18,7 @@ const MonsterForm:FC<PropType> = ({ onChange, value }) => {
     const useSharedState = sharedStateGenerator('monsterForm')
     const [creatureType, setCreatureType] = useSharedState(defaultTypeFilter)
     const [minCR, setMinCR] = useSharedState<ChallengeRating>(ChallengeRatingList[0])
-    const [maxCR, setMaxCR] = useSharedState<ChallengeRating>(ChallengeRatingList[ChallengeRatingList.length - 1])
+    const [maxCR, setMaxCR] = useSharedState<ChallengeRating>(ChallengeRatingList[ChallengeRatingList.length - 2])
     const [name, setName] = useSharedState<string>('')
 
     const searchResults = useCalculatedState(() => Monsters.filter(monster => {
@@ -83,7 +83,7 @@ const MonsterForm:FC<PropType> = ({ onChange, value }) => {
                 <Range
                     values={[ChallengeRatingList.indexOf(minCR), ChallengeRatingList.indexOf(maxCR)]}
                     min={0}
-                    max={ChallengeRatingList.length - 1}
+                    max={ChallengeRatingList.length - 2}
                     onChange={async (values: number[]) => { await setMaxCR(ChallengeRatingList[values[1]]); await setMinCR(ChallengeRatingList[values[0]]) }}
                     label={minCR}
                     upperLabel={maxCR}

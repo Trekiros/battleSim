@@ -38,6 +38,8 @@ const ConditionOptions: Options<ActionCondition> = [
     { value:'is under half HP', label: 'This creature is under half its maximum HP' },
     { value:'has no THP', label: 'This creature has no temporary HP' },
     { value:'not used yet', label: 'This action has not been used yet this encounter' },
+    { value:'enemy count one', label: 'There is only one enemy' },
+    { value:'enemy count multiple', label: 'There are at least two enemies' },
 ]
 
 const TypeOptions: Options<ActionType> = [
@@ -399,7 +401,7 @@ const ActionForm:FC<PropType> = ({ value, onChange, onDelete }) => {
                         })} />
                     <DiceFormulaInput value={value.toHit} onChange={toHit => update(v => { (v as AtkAction).toHit = toHit || 0 })} />
                     Damage: 
-                    <DiceFormulaInput value={value.dpr} onChange={dpr => update(v => { (v as AtkAction).dpr = dpr || 0 })} />
+                    <DiceFormulaInput value={value.dpr} onChange={dpr => update(v => { (v as AtkAction).dpr = dpr || 0 })} canCrit={!value.useSaves} />
                     
                     { !!value.useSaves ? (
                         <>

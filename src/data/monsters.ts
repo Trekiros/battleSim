@@ -5942,7 +5942,20 @@ export const Monsters: Creature[] = [
         "cr": "0",
         "hp": 4,
         "AC": 13,
-        "actions": [],
+        "actions": [
+            {
+                "id": "74e45162-b548-48cf-aefd-fa363ae95acd",
+                "name": "Bite",
+                "type": "atk",
+                "actionSlot": 0,
+                "freq": "at will",
+                "condition": "default",
+                "dpr": 2.5,
+                "toHit": 1,
+                "target": "enemy with most HP",
+                "targets": 1
+            }
+        ],
         "count": 1,
         "saveBonus": 0
     },
@@ -7467,7 +7480,20 @@ export const Monsters: Creature[] = [
         "cr": "0",
         "hp": 1,
         "AC": 13,
-        "actions": [],
+        "actions": [
+            {
+                "id": "929b7fa0-16f0-420e-bdfa-387a8fbbc7e1",
+                "name": "Talons",
+                "type": "atk",
+                "actionSlot": 0,
+                "freq": "at will",
+                "condition": "default",
+                "dpr": 1,
+                "toHit": 5,
+                "target": "enemy with most HP",
+                "targets": 1
+            }
+        ],
         "count": 1,
         "saveBonus": 0
     },
@@ -7716,7 +7742,7 @@ export const Monsters: Creature[] = [
             {
                 "id": "ef637906-7b0c-4563-adc3-f2f057a6cf2e",
                 "name": "Leadership",
-                "actionSlot": 0,
+                "actionSlot": 1,
                 "condition": "default",
                 "freq": "at will",
                 "targets": 2,
@@ -7731,7 +7757,7 @@ export const Monsters: Creature[] = [
             {
                 "id": "0b86b24c-09fb-4d67-bcae-ffe585e9a0bc",
                 "name": "Parry",
-                "actionSlot": 0,
+                "actionSlot": 4,
                 "condition": "default",
                 "freq": "at will",
                 "targets": 1,
@@ -7755,7 +7781,27 @@ export const Monsters: Creature[] = [
         "cr": "0",
         "hp": 5,
         "AC": 13,
-        "actions": [],
+        "actions": [
+            {
+                "id": "89a49e3b-2997-4c58-bcca-05b811fb8aaf",
+                "name": "Bite",
+                "type": "atk",
+                "actionSlot": 0,
+                "freq": "at will",
+                "condition": "default",
+                "dpr": 1,
+                "toHit": 4,
+                "target": "enemy with most HP",
+                "targets": 1,
+                "riderEffect": {
+                    "dc": 10,
+                    "buff": {
+                        "duration": "entire encounter",
+                        condition: 'Poisoned',
+                    }
+                }
+            }
+        ],
         "count": 1,
         "saveBonus": 0
     },
@@ -8236,7 +8282,20 @@ export const Monsters: Creature[] = [
         "cr": "0",
         "hp": 3,
         "AC": 12,
-        "actions": [],
+        "actions": [
+            {
+                "id": "77bb60b4-34e3-408b-8d79-e0a8988313e2",
+                "name": "Bite",
+                "type": "atk",
+                "actionSlot": 0,
+                "freq": "at will",
+                "condition": "default",
+                "dpr": 1.5,
+                "toHit": 1,
+                "target": "enemy with most HP",
+                "targets": 1
+            },
+        ],
         "count": 1,
         "saveBonus": 0
     },
@@ -10657,7 +10716,37 @@ export const Monsters: Creature[] = [
         "cr": "1/4",
         "hp": 1,
         "AC": 15,
-        "actions": [],
+        "actions": [
+            {
+                "id": "db1a831c-7dda-4e7b-9b5d-fb22b720a4d5",
+                "name": "Confusion",
+                "actionSlot": 0,
+                "condition": "default",
+                "freq": "1/day",
+                "targets": 1,
+                "type": "debuff",
+                "target": "enemy with highest DPR",
+                "saveDC": 12,
+                buff: {
+                    "duration": "1 round",
+                    condition: 'Incapacitated'
+                }
+            },
+            {
+                "id": "e95f6ba5-879a-444d-bb86-a75a268d49e4",
+                "name": "Superior Invisibility",
+                "type": "buff",
+                "actionSlot": 0,
+                "freq": "at will",
+                "condition": "default",
+                "targets": 1,
+                target: 'self',
+                buff: {
+                    duration: 'until next attack taken',
+                    condition: 'Invisible'
+                }
+            }
+        ],
         "count": 1,
         "saveBonus": 0.125
     },
@@ -13587,6 +13676,65 @@ export const Monsters: Creature[] = [
                 "toHit": 5,
                 "target": "enemy with most HP",
                 "targets": 1
+            }
+        ],
+        "count": 1,
+        "saveBonus": 1.5
+    },
+    {
+        "id": "bd61fe23-3cc4-40d5-a6ff-542df1904128",
+        "mode": "monster",
+        "name": "Gladiator",
+        "type": "humanoid",
+        "src": "MM p.346",
+        "cr": "5",
+        "hp": 112,
+        "AC": 16,
+        "actions": [
+            {
+                "id": "902aefca-ffb3-4596-97c1-b3a7eb5fe079",
+                "name": "Shield Bash",
+                "type": "atk",
+                "actionSlot": 0,
+                "freq": "at will",
+                "condition": "default",
+                "dpr": 9,
+                "toHit": 7,
+                "target": "enemy with most HP",
+                "targets": 1,
+                "riderEffect": {
+                    "buff": {
+                        "duration": '1 round',
+                        "condition": "Is attacked with Advantage",
+                    },
+                    dc: 15,
+                },
+            },
+            {
+                "id": "902aefca-ffb3-4596-97c1-b3a7eb5fe079",
+                "name": "Spear x2",
+                "type": "atk",
+                "actionSlot": 1,
+                "freq": "at will",
+                "condition": "default",
+                "dpr": 9,
+                "toHit": 7,
+                "target": "enemy with most HP",
+                "targets": 2,
+            },
+            {
+                "id": "608abe02-9602-46ec-982c-ba0355f922ce",
+                "name": "Parry",
+                "actionSlot": 4,
+                "condition": "default",
+                "freq": "at will",
+                "targets": 1,
+                "type": "buff",
+                "target": "self",
+                "buff": {
+                    "duration": "until next attack taken",
+                    "ac": 3
+                },
             }
         ],
         "count": 1,
@@ -22070,7 +22218,7 @@ export const Monsters: Creature[] = [
         "name": "Sacred Statue",
         "type": "construct",
         "src": "MPMM p.114",
-        "cr": "—" as any,
+        "cr": "—",
         "hp": 95,
         "AC": 19,
         "actions": [
