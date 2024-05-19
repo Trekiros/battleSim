@@ -83,7 +83,8 @@ const PlayerForm:FC<PropType> = ({ value, onChange }) => {
             <h3>Class</h3>
             <section className={styles.classes}>
                 { ClassesList.map(className => (
-                    <button 
+                    <button
+                        key={className}
                         className={`${styles.class} ${(chosenClass?.type === className) ? styles.active : ''}`}
                         onClick={() => { setClass(className) }}
                     >
