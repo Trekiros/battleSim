@@ -592,7 +592,7 @@ function useAtkAction(attacker: Combattant, action: AtkAction, target: Combattan
         }
 
         if (buffClone.applyDamage) {
-            let appliedDamage = Math.max(evaluateDiceFormula(buffClone.applyDamage, false), 0)
+            let appliedDamage = Math.max(evaluateDiceFormula(buffClone.applyDamage), 0)
             if (buffClone.halfOnSave)
                 appliedDamage = appliedDamage / 2
 
