@@ -135,7 +135,7 @@ const BuffForm:FC<{value: Buff, onUpdate: (newValue: Buff) => void}> = ({ value,
         setModifiers(modifiersClone)
     }
 
-    function updateValue(modifier: keyof Omit<Buff, 'duration'|'condition'|'displayName'>, newValue: number) {
+    function updateValue(modifier: keyof Omit<Buff, 'duration'|'condition'|'displayName'|'halfOnSave'>, newValue: number) {
         const buffClone = clone(value)
         buffClone[modifier] = newValue
         onUpdate(buffClone)
@@ -194,10 +194,13 @@ const BuffForm:FC<{value: Buff, onUpdate: (newValue: Buff) => void}> = ({ value,
                             />
                             Save for half?
                             <Select
-                                value={!!value.halfOnSave}
+                                value={value.halfOnSave}
                                 options={[{ value: true, label: 'Yes' }, { value: false, label: 'No' }]}
                                 onChange={halfOnSave => updateHalfOnSave(halfOnSave)}
                             />
+                        </>
+                    ) : (modifier === 'halfOnSave') ? (
+                        <>
                         </>
                     ) : (
                         <DiceFormulaInput 
