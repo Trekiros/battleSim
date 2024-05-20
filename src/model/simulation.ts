@@ -310,6 +310,25 @@ function handleActions(allies: Combattant[], enemies: Combattant[], actionTypes:
     })
 }
 
+function handleDebuffRiderEffects(allies: Combattant[], stats: Map<string, EncounterStats>) {
+    allies.forEach(target => {
+        let totalDamageApplied = 0
+        target.finalState.buffs.forEach((buff, name) => {
+            if(buff.applyDamage)
+            {
+                let appliedDamage = Math.max(evaluateDiceFormula(buff.applyDamage), 0)
+                if (buff.halfOnSave)
+                    appliedDamage = appliedDamage / 2
+    
+                totalDamageApplied += appliedDamage
+            }
+        })
+        //TODO Apply damage to temp hitpoints first
+        target.finalState.currentHP = Math.min(target.finalState.currentHP, Math.max(0, target.finalState.currentHP - totalDamageApplied))
+        getStats(stats, target).damageTaken += totalDamageApplied //TODO Apply damage dealt number to owner of buff?
+    } );
+}
+
 // This is called when an action with a negative/special action slot is triggered
 function triggerAction(combattant: Combattant, actionSlot: keyof typeof ActionSlots, allies: Combattant[], enemies: Combattant[], stats: Map<string, EncounterStats>) {
     combattant.creature.actions
@@ -393,6 +412,7 @@ function mergeBuff(buff1: Buff, buff2: Buff, comparisonMode: 'min'|'max'): Buff 
         save: comparator(buff1.save, buff2.save),
         condition: buff1.condition || buff2.condition,
         applyDamage: buff1.applyDamage || buff2.applyDamage,
+        halfOnSave: buff1.halfOnSave || buff2.halfOnSave,
 
         magnitude: atLeastOneChance([
             buff1.magnitude !== undefined ? buff1.magnitude : 1,
@@ -591,7 +611,7 @@ function useAtkAction(attacker: Combattant, action: AtkAction, target: Combattan
             buffClone = mergeBuff(existingBuff, buffClone, 'min')
         }
 
-        if (buffClone.applyDamage) {
+        if (buffClone.applyDamage !== undefined) {
             let appliedDamage = Math.max(evaluateDiceFormula(buffClone.applyDamage), 0)
             if (buffClone.halfOnSave)
                 appliedDamage = appliedDamage / 2
@@ -661,6 +681,8 @@ function runRound(team1: Combattant[], team2: Combattant[], stats: Map<string, E
     if (!firstRound?.team1Surprised) generateActions(round.team1, round.team2, stats)
     if (!firstRound?.team2Surprised) generateActions(round.team2, round.team1, stats)
 
+    handleDebuffRiderEffects(round.team1, stats)
+    handleDebuffRiderEffects(round.team2, stats)
 
     // Heals are resolved as soon as the actions are declared, to avoid situations where multiple creatures needlessly waste actions healing the same target
     // Then buffs/debuffs are resolved, so they can affect the attacks performed on that same round
