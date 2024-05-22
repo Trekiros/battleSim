@@ -419,6 +419,19 @@ function druid(level: number, options: z.infer<typeof ClassOptions.druid>): Crea
         10: getMonster('Fire Elemental')!,
     })
 
+    const wildShapeAction: Action = {
+        id: uuid(),
+        name: `Wild Shape: ${wildshape.name}`,
+        actionSlot: ActionSlots['Bonus Action'],
+        type: 'heal',
+        target: 'self',
+        targets: 1,
+        condition: 'has no THP',
+        freq: scale(level, {1: { reset: 'sr', uses: 2}, 20: 'at will'}),
+        amount: wildshape.hp,
+        tempHP: true,
+    }
+
     return {
         id: uuid(),
         name: name('Druid', level),
@@ -427,7 +440,7 @@ function druid(level: number, options: z.infer<typeof ClassOptions.druid>): Crea
         hp: hp(level, 8, CON),
         count: 1,
         mode: 'player',
-        actions: ([
+        actions: [
             ...wildshape.actions,
             ...scaleArray<Action>(level, {
                 1: [],
@@ -456,19 +469,8 @@ function druid(level: number, options: z.infer<typeof ClassOptions.druid>): Crea
                     },
                 ],
             }),
-            {
-                id: uuid(),
-                name: `Wild Shape: ${wildshape.name}`,
-                actionSlot: ActionSlots['Bonus Action'],
-                type: 'heal',
-                target: 'self',
-                targets: 1,
-                condition: 'has no THP',
-                freq: scale(level, {1: { reset: 'sr', uses: 2}, 20: 'at will'}),
-                amount: wildshape.hp,
-                tempHP: true,
-            },
-        ] satisfies Action[]).reverse(),
+            wildShapeAction,
+        ].reverse(),
     }
 }
 
