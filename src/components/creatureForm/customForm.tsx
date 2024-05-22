@@ -1,4 +1,4 @@
-import { FC, useState } from "react"
+import { FC, ReactNode, useState } from "react"
 import { Action, Creature } from "../../model/model"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFolder, faPlus, faSave } from "@fortawesome/free-solid-svg-icons"
@@ -97,6 +97,14 @@ const CustomForm:FC<PropType> = ({ value, onChange }) => {
                         value={action}
                         onChange={(a) => updateAction(index, a)}
                         onDelete={() => deleteAction(index)}
+                        onMoveUp={(index <= 0) ? undefined : () => update(v => {                            
+                            v.actions[index] = v.actions[index - 1]
+                            v.actions[index - 1] = action
+                        })}
+                        onMoveDown={(index >= value.actions.length - 1) ? undefined : () => update(v => {
+                            v.actions[index] = v.actions[index + 1]
+                            v.actions[index + 1] = action
+                        })}
                     />
                 ))}
             </div>

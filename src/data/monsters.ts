@@ -131,6 +131,24 @@ export const Monsters: Creature[] = [
         "AC": 10,
         "actions": [
             {
+                "id": "b92c0727-7b4d-41cd-b31e-3d1a02d5221e",
+                "name": "Cure Wounds",
+                "actionSlot": 0,
+                "condition": "ally under half HP",
+                "freq": "1/fight",
+                "targets": 1,
+                "type": "heal",
+                "amount": 7,
+                "target": "ally with the least HP"
+            },
+            {
+                "id": "f5e9b5f8-72f2-403e-9e58-2de262beb3b5",
+                "condition": "not used yet",
+                "freq": "at will",
+                "type": "template",
+                templateOptions: { templateName: 'Bless', target: "ally with the highest DPR" },
+            },
+            {
                 "id": "26e6ab65-5b86-403f-b246-d6ef50d013c7",
                 "name": "Club",
                 "type": "atk",
@@ -142,24 +160,6 @@ export const Monsters: Creature[] = [
                 "target": "enemy with most HP",
                 "targets": 1
             },
-            {
-                "id": "f5e9b5f8-72f2-403e-9e58-2de262beb3b5",
-                "condition": "default",
-                "freq": "at will",
-                "type": "template",
-                templateOptions: { templateName: 'Bless', target: "ally with the highest DPR" },
-            },
-            {
-                "id": "b92c0727-7b4d-41cd-b31e-3d1a02d5221e",
-                "name": "Cure Wounds",
-                "actionSlot": 0,
-                "condition": "ally under half HP",
-                "freq": "1/fight",
-                "targets": 1,
-                "type": "heal",
-                "amount": 7,
-                "target": "ally with the least HP"
-            }
         ],
         "count": 1,
         "saveBonus": 0.125
@@ -5167,6 +5167,13 @@ export const Monsters: Creature[] = [
         "AC": 13,
         "actions": [
             {
+                id: "79e62dc7-fae0-402a-953a-ffb1c32b8bc8",
+                type: 'template',
+                freq: "1/day",
+                condition: 'default',
+                templateOptions: { templateName: 'Fireball', toHit: 13, target: 'enemy with most HP' },
+            },
+            {
                 "id": "7de14aa3-0382-43ce-8d4e-2b3f29e500c2",
                 "name": "Fire Ray x2",
                 "type": "atk",
@@ -5177,13 +5184,6 @@ export const Monsters: Creature[] = [
                 "toHit": 5,
                 "target": "enemy with most HP",
                 "targets": 1
-            },
-            {
-                id: "79e62dc7-fae0-402a-953a-ffb1c32b8bc8",
-                type: 'template',
-                freq: "1/day",
-                condition: 'default',
-                templateOptions: { templateName: 'Fireball', toHit: 13, target: 'enemy with most HP' },
             },
             {
                 "id": "14270ca3-d687-4c55-9d85-b56407df47f5",
@@ -8778,6 +8778,18 @@ export const Monsters: Creature[] = [
                 "target": "enemy with least HP"
             },
             {
+                "id": "481822df-6241-407c-a35e-f86c99d015bf",
+                "actionSlot": 0,
+                "name": "Power Word Kill",
+                "freq": "1/day",
+                "condition": "is under half HP",
+                "targets": 1,
+                "type": "atk",
+                "dpr": 1000,
+                "toHit": 20,
+                "target": "enemy with least HP"
+            },
+            {
                 "id": "3999049e-2275-4243-9ae6-7d84d94f6595",
                 "actionSlot": 2,
                 "name": "Ray of Frost x3",
@@ -8789,18 +8801,6 @@ export const Monsters: Creature[] = [
                 "toHit": 12,
                 "target": "enemy with least HP"
             },
-            {
-                "id": "481822df-6241-407c-a35e-f86c99d015bf",
-                "actionSlot": 0,
-                "name": "Power Word Kill",
-                "freq": "1/day",
-                "condition": "is under half HP",
-                "targets": 1,
-                "type": "atk",
-                "dpr": 1000,
-                "toHit": 20,
-                "target": "enemy with least HP"
-            }
         ],
         "count": 1,
         "saveBonus": 10.5
