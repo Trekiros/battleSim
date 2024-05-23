@@ -223,13 +223,22 @@ function bard(level: number, options: z.infer<typeof ClassOptions.bard>): Creatu
                         },
                     }
                 },
-                {
-                    id: uuid(),
-                    type: 'template',
-                    condition: 'is available',
-                    freq: { reset: 'lr', uses: scale(level, {1: 1, 3: 2, 5: 3, 7: 4, 9: 5, 11: 6, 13: 7, 15: 8, 17: 9})},
-                    templateOptions: { templateName: 'Bane', saveDC: DC, target: 'enemy with highest DPR' },
-                },
+                scale<Action>(level, {
+                    1: {
+                        id: uuid(),
+                        type: 'template',
+                        condition: 'not used yet',
+                        freq: { reset: 'lr', uses: scale(level, {1: 1, 3: 2})},
+                        templateOptions: { templateName: 'Bane', saveDC: DC, target: 'enemy with highest DPR' },
+                    },
+                    5: {
+                        id: uuid(),
+                        type: 'template',
+                        freq: { reset: 'lr', uses: scale(level, {1: 1, 5: 1, 9: 2, 13: 3, 17: 4})},
+                        condition: 'not used yet',
+                        templateOptions: { templateName: 'Hypnotic Pattern', saveDC: DC, target: 'enemy with highest DPR' }
+                    },
+                }),
                 {
                     id: uuid(),
                     name: 'Bardic Inspiration',
@@ -256,15 +265,6 @@ function bard(level: number, options: z.infer<typeof ClassOptions.bard>): Creatu
                     amount: `${Math.ceil(level / 3)}d8 + ${CHA}`,
                 }
             ],
-            5: [
-                {
-                    id: uuid(),
-                    type: 'template',
-                    freq: { reset: 'lr', uses: scale(level, {1: 1, 5: 1, 9: 2, 13: 3, 17: 4})},
-                    condition: 'is available',
-                    templateOptions: { templateName: 'Hypnotic Pattern', saveDC: DC, target: 'enemy with highest DPR' }
-                },
-            ]
         }),
     }
 
@@ -301,13 +301,29 @@ function cleric(level: number, options: z.infer<typeof ClassOptions.cleric>): Cr
                     toHit: DC,
                     dpr: `${cantrip(level)}d8` + (level >= 8 ? ' + 1d8[Potent Spellcasting]' : ''),
                 },
-                {
-                    id: uuid(),
-                    type: 'template',
-                    freq: { reset: 'lr', uses: scale(level, {1: 1, 3: 2, 5: 3, 7: 4, 9: 5, 11: 6, 13: 7, 15: 8, 17: 9})},
-                    condition: 'not used yet',
-                    templateOptions: { templateName: 'Bless', target: 'ally with the highest DPR' },
-                },
+                scale(level, {
+                    1: {
+                        id: uuid(),
+                        type: 'template',
+                        freq: { reset: 'lr', uses: scale(level, {1: 1, 3: 2, 5: 3, 7: 4, 9: 5, 11: 6, 13: 7, 15: 8, 17: 9})},
+                        condition: 'not used yet',
+                        templateOptions: { templateName: 'Bless', target: 'ally with the highest DPR' },
+                    },
+                    5: {
+                        id: uuid(),
+                        name: 'Spirit Guardians',
+                        actionSlot: ActionSlots.Action,
+                        type: 'atk',
+                        targets: 2,
+                        freq: 'at will',
+                        condition: 'default',
+                        target: 'enemy with least HP',
+                        useSaves: true,
+                        halfOnSave: true,
+                        toHit: DC,
+                        dpr: `${(Math.ceil(level / 5) + 2)}d6`,
+                    },
+                }),
                 {
                     id: uuid(),
                     name: scale(level, { 1: 'Cure Wounds', 11: 'Heal' }),
@@ -337,26 +353,12 @@ function cleric(level: number, options: z.infer<typeof ClassOptions.cleric>): Cr
             5: [
                 {
                     id: uuid(),
-                    name: 'Spirit Guardians',
-                    actionSlot: ActionSlots.Action,
-                    type: 'atk',
-                    targets: 2,
-                    freq: 'at will',
-                    condition: 'default',
-                    target: 'enemy with least HP',
-                    useSaves: true,
-                    halfOnSave: true,
-                    toHit: DC,
-                    dpr: `${(Math.ceil(level / 5) + 2)}d6`,
-                },
-                {
-                    id: uuid(),
-                    name: scale(level, {1: 'Mass Healing Word', 9: 'Mass Cure Wounds', 17: 'Mass Heal' }),
+                    name: scale(level, {1: 'Mass Healing Word', 9: 'Mass Cure Wounds' }),
                     actionSlot: ActionSlots.Action,
                     type: 'heal',
                     targets: 6,
                     freq: { reset: 'lr', uses: scale(level, {1: 1, 5: 1, 9: 2, 13: 3, 17: 4})},
-                    condition: 'is under half HP',
+                    condition: 'ally under half HP',
                     target: 'ally with the least HP',
                     amount: scale(level, {1: `1d4 + ${WIS}`, 9: `3d8 + ${WIS}`, 17: 70}),
                 },
@@ -417,6 +419,19 @@ function druid(level: number, options: z.infer<typeof ClassOptions.druid>): Crea
         10: getMonster('Fire Elemental')!,
     })
 
+    const wildShapeAction: Action = {
+        id: uuid(),
+        name: `Wild Shape: ${wildshape.name}`,
+        actionSlot: ActionSlots['Bonus Action'],
+        type: 'heal',
+        target: 'self',
+        targets: 1,
+        condition: 'has no THP',
+        freq: scale(level, {1: { reset: 'sr', uses: 2}, 20: 'at will'}),
+        amount: wildshape.hp,
+        tempHP: true,
+    }
+
     return {
         id: uuid(),
         name: name('Druid', level),
@@ -425,47 +440,37 @@ function druid(level: number, options: z.infer<typeof ClassOptions.druid>): Crea
         hp: hp(level, 8, CON),
         count: 1,
         mode: 'player',
-        actions: scaleArray<Action>(level, {
-            1: [
-                ...wildshape.actions,
-                {
-                    id: uuid(),
-                    name: `Wild Shape: ${wildshape.name}`,
-                    actionSlot: ActionSlots['Bonus Action'],
-                    type: 'heal',
-                    target: 'self',
-                    targets: 1,
-                    condition: 'has no THP',
-                    freq: scale(level, {1: { reset: 'sr', uses: 2}, 20: 'at will'}),
-                    amount: wildshape.hp,
-                    tempHP: true,
-                },
-            ],
-            18: [
-                {
-                    id: uuid(),
-                    type: 'template',
-                    condition: 'ally at 0 HP',
-                    freq: '1/fight',
-                    templateOptions: { templateName: 'Heal', target: 'ally with the least HP' },
-                },
-                {
-                    id: uuid(),
-                    name: 'Guardian of Nature',
-                    actionSlot: ActionSlots['Bonus Action'],
-                    type: 'buff',
-                    target: 'self',
-                    targets: 1,
-                    condition: 'default',
-                    freq: '1/fight',
-                    buff: {
-                        duration: 'entire encounter',
-                        condition: 'Attacks with Advantage',
-                        damage: '2d6',
+        actions: [
+            ...wildshape.actions,
+            ...scaleArray<Action>(level, {
+                1: [],
+                18: [
+                    {
+                        id: uuid(),
+                        type: 'template',
+                        condition: 'ally at 0 HP',
+                        freq: '1/fight',
+                        templateOptions: { templateName: 'Heal', target: 'ally with the least HP' },
                     },
-                }
-            ]
-        })
+                    {
+                        id: uuid(),
+                        name: 'Guardian of Nature',
+                        actionSlot: ActionSlots['Bonus Action'],
+                        type: 'buff',
+                        target: 'self',
+                        targets: 1,
+                        condition: 'default',
+                        freq: '1/fight',
+                        buff: {
+                            duration: 'entire encounter',
+                            condition: 'Attacks with Advantage',
+                            damage: '2d6',
+                        },
+                    },
+                ],
+            }),
+            wildShapeAction,
+        ].reverse(),
     }
 }
 
@@ -769,7 +774,7 @@ function rogue(level: number, options: z.infer<typeof ClassOptions.rogue>): Crea
                 {
                     id: uuid(),
                     name: scale(level, { 
-                        1: "Hand Crossbow", 
+                        1: "Hand Crossbow",
                         4: "Hand Crossbow + Crossbow Expert" 
                     }),
                     actionSlot: ActionSlots.Action,
@@ -796,22 +801,6 @@ function rogue(level: number, options: z.infer<typeof ClassOptions.rogue>): Crea
                         duration: 'until next attack made',
                         damage: sneakAttack
                     }
-                },
-            ],
-            2: [
-                {
-                    id: uuid(),
-                    name: 'Cunning Action: Hide',
-                    actionSlot: ActionSlots['Bonus Action'],
-                    type: 'buff',
-                    freq: 'at will',
-                    condition: 'default',
-                    targets: 1,
-                    target: 'self',
-                    buff: {
-                        duration: 'until next attack made',
-                        condition: 'Attacks with Advantage',
-                    },
                 },
             ],
             5: [
@@ -867,13 +856,32 @@ function sorcerer(level: number, options: z.infer<typeof ClassOptions.sorcerer>)
                 },
             ],
             3: [
+                ...scale<Action[]>(level, {
+                    1: [],
+                    5: [
+                        {
+                            id: uuid(),
+                            name: 'Quickened Fireball',
+                            actionSlot: ActionSlots['Bonus Action'],
+                            type: 'atk',
+                            freq: { reset: 'lr', uses: scale(level, {1: 2, 5: 2, 6: 3, 9: 4, 12: 5, 15: 6, 18: 7})},
+                            condition: 'is available',
+                            targets: 2,
+                            target: 'enemy with least HP',
+                            useSaves: true,
+                            halfOnSave: true,
+                            toHit: DC,
+                            dpr: '8d6',
+                        },
+                    ]
+                }),
                 {
                     id: uuid(),
                     name: 'Quickened Mirror Image',
                     actionSlot: ActionSlots['Bonus Action'],
                     type: 'buff',
                     freq: { reset: 'lr', uses: scale(level, {1: 1, 5: 2, 9: 3, 13: 4, 17: 5})},
-                    condition: 'is available',
+                    condition: 'not used yet',
                     targets: 1,
                     target: 'self',
                     buff: {
@@ -882,22 +890,6 @@ function sorcerer(level: number, options: z.infer<typeof ClassOptions.sorcerer>)
                     },
                 },
             ],
-            5: [
-                {
-                    id: uuid(),
-                    name: 'Quickened Fireball',
-                    actionSlot: ActionSlots['Bonus Action'],
-                    type: 'atk',
-                    freq: { reset: 'lr', uses: scale(level, {1: 2, 5: 2, 6: 3, 9: 4, 12: 5, 15: 6, 18: 7})},
-                    condition: 'is available',
-                    targets: 2,
-                    target: 'enemy with least HP',
-                    useSaves: true,
-                    halfOnSave: true,
-                    toHit: DC,
-                    dpr: '8d6',
-                }
-            ]
         }),
     }
 }
@@ -1068,16 +1060,13 @@ function scale<T>(currentLevel: number, levelScale: {[minLevel: number]: T}) {
     return levelScale[level]
 }
 
-function scaleArray<T>(currentLevel: number, minLevelScale: {[minLevel: number]: T[]}, maxLevelScale?: {[minLevel: number]: T[]}): T[] {
+function scaleArray<T>(currentLevel: number, minLevelScale: {[minLevel: number]: T[]}): T[] {
     return [
         ...Object.keys(minLevelScale)
             .map(Number)
             .filter(level => (level <= currentLevel))
-            .flatMap(level => minLevelScale[level]),
-        ...!maxLevelScale ? [] : Object.keys(maxLevelScale)
-            .map(Number)
-            .filter(level => (level >= currentLevel))
-            .flatMap(level => minLevelScale[level]),
+            .flatMap(level => minLevelScale[level])
+            .reverse(),
     ]
 }
 

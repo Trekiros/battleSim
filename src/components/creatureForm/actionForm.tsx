@@ -5,7 +5,7 @@ import { clone } from "../../model/utils"
 import { ActionType, BuffDuration, ActionCondition, CreatureConditionList, CreatureCondition, ActionSlots } from "../../model/enums"
 import Select from "../utils/select"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faChevronDown, faChevronUp, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
 import DecimalInput from "../utils/DecimalInput"
 import DiceFormulaInput from "../utils/diceFormulaInput"
 import { ActionTemplates, getFinalAction } from "../../data/actions"
@@ -14,6 +14,8 @@ type PropType = {
     value: Action,
     onChange: (newvalue: Action) => void,
     onDelete: () => void,
+    onMoveUp?: () => void,
+    onMoveDown?: () => void,
 }
 
 type Options<T> = { value: T, label: string}[]
@@ -225,7 +227,7 @@ const BuffForm:FC<{value: Buff, onUpdate: (newValue: Buff) => void}> = ({ value,
     )
 }
 
-const ActionForm:FC<PropType> = ({ value, onChange, onDelete }) => {
+const ActionForm:FC<PropType> = ({ value, onChange, onDelete, onMoveUp, onMoveDown }) => {
     function update(callback: (valueClone: Action) => void) {
         const valueClone = clone(value)
         callback(value)
@@ -321,6 +323,19 @@ const ActionForm:FC<PropType> = ({ value, onChange, onDelete }) => {
 
     return (
         <div className={styles.actionForm}>
+            <div className={styles.arrowBtns}>
+                <button
+                    onClick={onMoveUp}
+                    disabled={!onMoveUp}>
+                        <FontAwesomeIcon icon={faChevronUp} />
+                </button>
+                <button
+                    onClick={onMoveDown}
+                    disabled={!onMoveDown}>
+                        <FontAwesomeIcon icon={faChevronDown} />
+                </button>
+            </div>
+
             <button onClick={onDelete}>
                 <FontAwesomeIcon icon={faTrash} />
             </button>

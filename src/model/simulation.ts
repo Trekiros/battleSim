@@ -137,14 +137,6 @@ function getActions(combattant: Combattant, allies: Combattant[], enemies: Comba
             .filter(action => (action.actionSlot === actionSlot))
             .filter(action => isUsable(combattant, action))
             .filter(action => matchCondition(combattant, action, allies, enemies))
-            .sort((action1, action2) => {
-                if (action1.condition !== "default") return -1
-                if (action2.condition !== "default") return 1
-                if (action1.freq !== "at will") return -1
-                if (action2.freq !== "at will") return 1
-
-                return action1.name.localeCompare(action2.name)
-            })
 
         if (!actions.length) return []
         return [actions[0]]

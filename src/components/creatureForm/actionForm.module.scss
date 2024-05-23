@@ -21,6 +21,10 @@
     &:hover {
         background: #fff1;
     }
+    
+    svg {
+        margin: 0;
+    }
 
     button {
         background: none!important;
@@ -36,5 +40,12 @@
         > input[type=number] { width: 45px }
         > input[type=text] { width: 50px; min-width: fit-content }
         svg { margin: 0 }
+    }
+
+    .arrowBtns {
+        padding: 0 1em;
+        display: grid;
+
+        button { margin: 0 }
     }
 }
