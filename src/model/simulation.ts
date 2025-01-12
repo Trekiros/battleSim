@@ -494,8 +494,17 @@ function calculateChanceToFail(attacker: Combattant, target: Combattant, baseDC:
     return chanceToFail
 }
 
+
 // Chance to hit with an attack
 function calculateHitChance(attacker: Combattant, target: Combattant, baseToHit: DiceFormula) {
+    const toHit = evaluateDiceFormula(baseToHit) + getBuffs(attacker, b => b.toHit, 'add')
+    const ac = target.creature.AC + getBuffs(target, b => b.ac, 'add')
+    const hitChance = Math.min(1, Math.max(0, (11 + toHit - (ac - 10)) / 20))
+    
+    return hitChance
+}
+
+function accountForAdvantage(attacker: Combattant, target: Combattant, baseHitChance: number) {
     const attackerConditions = getConditions(attacker)
     const targetConditions = getConditions(target)
 
@@ -503,15 +512,19 @@ function calculateHitChance(attacker: Combattant, target: Combattant, baseToHit:
         atLeastOneConditionChance(targetConditions, ['Blinded', 'Paralyzed', 'Restrained', 'Stunned', 'Unconscious', 'Petrified', 'Is attacked with Advantage', 'Attacks and is attacked with Advantage']),
         atLeastOneConditionChance(attackerConditions, ['Invisible', 'Attacks with Advantage', 'Attacks and is attacked with Advantage'])
     ])
-
+    const advHitChance = baseHitChance + (1 - baseHitChance) * baseHitChance
+    
     const chanceForDisadvantage = atLeastOneChance([
         atLeastOneConditionChance(targetConditions, ['Invisible', 'Is attacked with Disadvantage']),
         atLeastOneConditionChance(attackerConditions, ['Blinded', 'Frightened', 'Poisoned', 'Restrained', 'Attacks with Disadvantage', 'Attacks and saves with Disadvantage'])
     ])
-
-    const toHit = evaluateDiceFormula(baseToHit) + getBuffs(attacker, b => b.toHit, 'add') + 4.5 * chanceForAdvantage - 4.5 * chanceForDisadvantage
-    const ac = target.creature.AC + getBuffs(target, b => b.ac, 'add')
-    const hitChance = Math.min(1, Math.max(0, (11 + toHit - (ac - 10)) / 20))
+    const disHitChance = baseHitChance * baseHitChance
+    
+    const chanceForStraightRoll = 1 - chanceForAdvantage - chanceForDisadvantage + chanceForAdvantage * chanceForDisadvantage
+    
+    const hitChance = (chanceForStraightRoll * baseHitChance)
+        + (chanceForAdvantage * advHitChance)
+        + (chanceForDisadvantage * disHitChance)
 
     return hitChance
 }
@@ -542,7 +555,10 @@ function useAtkAction(attacker: Combattant, action: AtkAction, target: Combattan
     
     const hitChance = (1 - chanceToBeIncapacitated) * (action.useSaves ?
         calculateChanceToFail(attacker, target, action.toHit)
-        : calculateHitChance(attacker, target, action.toHit))
+        : accountForAdvantage(attacker, target, calculateHitChance(attacker, target, action.toHit)))
+
+    const critChance = (1 - chanceToBeIncapacitated) 
+        * (action.useSaves ? 0 : accountForAdvantage(attacker, target, 0.05))
 
     const targetConditions = getConditions(target)
 
@@ -563,8 +579,7 @@ function useAtkAction(attacker: Combattant, action: AtkAction, target: Combattan
     ), 0)
 
     /** TODO: update critChance when implementing features such as crit at 19 */
-    const critChance = 0.05;
-    let actualDamage = standardDamage * (hitChance - critChance) + criticalDamage * critChance
+    let actualDamage = standardDamage * Math.max(0, hitChance - critChance) + criticalDamage * critChance
     if (action.useSaves && action.halfOnSave) {
         actualDamage = standardDamage * hitChance + (standardDamage/2) * (1 - hitChance)
     }

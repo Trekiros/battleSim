@@ -61,7 +61,16 @@ const TargetCountOptions: Options<number> = [
     { value: 4, label: '4 targets' },
     { value: 5, label: '5 targets' },
     { value: 6, label: '6 targets' },
-    { value: 100, label: 'Target everything' },
+    { value: 7, label: '7 targets' },
+    { value: 8, label: '8 targets' },
+    { value: 9, label: '9 targets' },
+    { value: 10, label: '10 targets' },
+    { value: 11, label: '11 targets' },
+    { value: 12, label: '12 targets' },
+    { value: 13, label: '13 targets' },
+    { value: 14, label: '14 targets' },
+    { value: 15, label: '15 targets' },
+    { value: 10000, label: 'Target everything' },
 ]
 
 const HitCountOptions: Options<number> = [
@@ -207,8 +216,8 @@ const BuffForm:FC<{value: Buff, onUpdate: (newValue: Buff) => void}> = ({ value,
 const ActionForm:FC<PropType> = ({ value, onChange, onDelete, onMoveUp, onMoveDown }) => {
     function update(callback: (valueClone: Action) => void) {
         const valueClone = clone(value)
-        callback(value)
-        onChange(value)
+        callback(valueClone)
+        onChange(valueClone)
     }
 
     function updateFinalAction(callback: (valueClone: FinalAction) => void) {
