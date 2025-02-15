@@ -112,6 +112,7 @@ const BuffDurationOptions: Options<BuffDuration> = [
 
 const BuffStatOptions: Options<keyof Omit<Buff, 'duration'>> = [
     { value: 'condition', label: 'Condition' },
+    { value: 'applyDamage', label: 'Take Damage' },
     { value: 'ac', label: 'Armor Class' },
     { value: 'save', label: 'Bonus to Saves' },
     { value: 'toHit', label: 'Bonus to hit' },
@@ -145,7 +146,7 @@ const BuffForm:FC<{value: Buff, onUpdate: (newValue: Buff) => void}> = ({ value,
         setModifiers(modifiersClone)
     }
 
-    function updateValue(modifier: keyof Omit<Buff, 'duration'|'condition'|'displayName'>, newValue: number) {
+    function updateValue(modifier: keyof Omit<Buff, 'duration'|'condition'|'displayName'|'halfOnSave'>, newValue: number) {
         const buffClone = clone(value)
         buffClone[modifier] = newValue
         onUpdate(buffClone)
@@ -160,6 +161,12 @@ const BuffForm:FC<{value: Buff, onUpdate: (newValue: Buff) => void}> = ({ value,
     function updateCondition(newValue: CreatureCondition|undefined) {
         const buffClone = clone(value)
         buffClone.condition = newValue
+        onUpdate(buffClone)
+    }
+
+    function updateHalfOnSave(newValue: boolean | undefined) {
+        const buffClone = clone(value)
+        buffClone.halfOnSave = newValue
         onUpdate(buffClone)
     }
 
@@ -190,6 +197,22 @@ const BuffForm:FC<{value: Buff, onUpdate: (newValue: Buff) => void}> = ({ value,
                             options={CreatureConditionList.map(condition => ({ value: condition, label: condition }))}
                             onChange={(newCondition) => updateCondition(newCondition)}
                         />
+                    ) : (modifier === 'applyDamage') ? (
+                        <>
+                            <DiceFormulaInput
+                                value={value[modifier]}
+                                onChange={v => updateDiceFormula(modifier, v || 0)}
+                            />
+                            Save for half?
+                            <Select
+                                value={value.halfOnSave}
+                                options={[{ value: true, label: 'Yes' }, { value: false, label: 'No' }]}
+                                onChange={halfOnSave => updateHalfOnSave(halfOnSave)}
+                            />
+                        </>
+                    ) : (modifier === 'halfOnSave') ? (
+                        <>
+                        </>
                     ) : (
                         <DiceFormulaInput 
                             value={value[modifier]} 

@@ -36,6 +36,8 @@ const BuffSchema = z.object({
     dc: DiceFormulaSchema.optional(),
     save: DiceFormulaSchema.optional(),
     condition: CreatureConditionSchema.optional(),
+    applyDamage: DiceFormulaSchema.optional(),
+    halfOnSave: z.boolean().optional(), //TODO I need to combine the applyDamage and halfOnSave to a single... object?
 
     // Odds that the buff was applied. All of the effects are multiplied by this value. Default 1.
     magnitude: z.number().optional(),
