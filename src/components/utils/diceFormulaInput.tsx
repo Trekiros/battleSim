@@ -33,11 +33,11 @@ const DiceFormulaInput:FC<PropType> = ({ value, onChange, className, placeholder
                 className={`${className} ${isValid ? styles.isValid : styles.invalid}`}
                 placeholder={placeholder}
             />
-            { validateDiceFormula(valueString) && (String(evaluateDiceFormula(valueString)) !== valueString) ? (
+            { validateDiceFormula(valueString) && (String(evaluateDiceFormula(valueString, 0.5)) !== valueString) ? (
                 <div className="tooltip">
-                    Average: <b>{Math.trunc(100*evaluateDiceFormula(valueString))/100}</b> {
+                    Average: <b>{Math.trunc(100*evaluateDiceFormula(valueString, 0.5))/100}</b> {
                         canCrit && <>
-                            (on crit: <b>{Math.trunc(100*evaluateDiceFormula(valueString, { doubleDice: true }))/100}</b>)
+                            (on crit: <b>{Math.trunc(100*evaluateDiceFormula(valueString, 0.5, { doubleDice: true }))/100}</b>)
                         </>
                     }
                 </div>
