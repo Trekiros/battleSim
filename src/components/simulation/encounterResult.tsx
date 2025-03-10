@@ -1,5 +1,5 @@
 import { FC, useState } from "react"
-import { Combattant, EncounterResult, EncounterStats, FinalAction, Buff, DiceFormula } from "../../model/model"
+import { Combattant, EncounterResult as EncounterResultType, EncounterStats, FinalAction, Buff, DiceFormula } from "../../model/model"
 import styles from './encounterResult.module.scss'
 import { Round } from "../../model/model"
 import { clone } from "../../model/utils"
@@ -122,10 +122,13 @@ const TeamResults:FC<TeamPropType> = ({ round, team, stats, highlightedIds, onHi
                                     //todo effects that disappear in the same round are not shown, which can be misleading
                                     const buffCount = combattant.finalState.buffs.size
                                     const bi = Array.from(combattant.finalState.buffs)
+                                        .filter(([_, buff]) => ((buff.magnitude === undefined) || (buff.magnitude > 0.1)))
                                         .map(([buffId, buff], index) => (
                                             (buffCount <= 3) ?
                                                 <li key={buffId}>
-                                                    <b>{buff.displayName}</b>{getBuffEffect(buff)}
+                                                    <b>{buff.displayName}</b>{getBuffEffect(buff)} {(buff.magnitude !== undefined && buff.magnitude !== 1) ? (
+                                                        `(${Math.round(buff.magnitude * 100)}%)`
+                                                    ) : ''}
                                                 </li> :
                                                 <>
                                                     <b>{buff.displayName}</b>{(index < buffCount - 1) ? ', ' : null}
@@ -152,7 +155,7 @@ const TeamResults:FC<TeamPropType> = ({ round, team, stats, highlightedIds, onHi
 }
 
 type PropType = {
-    value: EncounterResult,
+    value: EncounterResultType,
 }
 
 const EncounterResult:FC<PropType> = ({ value }) => {

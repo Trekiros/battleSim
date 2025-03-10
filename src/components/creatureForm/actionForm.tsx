@@ -105,6 +105,7 @@ const AllyTargetOptions: Options<AllyTarget> = [
 
 const BuffDurationOptions: Options<BuffDuration> = [
     { value: '1 round', label: "1 Round" },
+    { value: 'repeat the save each round', label: "Repeat the save each round" },
     { value: 'entire encounter', label: 'Entire Encounter' },
     { value: 'until next attack taken', label: 'Until the next attack taken' },
     { value: 'until next attack made', label: 'Until the next attack made' }

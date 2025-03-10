@@ -64,6 +64,29 @@ function iterateCombattant(combattant: Combattant) {
     // Handle buffs
     combattant.finalState.buffs.forEach((buff, name) => {
         if (buff.duration === 'entire encounter') newInitialState.buffs.set(name, clone(buff))
+
+        if (buff.duration === 'repeat the save each round') {
+            const emptyState: CreatureState = {
+                buffs: new Map(),
+                currentHP: 0,
+                remainingUses: new Map(),
+                upcomingBuffs: new Map(),
+                usedActions: new Set()
+            }
+
+            // Create a mock attacker - the attacker's stats don't matter to a repeated saving throw.
+            const fakeAttacker: Combattant = {
+                actions: [],
+                creature: combattant.creature,
+                id: '',
+                initialState: emptyState,
+                finalState: emptyState,
+            }
+            
+            // Calculate new magnitude & apply it
+            const magnitude = (buff.magnitude || 1) * calculateChanceToFail(fakeAttacker, combattant, buff.dc || 10)
+            newInitialState.buffs.set(name, { ...clone(buff), magnitude })
+        }
     })
     combattant.finalState.upcomingBuffs.forEach((buff, name) => {
         newInitialState.buffs.set(name, clone(buff))

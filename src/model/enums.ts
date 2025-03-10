@@ -83,7 +83,7 @@ export const ActionTypeList = ['atk', 'heal', 'buff', 'debuff', 'template'] as c
 export const ActionTypeSchema = z.enum(ActionTypeList)
 export type ActionType = z.infer<typeof ActionTypeSchema>
 
-export const BuffDurationList = ['until next attack made', 'until next attack taken', '1 round', 'entire encounter'] as const
+export const BuffDurationList = ['until next attack made', 'until next attack taken', '1 round', 'repeat the save each round', 'entire encounter'] as const
 export const BuffDurationSchema = z.enum(BuffDurationList)
 export type BuffDuration = z.infer<typeof BuffDurationSchema>
 
