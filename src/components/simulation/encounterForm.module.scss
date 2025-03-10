@@ -104,4 +104,15 @@
         flex-direction: column;
         gap: 8px;
     }
+
+    .luckSlider {
+        margin-top: 1em;
+        display: flex;
+        gap: 1em;
+        align-items: center;
+
+        > :last-child {
+            flex-grow: 1;
+        }
+    }
 }

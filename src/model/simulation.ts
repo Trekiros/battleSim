@@ -1,17 +1,9 @@
-import { ActionTemplates, getFinalAction } from "../data/actions"
+import { getFinalAction } from "../data/actions"
 import { EvaluationOptions, evaluateDiceFormula } from "./dice"
 import { ActionSlots, ActionType, CreatureCondition, CreatureConditionList } from "./enums"
 import { Action, AtkAction, Buff, BuffAction, Combattant, Creature, CreatureState, DebuffAction, DiceFormula, Encounter, EncounterResult, EncounterStats, FinalAction, HealAction, Round, SimulationResult } from "./model"
 import { clone, range } from "./utils"
 import { v4 as uuid } from 'uuid'
-
-function evaluateDamageFormula(expr: number|string, canCrit?: boolean) {
-    const standard = evaluateDiceFormula(expr, { doubleDice: false })
-    return {
-        standard,
-        critical: canCrit ? evaluateDiceFormula(expr, { doubleDice: true }) : standard,
-    }
-}
 
 // Used to update a creature's resources between encounters
 function getRemainingUses(creature: Creature, rest: 'none'|'short rest'|'long rest', oldValue?: Map<string, number>) {
@@ -56,7 +48,7 @@ export function creatureToCombattant(creature: Creature) {
 }
 
 // Creates a copy of the combattant that can be used on the next round
-function iterateCombattant(combattant: Combattant) {
+function iterateCombattant(combattant: Combattant, luck: number) {
     const newInitialState: CreatureState = clone(combattant.finalState)
     newInitialState.buffs = new Map()
     newInitialState.upcomingBuffs = new Map()
@@ -84,7 +76,7 @@ function iterateCombattant(combattant: Combattant) {
             }
             
             // Calculate new magnitude & apply it
-            const magnitude = (buff.magnitude || 1) * calculateChanceToFail(fakeAttacker, combattant, buff.dc || 10)
+            const magnitude = (buff.magnitude || 1) * calculateChanceToFail(fakeAttacker, combattant, buff.dc || 10, luck)
             newInitialState.buffs.set(name, { ...clone(buff), magnitude })
         }
     })
@@ -147,7 +139,7 @@ function matchCondition(combattant: Combattant, action: Action, allies: Combatta
 
 // Determines which actions a creature will use. Does not actually perform the actions.
 // The exception is heals, to avoid situations where multiple healers all heal the same creature despite having the "ally at 0 hp" condition
-function getActions(combattant: Combattant, allies: Combattant[], enemies: Combattant[], handleHeals: boolean, stats: Map<string, EncounterStats>): FinalAction[] {
+function getActions(combattant: Combattant, allies: Combattant[], enemies: Combattant[], handleHeals: boolean, luck: number, stats: Map<string, EncounterStats>): FinalAction[] {
     const actionSlots = new Set()
     combattant.creature.actions
         .map(getFinalAction)
@@ -191,13 +183,13 @@ function getActions(combattant: Combattant, allies: Combattant[], enemies: Comba
 
             while ((targettableAllies.size > 0) && (targetCount > 0)) {
                 targetCount--
-                const target = getNextTarget(combattant, action, Array.from(targettableAllies), [], stats)
+                const target = getNextTarget(combattant, action, Array.from(targettableAllies), [], luck, stats)
 
                 if (!target) break;
 
                 targettableAllies.delete(target)
                 combattantAction.targets.set(target.id, 1)
-                useHealAction(combattant, action, target, stats)
+                useHealAction(combattant, action, target, luck, stats)
             }
         })
 
@@ -205,16 +197,16 @@ function getActions(combattant: Combattant, allies: Combattant[], enemies: Comba
 }
 
 // Actions can target multiple creatures. This finds the next valid target for that action.
-function getNextTarget(combattant: Combattant, action: FinalAction, allies: Combattant[], enemies: Combattant[], stats: Map<string, EncounterStats>): Combattant|undefined {
+function getNextTarget(combattant: Combattant, action: FinalAction, allies: Combattant[], enemies: Combattant[], luck: number, stats: Map<string, EncounterStats>): Combattant|undefined {
     const getHighestDPR = (group: Combattant[]) => {
         const getDPR = (combattant: Combattant) => {
-            const dmgBonus = getBuffs(combattant, b => b.damage, 'add')
-            const dmgMult = getBuffs(combattant, b => b.damageMultiplier, 'mult')
+            const dmgBonus = getBuffs(combattant, b => b.damage, 'add', luck)
+            const dmgMult = getBuffs(combattant, b => b.damageMultiplier, 'mult', luck)
             
-            return getActions(combattant, allies, enemies, false, stats)
+            return getActions(combattant, allies, enemies, false, luck, stats)
             .map(action => {
                 if (action.type !== "atk") return 0
-                return (evaluateDiceFormula(action.dpr) + dmgBonus) * action.targets * dmgMult
+                return (evaluateDiceFormula(action.dpr, luck) + dmgBonus) * action.targets * dmgMult
             })
             .reduce((dpr1, dpr2) => (dpr1 + dpr2), 0)
         }
@@ -250,11 +242,11 @@ function getNextTarget(combattant: Combattant, action: FinalAction, allies: Comb
 
 // Calculates which actions each creature is going to take, and saves them in combattant.actions
 // Also updates the remaining uses for each action.
-function generateActions(allies: Combattant[], enemies: Combattant[], stats: Map<string, EncounterStats>) {
+function generateActions(allies: Combattant[], enemies: Combattant[], luck: number, stats: Map<string, EncounterStats>) {
     allies.forEach(ally => {
         if (ally.initialState.currentHP <= 0) return
 
-        ally.actions.push(...getActions(ally, allies, enemies, true, stats)
+        ally.actions.push(...getActions(ally, allies, enemies, true, luck, stats)
             .map(action => ({
                 action: action, 
                 targets: new Map(),
@@ -273,7 +265,7 @@ function generateActions(allies: Combattant[], enemies: Combattant[], stats: Map
 }
 
 // The callback will be called for each valid target, sequentially
-function getTargets(combattant: Combattant, action: FinalAction, allies: Combattant[], enemies: Combattant[], stats: Map<string, EncounterStats>, callback: (target: Combattant) => void) {
+function getTargets(combattant: Combattant, action: FinalAction, allies: Combattant[], enemies: Combattant[], luck: number, stats: Map<string, EncounterStats>, callback: (target: Combattant) => void) {
     const isAttack = (action.type === 'atk') && !action.useSaves
                 
     let lastTarget: Combattant|undefined = undefined
@@ -285,7 +277,7 @@ function getTargets(combattant: Combattant, action: FinalAction, allies: Combatt
         
         // If it's an attack, continue attacking the same target until it's dead
         const target: Combattant|undefined = (isAttack && lastTarget) || 
-            getNextTarget(combattant, action, Array.from(targettableAllies), Array.from(targettableEnemies), stats)
+            getNextTarget(combattant, action, Array.from(targettableAllies), Array.from(targettableEnemies), luck, stats)
         
         if (target) {
             lastTarget = target
@@ -307,26 +299,26 @@ function getTargets(combattant: Combattant, action: FinalAction, allies: Combatt
 
 // Executes the actions saved in combattant.actions by the generateActions() function
 // Executes only the selected action type, so the different action types can be executed in the right order
-function handleActions(allies: Combattant[], enemies: Combattant[], actionTypes: ActionType[], stats: Map<string, EncounterStats>) {
+function handleActions(allies: Combattant[], enemies: Combattant[], actionTypes: ActionType[], luck: number, stats: Map<string, EncounterStats>) {
     allies.forEach(combattant => {
         combattant.actions
             .filter(({ action }) => (action.actionSlot >= 0))
             .filter(({ action }) => (actionTypes.includes(action.type)))
             .forEach((turn) => {
-                getTargets(combattant, turn.action, allies, enemies, stats, (target) => {
+                getTargets(combattant, turn.action, allies, enemies, luck, stats, (target) => {
                     turn.targets.set(target.id, 1 + (turn.targets.get(target.id) || 0))
 
                     if (turn.action.type === "buff") useBuffAction(combattant, turn.action, target, stats)
-                    if (turn.action.type === "debuff") useDebuffAction(combattant, turn.action, target, stats)
+                    if (turn.action.type === "debuff") useDebuffAction(combattant, turn.action, target, luck, stats)
                     //if (turn.action.type === "heal") useHealAction(turn.action, target) // Already handled before, in generateActions
-                    if (turn.action.type === "atk") useAtkAction(combattant, turn.action, target, allies, enemies, stats)
+                    if (turn.action.type === "atk") useAtkAction(combattant, turn.action, target, allies, enemies, luck, stats)
                 })
             })
     })
 }
 
 // This is called when an action with a negative/special action slot is triggered
-function triggerAction(combattant: Combattant, actionSlot: keyof typeof ActionSlots, allies: Combattant[], enemies: Combattant[], stats: Map<string, EncounterStats>) {
+function triggerAction(combattant: Combattant, actionSlot: keyof typeof ActionSlots, allies: Combattant[], enemies: Combattant[], luck: number, stats: Map<string, EncounterStats>) {
     combattant.creature.actions
         .map(getFinalAction)
         .forEach(action => {
@@ -337,15 +329,15 @@ function triggerAction(combattant: Combattant, actionSlot: keyof typeof ActionSl
             const targets: Map<string, number> = new Map()
             combattant.actions.push({ action: action, targets: targets })
 
-            getTargets(combattant, action, allies, enemies, stats, (target) => {
+            getTargets(combattant, action, allies, enemies, luck, stats, (target) => {
                 targets.set(target.id, 1 + (targets.get(target.id) || 0))
 
                 const ignoreIncapacitated = true
                 switch (action.type) {
                     case "buff": return useBuffAction(combattant, action, target, stats, ignoreIncapacitated)
-                    case "debuff": return useDebuffAction(combattant, action, target, stats, ignoreIncapacitated)
-                    case "heal": return useHealAction(combattant, action, target, stats, ignoreIncapacitated)
-                    case "atk": return useAtkAction(combattant, action, target, allies, enemies, stats, ignoreIncapacitated)
+                    case "debuff": return useDebuffAction(combattant, action, target, luck, stats, ignoreIncapacitated)
+                    case "heal": return useHealAction(combattant, action, target, luck, stats, ignoreIncapacitated)
+                    case "atk": return useAtkAction(combattant, action, target, allies, enemies, luck, stats, ignoreIncapacitated)
                 }
             })
             
@@ -378,8 +370,8 @@ function mergeBuff(buff1: Buff, buff2: Buff, comparisonMode: 'min'|'max'): Buff 
         if (a === undefined) return b
         if (b === undefined) return a
 
-        const evalA = evaluateDiceFormula(a)
-        const evalB = evaluateDiceFormula(b)
+        const evalA = evaluateDiceFormula(a, 0.5)
+        const evalB = evaluateDiceFormula(b, 0.5)
 
         const min = (evalA < evalB) ? a : b
         const max = (evalA < evalB) ? b : a
@@ -447,14 +439,14 @@ function useBuffAction(buffer: Combattant, action: BuffAction, target: Combattan
 
 // Sums up all of the buffs on a given combattant, taking into account the buff's magnitude
 // e.g. getBuffs(combattant, b => b.ac, 'add') will return the total of all of the buffs which alter a creature's AC
-function getBuffs(combattant: Combattant, getter: (buff: Buff) => DiceFormula|undefined, reducer: 'add'|'mult', options?: EvaluationOptions): number {
+function getBuffs(combattant: Combattant, getter: (buff: Buff) => DiceFormula|undefined, reducer: 'add'|'mult', luck: number, options?: EvaluationOptions): number {
     return Array.from(combattant.finalState.buffs)
         .map(([_, buff]) => {
             const expr = getter(buff)
             
             if (expr === undefined) return (reducer === 'add') ? 0 : 1
 
-            const value = evaluateDiceFormula(expr, options)
+            const value = evaluateDiceFormula(expr, luck, options)
 
             const magnitude = (buff.magnitude === undefined) ? 1 : buff.magnitude
 
@@ -502,16 +494,16 @@ function atLeastOneConditionChance(conditionsMap: Map<CreatureCondition, number>
 }
 
 // Chance to fail against a saving throw
-function calculateChanceToFail(attacker: Combattant, target: Combattant, baseDC: DiceFormula) {
+function calculateChanceToFail(attacker: Combattant, target: Combattant, baseDC: DiceFormula, luck: number) {
     const targetConditions = getConditions(target)
     
     const chanceForAdvantage = atLeastOneConditionChance(targetConditions, ['Saves with Advantage'])
     const chanceForDisadvantage = atLeastOneConditionChance(targetConditions, ['Save with Disadvantage', 'Attacks and saves with Disadvantage'])
 
-    const saveBonus = target.creature.saveBonus + getBuffs(target, b => b.save, 'add')
+    const saveBonus = target.creature.saveBonus + getBuffs(target, b => b.save, 'add', 1 - luck)
         + 4.5 * chanceForAdvantage
         - 4.5 * chanceForDisadvantage
-    const saveDC = evaluateDiceFormula(baseDC) + getBuffs(attacker, b => b.dc, 'add')
+    const saveDC = evaluateDiceFormula(baseDC, luck) + getBuffs(attacker, b => b.dc, 'add', luck)
     const chanceToFail = 1 - Math.min(1, Math.max(0, (11 + saveBonus - (saveDC - 10)) / 20))
 
     return chanceToFail
@@ -519,9 +511,9 @@ function calculateChanceToFail(attacker: Combattant, target: Combattant, baseDC:
 
 
 // Chance to hit with an attack
-function calculateHitChance(attacker: Combattant, target: Combattant, baseToHit: DiceFormula) {
-    const toHit = evaluateDiceFormula(baseToHit) + getBuffs(attacker, b => b.toHit, 'add')
-    const ac = target.creature.AC + getBuffs(target, b => b.ac, 'add')
+function calculateHitChance(attacker: Combattant, target: Combattant, baseToHit: DiceFormula, luck: number) {
+    const toHit = evaluateDiceFormula(baseToHit, luck) + getBuffs(attacker, b => b.toHit, 'add', luck)
+    const ac = target.creature.AC + getBuffs(target, b => b.ac, 'add', 1 - luck)
     const hitChance = Math.min(1, Math.max(0, (11 + toHit - (ac - 10)) / 20))
     
     return hitChance
@@ -553,11 +545,11 @@ function accountForAdvantage(attacker: Combattant, target: Combattant, baseHitCh
 }
 
 
-function useDebuffAction(attacker: Combattant, action: DebuffAction, target: Combattant, stats: Map<string, EncounterStats>, ignoreIncapacitated?: boolean) {
+function useDebuffAction(attacker: Combattant, action: DebuffAction, target: Combattant, luck: number, stats: Map<string, EncounterStats>, ignoreIncapacitated?: boolean) {
     const attackerConditions = getConditions(attacker)
     const chanceToBeIncapacitated = ignoreIncapacitated ? 0 : atLeastOneConditionChance(attackerConditions, ['Incapacitated', 'Paralyzed', 'Petrified', 'Stunned', 'Unconscious'])
     
-    const chanceToFail = (1 - chanceToBeIncapacitated) * calculateChanceToFail(attacker, target, action.saveDC)
+    const chanceToFail = (1 - chanceToBeIncapacitated) * calculateChanceToFail(attacker, target, action.saveDC, 1 - luck)
 
     const buffClone: Buff = clone(action.buff)
     if (buffClone.magnitude === undefined) buffClone.magnitude = 1
@@ -572,13 +564,13 @@ function useDebuffAction(attacker: Combattant, action: DebuffAction, target: Com
     }
 }
 
-function useAtkAction(attacker: Combattant, action: AtkAction, target: Combattant, allies: Combattant[], enemies: Combattant[], stats: Map<string, EncounterStats>, ignoreIncapacitated?: boolean) {
+function useAtkAction(attacker: Combattant, action: AtkAction, target: Combattant, allies: Combattant[], enemies: Combattant[], luck: number, stats: Map<string, EncounterStats>, ignoreIncapacitated?: boolean) {
     const attackerConditions = getConditions(attacker)
     const chanceToBeIncapacitated = ignoreIncapacitated ? 0 : atLeastOneConditionChance(attackerConditions, ['Incapacitated', 'Paralyzed', 'Petrified', 'Stunned', 'Unconscious'])
     
     const hitChance = (1 - chanceToBeIncapacitated) * (action.useSaves ?
-        calculateChanceToFail(attacker, target, action.toHit)
-        : accountForAdvantage(attacker, target, calculateHitChance(attacker, target, action.toHit)))
+        calculateChanceToFail(attacker, target, action.toHit, luck)
+        : accountForAdvantage(attacker, target, calculateHitChance(attacker, target, action.toHit, luck)))
 
     const critChance = (1 - chanceToBeIncapacitated) 
         * (action.useSaves ? 0 : accountForAdvantage(attacker, target, 0.05))
@@ -586,19 +578,19 @@ function useAtkAction(attacker: Combattant, action: AtkAction, target: Combattan
     const targetConditions = getConditions(target)
 
     const damageMultiplier = 1
-        * getBuffs(attacker, b => b.damageMultiplier, 'mult')
-        * getBuffs(target, b => b.damageTakenMultiplier, 'mult')
+        * getBuffs(attacker, b => b.damageMultiplier, 'mult', luck)
+        * getBuffs(target, b => b.damageTakenMultiplier, 'mult', 1 - luck)
         * (1 + targetConditions.get('Paralyzed')!)
 
     const standardDamage = damageMultiplier * Math.max((
-        evaluateDiceFormula(action.dpr, { doubleDice: false })
-        + getBuffs(attacker, b => b.damage, 'add', { doubleDice: false })
-        - getBuffs(target, b => b.damageReduction, 'add', { doubleDice: false })
+        evaluateDiceFormula(action.dpr, luck, { doubleDice: false })
+        + getBuffs(attacker, b => b.damage, 'add', luck, { doubleDice: false })
+        - getBuffs(target, b => b.damageReduction, 'add', 1 - luck, { doubleDice: false })
     ), 0)
     const criticalDamage = damageMultiplier * Math.max((
-        evaluateDiceFormula(action.dpr, { doubleDice: !action.useSaves })
-        + getBuffs(attacker, b => b.damage, 'add', { doubleDice: !action.useSaves })
-        - getBuffs(target, b => b.damageReduction, 'add', { doubleDice: false }) // negative cannot crit
+        evaluateDiceFormula(action.dpr, luck, { doubleDice: !action.useSaves })
+        + getBuffs(attacker, b => b.damage, 'add', luck, { doubleDice: !action.useSaves })
+        - getBuffs(target, b => b.damageReduction, 'add', 1 - luck, { doubleDice: false }) // negative cannot crit
     ), 0)
 
     /** TODO: update critChance when implementing features such as crit at 19 */
@@ -624,7 +616,7 @@ function useAtkAction(attacker: Combattant, action: AtkAction, target: Combattan
     getStats(stats, target).damageTaken += actualDamage
 
     if (action.riderEffect) {
-        const buffMagnitude = hitChance * calculateChanceToFail(attacker, target, action.riderEffect.dc)
+        const buffMagnitude = hitChance * calculateChanceToFail(attacker, target, action.riderEffect.dc, 1 - luck)
 
         let buffClone = clone(action.riderEffect.buff)
         if (buffClone.magnitude === undefined) buffClone.magnitude = 1
@@ -644,16 +636,16 @@ function useAtkAction(attacker: Combattant, action: AtkAction, target: Combattan
     }
     
     if (target.finalState.currentHP === 0) {
-        triggerAction(attacker, 'When reducing an enemy to 0 HP', allies, enemies, stats)
-        triggerAction(target, 'When Reduced to 0 HP', enemies, allies, stats)
+        triggerAction(attacker, 'When reducing an enemy to 0 HP', allies, enemies, luck, stats)
+        triggerAction(target, 'When Reduced to 0 HP', enemies, allies, 1 - luck, stats)
     }
 }
 
-function useHealAction(healer: Combattant, action: HealAction, target: Combattant, stats: Map<string, EncounterStats>, ignoreIncapacitated?: boolean) {
+function useHealAction(healer: Combattant, action: HealAction, target: Combattant, luck: number, stats: Map<string, EncounterStats>, ignoreIncapacitated?: boolean) {
     const attackerConditions = getConditions(healer)
     const chanceToBeIncapacitated = ignoreIncapacitated ? 0 : atLeastOneConditionChance(attackerConditions, ['Incapacitated', 'Paralyzed', 'Petrified', 'Stunned', 'Unconscious'])
     
-    const amount = (1 - chanceToBeIncapacitated) * evaluateDiceFormula(action.amount)
+    const amount = (1 - chanceToBeIncapacitated) * evaluateDiceFormula(action.amount, luck)
 
     if (action.tempHP) {
         target.finalState.tempHP = Math.max(0, target.finalState.tempHP || 0, amount)
@@ -667,34 +659,34 @@ function useHealAction(healer: Combattant, action: HealAction, target: Combattan
 }
 
 // The attackers & defenders must be clones here, they will both be mutated
-function runRound(team1: Combattant[], team2: Combattant[], stats: Map<string, EncounterStats>, firstRound?: { team1Surprised: boolean, team2Surprised: boolean }): Round {
+function runRound(team1: Combattant[], team2: Combattant[], luck: number, stats: Map<string, EncounterStats>, firstRound?: { team1Surprised: boolean, team2Surprised: boolean }): Round {
     const round: Round = {
         team1: team1.map(iterateCombattant),
         team2: team2.map(iterateCombattant),
     }
 
     if (firstRound) {
-        round.team1.forEach(combattant => triggerAction(combattant, 'Before the Encounter Starts', round.team1, round.team2, stats))
-        round.team2.forEach(combattant => triggerAction(combattant, 'Before the Encounter Starts', round.team2, round.team1, stats))    
+        round.team1.forEach(combattant => triggerAction(combattant, 'Before the Encounter Starts', round.team1, round.team2, luck, stats))
+        round.team2.forEach(combattant => triggerAction(combattant, 'Before the Encounter Starts', round.team2, round.team1, 1 - luck, stats))    
     }
 
-    if (!firstRound?.team1Surprised) generateActions(round.team1, round.team2, stats)
-    if (!firstRound?.team2Surprised) generateActions(round.team2, round.team1, stats)
+    if (!firstRound?.team1Surprised) generateActions(round.team1, round.team2, luck, stats)
+    if (!firstRound?.team2Surprised) generateActions(round.team2, round.team1, 1 - luck, stats)
 
 
     // Heals are resolved as soon as the actions are declared, to avoid situations where multiple creatures needlessly waste actions healing the same target
     // Then buffs/debuffs are resolved, so they can affect the attacks performed on that same round
-    handleActions(round.team1, round.team2, ['buff', 'debuff'], stats)
-    handleActions(round.team2, round.team1, ['buff', 'debuff'], stats)
+    handleActions(round.team1, round.team2, ['buff', 'debuff'], luck, stats)
+    handleActions(round.team2, round.team1, ['buff', 'debuff'], 1 - luck, stats)
 
     // And finally, attacks
-    handleActions(round.team1, round.team2, ['atk'], stats)
-    handleActions(round.team2, round.team1, ['atk'], stats)
+    handleActions(round.team1, round.team2, ['atk'], luck, stats)
+    handleActions(round.team2, round.team1, ['atk'], 1 - luck, stats)
 
     return round
 }
 
-function runEncounter(players: {creature: Creature, state: CreatureState}[], encounter: Encounter): EncounterResult {
+function runEncounter(players: {creature: Creature, state: CreatureState}[], encounter: Encounter, luck: number): EncounterResult {
     function createPlayer(creatureWithState: { creature: Creature, state: CreatureState}): Combattant {
         return {
             id: uuid(),
@@ -736,7 +728,7 @@ function runEncounter(players: {creature: Creature, state: CreatureState}[], enc
             if (team2Arrivals.length) team2.push(...team2Arrivals)
         }
 
-        const round = runRound(team1, team2, stats, firstRound)
+        const round = runRound(team1, team2, luck, stats, firstRound)
         rounds.push(round)
 
         firstRound = undefined
@@ -747,7 +739,7 @@ function runEncounter(players: {creature: Creature, state: CreatureState}[], enc
     return { rounds, stats }
 }
 
-export function runSimulation(players: Creature[], encounters: Encounter[]) {
+export function runSimulation(players: Creature[], encounters: Encounter[], luck: number) {
     const results: SimulationResult = []
 
     let playersWithState = players.flatMap(player => range(Math.round(player.count))
@@ -767,7 +759,7 @@ export function runSimulation(players: Creature[], encounters: Encounter[]) {
     )
 
     encounters.forEach((encounter, index) => {
-        const encounterResult = runEncounter(playersWithState, encounter)
+        const encounterResult = runEncounter(playersWithState, encounter, luck)
         results.push(encounterResult)
 
         const lastRound = encounterResult.rounds[encounterResult.rounds.length - 1]

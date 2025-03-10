@@ -6,6 +6,7 @@ import { faChevronDown, faChevronUp, faPen, faPlus, faTrash } from "@fortawesome
 import CreatureForm from "./../creatureForm/creatureForm"
 import { clone } from "../../model/utils"
 import Checkbox from "../utils/checkbox"
+import Range from "../utils/range"
 
 type PropType = {
     mode: 'player'|'monster',
@@ -15,9 +16,11 @@ type PropType = {
     children?: ReactNode,
     onMoveUp?: () => void,
     onMoveDown?: () => void,
+    luck: number,
+    setLuck: (newValue: number) => void,
 }
 
-const EncounterForm:FC<PropType> = ({ mode, encounter, onUpdate, onDelete, children, onMoveUp, onMoveDown }) => {
+const EncounterForm:FC<PropType> = ({ mode, encounter, onUpdate, onDelete, children, onMoveUp, onMoveDown, luck, setLuck }) => {
     const [updating, setUpdating] = useState<number | null>(null)
     const [creating, setCreating] = useState(false)
 
@@ -125,6 +128,36 @@ const EncounterForm:FC<PropType> = ({ mode, encounter, onUpdate, onDelete, child
                     <FontAwesomeIcon icon={faPlus} />
                     Add { (mode === 'player') ? 'Player Character' : 'Enemy' }
                 </button>
+
+                { (mode === "player") && (
+                    <div className={`${styles.luckSlider} tooltipContainer`}>
+                        <label>
+                            Luck:
+                        </label>
+                        
+                        <div className="tooltip">
+                            <p>
+                                Changing this setting allows you to quickly visualize how <b>swingy</b> your encounter is, 
+                                by simulating what happens if your players are slightly luckier or slightly more unlucky than average.
+                            </p>
+                            <p>
+                                A luck factor of +1 means instead of rolling 10 on average, the players will roll 11 on average, and their enemies will roll 9 on average.
+                            </p>
+                        </div>
+
+                        <Range
+                            value={luck * 100}
+                            onChange={v => setLuck(v/100)}
+                            min={35}
+                            max={65}
+                            step={5}
+                            label={
+                                (luck === 0.5) ? "even"
+                              : (luck > 0.5)   ? `+${Math.round(luck * 20 - 10)}`
+                                               : String(Math.round(luck * 20 - 10))
+                            } />
+                    </div>
+                )}
             </div>
 
             { (updating === null) ? null : (

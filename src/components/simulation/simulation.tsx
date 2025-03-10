@@ -24,6 +24,7 @@ const emptyEncounter: Encounter = {
 const Simulation:FC<PropType> = ({}) => {
     const [players, setPlayers] = useStoredState<Creature[]>('players', [], z.array(CreatureSchema).parse)
     const [encounters, setEncounters] = useStoredState<Encounter[]>('encounters', [emptyEncounter], z.array(EncounterSchema).parse)
+    const [luck, setLuck] = useStoredState<number>('luck', 0.5, z.number().min(0).max(1).parse)
     const [simulationResults, setSimulationResults] = useState<SimulationResult>([])
     const [state, setState] = useState(new Map<string, any>())
     
@@ -46,9 +47,9 @@ const Simulation:FC<PropType> = ({}) => {
     }, [players, encounters])
 
     useEffect(() => {
-        const results = runSimulation(players, encounters)
+        const results = runSimulation(players, encounters, luck)
         setSimulationResults(results)
-    }, [players, encounters])
+    }, [players, encounters, luck])
 
     function createEncounter() {
         setEncounters([...encounters, {
@@ -87,7 +88,9 @@ const Simulation:FC<PropType> = ({}) => {
                 <EncounterForm
                     mode='player'
                     encounter={{ monsters: players }}
-                    onUpdate={(newValue) => setPlayers(newValue.monsters)}>
+                    onUpdate={(newValue) => setPlayers(newValue.monsters)}
+                    luck={luck}
+                    setLuck={setLuck}>
                         <>
                             { !isEmpty() ? (
                                 <button onClick={() => { setPlayers([]); setEncounters([emptyEncounter]) }}>
@@ -134,6 +137,8 @@ const Simulation:FC<PropType> = ({}) => {
                             onDelete={(index > 0) ? () => deleteEncounter(index) : undefined}
                             onMoveUp={(!!encounters.length && !!index) ? () => swapEncounters(index, index-1) : undefined}
                             onMoveDown={(!!encounters.length && (index < encounters.length - 1)) ? () => swapEncounters(index, index+1) : undefined}
+                            luck={luck}
+                            setLuck={setLuck}
                         />
                         { (!simulationResults[index] ? null : (
                             <EncounterResult value={simulationResults[index]} />
